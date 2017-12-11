@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BillCompleteController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We hope to see you again!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZm-v3-Wh7">
+                    <rect key="frame" x="365" y="369" width="294" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please hold on as we bring the bill to you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAN-YG-Cpx">
+                    <rect key="frame" x="286" y="289" width="452.5" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bill has been sent!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gT-Xd-kHb">
+                    <rect key="frame" x="411" y="259" width="202.5" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r93-lI-PGC" customClass="ButtonCustom">
+                    <rect key="frame" x="362" y="449" width="300" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Xpw-Qg-USW"/>
+                        <constraint firstAttribute="width" constant="300" id="eHi-is-fHX"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <state key="normal" title="Back to home"/>
+                    <connections>
+                        <action selector="backToHome:" destination="-1" eventType="touchUpInside" id="MnP-ES-Qjd"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="kAN-YG-Cpx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9i7-bs-czj"/>
+                <constraint firstItem="QZm-v3-Wh7" firstAttribute="top" secondItem="kAN-YG-Cpx" secondAttribute="bottom" constant="50" id="BBO-CU-7Uv"/>
+                <constraint firstItem="kAN-YG-Cpx" firstAttribute="top" secondItem="5gT-Xd-kHb" secondAttribute="bottom" id="V8f-0j-wDU"/>
+                <constraint firstItem="r93-lI-PGC" firstAttribute="top" secondItem="QZm-v3-Wh7" secondAttribute="bottom" constant="50" id="WXY-Ep-ADi"/>
+                <constraint firstItem="QZm-v3-Wh7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="a2i-Yt-yqb"/>
+                <constraint firstItem="r93-lI-PGC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gOA-b1-UZn"/>
+                <constraint firstItem="QZm-v3-Wh7" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="smx-Gb-QQg"/>
+                <constraint firstItem="5gT-Xd-kHb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="u5E-4n-FJx"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

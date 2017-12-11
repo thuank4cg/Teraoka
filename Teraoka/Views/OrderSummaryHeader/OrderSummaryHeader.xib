@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Display-Regular.otf">
+            <string>SFUIDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="851" height="57"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ITEM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BE-To-uph">
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="57"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="5T1-Hr-eBg"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="20"/>
+                    <color key="textColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QTY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsI-Az-xJS">
+                    <rect key="frame" x="501" y="0.0" width="350" height="57"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="350" id="hgH-iz-1qs"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="20"/>
+                    <color key="textColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OPTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ee-gJ-trz">
+                    <rect key="frame" x="150" y="0.0" width="351" height="57"/>
+                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="20"/>
+                    <color key="textColor" red="0.3529411764705882" green="0.3529411764705882" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="4Ee-gJ-trz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2fU-gM-xd9"/>
+                <constraint firstItem="7BE-To-uph" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4O2-u8-HoJ"/>
+                <constraint firstAttribute="bottom" secondItem="4Ee-gJ-trz" secondAttribute="bottom" id="7mu-0p-d7t"/>
+                <constraint firstAttribute="bottom" secondItem="7BE-To-uph" secondAttribute="bottom" id="Ffk-sm-jTZ"/>
+                <constraint firstAttribute="trailing" secondItem="tsI-Az-xJS" secondAttribute="trailing" id="Isl-gF-Na1"/>
+                <constraint firstItem="7BE-To-uph" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QNm-Ot-Ps3"/>
+                <constraint firstItem="4Ee-gJ-trz" firstAttribute="leading" secondItem="7BE-To-uph" secondAttribute="trailing" id="fiA-Xd-syC"/>
+                <constraint firstItem="tsI-Az-xJS" firstAttribute="leading" secondItem="4Ee-gJ-trz" secondAttribute="trailing" id="jrC-4b-Zck"/>
+                <constraint firstAttribute="bottom" secondItem="tsI-Az-xJS" secondAttribute="bottom" id="r0a-TY-0Yv"/>
+                <constraint firstItem="tsI-Az-xJS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sCf-qF-FUh"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="278.5" y="-252.5"/>
+        </view>
+    </objects>
+</document>

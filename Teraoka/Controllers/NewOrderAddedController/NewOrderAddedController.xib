@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewOrderAddedController">
+            <connections>
+                <outlet property="lbProductName" destination="hgg-oi-UWA" id="pTB-Ql-Dh8"/>
+                <outlet property="productImage" destination="Upj-bW-Q2p" id="IUT-eg-ub7"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item added to ordering list" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMg-yP-iRW">
+                    <rect key="frame" x="366.5" y="25" width="291" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gato.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Upj-bW-Q2p">
+                    <rect key="frame" x="362" y="80" width="300" height="300"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="8xf-C9-KwA"/>
+                        <constraint firstAttribute="height" constant="300" id="d4K-00-8Ig"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgg-oi-UWA">
+                    <rect key="frame" x="436.5" y="385" width="151" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifY-2b-Wqc" customClass="ButtonCustom">
+                    <rect key="frame" x="362" y="440" width="300" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Ajm-B5-Bfu"/>
+                        <constraint firstAttribute="width" constant="300" id="bJt-Ym-JHk"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <state key="normal" title="View order summary"/>
+                    <connections>
+                        <action selector="viewOrderSummary:" destination="-1" eventType="touchUpInside" id="LjQ-fE-iFV"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAT-WT-244" customClass="ButtonCustom">
+                    <rect key="frame" x="362" y="505" width="300" height="50"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <state key="normal" title="Order more"/>
+                    <connections>
+                        <action selector="orderMore:" destination="-1" eventType="touchUpInside" id="sol-Bn-qpR"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="QAT-WT-244" firstAttribute="width" secondItem="ifY-2b-Wqc" secondAttribute="width" id="HcQ-Zc-dFG"/>
+                <constraint firstItem="rMg-yP-iRW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="25" id="JRA-MZ-c2g"/>
+                <constraint firstItem="hgg-oi-UWA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OQq-97-EZQ"/>
+                <constraint firstItem="QAT-WT-244" firstAttribute="height" secondItem="ifY-2b-Wqc" secondAttribute="height" id="PGD-Xk-SV2"/>
+                <constraint firstItem="ifY-2b-Wqc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UI4-nv-2OK"/>
+                <constraint firstItem="rMg-yP-iRW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UyL-9a-IVz"/>
+                <constraint firstItem="Upj-bW-Q2p" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="a0x-kd-3Zd"/>
+                <constraint firstItem="hgg-oi-UWA" firstAttribute="top" secondItem="Upj-bW-Q2p" secondAttribute="bottom" constant="5" id="aQY-mM-C2w"/>
+                <constraint firstItem="ifY-2b-Wqc" firstAttribute="top" secondItem="hgg-oi-UWA" secondAttribute="bottom" constant="25" id="g0c-vd-Ojg"/>
+                <constraint firstItem="Upj-bW-Q2p" firstAttribute="top" secondItem="rMg-yP-iRW" secondAttribute="bottom" constant="25" id="hag-9i-FYJ"/>
+                <constraint firstItem="QAT-WT-244" firstAttribute="top" secondItem="ifY-2b-Wqc" secondAttribute="bottom" constant="15" id="pTp-Uf-4FW"/>
+                <constraint firstItem="QAT-WT-244" firstAttribute="leading" secondItem="ifY-2b-Wqc" secondAttribute="leading" id="y7U-1v-z7e"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="gato.jpg" width="200" height="200"/>
+    </resources>
+</document>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EnterTableController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Wz-La-YKZ" customClass="TPKeyboardAvoidingScrollView">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPV-rQ-Ouw">
+                            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter table number to proceed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gi3-Na-9zy">
+                                    <rect key="frame" x="343" y="369" width="337.5" height="30"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bDc-jM-eME" customClass="TextfieldCustom">
+                                    <rect key="frame" x="362" y="414" width="300" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="300" id="H52-tw-R1f"/>
+                                        <constraint firstAttribute="height" constant="50" id="vhG-Nk-XXu"/>
+                                    </constraints>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yN9-ZC-rfn" customClass="ButtonCustom">
+                                    <rect key="frame" x="362" y="479" width="300" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="300" id="SB2-sy-IpX"/>
+                                        <constraint firstAttribute="height" constant="50" id="eLK-ef-hnr"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                    <state key="normal" title="Proceed"/>
+                                    <connections>
+                                        <action selector="proceedAction:" destination="-1" eventType="touchUpInside" id="2j0-tL-Raf"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="gi3-Na-9zy" firstAttribute="centerX" secondItem="SPV-rQ-Ouw" secondAttribute="centerX" id="15f-My-MJF"/>
+                                <constraint firstItem="yN9-ZC-rfn" firstAttribute="top" secondItem="bDc-jM-eME" secondAttribute="bottom" constant="15" id="6ap-df-1TG"/>
+                                <constraint firstItem="gi3-Na-9zy" firstAttribute="centerY" secondItem="SPV-rQ-Ouw" secondAttribute="centerY" id="Vvg-6b-Qw5"/>
+                                <constraint firstItem="bDc-jM-eME" firstAttribute="top" secondItem="gi3-Na-9zy" secondAttribute="bottom" constant="15" id="bt8-Jc-gji"/>
+                                <constraint firstItem="bDc-jM-eME" firstAttribute="centerX" secondItem="SPV-rQ-Ouw" secondAttribute="centerX" id="hZg-Xo-bNR"/>
+                                <constraint firstItem="yN9-ZC-rfn" firstAttribute="centerX" secondItem="SPV-rQ-Ouw" secondAttribute="centerX" id="nLj-DE-rPS"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="SPV-rQ-Ouw" secondAttribute="trailing" id="8tm-mq-zwt"/>
+                        <constraint firstAttribute="bottom" secondItem="SPV-rQ-Ouw" secondAttribute="bottom" id="gcE-kC-sja"/>
+                        <constraint firstItem="SPV-rQ-Ouw" firstAttribute="leading" secondItem="3Wz-La-YKZ" secondAttribute="leading" id="h56-9h-VjI"/>
+                        <constraint firstItem="SPV-rQ-Ouw" firstAttribute="top" secondItem="3Wz-La-YKZ" secondAttribute="top" id="lXZ-H3-0uD"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="3Wz-La-YKZ" secondAttribute="trailing" id="PCY-TH-T6H"/>
+                <constraint firstItem="3Wz-La-YKZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Q6w-tE-bcX"/>
+                <constraint firstAttribute="bottom" secondItem="3Wz-La-YKZ" secondAttribute="bottom" id="bQN-gb-d95"/>
+                <constraint firstItem="SPV-rQ-Ouw" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="ffO-x4-hjv"/>
+                <constraint firstItem="SPV-rQ-Ouw" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="px3-Uy-HpQ"/>
+                <constraint firstItem="3Wz-La-YKZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="x8b-7m-4Vx"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

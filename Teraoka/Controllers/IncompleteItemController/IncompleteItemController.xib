@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Display-Bold.otf">
+            <string>SFUIDisplay-Bold</string>
+        </array>
+        <array key="SF-UI-Display-Regular.otf">
+            <string>SFUIDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IncompleteItemController">
+            <connections>
+                <outlet property="containerView" destination="bYC-PW-mmD" id="uB1-eT-NOn"/>
+                <outlet property="lbNotice" destination="8hB-bP-mJl" id="Gd8-To-2NJ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_order_confirm" translatesAutoresizingMaskIntoConstraints="NO" id="DTs-nf-O4U">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bYC-PW-mmD">
+                    <rect key="frame" x="212" y="184" width="600" height="400"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Oc-sC-4Yk">
+                            <rect key="frame" x="146.5" y="194" width="307" height="73"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <state key="normal" backgroundImage="ok_btn"/>
+                            <connections>
+                                <action selector="yesAction:" destination="-1" eventType="touchUpInside" id="5Xc-Vr-wDh"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OKAY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ued-SK-PuG">
+                            <rect key="frame" x="270.5" y="218" width="59" height="26"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPX-s5-A6P">
+                            <rect key="frame" x="146.5" y="287" width="307" height="73"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="73" id="oAc-0W-k4F"/>
+                                <constraint firstAttribute="width" constant="307" id="rSh-yY-tjE"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <state key="normal" backgroundImage="back_btn"/>
+                            <connections>
+                                <action selector="noAction:" destination="-1" eventType="touchUpInside" id="Qsd-LS-SoX"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BACK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HV-KE-TNL">
+                            <rect key="frame" x="270.5" y="311" width="60" height="26"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="ued-SK-PuG" firstAttribute="centerX" secondItem="9Oc-sC-4Yk" secondAttribute="centerX" id="698-Yk-vR1"/>
+                        <constraint firstAttribute="height" constant="400" id="7Rj-Xl-2Eu"/>
+                        <constraint firstItem="9Oc-sC-4Yk" firstAttribute="width" secondItem="MPX-s5-A6P" secondAttribute="width" id="AFy-ql-XOu"/>
+                        <constraint firstAttribute="bottom" secondItem="MPX-s5-A6P" secondAttribute="bottom" constant="40" id="Hf7-lR-rqf"/>
+                        <constraint firstItem="9Oc-sC-4Yk" firstAttribute="height" secondItem="MPX-s5-A6P" secondAttribute="height" id="Od3-QL-ad5"/>
+                        <constraint firstItem="ued-SK-PuG" firstAttribute="centerY" secondItem="9Oc-sC-4Yk" secondAttribute="centerY" id="WXY-Ot-UCF"/>
+                        <constraint firstItem="1HV-KE-TNL" firstAttribute="centerX" secondItem="MPX-s5-A6P" secondAttribute="centerX" id="XyV-DZ-H1d"/>
+                        <constraint firstItem="9Oc-sC-4Yk" firstAttribute="leading" secondItem="MPX-s5-A6P" secondAttribute="leading" id="Zkn-5Q-q2v"/>
+                        <constraint firstItem="MPX-s5-A6P" firstAttribute="top" secondItem="9Oc-sC-4Yk" secondAttribute="bottom" constant="20" id="i34-ge-A5p"/>
+                        <constraint firstItem="MPX-s5-A6P" firstAttribute="centerX" secondItem="bYC-PW-mmD" secondAttribute="centerX" id="id1-e3-7nN"/>
+                        <constraint firstItem="1HV-KE-TNL" firstAttribute="centerY" secondItem="MPX-s5-A6P" secondAttribute="centerY" id="ppr-9O-gBV"/>
+                        <constraint firstAttribute="width" constant="600" id="w8y-7F-OtX"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hB-bP-mJl">
+                    <rect key="frame" x="478" y="261" width="68.5" height="33"/>
+                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="28"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="bYC-PW-mmD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8wV-fD-yrR"/>
+                <constraint firstAttribute="bottom" secondItem="DTs-nf-O4U" secondAttribute="bottom" id="U5q-V4-CtB"/>
+                <constraint firstItem="DTs-nf-O4U" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Wvk-w2-068"/>
+                <constraint firstItem="8hB-bP-mJl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="261" id="dLP-hr-on6"/>
+                <constraint firstItem="8hB-bP-mJl" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jTG-U3-Cph"/>
+                <constraint firstItem="DTs-nf-O4U" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="nze-Bp-vcg"/>
+                <constraint firstAttribute="trailing" secondItem="DTs-nf-O4U" secondAttribute="trailing" id="q7P-BA-Ie9"/>
+                <constraint firstItem="bYC-PW-mmD" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="yJh-8x-lls"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="back_btn" width="360" height="72"/>
+        <image name="bg_order_confirm" width="1024" height="768"/>
+        <image name="ok_btn" width="360" height="72"/>
+    </resources>
+</document>
