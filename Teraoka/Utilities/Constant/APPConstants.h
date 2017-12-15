@@ -12,7 +12,7 @@
 #import "AppDelegate.h"
 #define appDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
-#define HOST_NAME @"ftp://192.69.69.69"
+#define HOST_NAME @"ftp://192.168.1.100"
 #define USERNAME @"root"
 #define PASSWORD @"teraoka"
 
