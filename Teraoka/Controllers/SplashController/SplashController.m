@@ -9,8 +9,9 @@
 #import "SplashController.h"
 #import "APPConstants.h"
 #import "CategoriesController.h"
+#import "WhiteRaccoon.h"
 
-@interface SplashController ()
+@interface SplashController () <WRRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 
 @end
@@ -27,7 +28,37 @@
         [self saveCategoryToDb];
     });
 }
+#pragma mark - Custom method
+- (void)listDirectoryContents {
+    WRRequestListDirectory * listDir = [[WRRequestListDirectory alloc] init];
+    listDir.delegate = self;
+    
+    listDir.path = [NSString stringWithFormat:@"%@/", HOST_NAME];
+    
+    listDir.hostname = HOST_NAME;
+    listDir.username = USERNAME;
+    listDir.password = PASSWORD;
+    
+    [listDir start];
+}
+#pragma mark - WRRequestDelegate
+- (void)requestCompleted:(WRRequest *)request {
+    //called after 'request' is completed successfully
+    NSLog(@"%@ completed!", request);
+    
+    //we cast the request to list request
+    WRRequestListDirectory * listDir = (WRRequestListDirectory *)request;
+    
+    //we print each of the files name
+    for (NSDictionary * file in listDir.filesInfo) {
+        NSLog(@"%@", [file objectForKey:(id)kCFFTPResourceName]);
+    }
+}
+- (void)requestFailed:(WRRequest *)request {
+    NSLog(@"%@", request.error.message);
+}
 
+#pragma mark - save data to db
 - (void)saveCategoryToDb {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_DATA]) {
         [self showCategoriesScreen];

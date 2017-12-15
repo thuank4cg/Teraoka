@@ -12,6 +12,10 @@
 #import "AppDelegate.h"
 #define appDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
+#define HOST_NAME @"ftp://192.69.69.69"
+#define USERNAME @"root"
+#define PASSWORD @"teraoka"
+
 #define KEY_SAVED_DATA @"IS_SAVED_DATA"
 
 #define KEY_FONT_BOLD @"SFUIDisplay-Bold"

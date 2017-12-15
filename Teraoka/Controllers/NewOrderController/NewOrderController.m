@@ -22,8 +22,6 @@
 #import <SIOSocket.h>
 #import "ParamsHelper.h"
 
-#define HOST_NAME @"ftp://192.69.69.69"
-
 @interface NewOrderController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
 @property (weak, nonatomic) IBOutlet TextfieldCustom *tfQty;
