@@ -1,0 +1,20 @@
+PODS:
+  - CocoaAsyncSocket (7.5.0):
+    - CocoaAsyncSocket/GCD (= 7.5.0)
+  - CocoaAsyncSocket/GCD (7.5.0)
+  - JSONModel (1.0.2)
+  - TPKeyboardAvoiding (1.2)
+
+DEPENDENCIES:
+  - CocoaAsyncSocket
+  - JSONModel (~> 1.0.2)
+  - TPKeyboardAvoiding (= 1.2)
+
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: 3baeb1ddd969f81cf9fca81053ae49ef2d1cbbfa
+  JSONModel: 6ffcb4ffa3659c9e9a2e5d45d6c7705bab187c03
+  TPKeyboardAvoiding: aa2f77b2619dd52d5d0bd4fc7e875976a515bf8b
+
+PODFILE CHECKSUM: e2de26d686f4c6411f0076545fc91af8df28c906
+
+COCOAPODS: 1.2.1
