@@ -157,6 +157,7 @@
     
 //    OrderSummaryController *vc = [[OrderSummaryController alloc] initWithNibName:@"OrderSummaryController" bundle:nil];
 //    [self.navigationController pushViewController:vc animated:YES];
+    [self sendTransaction];
     [self.delegate backDelegate];
     [self.view removeFromSuperview];
 //    [self.delegate showOrderCart];
@@ -210,11 +211,11 @@
 }
 
 #pragma mark - Custom method
-- (void)submitOrder {
+- (void)sendTransaction {
     //fire event
-    [self.socket emit:@"fuck" args:@[ParamsHelper.shared.collectData]];
+    [self.socket emit:@"send" args:@[ParamsHelper.shared.collectData]];
     //callback
-    [self.socket on:@"fuck" callback:^(SIOParameterArray *args) {
+    [self.socket on:@"receive" callback:^(SIOParameterArray *args) {
         
     }];
 }

@@ -51,7 +51,8 @@
     
     //we print each of the files name
     for (NSDictionary * file in listDir.filesInfo) {
-        NSLog(@"%@", [file objectForKey:(id)kCFFTPResourceName]);
+        NSString *name = [file objectForKey:(id)kCFFTPResourceName];
+        NSLog(@"%@", name);
     }
 }
 - (void)requestFailed:(WRRequest *)request {
