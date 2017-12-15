@@ -16,8 +16,11 @@
 #import "ProductModel.h"
 #import "ProductOptionValue.h"
 #import "ProductOption.h"
+#import "APPConstants.h"
+#import "ParamsHelper.h"
+#import "GCDAsyncSocket.h"
 
-@interface OrderSummaryController () <UITableViewDelegate, UITableViewDataSource>
+@interface OrderSummaryController () <UITableViewDelegate, UITableViewDataSource, GCDAsyncSocketDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
@@ -110,7 +113,7 @@
 //        }
 //    }
     [ShareManager shared].cartArr = nil;
-    
+    [self sendTransaction];
     OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
     [self.navigationController pushViewController:vc animated:NO];
 }
@@ -188,6 +191,41 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 1;
+}
+
+#pragma mark - Custom method
+- (void)sendTransaction {
+    NSString *host = @"google.com";
+    uint16_t port = 80;
+    
+    NSError *error = nil;
+    
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    
+    GCDAsyncSocket* asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+    
+    if (![asyncSocket connectToHost:host onPort:port error:&error])
+    {
+        NSLog(@"error");
+    }
+}
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
+    NSLog(@"didConnectToHost");
+    NSString *test = @"test";
+    NSData *requestData = [test dataUsingEncoding:NSUTF8StringEncoding];
+    [sock writeData:requestData withTimeout:-1 tag:0];
+//    [sock readDataToData:[GCDAsyncSocket CRLFData] withTimeout:15 tag:0];
+}
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+    NSLog(@"didWriteDataWithTag");
+}
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+    NSLog(@"didReadData");
+    NSString *httpResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", httpResponse);
+}
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+    NSLog(@"socketDidDisconnect");
 }
 
 @end

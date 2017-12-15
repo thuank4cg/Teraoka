@@ -7,5 +7,5 @@ target 'Teraoka' do
   # Pods for Teraoka
   pod 'JSONModel',            '~> 1.0.2'
   pod 'TPKeyboardAvoiding',   '1.2'
-  pod 'SIOSocket', '~> 0.2.0'
+  pod 'CocoaAsyncSocket'
 end
