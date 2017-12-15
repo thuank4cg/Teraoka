@@ -22,13 +22,13 @@
 #import "ProductOptionValue.h"
 #import "OrderSummaryController.h"
 #import "CategoryView.h"
-#import "WhiteRaccoon.h"
 #import "Util.h"
+#import "APPConstants.h"
 
 #define KEY_PADDING_BOTTOM_CELL 65
 #define CELL_SPACE 15
 
-@interface CategoriesController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, WRRequestDelegate>
+@interface CategoriesController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *productsColView;
 @property (weak, nonatomic) IBOutlet UIView *containerCategoryView;
 @property (weak, nonatomic) IBOutlet UIView *menuBoxView;
@@ -42,6 +42,7 @@
     NSMutableArray *categories;
     int categoryIndex;
     NewOrderController *newOrderVC;
+    BOOL isBackDelegate;
 }
 
 - (void)viewDidLoad {
@@ -49,28 +50,12 @@
     // Do any additional setup after loading the view from its nib.
     
     self.qtyBoxView.layer.cornerRadius = CGRectGetWidth(self.qtyBoxView.frame)/2;
-    
-    WRRequestDownload *downloadFile = [[WRRequestDownload alloc] init];
-    downloadFile.delegate = self;
-    downloadFile.username = @"root";
-    downloadFile.password = @"teraoka";
-    
-    [downloadFile start];
-}
-
-- (void)requestCompleted:(WRRequest *)request {
-    WRRequestDownload * downloadFile = (WRRequestDownload *)request;
-    
-    NSString *dataStr = [Util convertDataToString:downloadFile.receivedData];
-    [Util saveFileToDocumentDirectory:dataStr];
-}
-- (void)requestFailed:(WRRequest *)request {
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setupQtyBoxView];
+    isBackDelegate = NO;
     [self dummyData];
 }
 
@@ -165,7 +150,7 @@
     ProductModel *product = cate.products[indexPath.row];
     
     cell.productName.text = product.name;
-    cell.productImage.image = [UIImage imageNamed:product.image];
+    if (product.image.length > 0) cell.productImage.image = [UIImage imageNamed:product.image];
     cell.productPrice.text = product.price;
     
     return cell;
@@ -203,198 +188,100 @@
 }
 - (void)backDelegate {
     [self setupQtyBoxView];
+    isBackDelegate = YES;
     [self dummyData];
+}
+- (NSManagedObjectContext *)managedObjectContext
+{
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
 }
 // dummy data
 - (void)dummyData {
+    if (!isBackDelegate) categoryIndex = 0;
     categories = [NSMutableArray new];
-    NSArray *categoriesArr = @[@"Drinks", @"Bread", @"Cake", @"Chocolate", @"Soups", @"Fruits"];
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Category"];
+    NSArray *categoriesArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
     int i = 0;
-    for (NSString *cate in categoriesArr) {
-        i++;
+    for (NSManagedObject *category in categoriesArr) {
         CategoryModel *cateModel = [[CategoryModel alloc] init];
-        cateModel.ids = [NSString stringWithFormat:@"%d", i];
-        cateModel.category_name = cate;
-        if (i == 1) cateModel.isSelected = YES;
+        cateModel.ids = [category valueForKey:@"id"];
+        cateModel.category_name = [category valueForKey:@"name"];
+        if (i == categoryIndex) cateModel.isSelected = YES;
         else cateModel.isSelected = NO;
+        i++;
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"MenuContent"];
+        NSArray *contents = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+        
+        NSMutableArray *productIds = [NSMutableArray new];
+        for (NSManagedObject *content in contents) {
+            NSString *categoryIdStr = [content valueForKey:@"category_id"];
+            if ([categoryIdStr isEqualToString:cateModel.ids]) {
+                [productIds addObject:[content valueForKey:@"product_id"]];
+            }
+        }
         
         cateModel.products = [NSMutableArray new];
         
-        ProductModel *product = [[ProductModel alloc] init];
-        product.ids = [NSString stringWithFormat:@"%d1", i];
-        product.image = [NSString stringWithFormat:@"%@1.jpg", cate];
-        product.name = [NSString stringWithFormat:@"%@ 1", cate];
-        product.price = @"$3.00";
-        product.priceNumber = @"3.00";
-        product.qty = @"1";
-        product.options = [[NSMutableArray alloc] init];
-        NSArray *options = @[@"Add option 1", @"Add option 2", @"Add option 3"];
-        for (NSString *tittle in options) {
-            ProductOption *option = [[ProductOption alloc] init];
-            option.tittle = tittle;
+        for (NSString *productId in productIds) {
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Product"];
+            NSArray *products = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
             
-            option.options = [NSMutableArray new];
-            
-            ProductOptionValue *optionValue = [[ProductOptionValue alloc] init];
-            optionValue.isCheck = NO;
-            optionValue.tittle = @"Option A";
-            [option.options addObject:optionValue];
-            
-            ProductOptionValue *optionValue2 = [[ProductOptionValue alloc] init];
-            optionValue2.isCheck = NO;
-            optionValue2.tittle = @"Option B";
-            [option.options addObject:optionValue2];
-            
-            ProductOptionValue *optionValue3 = [[ProductOptionValue alloc] init];
-            optionValue3.isCheck = NO;
-            optionValue3.tittle = @"Option C";
-            [option.options addObject:optionValue3];
-            
-            [product.options addObject:option];
+            for (NSManagedObject *productObj in products) {
+                NSString *productIdStr = [productObj valueForKey:@"id"];
+                if ([productIdStr isEqualToString:productId]) {
+                    ProductModel *product = [[ProductModel alloc] init];
+                    product.ids = [productObj valueForKey:@"id"];
+                    product.image = [NSString stringWithFormat:@"%@.png", [productObj valueForKey:@"id"]];
+                    product.name = [NSString stringWithFormat:@"%@", [productObj valueForKey:@"name"]];
+                    
+                    float price = [[productObj valueForKey:@"price"] floatValue]/100;
+                    
+                    product.price = [NSString stringWithFormat:@"SGD %.2f", price];
+                    product.priceNumber = [NSString stringWithFormat:@"%.2f", price];
+                    product.originalPrice = [NSString stringWithFormat:@"%@", [productObj valueForKey:@"price"]];
+                    product.qty = @"1";
+                    product.options = [[NSMutableArray alloc] init];
+                    NSArray *options = @[@"Add option 1", @"Add option 2", @"Add option 3"];
+                    for (NSString *tittle in options) {
+                        ProductOption *option = [[ProductOption alloc] init];
+                        option.tittle = tittle;
+                        
+                        option.options = [NSMutableArray new];
+                        
+                        ProductOptionValue *optionValue = [[ProductOptionValue alloc] init];
+                        optionValue.isCheck = NO;
+                        optionValue.tittle = @"Option A";
+                        [option.options addObject:optionValue];
+                        
+                        ProductOptionValue *optionValue2 = [[ProductOptionValue alloc] init];
+                        optionValue2.isCheck = NO;
+                        optionValue2.tittle = @"Option B";
+                        [option.options addObject:optionValue2];
+                        
+                        ProductOptionValue *optionValue3 = [[ProductOptionValue alloc] init];
+                        optionValue3.isCheck = NO;
+                        optionValue3.tittle = @"Option C";
+                        [option.options addObject:optionValue3];
+                        
+                        [product.options addObject:option];
+                    }
+                    
+                    [cateModel.products addObject:product];
+                }
+            }
         }
-        
-        [cateModel.products addObject:product];
-        
-        ProductModel *product2 = [[ProductModel alloc] init];
-        product2.ids = [NSString stringWithFormat:@"%d2", i];;
-        product2.image = [NSString stringWithFormat:@"%@2.jpg", cate];
-        product2.name = [NSString stringWithFormat:@"%@ 2", cate];
-        product2.price = @"$5.00";
-        product2.priceNumber = @"5.00";
-        product2.qty = @"1";
-        product2.options = [[NSMutableArray alloc] init];
-        for (NSString *tittle in options) {
-            ProductOption *option = [[ProductOption alloc] init];
-            option.tittle = tittle;
-            
-            option.options = [NSMutableArray new];
-            
-            ProductOptionValue *optionValue = [[ProductOptionValue alloc] init];
-            optionValue.isCheck = NO;
-            optionValue.tittle = @"Option A";
-            [option.options addObject:optionValue];
-            
-            ProductOptionValue *optionValue2 = [[ProductOptionValue alloc] init];
-            optionValue2.isCheck = NO;
-            optionValue2.tittle = @"Option B";
-            [option.options addObject:optionValue2];
-            
-            ProductOptionValue *optionValue3 = [[ProductOptionValue alloc] init];
-            optionValue3.isCheck = NO;
-            optionValue3.tittle = @"Option C";
-            [option.options addObject:optionValue3];
-            
-            [product2.options addObject:option];
-        }
-        
-        [cateModel.products addObject:product2];
-        
-        ProductModel *product3 = [[ProductModel alloc] init];
-        product3.ids = [NSString stringWithFormat:@"%d3", i];;
-        product3.image = [NSString stringWithFormat:@"%@3.jpg", cate];
-        product3.name = [NSString stringWithFormat:@"%@ 3", cate];
-        product3.price = @"$15.00";
-        product3.priceNumber = @"15.00";
-        product3.qty = @"1";
-        product3.options = [[NSMutableArray alloc] init];
-        for (NSString *tittle in options) {
-            ProductOption *option = [[ProductOption alloc] init];
-            option.tittle = tittle;
-            
-            option.options = [NSMutableArray new];
-            
-            ProductOptionValue *optionValue = [[ProductOptionValue alloc] init];
-            optionValue.isCheck = NO;
-            optionValue.tittle = @"Option A";
-            [option.options addObject:optionValue];
-            
-            ProductOptionValue *optionValue2 = [[ProductOptionValue alloc] init];
-            optionValue2.isCheck = NO;
-            optionValue2.tittle = @"Option B";
-            [option.options addObject:optionValue2];
-            
-            ProductOptionValue *optionValue3 = [[ProductOptionValue alloc] init];
-            optionValue3.isCheck = NO;
-            optionValue3.tittle = @"Option C";
-            [option.options addObject:optionValue3];
-            
-            [product3.options addObject:option];
-        }
-        
-        [cateModel.products addObject:product3];
-        
-        ProductModel *product4 = [[ProductModel alloc] init];
-        product4.ids = [NSString stringWithFormat:@"%d4", i];;
-        product4.image = [NSString stringWithFormat:@"%@3.jpg", cate];
-        product4.name = [NSString stringWithFormat:@"%@ 4", cate];
-        product4.price = @"$15.00";
-        product4.priceNumber = @"15.00";
-        product4.qty = @"1";
-        product4.options = [[NSMutableArray alloc] init];
-        for (NSString *tittle in options) {
-            ProductOption *option = [[ProductOption alloc] init];
-            option.tittle = tittle;
-            
-            option.options = [NSMutableArray new];
-            
-            ProductOptionValue *optionValue = [[ProductOptionValue alloc] init];
-            optionValue.isCheck = NO;
-            optionValue.tittle = @"Choice A";
-            [option.options addObject:optionValue];
-            
-            ProductOptionValue *optionValue2 = [[ProductOptionValue alloc] init];
-            optionValue2.isCheck = NO;
-            optionValue2.tittle = @"Choice B";
-            [option.options addObject:optionValue2];
-            
-            ProductOptionValue *optionValue3 = [[ProductOptionValue alloc] init];
-            optionValue3.isCheck = NO;
-            optionValue3.tittle = @"Choice C";
-            [option.options addObject:optionValue3];
-            
-            [product4.options addObject:option];
-        }
-        
-        [cateModel.products addObject:product4];
-        
-        ProductModel *product5 = [[ProductModel alloc] init];
-        product5.ids = [NSString stringWithFormat:@"%d5", i];;
-        product5.image = [NSString stringWithFormat:@"%@3.jpg", cate];
-        product5.name = [NSString stringWithFormat:@"%@ 5", cate];
-        product5.price = @"$15.00";
-        product5.priceNumber = @"15.00";
-        product5.qty = @"1";
-        product5.options = [[NSMutableArray alloc] init];
-        for (NSString *tittle in options) {
-            ProductOption *option = [[ProductOption alloc] init];
-            option.tittle = tittle;
-            
-            option.options = [NSMutableArray new];
-            
-            ProductOptionValue *optionValue = [[ProductOptionValue alloc] init];
-            optionValue.isCheck = NO;
-            optionValue.tittle = @"Choice A";
-            [option.options addObject:optionValue];
-            
-            ProductOptionValue *optionValue2 = [[ProductOptionValue alloc] init];
-            optionValue2.isCheck = NO;
-            optionValue2.tittle = @"Choice B";
-            [option.options addObject:optionValue2];
-            
-            ProductOptionValue *optionValue3 = [[ProductOptionValue alloc] init];
-            optionValue3.isCheck = NO;
-            optionValue3.tittle = @"Choice C";
-            [option.options addObject:optionValue3];
-            
-            [product5.options addObject:option];
-        }
-        
-        [cateModel.products addObject:product5];
         
         [categories addObject:cateModel];
     }
     
-    categoryIndex = 0;
     [self setupView];
 }
 

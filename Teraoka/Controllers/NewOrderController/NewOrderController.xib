@@ -26,6 +26,7 @@
                 <outlet property="increaseBox" destination="7RZ-ow-Jhy" id="zZB-HI-4Og"/>
                 <outlet property="productImage" destination="EXq-Ma-KGd" id="XjB-s5-96e"/>
                 <outlet property="productName" destination="TPP-IZ-GCG" id="bX7-6H-cvt"/>
+                <outlet property="productPrice" destination="CDc-Ux-O72" id="trG-7A-IEu"/>
                 <outlet property="tblView" destination="ecf-b4-sb3" id="ZKI-ht-B4f"/>
                 <outlet property="tfQty" destination="9PP-ZF-u5j" id="Uub-7O-GlB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -114,7 +115,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEH-3e-0jE">
                             <rect key="frame" x="0.0" y="10" width="1166" height="112"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gato.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EXq-Ma-KGd">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_product_image" translatesAutoresizingMaskIntoConstraints="NO" id="EXq-Ma-KGd">
                                     <rect key="frame" x="0.0" y="0.0" width="168" height="112"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="EXq-Ma-KGd" secondAttribute="height" multiplier="3:2" id="gXR-fh-yO3"/>
@@ -262,9 +263,9 @@
     <resources>
         <image name="back_btn" width="360" height="72"/>
         <image name="bg_test" width="852" height="613"/>
-        <image name="gato.jpg" width="200" height="200"/>
         <image name="ic_decrease" width="27" height="7"/>
         <image name="ic_increase" width="27" height="27"/>
+        <image name="no_product_image" width="137" height="137"/>
         <image name="ok_btn" width="360" height="72"/>
     </resources>
 </document>

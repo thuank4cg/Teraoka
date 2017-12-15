@@ -34,21 +34,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="197" height="276"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gato.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="My6-Tm-SNV">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_product_image" translatesAutoresizingMaskIntoConstraints="NO" id="My6-Tm-SNV">
                                 <rect key="frame" x="0.0" y="0.0" width="197" height="197"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="My6-Tm-SNV" secondAttribute="height" multiplier="1:1" id="CaB-lp-2aS"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFQ-jC-mu2">
-                                <rect key="frame" x="10" y="207" width="106" height="20.5"/>
+                                <rect key="frame" x="10" y="207" width="104" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="17"/>
                                 <color key="textColor" red="0.25166743993759155" green="0.43021291494369507" blue="0.51794123649597168" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$3.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xci-sF-nLD">
-                                <rect key="frame" x="10" y="229.5" width="35" height="20.5"/>
+                                <rect key="frame" x="10" y="229" width="33.5" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -90,6 +90,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="gato.jpg" width="200" height="200"/>
+        <image name="no_product_image" width="137" height="137"/>
     </resources>
 </document>
