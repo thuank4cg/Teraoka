@@ -27,7 +27,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="572" height="162.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gato.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="g5z-Ri-cmZ">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_product_image" translatesAutoresizingMaskIntoConstraints="NO" id="g5z-Ri-cmZ">
                         <rect key="frame" x="0.0" y="0.0" width="162.5" height="162.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="g5z-Ri-cmZ" secondAttribute="height" multiplier="1:1" id="QvX-0q-qk4"/>
@@ -165,8 +165,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="gato.jpg" width="200" height="200"/>
         <image name="ic_decrease" width="27" height="7"/>
         <image name="ic_increase" width="27" height="27"/>
+        <image name="no_product_image" width="137" height="137"/>
     </resources>
 </document>

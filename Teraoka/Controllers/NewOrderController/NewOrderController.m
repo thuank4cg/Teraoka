@@ -19,16 +19,21 @@
 #import "OrderSummaryController.h"
 #import "APPConstants.h"
 #import "UIColor+HexString.h"
+#import <SIOSocket.h>
+#import "ParamsHelper.h"
 
 @interface NewOrderController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
 @property (weak, nonatomic) IBOutlet TextfieldCustom *tfQty;
 @property (weak, nonatomic) IBOutlet UIImageView *productImage;
+@property (weak, nonatomic) IBOutlet UILabel *productPrice;
 @property (weak, nonatomic) IBOutlet UILabel *productName;
 @property (weak, nonatomic) IBOutlet UIView *increaseBox;
 @property (weak, nonatomic) IBOutlet UIView *decreaseBox;
 @property (weak, nonatomic) IBOutlet UIView *containerFootView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+
+@property (nonatomic, strong) SIOSocket *socket;
 
 @end
 
@@ -40,8 +45,14 @@
     [self setupView];
     
     self.tfQty.text = self.product.qty;
-    self.productImage.image = [UIImage imageNamed:self.product.image];
+    if (self.product.image.length > 0) self.productImage.image = [UIImage imageNamed:self.product.image];
     self.productName.text = self.product.name;
+    self.productPrice.text = self.product.price;
+    
+    [SIOSocket socketWithHost:HOST_NAME response: ^(SIOSocket *socket)
+     {
+         self.socket = socket;
+     }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -142,8 +153,11 @@
         [[ShareManager shared].cartArr addObject:self.product];
     }
     
+    
+    
 //    OrderSummaryController *vc = [[OrderSummaryController alloc] initWithNibName:@"OrderSummaryController" bundle:nil];
 //    [self.navigationController pushViewController:vc animated:YES];
+    [self sendTransaction];
     [self.delegate backDelegate];
     [self.view removeFromSuperview];
 //    [self.delegate showOrderCart];
@@ -194,6 +208,16 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 1;
+}
+
+#pragma mark - Custom method
+- (void)sendTransaction {
+    //fire event
+    [self.socket emit:@"send" args:@[ParamsHelper.shared.collectData]];
+    //callback
+    [self.socket on:@"receive" callback:^(SIOParameterArray *args) {
+        
+    }];
 }
 
 @end

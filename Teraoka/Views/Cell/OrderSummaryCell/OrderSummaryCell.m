@@ -54,7 +54,7 @@
 //    if (product.qty == 0) [self.lbNotice setHidden:NO];
 //    else [self.lbNotice setHidden:YES];
     self.tfQty.text = product.qty;
-    self.productImage.image = [UIImage imageNamed:product.image];
+    if (product.image.length > 0) self.productImage.image = [UIImage imageNamed:product.image];
     
     NSString* optionStr = @"<p style='line-height:1.8;text-align:center'>";
     for (ProductOption *option in product.options) {
