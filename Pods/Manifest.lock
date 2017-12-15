@@ -1,0 +1,18 @@
+PODS:
+  - JSONModel (1.0.2)
+  - SIOSocket (0.2.0)
+  - TPKeyboardAvoiding (1.2)
+
+DEPENDENCIES:
+  - JSONModel (~> 1.0.2)
+  - SIOSocket (~> 0.2.0)
+  - TPKeyboardAvoiding (= 1.2)
+
+SPEC CHECKSUMS:
+  JSONModel: 6ffcb4ffa3659c9e9a2e5d45d6c7705bab187c03
+  SIOSocket: 2facc0bd02ae72d98c223634a46dd8ebdf9be321
+  TPKeyboardAvoiding: aa2f77b2619dd52d5d0bd4fc7e875976a515bf8b
+
+PODFILE CHECKSUM: 99a7795f8d4a8ccd2fd150d9ef10002cc9804df0
+
+COCOAPODS: 1.2.1
