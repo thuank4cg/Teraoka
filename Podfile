@@ -8,4 +8,5 @@ target 'Teraoka' do
   pod 'JSONModel',            '~> 1.0.2'
   pod 'TPKeyboardAvoiding',   '1.2'
   pod 'CocoaAsyncSocket'
+  pod 'SSZipArchive'
 end

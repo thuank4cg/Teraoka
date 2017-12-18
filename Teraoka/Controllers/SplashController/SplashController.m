@@ -10,15 +10,20 @@
 #import "APPConstants.h"
 #import "CategoriesController.h"
 #import "WhiteRaccoon.h"
+#import <SSZipArchive.h>
 
-#define KEY_FILE_NAME @"HOTMasterDataFull_02.12_171214_143505_01.29.zip"
+//#define KEY_FILE_NAME @"HOTMasterDataFull_02.12_171214_143505_01.29.zip"
+//#define KEY_FOLDER_NAME @"HOTMasterDataFull"
 
 @interface SplashController () <WRRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 
 @end
 
-@implementation SplashController
+@implementation SplashController {
+    NSString *fileName;
+    BOOL isDownloadFile;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,7 +34,8 @@
 //    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
 //        [self saveCategoryToDb];
 //    });
-    [self downloadZipFile];
+    isDownloadFile = NO;
+    [self listDirectoryContents];
 }
 #pragma mark - Custom method
 - (void)listDirectoryContents {
@@ -48,7 +54,7 @@
     WRRequestDownload * downloadFile = [[WRRequestDownload alloc] init];
     downloadFile.delegate = self;
     
-    downloadFile.path = [NSString stringWithFormat:@"/datamanager/thot/%@", KEY_FILE_NAME];
+    downloadFile.path = [NSString stringWithFormat:@"/datamanager/thot/%@", fileName];
     
     downloadFile.hostname = @"192.168.1.100";
     downloadFile.username = USERNAME;
@@ -63,28 +69,49 @@
 }
 - (void)saveFile:(NSData *)receivedData {
     NSString *path = [[self applicationDocumentsDirectory].path
-                      stringByAppendingPathComponent:KEY_FILE_NAME];
+                      stringByAppendingPathComponent:fileName];
     NSLog(@"path: %@", path);
-    NSString *dataStr = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    [dataStr writeToFile:path atomically:YES
-                   encoding:NSUTF8StringEncoding error:nil];
+    BOOL success =  [receivedData writeToFile:path atomically:YES];
+    if (success) {
+        [self unzipFile];
+    }
+}
+- (void)unzipFile {
+    NSString *zipPath = [[self applicationDocumentsDirectory].path
+                         stringByAppendingPathComponent:fileName];
+    NSString *unzipPath = [self applicationDocumentsDirectory].path;
+    BOOL success =  [SSZipArchive unzipFileAtPath:zipPath toDestination:unzipPath];
+    NSLog(@"unzipPath: %@", unzipPath);
+    if (success) {
+        [self saveCategoryToDb];
+    }
+}
+- (NSString *)getContentFile:(NSString *)fileName {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
+    NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
+    return content;
 }
 #pragma mark - WRRequestDelegate
 - (void)requestCompleted:(WRRequest *)request {
     //called after 'request' is completed successfully
 //    NSLog(@"%@ completed!", request);
     
-    //we cast the request to list request
-//    WRRequestListDirectory * listDir = (WRRequestListDirectory *)request;
-    
-    //we print each of the files name
 //    for (NSDictionary * file in listDir.filesInfo) {
-//        NSString *name = [file objectForKey:(id)kCFFTPResourceName];
-//        NSLog(@"%@", name);
+//        NSDate *modDate = [file objectForKey:(id)kCFFTPResourceModDate];
 //    }
-    WRRequestDownload * downloadF = (WRRequestDownload *)request;
-    NSData *data = downloadF.receivedData;
-    [self saveFile:data];
+    if (isDownloadFile) {
+        WRRequestDownload * downloadF = (WRRequestDownload *)request;
+        NSData *data = downloadF.receivedData;
+        [self saveFile:data];
+        return;
+    }
+    WRRequestListDirectory * listDir = (WRRequestListDirectory *)request;
+    NSDictionary *dict = [listDir.filesInfo objectAtIndex:listDir.filesInfo.count - 1];
+    fileName = [dict objectForKey:kCFFTPResourceName];
+    isDownloadFile = YES;
+    [self downloadZipFile];
 }
 - (void)requestFailed:(WRRequest *)request {
     NSLog(@"%@", request.error.message);
@@ -102,8 +129,8 @@
     NSLog(@"Documents Directory: %@", [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
     NSManagedObjectContext *context = [self managedObjectContext];
     //save category to db
-    NSString* path = [[NSBundle mainBundle] pathForResource:KEY_CATEGORY_TABLE_FILE_NAME ofType:KEY_SURFFIX_FILE];
-    NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+//    NSString* path = [[NSBundle mainBundle] pathForResource:KEY_CATEGORY_TABLE_FILE_NAME ofType:KEY_SURFFIX_FILE];
+    NSString* content = [self getContentFile:KEY_CATEGORY_TABLE_FILE_NAME];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
     
     int indexOfCateId = 0;
@@ -135,8 +162,8 @@
 - (void)saveMenuContentToDb {
     NSManagedObjectContext *context = [self managedObjectContext];
     //save category to db
-    NSString* path = [[NSBundle mainBundle] pathForResource:KEY_MENU_CONTENT_TABLE_FILE_NAME ofType:KEY_SURFFIX_FILE];
-    NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+//    NSString* path = [[NSBundle mainBundle] pathForResource:KEY_MENU_CONTENT_TABLE_FILE_NAME ofType:KEY_SURFFIX_FILE];
+    NSString* content = [self getContentFile:KEY_MENU_CONTENT_TABLE_FILE_NAME];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
     
     int indexOfCateId = 0;
@@ -169,7 +196,7 @@
     NSManagedObjectContext *context = [self managedObjectContext];
     //save product to db
     NSString* path = [[NSBundle mainBundle] pathForResource:KEY_PRODUCT_TABLE_FILE_NAME ofType:KEY_SURFFIX_FILE];
-    NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+    NSString* content = [self getContentFile:KEY_PRODUCT_TABLE_FILE_NAME];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
     
     int indexOfId = 0;

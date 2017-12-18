@@ -112,9 +112,6 @@
 		739853531FBC38B30024E87C /* CategoryCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 739853511FBC38B30024E87C /* CategoryCollectionCell.xib */; };
 		739853571FBC3AF50024E87C /* CategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 739853561FBC3AF50024E87C /* CategoryView.m */; };
 		739853591FBC3AFE0024E87C /* CategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 739853581FBC3AFE0024E87C /* CategoryView.xib */; };
-		73A6606A1FE2626200FB80B8 /* plu.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73A660671FE2626200FB80B8 /* plu.txt */; };
-		73A6606B1FE2626200FB80B8 /* menu_category.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73A660681FE2626200FB80B8 /* menu_category.txt */; };
-		73A6606C1FE2626200FB80B8 /* menu_contents.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73A660691FE2626200FB80B8 /* menu_contents.txt */; };
 		73A660711FE264B000FB80B8 /* SplashController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A6606F1FE264B000FB80B8 /* SplashController.m */; };
 		73A660721FE264B000FB80B8 /* SplashController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A660701FE264B000FB80B8 /* SplashController.xib */; };
 		73B9A72B1F9DA4C8004680E4 /* ProductOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B9A72A1F9DA4C8004680E4 /* ProductOption.m */; };
@@ -265,9 +262,6 @@
 		739853551FBC3AF50024E87C /* CategoryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryView.h; sourceTree = "<group>"; };
 		739853561FBC3AF50024E87C /* CategoryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryView.m; sourceTree = "<group>"; };
 		739853581FBC3AFE0024E87C /* CategoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryView.xib; sourceTree = "<group>"; };
-		73A660671FE2626200FB80B8 /* plu.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plu.txt; sourceTree = "<group>"; };
-		73A660681FE2626200FB80B8 /* menu_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_category.txt; sourceTree = "<group>"; };
-		73A660691FE2626200FB80B8 /* menu_contents.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_contents.txt; sourceTree = "<group>"; };
 		73A6606E1FE264B000FB80B8 /* SplashController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplashController.h; sourceTree = "<group>"; };
 		73A6606F1FE264B000FB80B8 /* SplashController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplashController.m; sourceTree = "<group>"; };
 		73A660701FE264B000FB80B8 /* SplashController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashController.xib; sourceTree = "<group>"; };
@@ -350,9 +344,6 @@
 		730FE0B41F95A1690045A234 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				73A660681FE2626200FB80B8 /* menu_category.txt */,
-				73A660691FE2626200FB80B8 /* menu_contents.txt */,
-				73A660671FE2626200FB80B8 /* plu.txt */,
 				733675271FE25F2200F0AFF8 /* ImagesForProduct */,
 				730FE0B51F95A1690045A234 /* main.m */,
 			);
@@ -938,7 +929,6 @@
 				736574791FA04E8E008E59CA /* Soups2.jpg in Resources */,
 				7365746D1FA04E8E008E59CA /* Cake2.jpg in Resources */,
 				7336755B1FE25F2200F0AFF8 /* 1004.png in Resources */,
-				73A6606C1FE2626200FB80B8 /* menu_contents.txt in Resources */,
 				733675541FE25F2200F0AFF8 /* 2005.png in Resources */,
 				736574731FA04E8E008E59CA /* Drinks2.jpg in Resources */,
 				739853531FBC38B30024E87C /* CategoryCollectionCell.xib in Resources */,
@@ -959,8 +949,6 @@
 				7336754C1FE25F2200F0AFF8 /* 4007.png in Resources */,
 				736574741FA04E8E008E59CA /* Drinks3.jpg in Resources */,
 				7357EE941F9747D7001EB56B /* OrderSummaryHeader.xib in Resources */,
-				73A6606B1FE2626200FB80B8 /* menu_category.txt in Resources */,
-				73A6606A1FE2626200FB80B8 /* plu.txt in Resources */,
 				736574721FA04E8E008E59CA /* Drinks1.jpg in Resources */,
 				733675641FE25F2200F0AFF8 /* 3006.png in Resources */,
 				730FE0BF1F95A1690045A234 /* Main.storyboard in Resources */,
