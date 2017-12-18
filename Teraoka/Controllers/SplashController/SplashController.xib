@@ -12,7 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashController">
             <connections>
+                <outlet property="btnProceed" destination="gbS-Pn-UcA" id="6Un-4B-jP1"/>
                 <outlet property="indicatorView" destination="Mvx-44-z0z" id="R1X-iN-olS"/>
+                <outlet property="tfValue" destination="3w9-X7-9UW" id="tCP-5r-OU9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,6 +23,34 @@
             <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter IP address to proceed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IyD-Ml-TlB">
+                    <rect key="frame" x="536" y="447" width="295" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbS-Pn-UcA" customClass="ButtonCustom">
+                    <rect key="frame" x="533" y="567" width="300" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="HLT-xv-7Vk"/>
+                        <constraint firstAttribute="width" constant="300" id="b13-yy-5II"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <state key="normal" title="Proceed"/>
+                    <connections>
+                        <action selector="proceed:" destination="-1" eventType="touchUpInside" id="ciZ-3r-yaL"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="192.168.1.100" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3w9-X7-9UW" customClass="TextfieldCustom">
+                    <rect key="frame" x="533" y="497" width="300" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="ToX-nh-1Zo"/>
+                        <constraint firstAttribute="width" constant="300" id="zq6-KR-f5r"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                </textField>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Mvx-44-z0z">
                     <rect key="frame" x="673" y="512" width="20" height="20"/>
                 </activityIndicatorView>
@@ -28,6 +58,12 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Mvx-44-z0z" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="4Aq-PR-H9d"/>
+                <constraint firstItem="IyD-Ml-TlB" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="6Lb-JU-9m3"/>
+                <constraint firstItem="gbS-Pn-UcA" firstAttribute="top" secondItem="3w9-X7-9UW" secondAttribute="bottom" constant="20" id="MK0-wa-yPA"/>
+                <constraint firstItem="3w9-X7-9UW" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="Zme-AS-V5f"/>
+                <constraint firstItem="3w9-X7-9UW" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="atC-0x-9nA"/>
+                <constraint firstItem="gbS-Pn-UcA" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="j7w-dX-zKf"/>
+                <constraint firstItem="3w9-X7-9UW" firstAttribute="top" secondItem="IyD-Ml-TlB" secondAttribute="bottom" constant="20" id="uRE-m7-kiO"/>
                 <constraint firstItem="Mvx-44-z0z" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="vG1-0T-Poz"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>

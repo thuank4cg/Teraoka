@@ -1188,6 +1188,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nakarin Bunjerdluk (9LMKG7VUU9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nakarin Bunjerdluk (9LMKG7VUU9)";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NTR2MPTQ2A;
 				INFOPLIST_FILE = Teraoka/Info.plist;
@@ -1208,6 +1209,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nakarin Bunjerdluk (9LMKG7VUU9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nakarin Bunjerdluk (9LMKG7VUU9)";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NTR2MPTQ2A;
 				INFOPLIST_FILE = Teraoka/Info.plist;

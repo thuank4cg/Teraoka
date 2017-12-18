@@ -11,30 +11,44 @@
 #import "CategoriesController.h"
 #import "WhiteRaccoon.h"
 #import <SSZipArchive.h>
+#import "TextfieldCustom.h"
+#import "ButtonCustom.h"
 
 //#define KEY_FILE_NAME @"HOTMasterDataFull_02.12_171214_143505_01.29.zip"
 //#define KEY_FOLDER_NAME @"HOTMasterDataFull"
 
 @interface SplashController () <WRRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
+@property (weak, nonatomic) IBOutlet TextfieldCustom *tfValue;
+@property (weak, nonatomic) IBOutlet ButtonCustom *btnProceed;
 
 @end
 
 @implementation SplashController {
     NSString *fileName;
+    NSString *hostName;
     BOOL isDownloadFile;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [_indicatorView startAnimating];
+    [_indicatorView setHidden:YES];
 //    double delayInSeconds = 2.0;
 //    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
 //    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
 //        [self saveCategoryToDb];
 //    });
     isDownloadFile = NO;
+    hostName = @"192.168.1.100";
+//    [self listDirectoryContents];
+}
+- (IBAction)proceed:(id)sender {
+    hostName = _tfValue.text;
+//    if (hostName.length == 0) return;
+    [_btnProceed setUserInteractionEnabled:NO];
+    [_indicatorView setHidden:NO];
+    [_indicatorView startAnimating];
     [self listDirectoryContents];
 }
 #pragma mark - Custom method
@@ -44,7 +58,7 @@
     
     listDir.path = @"/datamanager/thot";
     
-    listDir.hostname = @"192.168.1.100";
+    listDir.hostname = hostName;
     listDir.username = USERNAME;
     listDir.password = PASSWORD;
     
@@ -56,7 +70,7 @@
     
     downloadFile.path = [NSString stringWithFormat:@"/datamanager/thot/%@", fileName];
     
-    downloadFile.hostname = @"192.168.1.100";
+    downloadFile.hostname = hostName;
     downloadFile.username = USERNAME;
     downloadFile.password = PASSWORD;
     
@@ -108,13 +122,16 @@
         return;
     }
     WRRequestListDirectory * listDir = (WRRequestListDirectory *)request;
-    NSDictionary *dict = [listDir.filesInfo objectAtIndex:listDir.filesInfo.count - 1];
-    fileName = [dict objectForKey:kCFFTPResourceName];
-    isDownloadFile = YES;
-    [self downloadZipFile];
+    if (listDir.filesInfo.count > 0) {
+        NSDictionary *dict = [listDir.filesInfo objectAtIndex:listDir.filesInfo.count - 1];
+        fileName = [dict objectForKey:kCFFTPResourceName];
+        isDownloadFile = YES;
+        [self downloadZipFile];
+    }
 }
 - (void)requestFailed:(WRRequest *)request {
     NSLog(@"%@", request.error.message);
+    if (!isDownloadFile) [_btnProceed setUserInteractionEnabled:YES];
 }
 
 #pragma mark - save data to db
