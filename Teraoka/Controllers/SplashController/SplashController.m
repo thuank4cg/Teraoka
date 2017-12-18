@@ -57,6 +57,18 @@
     //we start the request
     [downloadFile start];
 }
+- (NSURL *)applicationDocumentsDirectory {
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                   inDomains:NSUserDomainMask] lastObject];
+}
+- (void)saveFile:(NSData *)receivedData {
+    NSString *path = [[self applicationDocumentsDirectory].path
+                      stringByAppendingPathComponent:KEY_FILE_NAME];
+    NSLog(@"path: %@", path);
+    NSString *dataStr = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+    [dataStr writeToFile:path atomically:YES
+                   encoding:NSUTF8StringEncoding error:nil];
+}
 #pragma mark - WRRequestDelegate
 - (void)requestCompleted:(WRRequest *)request {
     //called after 'request' is completed successfully
@@ -72,6 +84,7 @@
 //    }
     WRRequestDownload * downloadF = (WRRequestDownload *)request;
     NSData *data = downloadF.receivedData;
+    [self saveFile:data];
 }
 - (void)requestFailed:(WRRequest *)request {
     NSLog(@"%@", request.error.message);
