@@ -11,6 +11,8 @@
 #import "CategoriesController.h"
 #import "WhiteRaccoon.h"
 
+#define KEY_FILE_NAME @"HOTMasterDataFull_02.12_171214_143505_01.29.zip"
+
 @interface SplashController () <WRRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 
@@ -22,38 +24,54 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [_indicatorView startAnimating];
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self saveCategoryToDb];
-    });
+//    double delayInSeconds = 2.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        [self saveCategoryToDb];
+//    });
+    [self downloadZipFile];
 }
 #pragma mark - Custom method
 - (void)listDirectoryContents {
     WRRequestListDirectory * listDir = [[WRRequestListDirectory alloc] init];
     listDir.delegate = self;
     
-    listDir.path = [NSString stringWithFormat:@"%@/", HOST_NAME];
+    listDir.path = @"/datamanager/thot";
     
-    listDir.hostname = HOST_NAME;
+    listDir.hostname = @"192.168.1.100";
     listDir.username = USERNAME;
     listDir.password = PASSWORD;
     
     [listDir start];
 }
+- (void)downloadZipFile {
+    WRRequestDownload * downloadFile = [[WRRequestDownload alloc] init];
+    downloadFile.delegate = self;
+    
+    downloadFile.path = [NSString stringWithFormat:@"/datamanager/thot/%@", KEY_FILE_NAME];
+    
+    downloadFile.hostname = @"192.168.1.100";
+    downloadFile.username = USERNAME;
+    downloadFile.password = PASSWORD;
+    
+    //we start the request
+    [downloadFile start];
+}
 #pragma mark - WRRequestDelegate
 - (void)requestCompleted:(WRRequest *)request {
     //called after 'request' is completed successfully
-    NSLog(@"%@ completed!", request);
+//    NSLog(@"%@ completed!", request);
     
     //we cast the request to list request
-    WRRequestListDirectory * listDir = (WRRequestListDirectory *)request;
+//    WRRequestListDirectory * listDir = (WRRequestListDirectory *)request;
     
     //we print each of the files name
-    for (NSDictionary * file in listDir.filesInfo) {
-        NSString *name = [file objectForKey:(id)kCFFTPResourceName];
-        NSLog(@"%@", name);
-    }
+//    for (NSDictionary * file in listDir.filesInfo) {
+//        NSString *name = [file objectForKey:(id)kCFFTPResourceName];
+//        NSLog(@"%@", name);
+//    }
+    WRRequestDownload * downloadF = (WRRequestDownload *)request;
+    NSData *data = downloadF.receivedData;
 }
 - (void)requestFailed:(WRRequest *)request {
     NSLog(@"%@", request.error.message);
