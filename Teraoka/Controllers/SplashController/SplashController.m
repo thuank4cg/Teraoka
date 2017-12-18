@@ -122,9 +122,23 @@
         return;
     }
     WRRequestListDirectory * listDir = (WRRequestListDirectory *)request;
-    if (listDir.filesInfo.count > 0) {
-        NSDictionary *dict = [listDir.filesInfo objectAtIndex:listDir.filesInfo.count - 1];
-        fileName = [dict objectForKey:kCFFTPResourceName];
+    NSDate *compareDate = nil;
+    NSDictionary *targetDict = nil;
+    for (NSDictionary *file in listDir.filesInfo) {
+        NSDate *modDate = [file objectForKey:(id)kCFFTPResourceModDate];
+        if (!compareDate) {
+            compareDate = modDate;
+            targetDict = file;
+        }else {
+            if ([modDate compare:compareDate] == NSOrderedDescending) {
+                compareDate = modDate;
+                targetDict = file;
+            }
+        }
+        
+    }
+    if (!targetDict) {
+        fileName = [targetDict objectForKey:kCFFTPResourceName];
         isDownloadFile = YES;
         [self downloadZipFile];
     }
