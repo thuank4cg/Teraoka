@@ -125,20 +125,22 @@
     NSDate *compareDate = nil;
     NSDictionary *targetDict = nil;
     for (NSDictionary *file in listDir.filesInfo) {
-        NSDate *modDate = [file objectForKey:(id)kCFFTPResourceModDate];
-        if (!compareDate) {
-            compareDate = modDate;
-            targetDict = file;
-        }else {
-            if ([modDate compare:compareDate] == NSOrderedDescending) {
+        NSString *fName = [file objectForKey:(id)kCFFTPResourceName];
+        if ([fName rangeOfString:@".zip"].location != NSNotFound) {
+            NSDate *modDate = [file objectForKey:(id)kCFFTPResourceModDate];
+            if (!compareDate) {
                 compareDate = modDate;
                 targetDict = file;
+            }else {
+                if ([modDate compare:compareDate] == NSOrderedDescending) {
+                    compareDate = modDate;
+                    targetDict = file;
+                }
             }
         }
-        
     }
     if (!targetDict) {
-        fileName = [targetDict objectForKey:kCFFTPResourceName];
+        fileName = [targetDict objectForKey:(id)kCFFTPResourceName];
         isDownloadFile = YES;
         [self downloadZipFile];
     }
