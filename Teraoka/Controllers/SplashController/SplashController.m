@@ -41,11 +41,10 @@
 //    });
     isDownloadFile = NO;
     hostName = @"192.168.1.100";
-    [self saveCategoryToDb];
 //    [self listDirectoryContents];
 }
 - (IBAction)proceed:(id)sender {
-    hostName = _tfValue.text;
+    if (_tfValue.text.length > 0) hostName = _tfValue.text;
 //    if (hostName.length == 0) return;
     [_btnProceed setUserInteractionEnabled:NO];
     [_indicatorView setHidden:NO];
@@ -57,7 +56,7 @@
     WRRequestListDirectory * listDir = [[WRRequestListDirectory alloc] init];
     listDir.delegate = self;
     
-    listDir.path = @"/datamanager/thot";
+    listDir.path = @"../opt/datamanager/thot";
     
     listDir.hostname = hostName;
     listDir.username = USERNAME;
@@ -69,7 +68,7 @@
     WRRequestDownload * downloadFile = [[WRRequestDownload alloc] init];
     downloadFile.delegate = self;
     
-    downloadFile.path = [NSString stringWithFormat:@"/datamanager/thot/%@", fileName];
+    downloadFile.path = [NSString stringWithFormat:@"../opt/datamanager/thot/%@", fileName];
     
     downloadFile.hostname = hostName;
     downloadFile.username = USERNAME;
@@ -140,7 +139,7 @@
             }
         }
     }
-    if (!targetDict) {
+    if (targetDict) {
         fileName = [targetDict objectForKey:(id)kCFFTPResourceName];
         isDownloadFile = YES;
         [self downloadZipFile];

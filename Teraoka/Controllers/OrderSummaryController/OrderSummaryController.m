@@ -28,6 +28,7 @@
 
 @implementation OrderSummaryController {
     NSMutableArray *products;
+    GCDAsyncSocket* asyncSocket;
 }
 
 - (void)viewDidLoad {
@@ -197,13 +198,13 @@
 - (void)sendTransaction {
 //    NSString *host = @"google.com";
 //    uint16_t port = 80;
-//    
+//
 //    NSError *error = nil;
-//    
+//
 //    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-//    
-//    GCDAsyncSocket* asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
-//    
+//
+//    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+//
 //    if (![asyncSocket connectToHost:host onPort:port error:&error])
 //    {
 //        NSLog(@"error");
@@ -213,12 +214,12 @@
     NSLog(@"didConnectToHost");
     NSString *test = @"test";
     NSData *requestData = [test dataUsingEncoding:NSUTF8StringEncoding];
-    [sock writeData:requestData withTimeout:-1 tag:0];
-//    [sock readDataToData:[GCDAsyncSocket CRLFData] withTimeout:15 tag:0];
+    [asyncSocket writeData:requestData withTimeout:-1 tag:0];
+    [asyncSocket readDataWithTimeout:-1 tag:0];
 }
-- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
-    NSLog(@"didWriteDataWithTag");
-}
+//- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+//    NSLog(@"didWriteDataWithTag");
+//}
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSLog(@"didReadData");
     NSString *httpResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
