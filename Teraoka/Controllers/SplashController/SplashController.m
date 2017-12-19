@@ -41,6 +41,7 @@
 //    });
     isDownloadFile = NO;
     hostName = @"192.168.1.100";
+    [self saveCategoryToDb];
 //    [self listDirectoryContents];
 }
 - (IBAction)proceed:(id)sender {
@@ -147,6 +148,8 @@
 }
 - (void)requestFailed:(WRRequest *)request {
     NSLog(@"%@", request.error.message);
+    [_indicatorView stopAnimating];
+    [_indicatorView setHidden:YES];
     if (!isDownloadFile) [_btnProceed setUserInteractionEnabled:YES];
 }
 
