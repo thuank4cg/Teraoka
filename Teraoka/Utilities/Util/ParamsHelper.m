@@ -73,7 +73,7 @@
     //Data
     [mCollectData appendData:[self requestData]];
     
-    NSString *newLine = @"test\n";
+    NSString *newLine = @"test\r\n";
     NSData *requestData = [newLine dataUsingEncoding:NSUTF8StringEncoding];
     [mCollectData appendData:requestData];
     

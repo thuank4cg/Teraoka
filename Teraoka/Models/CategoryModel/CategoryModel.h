@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <JSONModel.h>
+#import <JSONModel/JSONModel.h>
 #import "ProductModel.h"
 
 
