@@ -13,13 +13,13 @@
 #import <SSZipArchive/SSZipArchive.h>
 #import "TextfieldCustom.h"
 #import "ButtonCustom.h"
-#import <CocoaAsyncSocket/GCDAsyncSocket.h>
 #import "ParamsHelper.h"
+#import <GCDAsyncSocket.h>
 
 //#define KEY_FILE_NAME @"HOTMasterDataFull_02.12_171214_143505_01.29.zip"
 //#define KEY_FOLDER_NAME @"HOTMasterDataFull"
 
-@interface SplashController () <WRRequestDelegate, NSStreamDelegate>
+@interface SplashController () <WRRequestDelegate, NSStreamDelegate, GCDAsyncSocketDelegate>
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet TextfieldCustom *tfValue;
 @property (weak, nonatomic) IBOutlet ButtonCustom *btnProceed;
@@ -31,6 +31,10 @@
     NSString *hostName;
     BOOL isDownloadFile;
     GCDAsyncSocket *asyncSocket;
+    NSOutputStream *outputStream;
+    NSInputStream *inputStream;
+    CFReadStreamRef readStream;
+    CFWriteStreamRef writeStream;
 }
 
 - (void)viewDidLoad {
@@ -46,42 +50,93 @@
     hostName = @"192.168.1.100";
 //    [self listDirectoryContents];
     
+//    CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, (__bridge CFStringRef) @"google.com", 80, &readStream, &writeStream);
+//    [self open];
+}
+- (void)open {
+    
+    NSLog(@"Opening streams.");
+    
+    outputStream = (__bridge NSOutputStream *)writeStream;
+    inputStream = (__bridge NSInputStream *)readStream;
+    
+    [outputStream setDelegate:self];
+    [inputStream setDelegate:self];
+    
+    [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    
+    [outputStream open];
+    [inputStream open];
+}
+- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
+    NSLog(@"stream event %lu", eventCode);
+    
+    switch (eventCode) {
+            
+        case NSStreamEventOpenCompleted:
+            NSLog(@"Stream opened");
+            break;
+            
+        case NSStreamEventHasBytesAvailable:
+            if (aStream == inputStream)
+            {
+                uint8_t buffer[1024];
+                NSInteger len;
+                
+                while ([inputStream hasBytesAvailable])
+                {
+                    len = [inputStream read:buffer maxLength:sizeof(buffer)];
+                    if (len > 0)
+                    {
+                        NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
+                        
+                        if (nil != output)
+                        {
+                            NSLog(@"server said: %@", output);
+                        }
+                    }
+                }
+            }
+            break;
+            
+        case NSStreamEventHasSpaceAvailable:
+            NSLog(@"Stream has space available now");
+            break;
+            
+        case NSStreamEventErrorOccurred:
+            NSLog(@"error: %@",[aStream streamError].localizedDescription);
+            break;
+            
+        case NSStreamEventEndEncountered:
+            [aStream close];
+            [aStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+            NSLog(@"close stream");
+            break;
+            
+        default:
+            NSLog(@"Unknown event");
+    }
+}
+
+- (IBAction)proceed:(id)sender {
+//    [outputStream write:[ParamsHelper.shared.collectData bytes] maxLength:[ParamsHelper.shared.collectData length]];
     
 //    NSString *host = @"google.com";
 //    uint16_t port = 80;
-//
+//    
 //    NSError *error = nil;
-//
+//    
 //    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-//
+//    
 //    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
-//
+//    
 //    if (![asyncSocket connectToHost:host onPort:port error:&error])
 //    {
 //        NSLog(@"error");
 //    }
-}
-
-//- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
-//    NSLog(@"didConnectToHost");
-//    [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:-1 tag:0];
-//}
-//- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
-//    NSLog(@"didWriteDataWithTag");
-//    [asyncSocket readDataWithTimeout:-1 tag:0];
-//}
-//- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-//    NSLog(@"didReadData");
-//    NSString *httpResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    NSLog(@"%@", httpResponse);
-//}
-//- (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket {
-//    NSLog(@"didAcceptNewSocket");
-//}
-//- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-//    NSLog(@"socketDidDisconnect");
-//}
-- (IBAction)proceed:(id)sender {
+//
+//    return;
     if (_tfValue.text.length > 0) hostName = _tfValue.text;
 //    if (hostName.length == 0) return;
     [_btnProceed setUserInteractionEnabled:NO];
@@ -318,6 +373,23 @@
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:rootVC];
     [navc setNavigationBarHidden:YES];
     appDelegate.window.rootViewController = navc;
+}
+
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
+    NSLog(@"didConnectToHost");
+    [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:-1 tag:0];
+    [asyncSocket readDataWithTimeout:-1 tag:0];
+}
+//- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+//    NSLog(@"didWriteDataWithTag");
+//}
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+    NSLog(@"didReadData");
+    NSString *httpResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", httpResponse);
+}
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+    NSLog(@"socketDidDisconnect");
 }
 
 @end

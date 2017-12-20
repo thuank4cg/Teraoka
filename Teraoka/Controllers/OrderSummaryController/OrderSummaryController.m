@@ -41,9 +41,6 @@
     // Do any additional setup after loading the view from its nib.
     products = [ShareManager shared].cartArr;
     [self setupView];
-    
-    CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, (__bridge CFStringRef) @"google.com", 80, &readStream, &writeStream);
-    [self open];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -203,43 +200,24 @@
 }
 
 #pragma mark - Custom method
-- (void)open {
-    
-    NSLog(@"Opening streams.");
-    
-    outputStream = (__bridge NSOutputStream *)writeStream;
-    inputStream = (__bridge NSInputStream *)readStream;
-    
-    [outputStream setDelegate:self];
-    [inputStream setDelegate:self];
-    
-    [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    
-    [outputStream open];
-    [inputStream open];
-}
 - (void)sendTransaction {
-//    NSString *host = @"google.com";
-//    uint16_t port = 80;
-//
-//    NSError *error = nil;
-//
-//    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-//
-//    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
-//
-//    if (![asyncSocket connectToHost:host onPort:port error:&error])
-//    {
-//        NSLog(@"error");
-//    }
-    [outputStream write:[ParamsHelper.shared.collectData bytes] maxLength:[ParamsHelper.shared.collectData length]];
+    NSString *host = @"google.com";
+    uint16_t port = 80;
+
+    NSError *error = nil;
+
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+
+    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+
+    if (![asyncSocket connectToHost:host onPort:port error:&error])
+    {
+        NSLog(@"error");
+    }
 }
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
-    NSString *test = @"test";
-    NSData *requestData = [test dataUsingEncoding:NSUTF8StringEncoding];
-    [asyncSocket writeData:requestData withTimeout:-1 tag:0];
+    [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:-1 tag:0];
     [asyncSocket readDataWithTimeout:-1 tag:0];
 }
 //- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
@@ -252,57 +230,6 @@
 }
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     NSLog(@"socketDidDisconnect");
-}
-
-#pragma mark - NSStreamDelegate
-- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
-    NSLog(@"stream event %lu", eventCode);
-    
-    switch (eventCode) {
-            
-        case NSStreamEventOpenCompleted:
-            NSLog(@"Stream opened");
-            break;
-            
-        case NSStreamEventHasBytesAvailable:
-            if (aStream == inputStream)
-            {
-                uint8_t buffer[1024];
-                NSInteger len;
-                
-                while ([inputStream hasBytesAvailable])
-                {
-                    len = [inputStream read:buffer maxLength:sizeof(buffer)];
-                    if (len > 0)
-                    {
-                        NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
-                        
-                        if (nil != output)
-                        {
-                            NSLog(@"server said: %@", output);
-                        }
-                    }
-                }
-            }
-            break;
-            
-        case NSStreamEventHasSpaceAvailable:
-            NSLog(@"Stream has space available now");
-            break;
-            
-        case NSStreamEventErrorOccurred:
-            NSLog(@"error: %@",[aStream streamError].localizedDescription);
-            break;
-            
-        case NSStreamEventEndEncountered:
-            [aStream close];
-            [aStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-            NSLog(@"close stream");
-            break;
-            
-        default:
-            NSLog(@"Unknown event");
-    }
 }
 
 @end
