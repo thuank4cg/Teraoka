@@ -62,16 +62,20 @@
     //Command size
     int dataSize = (int)[self requestData].length;
     int commandSize = dataSize + 8;
-    [mCollectData appendData:[self intToData:commandSize length:4]];
+//    [mCollectData appendData:[self intToData:commandSize length:4]];
     
     //Command ID
     [mCollectData appendData:[self intToData:13200 length:4]];
     
     //Data size
-    [mCollectData appendData:[self intToData:dataSize length:4]];
+//    [mCollectData appendData:[self intToData:dataSize length:4]];
     
     //Data
-    [mCollectData appendData:[self requestData]];
+//    [mCollectData appendData:[self requestData]];
+    
+    NSString *newLine = @"test\r\n";
+    NSData *requestData = [newLine dataUsingEncoding:NSUTF8StringEncoding];
+    [mCollectData appendData:requestData];
     
     return mCollectData;
 }

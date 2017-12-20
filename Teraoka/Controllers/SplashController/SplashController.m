@@ -10,14 +10,17 @@
 #import "APPConstants.h"
 #import "CategoriesController.h"
 #import "WhiteRaccoon.h"
-#import <SSZipArchive.h>
+#import <SSZipArchive/SSZipArchive.h>
 #import "TextfieldCustom.h"
 #import "ButtonCustom.h"
+#import <CocoaAsyncSocket/GCDAsyncSocket.h>
+#import "ParamsHelper.h"
+#import <Starscream/Starscream-Swift.h>
 
 //#define KEY_FILE_NAME @"HOTMasterDataFull_02.12_171214_143505_01.29.zip"
 //#define KEY_FOLDER_NAME @"HOTMasterDataFull"
 
-@interface SplashController () <WRRequestDelegate>
+@interface SplashController () <WRRequestDelegate, GCDAsyncSocketDelegate>
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet TextfieldCustom *tfValue;
 @property (weak, nonatomic) IBOutlet ButtonCustom *btnProceed;
@@ -28,6 +31,7 @@
     NSString *fileName;
     NSString *hostName;
     BOOL isDownloadFile;
+    GCDAsyncSocket *asyncSocket;
 }
 
 - (void)viewDidLoad {
@@ -42,6 +46,40 @@
     isDownloadFile = NO;
     hostName = @"192.168.1.100";
 //    [self listDirectoryContents];
+    
+    
+    NSString *host = @"google.com";
+    uint16_t port = 80;
+    
+    NSError *error = nil;
+    
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    
+    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+    
+    if (![asyncSocket connectToHost:host onPort:port error:&error])
+    {
+        NSLog(@"error");
+    }
+}
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
+    NSLog(@"didConnectToHost");
+    [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:-1 tag:0];
+}
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+    NSLog(@"didWriteDataWithTag");
+    [asyncSocket readDataWithTimeout:-1 tag:0];
+}
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+    NSLog(@"didReadData");
+    NSString *httpResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", httpResponse);
+}
+//- (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket {
+//    NSLog(@"didAcceptNewSocket");
+//}
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+    NSLog(@"socketDidDisconnect");
 }
 - (IBAction)proceed:(id)sender {
     if (_tfValue.text.length > 0) hostName = _tfValue.text;
