@@ -13,7 +13,7 @@
 #define appDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
 #define HOST_NAME @"192.168.1.100"
-#define POST 9088
+#define PORT 9088
 #define USERNAME @"root"
 #define PASSWORD @"teraoka"
 

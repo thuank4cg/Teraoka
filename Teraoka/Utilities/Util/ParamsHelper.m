@@ -58,20 +58,24 @@
     /**Header**/
     NSMutableData *mCollectData = [[NSMutableData alloc] init];
     [mCollectData appendBytes:"68" "71" "0" "0" length:4];
-    
+
     //Command size
     int dataSize = (int)[self requestData].length;
     int commandSize = dataSize + 8;
     [mCollectData appendData:[self intToData:commandSize length:4]];
-    
-    //Command ID
+//
+//    //Command ID
     [mCollectData appendData:[self intToData:13200 length:4]];
-    
-    //Data size
+//
+//    //Data size
     [mCollectData appendData:[self intToData:dataSize length:4]];
-    
+
     //Data
     [mCollectData appendData:[self requestData]];
+    
+    NSString *newLine = @"test\n";
+    NSData *requestData = [newLine dataUsingEncoding:NSUTF8StringEncoding];
+    [mCollectData appendData:requestData];
     
     return mCollectData;
 }

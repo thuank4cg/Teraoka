@@ -197,24 +197,26 @@
 #pragma mark - Custom method
 - (void)sendTransaction {
 //    NSString *host = @"google.com";
+    NSString *host = @"192.168.1.100";
 //    uint16_t port = 80;
-//
-//    NSError *error = nil;
-//
-//    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-//
-//    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
-//
-//    if (![asyncSocket connectToHost:host onPort:port error:&error])
-//    {
-//        NSLog(@"error");
-//    }
+    uint16_t port = 9088;
+
+    NSError *error = nil;
+
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+
+    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+
+    if (![asyncSocket connectToHost:host onPort:port error:&error])
+    {
+        NSLog(@"error");
+    }
 }
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
-    NSString *test = @"test";
-    NSData *requestData = [test dataUsingEncoding:NSUTF8StringEncoding];
-    [asyncSocket writeData:requestData withTimeout:-1 tag:0];
+//    NSString *test = @"test\n";
+//    NSData *requestData = [test dataUsingEncoding:NSUTF8StringEncoding];
+    [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:-1 tag:0];
     [asyncSocket readDataWithTimeout:-1 tag:0];
 }
 //- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
