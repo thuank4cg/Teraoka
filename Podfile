@@ -9,6 +9,4 @@ target 'Teraoka' do
   pod 'TPKeyboardAvoiding',   '1.2'
   pod 'CocoaAsyncSocket'
   pod 'SSZipArchive'
-  pod 'Starscream', '~> 3.0'
-  use_frameworks!
 end
