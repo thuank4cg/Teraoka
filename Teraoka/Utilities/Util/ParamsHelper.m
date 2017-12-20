@@ -85,12 +85,11 @@
 - (NSMutableData *)collectData {
     /**Header**/
     NSMutableData *mCollectData = [[NSMutableData alloc] init];
-//    [mCollectData appendBytes:"68" "71" "0" "0" length:4];
+    [mCollectData appendBytes:"68" "71" "0" "0" length:4];
     
     //Command size
     int dataSize = (int)[self requestData].length;
     int commandSize = dataSize + 8;
-//    [mCollectData appendBytes:[self convertStringToBytesArr:@"13200"] length:4];
     [mCollectData appendData:[self convertStringToBytesArr:@"13200" length:4]];
 
     //Command ID
