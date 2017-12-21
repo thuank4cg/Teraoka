@@ -40,80 +40,84 @@
     return data;
 }
 
-- (NSMutableData *)collectData {
+- (NSData *)collectData {
     /**Header**/
-    NSMutableData *mCollectData = [[NSMutableData alloc] init];
-//    const unsigned char header[] = {68, 71, 0, 0};
-    [mCollectData appendBytes:"68" length:1];
-    [mCollectData appendBytes:"71" length:1];
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"0" length:1];
+    NSMutableArray *bytesArr = [NSMutableArray new];
+    [bytesArr addObject:[NSNumber numberWithInt:68]];
+    [bytesArr addObject:[NSNumber numberWithInt:71]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
     
     /**Command Size**/
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"32" length:1];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:32]];
     
     /**Command Id**/
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"39" length:1];
-    [mCollectData appendBytes:"118" length:1];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:39]];
+    [bytesArr addObject:[NSNumber numberWithInt:118]];
     
     /**Data Size**/
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"26" length:1];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:26]];
     
     /**
      *START [DATA] XRequestHeaderData
      */
     // - Version (4 bytes) 0.1.15.0
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"1" length:1];
-    [mCollectData appendBytes:"15" length:1];
-    [mCollectData appendBytes:"0" length:1];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:1]];
+    [bytesArr addObject:[NSNumber numberWithInt:15]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
     // - RequestID (4 bytes)
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"2" length:1];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:2]];
     
     // - Terminal No (2 bytes) (Hex: 21)
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"15" length:1];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:15]];
     
     // - Staff ID (4 bytes)
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"1" length:1];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:1]];
     
     // - Sending Date (4 bytes) (20170301)
-    [mCollectData appendBytes:"1" length:1];
-    [mCollectData appendBytes:"51" length:1];
-    [mCollectData appendBytes:"-58" length:1];
-    [mCollectData appendBytes:"61" length:1];
+    [bytesArr addObject:[NSNumber numberWithInt:1]];
+    [bytesArr addObject:[NSNumber numberWithInt:51]];
+    [bytesArr addObject:[NSNumber numberWithInt:-58]];
+    [bytesArr addObject:[NSNumber numberWithInt:61]];
     
     // - Sending Time (4 bytes) (17h15'00)
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"2" length:1];
-    [mCollectData appendBytes:"-99" length:1];
-    [mCollectData appendBytes:"-20" length:1];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:2]];
+    [bytesArr addObject:[NSNumber numberWithInt:-99]];
+    [bytesArr addObject:[NSNumber numberWithInt:-20]];
     
     /**
      * END [DATA] XRequestHeaderData
      * */
     
     // Table No:  00 00 00 01  (4 bytes)
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"0" length:1];
-    [mCollectData appendBytes:"2" length:1];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    [bytesArr addObject:[NSNumber numberWithInt:2]];
     
-    return mCollectData;
+    Byte UUID[bytesArr.count];
+    for (int i = 0; i < 16; i++) {
+        UUID[i] = strtoul([bytesArr[i] UTF8String], NULL, 16);
+    }
+    
+    return [NSData dataWithBytesNoCopy:UUID length:sizeof(UUID) freeWhenDone:YES];
     /**
     //Command size
     int dataSize = (int)[self requestData].length;
