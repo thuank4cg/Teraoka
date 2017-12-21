@@ -122,27 +122,27 @@
 - (IBAction)proceed:(id)sender {
 //    [outputStream write:[ParamsHelper.shared.collectData bytes] maxLength:[ParamsHelper.shared.collectData length]];
     
-//    NSString *host = @"google.com";
-//    uint16_t port = 80;
-//    
-//    NSError *error = nil;
-//    
-//    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-//    
-//    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
-//    
-//    if (![asyncSocket connectToHost:host onPort:port error:&error])
-//    {
-//        NSLog(@"error");
-//    }
-//
-//    return;
-    if (_tfValue.text.length > 0) hostName = _tfValue.text;
-//    if (hostName.length == 0) return;
-    [_btnProceed setUserInteractionEnabled:NO];
-    [_indicatorView setHidden:NO];
-    [_indicatorView startAnimating];
-    [self listDirectoryContents];
+    NSString *host = @"google.com";
+    uint16_t port = 80;
+
+    NSError *error = nil;
+
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+
+    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+
+    if (![asyncSocket connectToHost:host onPort:port error:&error])
+    {
+        NSLog(@"error");
+    }
+
+    return;
+//    if (_tfValue.text.length > 0) hostName = _tfValue.text;
+////    if (hostName.length == 0) return;
+//    [_btnProceed setUserInteractionEnabled:NO];
+//    [_indicatorView setHidden:NO];
+//    [_indicatorView startAnimating];
+//    [self listDirectoryContents];
 }
 #pragma mark - Custom method
 - (void)listDirectoryContents {
@@ -378,11 +378,11 @@
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
     [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:-1 tag:0];
+}
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+    NSLog(@"didWriteDataWithTag");
     [asyncSocket readDataWithTimeout:-1 tag:0];
 }
-//- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
-//    NSLog(@"didWriteDataWithTag");
-//}
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSLog(@"didReadData");
     NSString *httpResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
