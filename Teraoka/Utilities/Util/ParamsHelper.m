@@ -23,51 +23,9 @@
     return _shared;
 }
 
-//- (NSString *)stringToHex:(NSString *)string
-//{
-//    char *utf8 = [string UTF8String];
-//    NSMutableString *hex = [NSMutableString string];
-//    while ( *utf8 ) [hex appendFormat:@"%02X" , *utf8++ & 0x00FF];
-//
-//    return [NSString stringWithFormat:@"%@", hex];
-//}
-//- (NSData *)dataFromHexString:(NSString *)string length:(int)length {
-//    NSString *hexStr = [self stringToHex:string];
-//    const char *chars = [hexStr UTF8String];
-//    int i = 0, len = hexStr.length;
-//
-//    NSMutableData *data = [NSMutableData dataWithCapacity:len / 2];
-//    char byteChars[3] = {'\0','\0','\0'};
-//    unsigned long wholeByte;
-//
-//    while (i < len) {
-//        byteChars[0] = chars[i++];
-//        byteChars[1] = chars[i++];
-//        wholeByte = strtoul(byteChars, NULL, 16);
-//        [data appendBytes:&wholeByte length:length];
-//    }
-//
-//    return data;
-//}
-//
-//- (NSData *)intToData:(int)value length:(int)length {
-//    return [NSData dataWithBytes:&value length:length];
-//}
-
 - (NSData *)convertStringToBytesArr:(NSString *)valueStr length:(int)length {
     NSString *hex = [NSString stringWithFormat:@"%08lX",
                         (unsigned long)[valueStr integerValue]];
-//
-//    unsigned char * myBuffer = (unsigned char *)malloc((int)[hexStr length] / 2 + 1);
-//    bzero(myBuffer, [hexStr length] / 2 + 1);
-//    for (int i = 0; i < [hexStr length] - 1; i += 2) {
-//        unsigned int anInt;
-//        NSString * hexCharStr = [hexStr substringWithRange:NSMakeRange(i, 2)];
-//        NSScanner * scanner = [[NSScanner alloc] initWithString:hexCharStr];
-//        [scanner scanHexInt:&anInt];
-//        myBuffer[i / 2] = (char)anInt;
-//    }
-//    return myBuffer;
     NSMutableData* data = [NSMutableData data];
     int idx;
     int test = [hex length] - length*2;
@@ -85,34 +43,109 @@
 - (NSMutableData *)collectData {
     /**Header**/
     NSMutableData *mCollectData = [[NSMutableData alloc] init];
-    [mCollectData appendBytes:"68" "71" "0" "0" length:4];
+//    const unsigned char header[] = {68, 71, 0, 0};
+    [mCollectData appendBytes:"68" length:1];
+    [mCollectData appendBytes:"71" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"0" length:1];
     
+    /**Command Size**/
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"32" length:1];
+    
+    /**Command Id**/
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"39" length:1];
+    [mCollectData appendBytes:"118" length:1];
+    
+    /**Data Size**/
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"26" length:1];
+    
+    /**
+     *START [DATA] XRequestHeaderData
+     */
+    // - Version (4 bytes) 0.1.15.0
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"1" length:1];
+    [mCollectData appendBytes:"15" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    // - RequestID (4 bytes)
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"2" length:1];
+    
+    // - Terminal No (2 bytes) (Hex: 21)
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"15" length:1];
+    
+    // - Staff ID (4 bytes)
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"1" length:1];
+    
+    // - Sending Date (4 bytes) (20170301)
+    [mCollectData appendBytes:"1" length:1];
+    [mCollectData appendBytes:"51" length:1];
+    [mCollectData appendBytes:"-58" length:1];
+    [mCollectData appendBytes:"61" length:1];
+    
+    // - Sending Time (4 bytes) (17h15'00)
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"2" length:1];
+    [mCollectData appendBytes:"-99" length:1];
+    [mCollectData appendBytes:"-20" length:1];
+    
+    /**
+     * END [DATA] XRequestHeaderData
+     * */
+    
+    // Table No:  00 00 00 01  (4 bytes)
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"0" length:1];
+    [mCollectData appendBytes:"2" length:1];
+    
+    return mCollectData;
+    /**
     //Command size
     int dataSize = (int)[self requestData].length;
     int commandSize = dataSize + 8;
+
+//    //Command Id
     [mCollectData appendData:[self convertStringToBytesArr:@"13200" length:4]];
 
-    //Command ID
+//    //Command ID
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", commandSize] length:2]];
-    
-    //Data size
+
+//    //Data size
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", dataSize] length:4]];
 
-    //Data
-    [mCollectData appendData:[self requestData]];
+//    //Data
+//    [mCollectData appendData:[self requestData]];
     
     NSString *newLine = @"test\r\n";
     NSData *requestData = [newLine dataUsingEncoding:NSUTF8StringEncoding];
     [mCollectData appendData:requestData];
     
     return mCollectData;
+     **/
 }
 
 - (NSMutableData *)requestData {
     NSMutableData *mCollectData = [[NSMutableData alloc] init];
     /**XRequestHeaderData**/
     //version
-    [mCollectData appendBytes:"0" "1" "15" "0" length:4];
+//    [mCollectData appendBytes:"0" "1" "15" "0" length:4];
+    const unsigned char version[] = {0, 1, 15, 0};
+    [mCollectData appendBytes:version length:4];
     
     //Request ID
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", [self generatorRequestId]] length:4]];
@@ -244,9 +277,13 @@
         //Weight
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         //Item Flag
-        [mCollectData appendBytes:"0" "0" "0" "0" length:4];
+//        [mCollectData appendBytes:"0" "0" "0" "0" length:4];
+        const unsigned char itemFlag[] = {0, 0, 0, 0};
+        [mCollectData appendBytes:itemFlag length:4];
         //Item status
-        [mCollectData appendBytes:"0" "0" "0" "0" length:4];
+//        [mCollectData appendBytes:"0" "0" "0" "0" length:4];
+        const unsigned char itemStatus[] = {0, 0, 0, 0};
+        [mCollectData appendBytes:itemStatus length:4];
         //Unit price before discount
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.originalPrice] length:4]];
         //Unit price after discount
