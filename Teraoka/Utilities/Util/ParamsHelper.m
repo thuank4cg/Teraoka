@@ -93,7 +93,7 @@
     
     //Sending Date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyymmdd";
+    formatter.dateFormat = @"yyyyMMdd";
     NSString *dateStr = [formatter stringFromDate:[NSDate date]];
     [mCollectData appendData:[self convertStringToBytesArr:dateStr length:4]];
     
@@ -104,13 +104,10 @@
     
     /**XTransactionData**/
     //Number of object
-    int numberOfObj = 0;
     int totalPrice = 0;
     for (ProductModel *product in [ShareManager shared].cartArr) {
-        numberOfObj += [product.qty intValue];
-        totalPrice += [product.originalPrice intValue];
+        totalPrice += [product.originalPrice intValue] * [product.qty intValue];
     }
-    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
     
     /**XTransactionTotalData**/
     //Total price before item discount
@@ -188,6 +185,8 @@
     //Total price paid
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
     
+    int numberOfObj = (int)[ShareManager shared].cartArr.count;
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
     /**XTransactionPaymentData[]**/
     for (ProductModel *product in [ShareManager shared].cartArr) {
         //Id
@@ -203,7 +202,8 @@
         //Reference
     }
     
-    /**XTransactionItemData**/
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
+    /**XTransactionItemData[]**/
     for (ProductModel *product in [ShareManager shared].cartArr) {
         //PLU No
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.ids] length:4]];
@@ -212,11 +212,9 @@
         //Weight
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         //Item Flag
-//        [mCollectData appendBytes:"0" "0" "0" "0" length:4];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
+//        [mCollectData appendBytes:"0" "0" length:4];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         //Item status
 //        [mCollectData appendBytes:"0" "0" "0" "0" length:4];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
@@ -247,7 +245,7 @@
         //Subtotal surcharge amount
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         //Discount source
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         //Discount flexkey Id
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         //Discount level
@@ -255,7 +253,7 @@
         //Discount type
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         //Item tax Id
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         //Item tax type
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         //Item tax rate
@@ -268,21 +266,23 @@
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         //Price after subtotal discount and tax
         [mCollectData appendData:[self convertStringToBytesArr:product.originalPrice length:4]];
+        //Set item index (Apply to plu meal set item only)
+        
         //Set item addon price
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         /**XItemOptionData**/
         /****XCondimentData**/
-        [mCollectData appendData:[self convertStringToBytesArr:@"1" length:4]];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         /****XCookingInstructionData**/
-        [mCollectData appendData:[self convertStringToBytesArr:@"1" length:4]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         /****XServingTimeData**/
-        [mCollectData appendData:[self convertStringToBytesArr:@"1" length:4]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         /****XFreeInstructionData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
     }
