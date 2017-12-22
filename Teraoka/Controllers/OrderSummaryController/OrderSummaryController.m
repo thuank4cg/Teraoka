@@ -21,6 +21,8 @@
 #import "GCDAsyncSocket.h"
 #import "Util.h"
 
+#define STATUS_REPLY_OK @"00000000"
+
 @interface OrderSummaryController () <UITableViewDelegate, UITableViewDataSource, GCDAsyncSocketDelegate, NSStreamDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -239,7 +241,7 @@
     NSLog(@"didReadData");
     NSData *replyData = [data subdataWithRange:NSMakeRange(23, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyData];
-    if ([httpResponse isEqualToString:@"00000000"]){
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
         dispatch_async(dispatch_get_main_queue(), ^{
             [ShareManager shared].cartArr = nil;
             OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
