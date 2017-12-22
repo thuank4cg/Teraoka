@@ -1,0 +1,5 @@
+category_no,category_name,category_name1,category_name2,category_name3,category_name4,display_order
+30,"Logistics","","","","",1
+31,"Fashion","","","","",2
+32,"Pharmacy","","","","",3
+33,"Food","","","","",4

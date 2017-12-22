@@ -41,11 +41,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [_indicatorView setHidden:YES];
-//    double delayInSeconds = 2.0;
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//        [self saveCategoryToDb];
-//    });
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self saveCategoryToDb];
+    });
     isDownloadFile = NO;
     hostName = @"192.168.1.100";
 //    [self listDirectoryContents];
@@ -53,96 +53,96 @@
 //    CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, (__bridge CFStringRef) @"google.com", 80, &readStream, &writeStream);
 //    [self open];
 }
-- (void)open {
-    
-    NSLog(@"Opening streams.");
-    
-    outputStream = (__bridge NSOutputStream *)writeStream;
-    inputStream = (__bridge NSInputStream *)readStream;
-    
-    [outputStream setDelegate:self];
-    [inputStream setDelegate:self];
-    
-    [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    
-    [outputStream open];
-    [inputStream open];
-}
-- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
-    NSLog(@"stream event %lu", eventCode);
-    
-    switch (eventCode) {
-            
-        case NSStreamEventOpenCompleted:
-            NSLog(@"Stream opened");
-            break;
-            
-        case NSStreamEventHasBytesAvailable:
-            if (aStream == inputStream)
-            {
-                uint8_t buffer[1024];
-                NSInteger len;
-                
-                while ([inputStream hasBytesAvailable])
-                {
-                    len = [inputStream read:buffer maxLength:sizeof(buffer)];
-                    if (len > 0)
-                    {
-                        NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
-                        
-                        if (nil != output)
-                        {
-                            NSLog(@"server said: %@", output);
-                        }
-                    }
-                }
-            }
-            break;
-            
-        case NSStreamEventHasSpaceAvailable:
-            NSLog(@"Stream has space available now");
-            break;
-            
-        case NSStreamEventErrorOccurred:
-            NSLog(@"error: %@",[aStream streamError].localizedDescription);
-            break;
-            
-        case NSStreamEventEndEncountered:
-            [aStream close];
-            [aStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-            NSLog(@"close stream");
-            break;
-            
-        default:
-            NSLog(@"Unknown event");
-    }
-}
+//- (void)open {
+//
+//    NSLog(@"Opening streams.");
+//
+//    outputStream = (__bridge NSOutputStream *)writeStream;
+//    inputStream = (__bridge NSInputStream *)readStream;
+//
+//    [outputStream setDelegate:self];
+//    [inputStream setDelegate:self];
+//
+//    [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+//    [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+//
+//    [outputStream open];
+//    [inputStream open];
+//}
+//- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
+//    NSLog(@"stream event %lu", eventCode);
+//
+//    switch (eventCode) {
+//
+//        case NSStreamEventOpenCompleted:
+//            NSLog(@"Stream opened");
+//            break;
+//
+//        case NSStreamEventHasBytesAvailable:
+//            if (aStream == inputStream)
+//            {
+//                uint8_t buffer[1024];
+//                NSInteger len;
+//
+//                while ([inputStream hasBytesAvailable])
+//                {
+//                    len = [inputStream read:buffer maxLength:sizeof(buffer)];
+//                    if (len > 0)
+//                    {
+//                        NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
+//
+//                        if (nil != output)
+//                        {
+//                            NSLog(@"server said: %@", output);
+//                        }
+//                    }
+//                }
+//            }
+//            break;
+//
+//        case NSStreamEventHasSpaceAvailable:
+//            NSLog(@"Stream has space available now");
+//            break;
+//
+//        case NSStreamEventErrorOccurred:
+//            NSLog(@"error: %@",[aStream streamError].localizedDescription);
+//            break;
+//
+//        case NSStreamEventEndEncountered:
+//            [aStream close];
+//            [aStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+//            NSLog(@"close stream");
+//            break;
+//
+//        default:
+//            NSLog(@"Unknown event");
+//    }
+//}
 
 - (IBAction)proceed:(id)sender {
-//    [outputStream write:[ParamsHelper.shared.collectData bytes] maxLength:[ParamsHelper.shared.collectData length]];
+//    NSData *data = [@"test\n" dataUsingEncoding:NSUTF8StringEncoding];
+//    [outputStream write:bytes maxLength:sizeof(bytes)];
     
-    NSString *host = @"google.com";
-    uint16_t port = 80;
-
-    NSError *error = nil;
-
-    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-
-    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
-
-    if (![asyncSocket connectToHost:host onPort:port error:&error])
-    {
-        NSLog(@"error");
-    }
-
-    return;
-//    if (_tfValue.text.length > 0) hostName = _tfValue.text;
-////    if (hostName.length == 0) return;
-//    [_btnProceed setUserInteractionEnabled:NO];
-//    [_indicatorView setHidden:NO];
-//    [_indicatorView startAnimating];
-//    [self listDirectoryContents];
+//    NSString *host = @"google.com";
+//    uint16_t port = 80;
+//
+//    NSError *error = nil;
+//
+//    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+//
+//    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+//
+//    if (![asyncSocket connectToHost:host onPort:port error:&error])
+//    {
+//        NSLog(@"error");
+//    }
+    
+    if (_tfValue.text.length > 0) hostName = _tfValue.text;
+//    if (hostName.length == 0) return;
+    [_btnProceed setUserInteractionEnabled:NO];
+    [_indicatorView setHidden:NO];
+    [_indicatorView startAnimating];
+    [self listDirectoryContents];
 }
 #pragma mark - Custom method
 - (void)listDirectoryContents {
@@ -194,9 +194,11 @@
     }
 }
 - (NSString *)getContentFile:(NSString *)fileName {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName
+                                                     ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     return content;
 }

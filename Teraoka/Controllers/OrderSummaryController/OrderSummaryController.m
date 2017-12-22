@@ -118,7 +118,6 @@
 //            if (isAdd) [[ShareManager shared].existingOrderArr addObject:product];
 //        }
 //    }
-    [ShareManager shared].cartArr = nil;
     [self sendTransaction];
     OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
     [self.navigationController pushViewController:vc animated:NO];
@@ -218,11 +217,11 @@
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
     [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:-1 tag:0];
+}
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+    NSLog(@"didWriteDataWithTag");
     [asyncSocket readDataWithTimeout:-1 tag:0];
 }
-//- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
-//    NSLog(@"didWriteDataWithTag");
-//}
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSLog(@"didReadData");
     NSString *httpResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

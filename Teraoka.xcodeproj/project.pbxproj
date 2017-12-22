@@ -63,6 +63,9 @@
 		733675651FE25F2200F0AFF8 /* 3004.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675451FE25F2200F0AFF8 /* 3004.png */; };
 		733675661FE25F2200F0AFF8 /* 1001.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675461FE25F2200F0AFF8 /* 1001.png */; };
 		733675671FE25F2200F0AFF8 /* 3005.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675471FE25F2200F0AFF8 /* 3005.png */; };
+		7344596B1FECAA09006D3BEF /* menu_category.txt in Resources */ = {isa = PBXBuildFile; fileRef = 734459681FECAA09006D3BEF /* menu_category.txt */; };
+		7344596C1FECAA09006D3BEF /* menu_contents.txt in Resources */ = {isa = PBXBuildFile; fileRef = 734459691FECAA09006D3BEF /* menu_contents.txt */; };
+		7344596D1FECAA09006D3BEF /* plu.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7344596A1FECAA09006D3BEF /* plu.txt */; };
 		7357EE6D1F96F9F3001EB56B /* OptionTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7357EE6B1F96F9F3001EB56B /* OptionTableCell.m */; };
 		7357EE6E1F96F9F3001EB56B /* OptionTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7357EE6C1F96F9F3001EB56B /* OptionTableCell.xib */; };
 		7357EE721F96FA43001EB56B /* OptionCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7357EE701F96FA43001EB56B /* OptionCollectionCell.m */; };
@@ -196,6 +199,9 @@
 		733675451FE25F2200F0AFF8 /* 3004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3004.png; sourceTree = "<group>"; };
 		733675461FE25F2200F0AFF8 /* 1001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1001.png; sourceTree = "<group>"; };
 		733675471FE25F2200F0AFF8 /* 3005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3005.png; sourceTree = "<group>"; };
+		734459681FECAA09006D3BEF /* menu_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_category.txt; sourceTree = "<group>"; };
+		734459691FECAA09006D3BEF /* menu_contents.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_contents.txt; sourceTree = "<group>"; };
+		7344596A1FECAA09006D3BEF /* plu.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plu.txt; sourceTree = "<group>"; };
 		7357EE6A1F96F9F3001EB56B /* OptionTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionTableCell.h; sourceTree = "<group>"; };
 		7357EE6B1F96F9F3001EB56B /* OptionTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionTableCell.m; sourceTree = "<group>"; };
 		7357EE6C1F96F9F3001EB56B /* OptionTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionTableCell.xib; sourceTree = "<group>"; };
@@ -344,6 +350,9 @@
 		730FE0B41F95A1690045A234 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				734459681FECAA09006D3BEF /* menu_category.txt */,
+				734459691FECAA09006D3BEF /* menu_contents.txt */,
+				7344596A1FECAA09006D3BEF /* plu.txt */,
 				733675271FE25F2200F0AFF8 /* ImagesForProduct */,
 				730FE0B51F95A1690045A234 /* main.m */,
 			);
@@ -897,6 +906,7 @@
 				733675671FE25F2200F0AFF8 /* 3005.png in Resources */,
 				7365746A1FA04E8E008E59CA /* Bread2.jpg in Resources */,
 				736574761FA04E8E008E59CA /* Fruits2.jpg in Resources */,
+				7344596D1FECAA09006D3BEF /* plu.txt in Resources */,
 				730FE0C71F95A1690045A234 /* LaunchScreen.storyboard in Resources */,
 				7357EEA01F974BE6001EB56B /* ViewExistingOrderController.xib in Resources */,
 				7336754A1FE25F2200F0AFF8 /* 4002.png in Resources */,
@@ -928,6 +938,7 @@
 				733675631FE25F2200F0AFF8 /* 1003.png in Resources */,
 				736574791FA04E8E008E59CA /* Soups2.jpg in Resources */,
 				7365746D1FA04E8E008E59CA /* Cake2.jpg in Resources */,
+				7344596C1FECAA09006D3BEF /* menu_contents.txt in Resources */,
 				7336755B1FE25F2200F0AFF8 /* 1004.png in Resources */,
 				733675541FE25F2200F0AFF8 /* 2005.png in Resources */,
 				736574731FA04E8E008E59CA /* Drinks2.jpg in Resources */,
@@ -948,6 +959,7 @@
 				733675581FE25F2200F0AFF8 /* 2008.png in Resources */,
 				7336754C1FE25F2200F0AFF8 /* 4007.png in Resources */,
 				736574741FA04E8E008E59CA /* Drinks3.jpg in Resources */,
+				7344596B1FECAA09006D3BEF /* menu_category.txt in Resources */,
 				7357EE941F9747D7001EB56B /* OrderSummaryHeader.xib in Resources */,
 				736574721FA04E8E008E59CA /* Drinks1.jpg in Resources */,
 				733675641FE25F2200F0AFF8 /* 3006.png in Resources */,

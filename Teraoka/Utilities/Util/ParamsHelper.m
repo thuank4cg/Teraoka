@@ -41,106 +41,35 @@
 }
 
 - (NSData *)collectData {
-    /**Header**/
-    NSMutableArray *bytesArr = [NSMutableArray new];
-    [bytesArr addObject:[NSNumber numberWithInt:68]];
-    [bytesArr addObject:[NSNumber numberWithInt:71]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
+    NSMutableData *mCollectData = [NSMutableData new];
+    //Header
+//    [mCollectData appendBytes:"68" "71" "0" "0" length:4];
+    [mCollectData appendData:[self convertStringToBytesArr:@"68" length:1]];
+    [mCollectData appendData:[self convertStringToBytesArr:@"71" length:1]];
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
     
-    /**Command Size**/
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:32]];
-    
-    /**Command Id**/
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:39]];
-    [bytesArr addObject:[NSNumber numberWithInt:118]];
-    
-    /**Data Size**/
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:26]];
-    
-    /**
-     *START [DATA] XRequestHeaderData
-     */
-    // - Version (4 bytes) 0.1.15.0
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:1]];
-    [bytesArr addObject:[NSNumber numberWithInt:15]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    // - RequestID (4 bytes)
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:2]];
-    
-    // - Terminal No (2 bytes) (Hex: 21)
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:15]];
-    
-    // - Staff ID (4 bytes)
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:1]];
-    
-    // - Sending Date (4 bytes) (20170301)
-    [bytesArr addObject:[NSNumber numberWithInt:1]];
-    [bytesArr addObject:[NSNumber numberWithInt:51]];
-    [bytesArr addObject:[NSNumber numberWithInt:-58]];
-    [bytesArr addObject:[NSNumber numberWithInt:61]];
-    
-    // - Sending Time (4 bytes) (17h15'00)
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:2]];
-    [bytesArr addObject:[NSNumber numberWithInt:-99]];
-    [bytesArr addObject:[NSNumber numberWithInt:-20]];
-    
-    /**
-     * END [DATA] XRequestHeaderData
-     * */
-    
-    // Table No:  00 00 00 01  (4 bytes)
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:0]];
-    [bytesArr addObject:[NSNumber numberWithInt:2]];
-    
-    Byte UUID[bytesArr.count];
-    for (int i = 0; i < 16; i++) {
-        UUID[i] = strtoul([bytesArr[i] UTF8String], NULL, 16);
-    }
-    
-    return [NSData dataWithBytesNoCopy:UUID length:sizeof(UUID) freeWhenDone:YES];
-    /**
     //Command size
     int dataSize = (int)[self requestData].length;
     int commandSize = dataSize + 8;
 
-//    //Command Id
+    //Command size
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", commandSize] length:4]];
+    
+    //Command Id
     [mCollectData appendData:[self convertStringToBytesArr:@"13200" length:4]];
 
-//    //Command ID
-    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", commandSize] length:2]];
-
-//    //Data size
+    //Data size
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", dataSize] length:4]];
 
-//    //Data
-//    [mCollectData appendData:[self requestData]];
+    //Data
+    [mCollectData appendData:[self requestData]];
     
     NSString *newLine = @"test\r\n";
     NSData *requestData = [newLine dataUsingEncoding:NSUTF8StringEncoding];
     [mCollectData appendData:requestData];
     
     return mCollectData;
-     **/
 }
 
 - (NSMutableData *)requestData {
@@ -148,8 +77,10 @@
     /**XRequestHeaderData**/
     //version
 //    [mCollectData appendBytes:"0" "1" "15" "0" length:4];
-    const unsigned char version[] = {0, 1, 15, 0};
-    [mCollectData appendBytes:version length:4];
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
+    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:1]];
+    [mCollectData appendData:[self convertStringToBytesArr:@"15" length:1]];
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
     
     //Request ID
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", [self generatorRequestId]] length:4]];
@@ -282,12 +213,16 @@
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         //Item Flag
 //        [mCollectData appendBytes:"0" "0" "0" "0" length:4];
-        const unsigned char itemFlag[] = {0, 0, 0, 0};
-        [mCollectData appendBytes:itemFlag length:4];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
         //Item status
 //        [mCollectData appendBytes:"0" "0" "0" "0" length:4];
-        const unsigned char itemStatus[] = {0, 0, 0, 0};
-        [mCollectData appendBytes:itemStatus length:4];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
         //Unit price before discount
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.originalPrice] length:4]];
         //Unit price after discount
@@ -332,7 +267,7 @@
         //Service charge amount
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         //Price after subtotal discount and tax
-        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.originalPrice] length:4]];
+        [mCollectData appendData:[self convertStringToBytesArr:product.originalPrice length:4]];
         //Set item addon price
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         /**XItemOptionData**/
