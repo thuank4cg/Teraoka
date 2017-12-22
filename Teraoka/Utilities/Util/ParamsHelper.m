@@ -131,7 +131,7 @@
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
     
     //Tax rate
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
     
     //Total price after tax
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", totalPrice] length:4]];
@@ -269,22 +269,22 @@
         //Price after subtotal discount and tax
         [mCollectData appendData:[self convertStringToBytesArr:product.originalPrice length:4]];
         //Set item index (Apply to plu meal set item only)
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         //Set item addon price
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         /**XItemOptionData**/
         /****XCondimentData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         /****XCookingInstructionData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         /****XServingTimeData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         /****XFreeInstructionData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
     }
