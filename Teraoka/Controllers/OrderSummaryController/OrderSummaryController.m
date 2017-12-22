@@ -53,6 +53,8 @@
 }
 
 - (void)setupView {
+    [_indicatorView setHidden:YES];
+    
     self.tblView.delegate = self;
     self.tblView.dataSource = self;
     [self.tblView registerNib:[UINib nibWithNibName:@"OrderSummaryCell" bundle:nil] forCellReuseIdentifier:@"OrderSummaryCellID"];
@@ -207,7 +209,7 @@
 #pragma mark - Custom method
 
 - (void)sendTransaction {
-    NSString *host = HOST_NAME;
+    NSString *host = [ShareManager shared].hostName;
     uint16_t port = PORT;
 
     NSError *error = nil;
@@ -219,6 +221,10 @@
     if (![asyncSocket connectToHost:host onPort:port error:&error])
     {
         NSLog(@"error");
+        [_indicatorView setHidden:YES];
+        [_indicatorView stopAnimating];
+        [_btnBack setUserInteractionEnabled:YES];
+        [_btnSend setUserInteractionEnabled:YES];
     }
 }
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
@@ -227,7 +233,7 @@
 }
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
     NSLog(@"didWriteDataWithTag");
-    [asyncSocket readDataWithTimeout:-1 tag:0];
+    [asyncSocket readDataWithTimeout:15 tag:0];
 }
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSLog(@"didReadData");
@@ -239,10 +245,21 @@
             OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
             [self.navigationController pushViewController:vc animated:NO];
         });
+    }else {
+        [_indicatorView setHidden:YES];
+        [_indicatorView stopAnimating];
+        [_btnBack setUserInteractionEnabled:YES];
+        [_btnSend setUserInteractionEnabled:YES];
     }
 }
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     NSLog(@"socketDidDisconnect");
+    if (!_btnSend.isUserInteractionEnabled) {
+        [_indicatorView setHidden:YES];
+        [_indicatorView stopAnimating];
+        [_btnBack setUserInteractionEnabled:YES];
+        [_btnSend setUserInteractionEnabled:YES];
+    }
 }
 
 @end

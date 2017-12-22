@@ -15,6 +15,7 @@
 #import "ButtonCustom.h"
 #import "ParamsHelper.h"
 #import <GCDAsyncSocket.h>
+#import "ShareManager.h"
 
 //#define KEY_FILE_NAME @"HOTMasterDataFull_02.12_171214_143505_01.29.zip"
 //#define KEY_FOLDER_NAME @"HOTMasterDataFull"
@@ -28,7 +29,6 @@
 
 @implementation SplashController {
     NSString *fileName;
-    NSString *hostName;
     BOOL isDownloadFile;
     GCDAsyncSocket *asyncSocket;
     NSOutputStream *outputStream;
@@ -41,20 +41,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [_indicatorView setHidden:YES];
-//    double delayInSeconds = 2.0;
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//        [self saveCategoryToDb];
-//    });
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self saveCategoryToDb];
+    });
     isDownloadFile = NO;
-    hostName = HOST_NAME;
+    [ShareManager shared].hostName = HOST_NAME;
 //    [self listDirectoryContents];
 }
 
 - (IBAction)proceed:(id)sender {
-//    NSData *data = [@"test\n" dataUsingEncoding:NSUTF8StringEncoding];
-//    [outputStream write:bytes maxLength:sizeof(bytes)];
-    
 //    NSString *host = @"google.com";
 //    uint16_t port = 80;
 //
@@ -69,7 +66,7 @@
 //        NSLog(@"error");
 //    }
     
-    if (_tfValue.text.length > 0) hostName = _tfValue.text;
+    if (_tfValue.text.length > 0) [ShareManager shared].hostName = _tfValue.text;
 //    if (hostName.length == 0) return;
     [_btnProceed setUserInteractionEnabled:NO];
     [_indicatorView setHidden:NO];
@@ -83,7 +80,7 @@
     
     listDir.path = @"../opt/datamanager/thot";
     
-    listDir.hostname = hostName;
+    listDir.hostname = [ShareManager shared].hostName;
     listDir.username = USERNAME;
     listDir.password = PASSWORD;
     
@@ -95,7 +92,7 @@
     
     downloadFile.path = [NSString stringWithFormat:@"../opt/datamanager/thot/%@", fileName];
     
-    downloadFile.hostname = hostName;
+    downloadFile.hostname = [ShareManager shared].hostName;
     downloadFile.username = USERNAME;
     downloadFile.password = PASSWORD;
     
@@ -191,7 +188,6 @@
     NSLog(@"Documents Directory: %@", [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
     NSManagedObjectContext *context = [self managedObjectContext];
     //save category to db
-//    NSString* path = [[NSBundle mainBundle] pathForResource:KEY_CATEGORY_TABLE_FILE_NAME ofType:KEY_SURFFIX_FILE];
     NSString* content = [self getContentFile:KEY_CATEGORY_TABLE_FILE_NAME];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
     
@@ -224,7 +220,6 @@
 - (void)saveMenuContentToDb {
     NSManagedObjectContext *context = [self managedObjectContext];
     //save category to db
-//    NSString* path = [[NSBundle mainBundle] pathForResource:KEY_MENU_CONTENT_TABLE_FILE_NAME ofType:KEY_SURFFIX_FILE];
     NSString* content = [self getContentFile:KEY_MENU_CONTENT_TABLE_FILE_NAME];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
     
@@ -257,7 +252,6 @@
 - (void)saveProductToDb {
     NSManagedObjectContext *context = [self managedObjectContext];
     //save product to db
-    NSString* path = [[NSBundle mainBundle] pathForResource:KEY_PRODUCT_TABLE_FILE_NAME ofType:KEY_SURFFIX_FILE];
     NSString* content = [self getContentFile:KEY_PRODUCT_TABLE_FILE_NAME];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
     

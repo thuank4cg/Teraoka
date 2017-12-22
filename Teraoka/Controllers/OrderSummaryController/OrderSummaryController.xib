@@ -77,7 +77,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUBMIT ORDER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPd-Ja-xN1">
-                                    <rect key="frame" x="504.5" y="36" width="165" height="26"/>
+                                    <rect key="frame" x="505" y="36" width="165" height="26"/>
                                     <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -100,7 +100,7 @@
                                 <constraint firstItem="kPd-Ja-xN1" firstAttribute="centerX" secondItem="Z31-mz-uDT" secondAttribute="centerX" constant="-15" id="ydK-tA-nhn"/>
                             </constraints>
                         </view>
-                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="1YZ-xx-CVO">
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1YZ-xx-CVO">
                             <rect key="frame" x="402" y="274" width="20" height="20"/>
                         </activityIndicatorView>
                     </subviews>
