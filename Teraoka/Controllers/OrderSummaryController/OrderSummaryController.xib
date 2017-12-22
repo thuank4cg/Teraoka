@@ -16,7 +16,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderSummaryController">
             <connections>
+                <outlet property="btnBack" destination="Q3A-vn-yTM" id="LDg-sV-rwZ"/>
+                <outlet property="btnSend" destination="Z31-mz-uDT" id="98M-ay-BRC"/>
                 <outlet property="containerView" destination="c3S-4o-jSJ" id="bbi-A2-AFb"/>
+                <outlet property="indicatorView" destination="1YZ-xx-CVO" id="nnh-v2-2k7"/>
                 <outlet property="tblView" destination="bXs-gM-Ts1" id="6AA-yv-0yN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -97,10 +100,14 @@
                                 <constraint firstItem="kPd-Ja-xN1" firstAttribute="centerX" secondItem="Z31-mz-uDT" secondAttribute="centerX" constant="-15" id="ydK-tA-nhn"/>
                             </constraints>
                         </view>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="1YZ-xx-CVO">
+                            <rect key="frame" x="402" y="274" width="20" height="20"/>
+                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="2Og-nd-uht" secondAttribute="trailing" id="1xx-ee-oGQ"/>
+                        <constraint firstItem="1YZ-xx-CVO" firstAttribute="centerX" secondItem="c3S-4o-jSJ" secondAttribute="centerX" id="3Q6-xZ-L8P"/>
                         <constraint firstAttribute="trailing" secondItem="FWU-P5-AN5" secondAttribute="trailing" id="5nw-k3-CD2"/>
                         <constraint firstItem="bXs-gM-Ts1" firstAttribute="leading" secondItem="c3S-4o-jSJ" secondAttribute="leading" id="8cr-Y3-uqI"/>
                         <constraint firstAttribute="trailing" secondItem="bXs-gM-Ts1" secondAttribute="trailing" id="ALO-gZ-KrS"/>
@@ -112,6 +119,7 @@
                         <constraint firstItem="vnH-Eb-bWK" firstAttribute="top" secondItem="c3S-4o-jSJ" secondAttribute="top" id="afM-XT-kz4"/>
                         <constraint firstItem="vnH-Eb-bWK" firstAttribute="leading" secondItem="c3S-4o-jSJ" secondAttribute="leading" id="dir-0p-alt"/>
                         <constraint firstItem="bXs-gM-Ts1" firstAttribute="top" secondItem="2Og-nd-uht" secondAttribute="bottom" id="f4V-Pn-H5J"/>
+                        <constraint firstItem="1YZ-xx-CVO" firstAttribute="centerY" secondItem="c3S-4o-jSJ" secondAttribute="centerY" id="oDD-jU-6dm"/>
                         <constraint firstItem="2Og-nd-uht" firstAttribute="top" secondItem="c3S-4o-jSJ" secondAttribute="top" id="qUS-UZ-9he"/>
                         <constraint firstAttribute="trailing" secondItem="vnH-Eb-bWK" secondAttribute="trailing" id="u2J-NS-yEv"/>
                     </constraints>

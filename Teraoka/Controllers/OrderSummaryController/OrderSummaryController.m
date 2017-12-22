@@ -23,6 +23,9 @@
 @interface OrderSummaryController () <UITableViewDelegate, UITableViewDataSource, GCDAsyncSocketDelegate, NSStreamDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
+@property (weak, nonatomic) IBOutlet UIButton *btnBack;
+@property (weak, nonatomic) IBOutlet UIButton *btnSend;
 
 @end
 
@@ -118,6 +121,10 @@
 //            if (isAdd) [[ShareManager shared].existingOrderArr addObject:product];
 //        }
 //    }
+    [_indicatorView setHidden:NO];
+    [_indicatorView startAnimating];
+    [_btnBack setUserInteractionEnabled:NO];
+    [_btnSend setUserInteractionEnabled:NO];
     [self sendTransaction];
     OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
     [self.navigationController pushViewController:vc animated:NO];
@@ -200,8 +207,8 @@
 
 #pragma mark - Custom method
 - (void)sendTransaction {
-    NSString *host = @"google.com";
-    uint16_t port = 80;
+    NSString *host = HOST_NAME;
+    uint16_t port = PORT;
 
     NSError *error = nil;
 

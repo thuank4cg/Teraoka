@@ -47,77 +47,9 @@
         [self saveCategoryToDb];
     });
     isDownloadFile = NO;
-    hostName = @"192.168.1.100";
+    hostName = HOST_NAME;
 //    [self listDirectoryContents];
-    
-//    CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, (__bridge CFStringRef) @"google.com", 80, &readStream, &writeStream);
-//    [self open];
 }
-//- (void)open {
-//
-//    NSLog(@"Opening streams.");
-//
-//    outputStream = (__bridge NSOutputStream *)writeStream;
-//    inputStream = (__bridge NSInputStream *)readStream;
-//
-//    [outputStream setDelegate:self];
-//    [inputStream setDelegate:self];
-//
-//    [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-//    [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-//
-//    [outputStream open];
-//    [inputStream open];
-//}
-//- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
-//    NSLog(@"stream event %lu", eventCode);
-//
-//    switch (eventCode) {
-//
-//        case NSStreamEventOpenCompleted:
-//            NSLog(@"Stream opened");
-//            break;
-//
-//        case NSStreamEventHasBytesAvailable:
-//            if (aStream == inputStream)
-//            {
-//                uint8_t buffer[1024];
-//                NSInteger len;
-//
-//                while ([inputStream hasBytesAvailable])
-//                {
-//                    len = [inputStream read:buffer maxLength:sizeof(buffer)];
-//                    if (len > 0)
-//                    {
-//                        NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
-//
-//                        if (nil != output)
-//                        {
-//                            NSLog(@"server said: %@", output);
-//                        }
-//                    }
-//                }
-//            }
-//            break;
-//
-//        case NSStreamEventHasSpaceAvailable:
-//            NSLog(@"Stream has space available now");
-//            break;
-//
-//        case NSStreamEventErrorOccurred:
-//            NSLog(@"error: %@",[aStream streamError].localizedDescription);
-//            break;
-//
-//        case NSStreamEventEndEncountered:
-//            [aStream close];
-//            [aStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-//            NSLog(@"close stream");
-//            break;
-//
-//        default:
-//            NSLog(@"Unknown event");
-//    }
-//}
 
 - (IBAction)proceed:(id)sender {
 //    NSData *data = [@"test\n" dataUsingEncoding:NSUTF8StringEncoding];
