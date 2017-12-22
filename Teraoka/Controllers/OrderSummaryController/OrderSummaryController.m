@@ -19,6 +19,7 @@
 #import "APPConstants.h"
 #import "ParamsHelper.h"
 #import "GCDAsyncSocket.h"
+#import "Util.h"
 
 @interface OrderSummaryController () <UITableViewDelegate, UITableViewDataSource, GCDAsyncSocketDelegate, NSStreamDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
@@ -126,8 +127,6 @@
     [_btnBack setUserInteractionEnabled:NO];
     [_btnSend setUserInteractionEnabled:NO];
     [self sendTransaction];
-    OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
-    [self.navigationController pushViewController:vc animated:NO];
 }
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -206,6 +205,7 @@
 }
 
 #pragma mark - Custom method
+
 - (void)sendTransaction {
     NSString *host = HOST_NAME;
     uint16_t port = PORT;
@@ -231,8 +231,15 @@
 }
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSLog(@"didReadData");
-    NSString *httpResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", httpResponse);
+    NSData *replyData = [data subdataWithRange:NSMakeRange(23, 4)];
+    NSString *httpResponse = [Util hexadecimalString:replyData];
+    if ([httpResponse isEqualToString:@"00000000"]){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [ShareManager shared].cartArr = nil;
+            OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
+            [self.navigationController pushViewController:vc animated:NO];
+        });
+    }
 }
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     NSLog(@"socketDidDisconnect");

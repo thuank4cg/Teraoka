@@ -41,11 +41,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [_indicatorView setHidden:YES];
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self saveCategoryToDb];
-    });
+//    double delayInSeconds = 2.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        [self saveCategoryToDb];
+//    });
     isDownloadFile = NO;
     hostName = HOST_NAME;
 //    [self listDirectoryContents];

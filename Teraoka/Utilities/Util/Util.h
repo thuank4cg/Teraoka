@@ -11,4 +11,5 @@
 @interface Util : NSObject
 + (NSString *)convertDataToString:(NSData *)myData;
 + (void)saveFileToDocumentDirectory:(NSString *)dataStr;
++ (NSString *)hexadecimalString:(NSData *)receivedData;
 @end
