@@ -65,9 +65,9 @@
     //Data
     [mCollectData appendData:[self requestData]];
     
-    NSString *newLine = @"test\r\n";
-    NSData *requestData = [newLine dataUsingEncoding:NSUTF8StringEncoding];
-    [mCollectData appendData:requestData];
+//    NSString *newLine = @"test\r\n";
+//    NSData *requestData = [newLine dataUsingEncoding:NSUTF8StringEncoding];
+//    [mCollectData appendData:requestData];
     
     return mCollectData;
 }
@@ -103,7 +103,6 @@
     [mCollectData appendData:[self convertStringToBytesArr:timeStr length:4]];
     
     /**XTransactionData**/
-    //Number of object
     int totalPrice = 0;
     for (ProductModel *product in [ShareManager shared].cartArr) {
         totalPrice += [product.originalPrice intValue] * [product.qty intValue];
@@ -186,6 +185,7 @@
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
     
     int numberOfObj = (int)[ShareManager shared].cartArr.count;
+    //Number of object
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
     /**XTransactionPaymentData[]**/
     for (ProductModel *product in [ShareManager shared].cartArr) {
@@ -201,7 +201,7 @@
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         //Reference
     }
-    
+    //Number of object
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
     /**XTransactionItemData[]**/
     for (ProductModel *product in [ShareManager shared].cartArr) {
@@ -215,6 +215,8 @@
 //        [mCollectData appendBytes:"0" "0" length:4];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
         //Item status
 //        [mCollectData appendBytes:"0" "0" "0" "0" length:4];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
@@ -267,7 +269,7 @@
         //Price after subtotal discount and tax
         [mCollectData appendData:[self convertStringToBytesArr:product.originalPrice length:4]];
         //Set item index (Apply to plu meal set item only)
-        
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         //Set item addon price
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         /**XItemOptionData**/
