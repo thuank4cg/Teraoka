@@ -115,20 +115,20 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEH-3e-0jE">
                             <rect key="frame" x="0.0" y="10" width="1166" height="112"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_product_image" translatesAutoresizingMaskIntoConstraints="NO" id="EXq-Ma-KGd">
-                                    <rect key="frame" x="0.0" y="0.0" width="168" height="112"/>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_product_image" translatesAutoresizingMaskIntoConstraints="NO" id="EXq-Ma-KGd">
+                                    <rect key="frame" x="0.0" y="0.0" width="127.5" height="112"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="EXq-Ma-KGd" secondAttribute="height" multiplier="3:2" id="gXR-fh-yO3"/>
+                                        <constraint firstAttribute="width" secondItem="EXq-Ma-KGd" secondAttribute="height" multiplier="406:357" id="gXR-fh-yO3"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of food" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPP-IZ-GCG">
-                                    <rect key="frame" x="183" y="15" width="104" height="20"/>
+                                    <rect key="frame" x="142.5" y="15" width="104" height="20"/>
                                     <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="17"/>
                                     <color key="textColor" red="0.3411764705882353" green="0.49411764705882355" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDc-Ux-O72">
-                                    <rect key="frame" x="183" y="40" width="28.5" height="20"/>
+                                    <rect key="frame" x="142.5" y="40" width="28.5" height="20"/>
                                     <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>

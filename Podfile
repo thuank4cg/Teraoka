@@ -9,4 +9,5 @@ target 'Teraoka' do
   pod 'TPKeyboardAvoiding',   '1.2'
   pod 'CocoaAsyncSocket'
   pod 'SSZipArchive'
+  pod 'SIAlertView', '~> 1.3'
 end

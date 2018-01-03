@@ -239,15 +239,27 @@
 }
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSLog(@"didReadData");
-    NSData *replyData = [data subdataWithRange:NSMakeRange(23, 4)];
-    NSString *httpResponse = [Util hexadecimalString:replyData];
+    
+    int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
+    
+    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location + 1, 4)];
+    NSString *httpResponse = [Util hexadecimalString:replyStatus];
     if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [ShareManager shared].cartArr = nil;
-            OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
-            [self.navigationController pushViewController:vc animated:NO];
-        });
+        NSData *replyData = [data subdataWithRange:NSMakeRange(location + 1, data.length - location)];
+        httpResponse = [[NSString alloc] initWithData:replyData encoding:NSUTF8StringEncoding];
+        
+        [ShareManager shared].cartArr = nil;
+        OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
+        [self.navigationController pushViewController:vc animated:NO];
     }else {
+        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
+        NSData *replyData = [data subdataWithRange:NSMakeRange(location + 1, data.length - location)];
+        httpResponse = [[NSString alloc] initWithData:replyData encoding:NSUTF8StringEncoding];
+        if (httpResponse.length == 0) {
+            httpResponse = @"submission failed due to connection error";
+        }
+        [Util showAlert:httpResponse];
+        
         [_indicatorView setHidden:YES];
         [_indicatorView stopAnimating];
         [_btnBack setUserInteractionEnabled:YES];

@@ -12,4 +12,5 @@
 + (NSString *)convertDataToString:(NSData *)myData;
 + (void)saveFileToDocumentDirectory:(NSString *)dataStr;
 + (NSString *)hexadecimalString:(NSData *)receivedData;
++ (void)showAlert:(NSString *)msg;
 @end

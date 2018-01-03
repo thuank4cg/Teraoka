@@ -7,6 +7,8 @@
 //
 
 #import "Util.h"
+#import <UIKit/UIKit.h>
+#import <SIAlertView.h>
 
 @implementation Util
 + (NSString *)convertDataToString:(NSData *)myData {
@@ -39,5 +41,18 @@
     }
     
     return [NSString stringWithString:hexString];
+}
++ (void)showAlert:(NSString *)msg {
+    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:nil andMessage:msg];
+    
+    [alertView addButtonWithTitle:@"Ok"
+                             type:SIAlertViewButtonTypeDefault
+                          handler:^(SIAlertView *alert) {
+                              
+                          }];
+    
+    alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+    
+    [alertView show];
 }
 @end

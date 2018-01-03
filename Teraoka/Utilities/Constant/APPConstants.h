@@ -36,4 +36,14 @@
 #define KEY_PRODUCT_PRICE @"price"
 #define KEY_PRODUCT_NAME @"item_name"
 
+//byte size
+#define REPLY_HEADER 4
+#define REPLY_COMMAND_SIZE 4
+#define REPLY_COMMAND_ID 4
+#define REPLY_REQUEST_ID 4
+#define REPLY_STORE_STATUS 2
+#define REPLY_LAST_EVENT_ID 4
+#define REPLY_STATUS 4
+#define REPLY_DATA_SIZE 4
+
 #endif /* APPConstants_h */
