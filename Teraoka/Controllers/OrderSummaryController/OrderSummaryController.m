@@ -242,14 +242,14 @@
     
     int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
     
-    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location + 1, 4)];
+    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
     if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
         location = location + REPLY_STATUS + REPLY_DATA_SIZE;
-        NSData *replyData = [data subdataWithRange:NSMakeRange(location + 1, data.length - location)];
+        NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
 //        httpResponse = [[NSString alloc] initWithData:replyData encoding:NSUTF8StringEncoding];
         NSData *dataReceipt = [replyData subdataWithRange:NSMakeRange(0, 4)];
-        NSData *transactionNumber = [replyData subdataWithRange:NSMakeRange(5, 4)];
+        NSData *transactionNumber = [replyData subdataWithRange:NSMakeRange(4, 4)];
         
         int receiptResponse = [Util hexStringToInt:[Util hexadecimalString:dataReceipt]];
         int transactionNumberResponse = [Util hexStringToInt:[Util hexadecimalString:transactionNumber]];
@@ -260,7 +260,7 @@
         [self.navigationController pushViewController:vc animated:NO];
     }else {
         location = location + REPLY_STATUS + REPLY_DATA_SIZE;
-        NSData *replyData = [data subdataWithRange:NSMakeRange(location + 1, data.length - location)];
+        NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
         httpResponse = [[NSString alloc] initWithData:replyData encoding:NSUTF8StringEncoding];
         if (httpResponse.length == 0) {
             httpResponse = @"submission failed due to connection error";
