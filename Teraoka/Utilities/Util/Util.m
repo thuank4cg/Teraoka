@@ -55,4 +55,11 @@
     
     [alertView show];
 }
++ (int)hexStringToInt:(NSString *)hex {
+    NSScanner* pScanner = [NSScanner scannerWithString: hex];
+    
+    unsigned int iValue;
+    [pScanner scanHexInt: &iValue];
+    return iValue;
+}
 @end

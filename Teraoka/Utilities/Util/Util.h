@@ -13,4 +13,5 @@
 + (void)saveFileToDocumentDirectory:(NSString *)dataStr;
 + (NSString *)hexadecimalString:(NSData *)receivedData;
 + (void)showAlert:(NSString *)msg;
++ (int)hexStringToInt:(NSString *)hex;
 @end
