@@ -9,5 +9,6 @@
 #import "BaseController.h"
 
 @interface OrderConfirmController : BaseController
-
+@property (nonatomic, assign) int receipt;
+@property (nonatomic, assign) int queueNumber;
 @end

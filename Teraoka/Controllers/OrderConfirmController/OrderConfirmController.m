@@ -14,6 +14,8 @@
 
 @interface OrderConfirmController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UILabel *lbReceipt;
+@property (weak, nonatomic) IBOutlet UILabel *lbQueue;
 
 @end
 
@@ -31,6 +33,9 @@
     self.containerView.layer.shadowOpacity = 0.5;
     self.containerView.layer.shadowRadius = 3.0;
     self.containerView.layer.masksToBounds = NO;
+    
+    self.lbReceipt.text = [NSString stringWithFormat:@"Receipt: %d", self.receipt];
+    self.lbQueue.text = [NSString stringWithFormat:@"Queue number: %d", self.queueNumber];
 }
 - (IBAction)backTohome:(id)sender {
     for (UIViewController *vc in self.navigationController.viewControllers) {

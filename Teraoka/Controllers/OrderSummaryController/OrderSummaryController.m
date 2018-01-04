@@ -257,6 +257,8 @@
         
         [ShareManager shared].cartArr = nil;
         OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
+        vc.receipt = receiptResponse;
+        vc.queueNumber = transactionNumberResponse;
         [self.navigationController pushViewController:vc animated:NO];
     }else {
         location = location + REPLY_STATUS + REPLY_DATA_SIZE;
