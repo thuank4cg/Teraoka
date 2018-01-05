@@ -7,7 +7,6 @@
 //
 
 #import "Util.h"
-#import <UIKit/UIKit.h>
 #import <SIAlertView.h>
 
 @implementation Util
@@ -42,18 +41,13 @@
     
     return [NSString stringWithString:hexString];
 }
-+ (void)showAlert:(NSString *)msg {
-    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:nil andMessage:msg];
-    
-    [alertView addButtonWithTitle:@"Ok"
-                             type:SIAlertViewButtonTypeDefault
-                          handler:^(SIAlertView *alert) {
-                              
-                          }];
-    
-    alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
-    
-    [alertView show];
++ (void)showAlert:(NSString *)msg vc:(UIViewController *)vc {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action){
+        
+    }];
+    [alert addAction:okAction];
+    [vc presentViewController:alert animated:YES completion:nil];
 }
 + (int)hexStringToInt:(NSString *)hex {
     NSScanner* pScanner = [NSScanner scannerWithString: hex];

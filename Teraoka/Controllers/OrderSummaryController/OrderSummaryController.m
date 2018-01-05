@@ -20,8 +20,10 @@
 #import "ParamsHelper.h"
 #import "GCDAsyncSocket.h"
 #import "Util.h"
+#import "Reachability.h"
 
 #define STATUS_REPLY_OK @"00000000"
+#define MSG_ERROR @"submission failed due to connection error"
 
 @interface OrderSummaryController () <UITableViewDelegate, UITableViewDataSource, GCDAsyncSocketDelegate, NSStreamDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
@@ -126,10 +128,6 @@
 //            if (isAdd) [[ShareManager shared].existingOrderArr addObject:product];
 //        }
 //    }
-    [_indicatorView setHidden:NO];
-    [_indicatorView startAnimating];
-    [_btnBack setUserInteractionEnabled:NO];
-    [_btnSend setUserInteractionEnabled:NO];
     [self sendTransaction];
 }
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -210,7 +208,25 @@
 
 #pragma mark - Custom method
 
+- (void)stopProcessView {
+    [_indicatorView setHidden:YES];
+    [_indicatorView stopAnimating];
+    [_btnBack setUserInteractionEnabled:YES];
+    [_btnSend setUserInteractionEnabled:YES];
+}
+
 - (void)sendTransaction {
+    if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable)
+    {
+        [Util showAlert:MSG_ERROR vc:self];
+        return;
+    }
+    
+    [_indicatorView setHidden:NO];
+    [_indicatorView startAnimating];
+    [_btnBack setUserInteractionEnabled:NO];
+    [_btnSend setUserInteractionEnabled:NO];
+    
     NSString *host = [ShareManager shared].hostName;
     uint16_t port = PORT;
 
@@ -223,15 +239,12 @@
     if (![asyncSocket connectToHost:host onPort:port error:&error])
     {
         NSLog(@"error");
-        [_indicatorView setHidden:YES];
-        [_indicatorView stopAnimating];
-        [_btnBack setUserInteractionEnabled:YES];
-        [_btnSend setUserInteractionEnabled:YES];
+        [self stopProcessView];
     }
 }
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
-    [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:-1 tag:0];
+    [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:15 tag:0];
 }
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
     NSLog(@"didWriteDataWithTag");
@@ -265,23 +278,20 @@
         NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
         httpResponse = [[NSString alloc] initWithData:replyData encoding:NSUTF8StringEncoding];
         if (httpResponse.length == 0) {
-            httpResponse = @"submission failed due to connection error";
+            httpResponse = MSG_ERROR;
         }
-        [Util showAlert:httpResponse];
+        [Util showAlert:httpResponse vc:self];
         
-        [_indicatorView setHidden:YES];
-        [_indicatorView stopAnimating];
-        [_btnBack setUserInteractionEnabled:YES];
-        [_btnSend setUserInteractionEnabled:YES];
+        [self stopProcessView];
     }
 }
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+    if (err.domain == NSPOSIXErrorDomain) {
+        [Util showAlert:MSG_ERROR vc:self];
+    }
     NSLog(@"socketDidDisconnect");
     if (!_btnSend.isUserInteractionEnabled) {
-        [_indicatorView setHidden:YES];
-        [_indicatorView stopAnimating];
-        [_btnBack setUserInteractionEnabled:YES];
-        [_btnSend setUserInteractionEnabled:YES];
+        [self stopProcessView];
     }
 }
 

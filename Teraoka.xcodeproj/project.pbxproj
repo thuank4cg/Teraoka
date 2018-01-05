@@ -122,6 +122,7 @@
 		73C1E02B1FBC25F5005D6DE1 /* SF-UI-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C1E0291FBC25F5005D6DE1 /* SF-UI-Display-Bold.otf */; };
 		73C1E02C1FBC25F5005D6DE1 /* SF-UI-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C1E02A1FBC25F5005D6DE1 /* SF-UI-Display-Regular.otf */; };
 		73DC91BB1FE2BC6500AD86E6 /* ParamsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC91BA1FE2BC6500AD86E6 /* ParamsHelper.m */; };
+		73E4DD061FFF151F00BBD349 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E4DD051FFF151F00BBD349 /* Reachability.m */; };
 		F534B53E83D60C16002E3C90 /* libPods-Teraoka.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8826900F53921C0151A18A11 /* libPods-Teraoka.a */; };
 /* End PBXBuildFile section */
 
@@ -278,6 +279,8 @@
 		73C1E02A1FBC25F5005D6DE1 /* SF-UI-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Regular.otf"; sourceTree = "<group>"; };
 		73DC91B91FE2BC6500AD86E6 /* ParamsHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParamsHelper.h; sourceTree = "<group>"; };
 		73DC91BA1FE2BC6500AD86E6 /* ParamsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParamsHelper.m; sourceTree = "<group>"; };
+		73E4DD041FFF151E00BBD349 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		73E4DD051FFF151F00BBD349 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8826900F53921C0151A18A11 /* libPods-Teraoka.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Teraoka.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B4E1C4D574C9122D1A3D981 /* Pods-Teraoka.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teraoka.release.xcconfig"; path = "Pods/Target Support Files/Pods-Teraoka/Pods-Teraoka.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -796,6 +799,8 @@
 		7384AD2C1F99985A00E996AD /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				73E4DD041FFF151E00BBD349 /* Reachability.h */,
+				73E4DD051FFF151F00BBD349 /* Reachability.m */,
 				7382C85F1FDE2B0300952250 /* WhiteRaccoon.h */,
 				7382C85E1FDE2B0300952250 /* WhiteRaccoon.m */,
 				7384AD2D1F99986D00E996AD /* ShareManager.h */,
@@ -1078,6 +1083,7 @@
 				73B9A72E1F9DA55C004680E4 /* ProductOptionValue.m in Sources */,
 				730FE0FE1F95B18B0045A234 /* HomeController.m in Sources */,
 				730FE0EA1F95A7A80045A234 /* ButtonCustom.m in Sources */,
+				73E4DD061FFF151F00BBD349 /* Reachability.m in Sources */,
 				7357EE8A1F9737C2001EB56B /* OrderSummaryCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

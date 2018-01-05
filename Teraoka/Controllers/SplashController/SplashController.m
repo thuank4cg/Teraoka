@@ -16,6 +16,7 @@
 #import "ParamsHelper.h"
 #import <GCDAsyncSocket.h>
 #import "ShareManager.h"
+#import "Util.h"
 
 //#define KEY_FILE_NAME @"HOTMasterDataFull_02.12_171214_143505_01.29.zip"
 //#define KEY_FOLDER_NAME @"HOTMasterDataFull"

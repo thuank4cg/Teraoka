@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Util : NSObject
 + (NSString *)convertDataToString:(NSData *)myData;
 + (void)saveFileToDocumentDirectory:(NSString *)dataStr;
 + (NSString *)hexadecimalString:(NSData *)receivedData;
-+ (void)showAlert:(NSString *)msg;
++ (void)showAlert:(NSString *)msg vc:(UIViewController *)vc;
 + (int)hexStringToInt:(NSString *)hex;
 @end
