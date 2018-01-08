@@ -10,4 +10,6 @@ target 'Teraoka' do
   pod 'CocoaAsyncSocket'
   pod 'SSZipArchive'
   pod 'SIAlertView', '~> 1.3'
+  pod 'Fabric'
+  pod 'Crashlytics'
 end

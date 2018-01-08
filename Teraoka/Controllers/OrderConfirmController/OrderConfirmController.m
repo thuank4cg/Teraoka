@@ -35,7 +35,7 @@
     self.containerView.layer.masksToBounds = NO;
     
     self.lbReceipt.text = [NSString stringWithFormat:@"Receipt: %d", self.receipt];
-    self.lbQueue.text = [NSString stringWithFormat:@"Queue number: %d", self.queueNumber];
+    self.lbQueue.text = [NSString stringWithFormat:@"Order number: %d", self.queueNumber];
 }
 - (IBAction)backTohome:(id)sender {
     for (UIViewController *vc in self.navigationController.viewControllers) {

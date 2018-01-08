@@ -14,13 +14,13 @@
 #import "TextfieldCustom.h"
 #import "ButtonCustom.h"
 #import "ParamsHelper.h"
-#import <GCDAsyncSocket.h>
 #import "ShareManager.h"
+#import "Util.h"
 
 //#define KEY_FILE_NAME @"HOTMasterDataFull_02.12_171214_143505_01.29.zip"
 //#define KEY_FOLDER_NAME @"HOTMasterDataFull"
 
-@interface SplashController () <WRRequestDelegate, NSStreamDelegate, GCDAsyncSocketDelegate>
+@interface SplashController () <WRRequestDelegate, NSStreamDelegate>
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet TextfieldCustom *tfValue;
 @property (weak, nonatomic) IBOutlet ButtonCustom *btnProceed;
@@ -30,11 +30,6 @@
 @implementation SplashController {
     NSString *fileName;
     BOOL isDownloadFile;
-    GCDAsyncSocket *asyncSocket;
-    NSOutputStream *outputStream;
-    NSInputStream *inputStream;
-    CFReadStreamRef readStream;
-    CFWriteStreamRef writeStream;
 }
 
 - (void)viewDidLoad {
@@ -52,20 +47,6 @@
 }
 
 - (IBAction)proceed:(id)sender {
-//    NSString *host = @"google.com";
-//    uint16_t port = 80;
-//
-//    NSError *error = nil;
-//
-//    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-//
-//    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
-//
-//    if (![asyncSocket connectToHost:host onPort:port error:&error])
-//    {
-//        NSLog(@"error");
-//    }
-    
     if (_tfValue.text.length > 0) [ShareManager shared].hostName = _tfValue.text;
 //    if (hostName.length == 0) return;
     [_btnProceed setUserInteractionEnabled:NO];
@@ -301,23 +282,6 @@
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:rootVC];
     [navc setNavigationBarHidden:YES];
     appDelegate.window.rootViewController = navc;
-}
-
-- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
-    NSLog(@"didConnectToHost");
-    [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:-1 tag:0];
-}
-- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
-    NSLog(@"didWriteDataWithTag");
-    [asyncSocket readDataWithTimeout:-1 tag:0];
-}
-- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-    NSLog(@"didReadData");
-    NSString *httpResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", httpResponse);
-}
-- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    NSLog(@"socketDidDisconnect");
 }
 
 @end
