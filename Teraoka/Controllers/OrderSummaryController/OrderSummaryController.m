@@ -216,11 +216,11 @@
 }
 
 - (void)sendTransaction {
-    if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable)
-    {
-        [Util showAlert:MSG_ERROR vc:self];
-        return;
-    }
+//    if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable)
+//    {
+//        [Util showAlert:MSG_ERROR vc:self];
+//        return;
+//    }
     
     [_indicatorView setHidden:NO];
     [_indicatorView startAnimating];
@@ -236,7 +236,7 @@
 
     asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
 
-    if (![asyncSocket connectToHost:host onPort:port error:&error])
+    if (![asyncSocket connectToHost:host onPort:port withTimeout:10 error:&error])
     {
         NSLog(@"error");
         [self stopProcessView];
@@ -244,11 +244,11 @@
 }
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
-    [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:15 tag:0];
+    [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:10 tag:0];
 }
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
     NSLog(@"didWriteDataWithTag");
-    [asyncSocket readDataWithTimeout:15 tag:0];
+    [asyncSocket readDataWithTimeout:10 tag:0];
 }
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSLog(@"didReadData");

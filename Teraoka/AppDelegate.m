@@ -10,6 +10,8 @@
 #import "CategoriesController.h"
 #import "SplashController.h"
 #import "APPConstants.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -20,6 +22,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [Fabric with:@[[Crashlytics class]]];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     SplashController *splashVC = [[SplashController alloc] initWithNibName:@"SplashController" bundle:nil];
     self.window.rootViewController = splashVC;
