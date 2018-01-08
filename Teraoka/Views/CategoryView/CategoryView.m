@@ -37,20 +37,24 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CategoryCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CategoryCollectionCellID" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor clearColor];
-    CategoryModel *cate = categories[indexPath.row];
-    [cell setDataForCell:cate];
+    if (indexPath.row < categories.count) {
+        CategoryModel *cate = categories[indexPath.row];
+        [cell setDataForCell:cate];
+    }
     return cell;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(200, 65);
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    CategoryModel *model = categories[self.categoryIndex];
-    model.isSelected = NO;
-    self.categoryIndex = (int)indexPath.row;
-    self.chooseCategory(self.categoryIndex);
-    model = categories[self.categoryIndex];
-    model.isSelected = YES;
-    [self.colView reloadData];
+    if (self.categoryIndex < categories.count) {
+        CategoryModel *model = categories[self.categoryIndex];
+        model.isSelected = NO;
+        self.categoryIndex = (int)indexPath.row;
+        self.chooseCategory(self.categoryIndex);
+        model = categories[self.categoryIndex];
+        model.isSelected = YES;
+        [self.colView reloadData];
+    }
 }
 @end

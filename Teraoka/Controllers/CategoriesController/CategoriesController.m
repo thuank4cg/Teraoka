@@ -56,7 +56,7 @@
     [super viewWillAppear:animated];
     [self setupQtyBoxView];
     isBackDelegate = NO;
-    [self dummyData];
+    [self setData];
 }
 
 - (void)setupQtyBoxView {
@@ -141,17 +141,26 @@
     return 1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    CategoryModel *cate = categories[categoryIndex];
-    return cate.products.count;
+    if (categoryIndex < categories.count) {
+        CategoryModel *cate = categories[categoryIndex];
+        return cate.products.count;
+    }
+    return 0;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ProductCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ProductCellID" forIndexPath:indexPath];
-    CategoryModel *cate = categories[categoryIndex];
-    ProductModel *product = cate.products[indexPath.row];
     
-    cell.productName.text = product.name;
-    if (product.image.length > 0) cell.productImage.image = [UIImage imageNamed:product.image];
-    cell.productPrice.text = product.price;
+    if (categoryIndex < categories.count) {
+        CategoryModel *cate = categories[categoryIndex];
+        
+        if (indexPath.row < cate.products.count) {
+            ProductModel *product = cate.products[indexPath.row];
+            
+            cell.productName.text = product.name;
+            if (product.image.length > 0) cell.productImage.image = [UIImage imageNamed:product.image];
+            cell.productPrice.text = product.price;
+        }
+    }
     
     return cell;
 }
@@ -161,8 +170,12 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     newOrderVC = [[NewOrderController alloc] initWithNibName:@"NewOrderController" bundle:nil];
-    CategoryModel *cate = categories[categoryIndex];
-    newOrderVC.product = cate.products[indexPath.row];
+    if (categoryIndex < categories.count) {
+        CategoryModel *cate = categories[categoryIndex];
+        if (indexPath.row < cate.products.count) {
+            newOrderVC.product = cate.products[indexPath.row];
+        }
+    }
 //    [self.navigationController pushViewController:vc animated:NO];
     newOrderVC.delegate = self;
     newOrderVC.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
@@ -189,7 +202,7 @@
 - (void)backDelegate {
     [self setupQtyBoxView];
     isBackDelegate = YES;
-    [self dummyData];
+    [self setData];
 }
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -201,7 +214,7 @@
     return context;
 }
 // dummy data
-- (void)dummyData {
+- (void)setData {
     if (!isBackDelegate) categoryIndex = 0;
     categories = [NSMutableArray new];
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];

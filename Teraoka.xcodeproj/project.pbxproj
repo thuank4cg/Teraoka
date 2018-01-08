@@ -1227,6 +1227,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nakarin Bunjerdluk (9LMKG7VUU9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nakarin Bunjerdluk (9LMKG7VUU9)";
 				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NTR2MPTQ2A;
 				INFOPLIST_FILE = Teraoka/Info.plist;
