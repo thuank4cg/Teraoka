@@ -31,6 +31,7 @@
 		730FE1131F95EC180045A234 /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730FE1111F95EC180045A234 /* ProductCell.xib */; };
 		730FE11A1F96032F0045A234 /* NewOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 730FE1181F96032F0045A234 /* NewOrderController.m */; };
 		730FE11B1F96032F0045A234 /* NewOrderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730FE1191F96032F0045A234 /* NewOrderController.xib */; };
+		7334D2D5200477C1009853BB /* HOTMasterDataFull_02.12_171214_143505_01.29.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7334D2D4200477C1009853BB /* HOTMasterDataFull_02.12_171214_143505_01.29.zip */; };
 		733675481FE25F2200F0AFF8 /* 4001.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675281FE25F2200F0AFF8 /* 4001.png */; };
 		733675491FE25F2200F0AFF8 /* 3008.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675291FE25F2200F0AFF8 /* 3008.png */; };
 		7336754A1FE25F2200F0AFF8 /* 4002.png in Resources */ = {isa = PBXBuildFile; fileRef = 7336752A1FE25F2200F0AFF8 /* 4002.png */; };
@@ -123,6 +124,8 @@
 		73C1E02C1FBC25F5005D6DE1 /* SF-UI-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C1E02A1FBC25F5005D6DE1 /* SF-UI-Display-Regular.otf */; };
 		73DC91BB1FE2BC6500AD86E6 /* ParamsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC91BA1FE2BC6500AD86E6 /* ParamsHelper.m */; };
 		73E4DD061FFF151F00BBD349 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E4DD051FFF151F00BBD349 /* Reachability.m */; };
+		73EC12722005F31F005C11C6 /* HOTMasterDataFull_02.12_180110_085203_01.38.zip in Resources */ = {isa = PBXBuildFile; fileRef = 73EC12712005F31F005C11C6 /* HOTMasterDataFull_02.12_180110_085203_01.38.zip */; };
+		73EC12742005F873005C11C6 /* HOTMasterDataFull_02.12_180110_090203_01.10.zip in Resources */ = {isa = PBXBuildFile; fileRef = 73EC12732005F872005C11C6 /* HOTMasterDataFull_02.12_180110_090203_01.10.zip */; };
 		F534B53E83D60C16002E3C90 /* libPods-Teraoka.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8826900F53921C0151A18A11 /* libPods-Teraoka.a */; };
 /* End PBXBuildFile section */
 
@@ -168,6 +171,7 @@
 		730FE1181F96032F0045A234 /* NewOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewOrderController.m; sourceTree = "<group>"; };
 		730FE1191F96032F0045A234 /* NewOrderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewOrderController.xib; sourceTree = "<group>"; };
 		732679A51FB2E3D80071405F /* APPConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APPConstants.h; sourceTree = "<group>"; };
+		7334D2D4200477C1009853BB /* HOTMasterDataFull_02.12_171214_143505_01.29.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = HOTMasterDataFull_02.12_171214_143505_01.29.zip; sourceTree = "<group>"; };
 		733675281FE25F2200F0AFF8 /* 4001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4001.png; sourceTree = "<group>"; };
 		733675291FE25F2200F0AFF8 /* 3008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3008.png; sourceTree = "<group>"; };
 		7336752A1FE25F2200F0AFF8 /* 4002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4002.png; sourceTree = "<group>"; };
@@ -281,6 +285,8 @@
 		73DC91BA1FE2BC6500AD86E6 /* ParamsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParamsHelper.m; sourceTree = "<group>"; };
 		73E4DD041FFF151E00BBD349 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		73E4DD051FFF151F00BBD349 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		73EC12712005F31F005C11C6 /* HOTMasterDataFull_02.12_180110_085203_01.38.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = HOTMasterDataFull_02.12_180110_085203_01.38.zip; sourceTree = "<group>"; };
+		73EC12732005F872005C11C6 /* HOTMasterDataFull_02.12_180110_090203_01.10.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = HOTMasterDataFull_02.12_180110_090203_01.10.zip; sourceTree = "<group>"; };
 		8826900F53921C0151A18A11 /* libPods-Teraoka.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Teraoka.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B4E1C4D574C9122D1A3D981 /* Pods-Teraoka.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teraoka.release.xcconfig"; path = "Pods/Target Support Files/Pods-Teraoka/Pods-Teraoka.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -353,6 +359,9 @@
 		730FE0B41F95A1690045A234 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				73EC12732005F872005C11C6 /* HOTMasterDataFull_02.12_180110_090203_01.10.zip */,
+				73EC12712005F31F005C11C6 /* HOTMasterDataFull_02.12_180110_085203_01.38.zip */,
+				7334D2D4200477C1009853BB /* HOTMasterDataFull_02.12_171214_143505_01.29.zip */,
 				734459681FECAA09006D3BEF /* menu_category.txt */,
 				734459691FECAA09006D3BEF /* menu_contents.txt */,
 				7344596A1FECAA09006D3BEF /* plu.txt */,
@@ -927,16 +936,19 @@
 				7357EE6E1F96F9F3001EB56B /* OptionTableCell.xib in Resources */,
 				730FE10E1F95EBAF0045A234 /* CategoryCell.xib in Resources */,
 				733675501FE25F2200F0AFF8 /* 4005.png in Resources */,
+				73EC12742005F873005C11C6 /* HOTMasterDataFull_02.12_180110_090203_01.10.zip in Resources */,
 				73A660721FE264B000FB80B8 /* SplashController.xib in Resources */,
 				733675571FE25F2200F0AFF8 /* 2007.png in Resources */,
 				736574771FA04E8E008E59CA /* Fruits3.jpg in Resources */,
 				7336755D1FE25F2200F0AFF8 /* 3002.png in Resources */,
 				73C1E02C1FBC25F5005D6DE1 /* SF-UI-Display-Regular.otf in Resources */,
 				736574751FA04E8E008E59CA /* Fruits1.jpg in Resources */,
+				7334D2D5200477C1009853BB /* HOTMasterDataFull_02.12_171214_143505_01.29.zip in Resources */,
 				7365746E1FA04E8E008E59CA /* Cake3.jpg in Resources */,
 				73C1E02B1FBC25F5005D6DE1 /* SF-UI-Display-Bold.otf in Resources */,
 				733675481FE25F2200F0AFF8 /* 4001.png in Resources */,
 				7336755C1FE25F2200F0AFF8 /* 1005.png in Resources */,
+				73EC12722005F31F005C11C6 /* HOTMasterDataFull_02.12_180110_085203_01.38.zip in Resources */,
 				730FE1051F95E8960045A234 /* CategoriesController.xib in Resources */,
 				7357EEB81F975A6D001EB56B /* BillCompleteController.xib in Resources */,
 				730FE11B1F96032F0045A234 /* NewOrderController.xib in Resources */,
@@ -1235,7 +1247,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tvo.parentkid.inapp.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cd068048-a54a-456f-bb8f-dc8c7bd97e9a";
+				PROVISIONING_PROFILE = "38613190-2ebb-4bb3-b13c-bb76847514d8";
 				PROVISIONING_PROFILE_SPECIFIER = "Tittle test";
 				TARGETED_DEVICE_FAMILY = 2;
 			};

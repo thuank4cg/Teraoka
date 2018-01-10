@@ -293,9 +293,13 @@
         }
         
         [categories addObject:cateModel];
+        
+        if (i == categoriesArr.count) {
+            [self setupView];
+        }
     }
     
-    [self setupView];
+//    [self setupView];
 }
 
 @end

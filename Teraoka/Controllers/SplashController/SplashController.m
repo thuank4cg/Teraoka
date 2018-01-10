@@ -16,9 +16,8 @@
 #import "ParamsHelper.h"
 #import "ShareManager.h"
 #import "Util.h"
+#import <Crashlytics/Answers.h>
 
-//#define KEY_FILE_NAME @"HOTMasterDataFull_02.12_171214_143505_01.29.zip"
-//#define KEY_FOLDER_NAME @"HOTMasterDataFull"
 
 @interface SplashController () <WRRequestDelegate, NSStreamDelegate>
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
@@ -44,6 +43,9 @@
     isDownloadFile = NO;
     [ShareManager shared].hostName = HOST_NAME;
 //    [self listDirectoryContents];
+    [self removeDataForEntity:@"Category"];
+    [self removeDataForEntity:@"MenuContent"];
+    [self removeDataForEntity:@"Product"];
 }
 
 - (IBAction)proceed:(id)sender {
@@ -90,17 +92,24 @@
     NSLog(@"path: %@", path);
     BOOL success =  [receivedData writeToFile:path atomically:YES];
     if (success) {
+        [Answers logCustomEventWithName:@"save file success" customAttributes:nil];
         [self unzipFile];
+    }else {
+        [Answers logCustomEventWithName:@"save file false" customAttributes:nil];
     }
 }
 - (void)unzipFile {
     NSString *zipPath = [[self applicationDocumentsDirectory].path
                          stringByAppendingPathComponent:fileName];
+//    zipPath = [[NSBundle mainBundle] pathForResource:@"HOTMasterDataFull_02.12_180110_090203_01.10" ofType:@"zip"];
     NSString *unzipPath = [self applicationDocumentsDirectory].path;
     BOOL success =  [SSZipArchive unzipFileAtPath:zipPath toDestination:unzipPath];
     NSLog(@"unzipPath: %@", unzipPath);
     if (success) {
+        [Answers logCustomEventWithName:@"unzip file success" customAttributes:nil];
         [self saveCategoryToDb];
+    }else {
+        [Answers logCustomEventWithName:@"unzip file false" customAttributes:nil];
     }
 }
 - (NSString *)getContentFile:(NSString *)fileName {
@@ -148,6 +157,8 @@
         fileName = [targetDict objectForKey:(id)kCFFTPResourceName];
         isDownloadFile = YES;
         [self downloadZipFile];
+        
+        [Answers logCustomEventWithName:fileName customAttributes:nil];
     }
 }
 - (void)requestFailed:(WRRequest *)request {
@@ -159,19 +170,19 @@
 
 #pragma mark - save data to db
 - (void)saveCategoryToDb {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_DATA]) {
-        [self showCategoriesScreen];
-        return;
-    }
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KEY_SAVED_DATA];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_DATA]) {
+//        [self showCategoriesScreen];
+//        return;
+//    }
+//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KEY_SAVED_DATA];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+
     NSLog(@"Documents Directory: %@", [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
     NSManagedObjectContext *context = [self managedObjectContext];
     //save category to db
     NSString* content = [self getContentFile:KEY_CATEGORY_TABLE_FILE_NAME];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
-    
+    [Answers logCustomEventWithName:[NSString stringWithFormat:@"category %d", (int)lines.count] customAttributes:nil];
     int indexOfCateId = 0;
     int indexOfCateName = 0;
     for (int i=0;i<lines.count;i++)
@@ -203,7 +214,7 @@
     //save category to db
     NSString* content = [self getContentFile:KEY_MENU_CONTENT_TABLE_FILE_NAME];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
-    
+    [Answers logCustomEventWithName:[NSString stringWithFormat:@"menu %d", (int)lines.count] customAttributes:nil];
     int indexOfCateId = 0;
     int indexOfProductId = 0;
     for (int i=0;i<lines.count;i++)
@@ -235,7 +246,7 @@
     //save product to db
     NSString* content = [self getContentFile:KEY_PRODUCT_TABLE_FILE_NAME];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
-    
+    [Answers logCustomEventWithName:[NSString stringWithFormat:@"product %d", (int)lines.count] customAttributes:nil];
     int indexOfId = 0;
     int indexOfPrice = 0;
     int indexOfName = 0;
@@ -275,6 +286,20 @@
         context = [delegate managedObjectContext];
     }
     return context;
+}
+
+- (void)removeDataForEntity:(NSString *)entity {
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:entity];
+    NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
+
+    NSManagedObjectContext *myManagedObjectContext = appDelegate.managedObjectContext;
+    NSPersistentStoreCoordinator *myPersistentStoreCoordinator = appDelegate.persistentStoreCoordinator;
+
+    @try {
+        [myPersistentStoreCoordinator executeRequest:deleteRequest withContext:myManagedObjectContext error:nil];
+    }@catch (NSException *exception) {
+        NSLog(@"Exception:%@",exception);
+    }
 }
 
 - (void)showCategoriesScreen {
