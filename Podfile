@@ -12,4 +12,5 @@ target 'Teraoka' do
   pod 'SIAlertView', '~> 1.3'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'Masonry',              '~> 1.0'
 end

@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad12_9" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Display-Bold.otf">
+            <string>SFUIDisplay-Bold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashController">
             <connections>
-                <outlet property="btnProceed" destination="gbS-Pn-UcA" id="6Un-4B-jP1"/>
                 <outlet property="indicatorView" destination="Mvx-44-z0z" id="R1X-iN-olS"/>
-                <outlet property="tfValue" destination="3w9-X7-9UW" id="tCP-5r-OU9"/>
+                <outlet property="settingBtn" destination="jg4-uo-yzv" id="fvo-0g-7c6"/>
+                <outlet property="startOrderBtn" destination="PF0-OK-UUy" id="Byz-HP-wOO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,50 +29,80 @@
             <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter IP address to proceed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IyD-Ml-TlB">
-                    <rect key="frame" x="536" y="447" width="295" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbS-Pn-UcA" customClass="ButtonCustom">
-                    <rect key="frame" x="533" y="567" width="300" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="HLT-xv-7Vk"/>
-                        <constraint firstAttribute="width" constant="300" id="b13-yy-5II"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                    <state key="normal" title="Proceed"/>
-                    <connections>
-                        <action selector="proceed:" destination="-1" eventType="touchUpInside" id="ciZ-3r-yaL"/>
-                    </connections>
-                </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="192.168.1.100" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3w9-X7-9UW" customClass="TextfieldCustom">
-                    <rect key="frame" x="533" y="497" width="300" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="ToX-nh-1Zo"/>
-                        <constraint firstAttribute="width" constant="300" id="zq6-KR-f5r"/>
-                    </constraints>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_home" translatesAutoresizingMaskIntoConstraints="NO" id="JTs-1L-oAt">
+                    <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                </imageView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Mvx-44-z0z">
                     <rect key="frame" x="673" y="512" width="20" height="20"/>
                 </activityIndicatorView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajK-YP-84g">
+                    <rect key="frame" x="472" y="379" width="423" height="286"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DELIOUS SELF ORDER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jA-m8-6sg">
+                            <rect key="frame" x="7.5" y="0.0" width="409" height="48"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="40"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PF0-OK-UUy">
+                            <rect key="frame" x="0.0" y="98" width="423" height="84"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="84" id="F9c-fb-gWR"/>
+                                <constraint firstAttribute="width" secondItem="PF0-OK-UUy" secondAttribute="height" multiplier="988:196" id="bqt-V7-ecu"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
+                            <inset key="titleEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="START ORDER" backgroundImage="start_order_btn">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="startOrderAction:" destination="-1" eventType="touchUpInside" id="F9s-K4-nDA"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jg4-uo-yzv">
+                            <rect key="frame" x="0.0" y="202" width="423" height="84"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
+                            <inset key="titleEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="SETTINGS" backgroundImage="goto_setting_btn">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="settingAction:" destination="-1" eventType="touchUpInside" id="RUp-bD-3bO"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="jg4-uo-yzv" firstAttribute="leading" secondItem="PF0-OK-UUy" secondAttribute="leading" id="8wL-vP-hin"/>
+                        <constraint firstItem="jg4-uo-yzv" firstAttribute="top" secondItem="PF0-OK-UUy" secondAttribute="bottom" constant="20" id="Ke9-Rm-LrZ"/>
+                        <constraint firstItem="2jA-m8-6sg" firstAttribute="top" secondItem="ajK-YP-84g" secondAttribute="top" id="NUp-FG-rw4"/>
+                        <constraint firstItem="jg4-uo-yzv" firstAttribute="width" secondItem="PF0-OK-UUy" secondAttribute="width" id="No0-TK-eOb"/>
+                        <constraint firstAttribute="bottom" secondItem="jg4-uo-yzv" secondAttribute="bottom" id="Q19-Sc-dc9"/>
+                        <constraint firstItem="PF0-OK-UUy" firstAttribute="leading" secondItem="ajK-YP-84g" secondAttribute="leading" id="ZLA-tZ-daO"/>
+                        <constraint firstAttribute="trailing" secondItem="PF0-OK-UUy" secondAttribute="trailing" id="gyr-1c-Rdl"/>
+                        <constraint firstItem="jg4-uo-yzv" firstAttribute="height" secondItem="PF0-OK-UUy" secondAttribute="height" id="mEP-00-bKB"/>
+                        <constraint firstItem="PF0-OK-UUy" firstAttribute="top" secondItem="2jA-m8-6sg" secondAttribute="bottom" constant="50" id="qbt-SS-Ihx"/>
+                        <constraint firstItem="2jA-m8-6sg" firstAttribute="centerX" secondItem="ajK-YP-84g" secondAttribute="centerX" id="vo2-mM-azd"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Mvx-44-z0z" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="4Aq-PR-H9d"/>
-                <constraint firstItem="IyD-Ml-TlB" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="6Lb-JU-9m3"/>
-                <constraint firstItem="gbS-Pn-UcA" firstAttribute="top" secondItem="3w9-X7-9UW" secondAttribute="bottom" constant="20" id="MK0-wa-yPA"/>
-                <constraint firstItem="3w9-X7-9UW" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="Zme-AS-V5f"/>
-                <constraint firstItem="3w9-X7-9UW" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="atC-0x-9nA"/>
-                <constraint firstItem="gbS-Pn-UcA" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="j7w-dX-zKf"/>
-                <constraint firstItem="3w9-X7-9UW" firstAttribute="top" secondItem="IyD-Ml-TlB" secondAttribute="bottom" constant="20" id="uRE-m7-kiO"/>
+                <constraint firstItem="JTs-1L-oAt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8jv-tU-Vhe"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="JTs-1L-oAt" secondAttribute="trailing" id="J1l-5X-euM"/>
+                <constraint firstItem="ajK-YP-84g" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="Q1g-ed-STr"/>
+                <constraint firstItem="ajK-YP-84g" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="RFf-Bu-9SB"/>
+                <constraint firstAttribute="bottom" secondItem="JTs-1L-oAt" secondAttribute="bottom" id="a68-7J-4zo"/>
+                <constraint firstItem="JTs-1L-oAt" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="gHf-2b-wOe"/>
                 <constraint firstItem="Mvx-44-z0z" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="vG1-0T-Poz"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>
     </objects>
+    <resources>
+        <image name="bg_home" width="1024" height="768"/>
+        <image name="goto_setting_btn" width="988" height="196"/>
+        <image name="start_order_btn" width="988" height="196"/>
+    </resources>
 </document>

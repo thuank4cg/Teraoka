@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "save_btn.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "if_controls_play_back_103459-2.png",
       "scale" : "2x"
     },
     {

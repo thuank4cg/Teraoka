@@ -17,6 +17,7 @@
 #import "ShareManager.h"
 #import "Util.h"
 #import <Crashlytics/Answers.h>
+#import "SettingsController.h"
 
 
 @interface SplashController () <WRRequestDelegate, NSStreamDelegate>
@@ -24,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet TextfieldCustom *tfValue;
 @property (weak, nonatomic) IBOutlet ButtonCustom *btnProceed;
+@property (weak, nonatomic) IBOutlet UIButton *startOrderBtn;
+@property (weak, nonatomic) IBOutlet UIButton *settingBtn;
 
 @end
 
@@ -41,12 +44,6 @@
     [self removeDataForEntity:@"MenuContent"];
     [self removeDataForEntity:@"Product"];
     
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self saveCategoryToDb];
-    });
-    
     isDownloadFile = NO;
     [ShareManager shared].hostName = HOST_NAME;
 }
@@ -57,6 +54,15 @@
     [_indicatorView setHidden:NO];
     [_indicatorView startAnimating];
     [self listDirectoryContents];
+}
+
+- (IBAction)startOrderAction:(id)sender {
+    [self saveCategoryToDb];
+}
+
+- (IBAction)settingAction:(id)sender {
+    SettingsController *settingVc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
+    [self presentViewController:settingVc animated:NO completion:nil];
 }
 
 #pragma mark - Custom method

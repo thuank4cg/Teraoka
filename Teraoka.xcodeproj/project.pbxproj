@@ -108,6 +108,11 @@
 		736574781FA04E8E008E59CA /* Soups1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 736574661FA04E8E008E59CA /* Soups1.jpg */; };
 		736574791FA04E8E008E59CA /* Soups2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 736574671FA04E8E008E59CA /* Soups2.jpg */; };
 		7365747A1FA04E8E008E59CA /* Soups3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 736574681FA04E8E008E59CA /* Soups3.jpg */; };
+		737B4899212AA02400B02B3D /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 737B4897212AA02400B02B3D /* SettingsController.m */; };
+		737B489A212AA02400B02B3D /* SettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737B4898212AA02400B02B3D /* SettingsController.xib */; };
+		737B489D212AAB0300B02B3D /* CommonButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 737B489C212AAB0300B02B3D /* CommonButton.m */; };
+		737B48A5212AB18A00B02B3D /* SwitchCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 737B48A4212AB18A00B02B3D /* SwitchCustomView.m */; };
+		737B48A8212ACC0700B02B3D /* CommonTextfield.m in Sources */ = {isa = PBXBuildFile; fileRef = 737B48A7212ACC0700B02B3D /* CommonTextfield.m */; };
 		7382C8601FDE2B0300952250 /* WhiteRaccoon.m in Sources */ = {isa = PBXBuildFile; fileRef = 7382C85E1FDE2B0300952250 /* WhiteRaccoon.m */; };
 		7384AD271F9990B100E996AD /* ProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7384AD261F9990B100E996AD /* ProductModel.m */; };
 		7384AD2B1F99917D00E996AD /* CategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7384AD2A1F99917D00E996AD /* CategoryModel.m */; };
@@ -258,6 +263,15 @@
 		736574661FA04E8E008E59CA /* Soups1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Soups1.jpg; sourceTree = "<group>"; };
 		736574671FA04E8E008E59CA /* Soups2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Soups2.jpg; sourceTree = "<group>"; };
 		736574681FA04E8E008E59CA /* Soups3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Soups3.jpg; sourceTree = "<group>"; };
+		737B4896212AA02400B02B3D /* SettingsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		737B4897212AA02400B02B3D /* SettingsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
+		737B4898212AA02400B02B3D /* SettingsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsController.xib; sourceTree = "<group>"; };
+		737B489B212AAB0300B02B3D /* CommonButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonButton.h; sourceTree = "<group>"; };
+		737B489C212AAB0300B02B3D /* CommonButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonButton.m; sourceTree = "<group>"; };
+		737B48A3212AB18A00B02B3D /* SwitchCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchCustomView.h; sourceTree = "<group>"; };
+		737B48A4212AB18A00B02B3D /* SwitchCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchCustomView.m; sourceTree = "<group>"; };
+		737B48A6212ACC0700B02B3D /* CommonTextfield.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTextfield.h; sourceTree = "<group>"; };
+		737B48A7212ACC0700B02B3D /* CommonTextfield.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonTextfield.m; sourceTree = "<group>"; };
 		7382C85E1FDE2B0300952250 /* WhiteRaccoon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteRaccoon.m; sourceTree = "<group>"; };
 		7382C85F1FDE2B0300952250 /* WhiteRaccoon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteRaccoon.h; sourceTree = "<group>"; };
 		7384AD251F9990B100E996AD /* ProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductModel.h; sourceTree = "<group>"; };
@@ -383,6 +397,7 @@
 		730FE0CF1F95A2120045A234 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				737B4895212AA00300B02B3D /* SettingsController */,
 				73A6606D1FE2649F00FB80B8 /* SplashController */,
 				7357EEB31F975A60001EB56B /* BillCompleteController */,
 				7357EE9B1F974BDC001EB56B /* ViewExistingOrderController */,
@@ -421,6 +436,7 @@
 		730FE0D21F95A26B0045A234 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				737B48A1212AB14200B02B3D /* View */,
 				730FE0E71F95A7A80045A234 /* Button */,
 				730FE0D71F95A4800045A234 /* Textfield */,
 			);
@@ -485,6 +501,8 @@
 			children = (
 				730FE0D91F95A5230045A234 /* TextfieldCustom.h */,
 				730FE0DA1F95A5230045A234 /* TextfieldCustom.m */,
+				737B48A6212ACC0700B02B3D /* CommonTextfield.h */,
+				737B48A7212ACC0700B02B3D /* CommonTextfield.m */,
 			);
 			path = Textfield;
 			sourceTree = "<group>";
@@ -514,6 +532,8 @@
 			children = (
 				730FE0E81F95A7A80045A234 /* ButtonCustom.h */,
 				730FE0E91F95A7A80045A234 /* ButtonCustom.m */,
+				737B489B212AAB0300B02B3D /* CommonButton.h */,
+				737B489C212AAB0300B02B3D /* CommonButton.m */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -783,6 +803,25 @@
 			path = BillCompleteController;
 			sourceTree = "<group>";
 		};
+		737B4895212AA00300B02B3D /* SettingsController */ = {
+			isa = PBXGroup;
+			children = (
+				737B4896212AA02400B02B3D /* SettingsController.h */,
+				737B4897212AA02400B02B3D /* SettingsController.m */,
+				737B4898212AA02400B02B3D /* SettingsController.xib */,
+			);
+			path = SettingsController;
+			sourceTree = "<group>";
+		};
+		737B48A1212AB14200B02B3D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				737B48A3212AB18A00B02B3D /* SwitchCustomView.h */,
+				737B48A4212AB18A00B02B3D /* SwitchCustomView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		7384AD241F998ED300E996AD /* ProductModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -955,6 +994,7 @@
 				7336755E1FE25F2200F0AFF8 /* 1007.png in Resources */,
 				733675631FE25F2200F0AFF8 /* 1003.png in Resources */,
 				736574791FA04E8E008E59CA /* Soups2.jpg in Resources */,
+				737B489A212AA02400B02B3D /* SettingsController.xib in Resources */,
 				7365746D1FA04E8E008E59CA /* Cake2.jpg in Resources */,
 				7344596C1FECAA09006D3BEF /* menu_contents.txt in Resources */,
 				7336755B1FE25F2200F0AFF8 /* 1004.png in Resources */,
@@ -1047,7 +1087,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FE675B5F754E0B09E80F58AA /* [CP] Copy Pods Resources */ = {
@@ -1061,7 +1101,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SIAlertView.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1093,16 +1133,20 @@
 				7357EE721F96FA43001EB56B /* OptionCollectionCell.m in Sources */,
 				730FE1121F95EC180045A234 /* ProductCell.m in Sources */,
 				7357EE991F974B0B001EB56B /* OrderConfirmController.m in Sources */,
+				737B489D212AAB0300B02B3D /* CommonButton.m in Sources */,
 				7384AD2B1F99917D00E996AD /* CategoryModel.m in Sources */,
 				7357EE6D1F96F9F3001EB56B /* OptionTableCell.m in Sources */,
 				7384AD2F1F99986D00E996AD /* ShareManager.m in Sources */,
+				737B48A8212ACC0700B02B3D /* CommonTextfield.m in Sources */,
 				730FE0B91F95A1690045A234 /* AppDelegate.m in Sources */,
 				7357EEA81F974EEB001EB56B /* ExistingOrderCell.m in Sources */,
 				730FE0B61F95A1690045A234 /* main.m in Sources */,
 				7357EE841F9714D1001EB56B /* OrderSummaryController.m in Sources */,
 				730FE10D1F95EBAF0045A234 /* CategoryCell.m in Sources */,
 				730FE1041F95E8960045A234 /* CategoriesController.m in Sources */,
+				737B48A5212AB18A00B02B3D /* SwitchCustomView.m in Sources */,
 				7357EEB71F975A6D001EB56B /* BillCompleteController.m in Sources */,
+				737B4899212AA02400B02B3D /* SettingsController.m in Sources */,
 				73DC91BB1FE2BC6500AD86E6 /* ParamsHelper.m in Sources */,
 				7357EE781F9711FB001EB56B /* IncompleteItemController.m in Sources */,
 				730FE0C21F95A1690045A234 /* Teraoka.xcdatamodeld in Sources */,
