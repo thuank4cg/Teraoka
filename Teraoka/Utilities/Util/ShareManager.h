@@ -11,7 +11,6 @@
 @interface ShareManager : NSObject
 @property (nonatomic, strong) NSMutableArray *cartArr;
 @property (nonatomic, strong) NSMutableArray *existingOrderArr;
-
 @property (nonatomic, strong) NSString *hostName;
 + (ShareManager *)shared;
 @end

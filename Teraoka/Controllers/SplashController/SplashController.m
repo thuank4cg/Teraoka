@@ -36,22 +36,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [_indicatorView setHidden:YES];
-//    double delayInSeconds = 2.0;
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//        [self saveCategoryToDb];
-//    });
-    isDownloadFile = NO;
-    [ShareManager shared].hostName = HOST_NAME;
-//    [self listDirectoryContents];
+    
     [self removeDataForEntity:@"Category"];
     [self removeDataForEntity:@"MenuContent"];
     [self removeDataForEntity:@"Product"];
+    
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self saveCategoryToDb];
+    });
+    
+    isDownloadFile = NO;
+    [ShareManager shared].hostName = HOST_NAME;
 }
 
 - (IBAction)proceed:(id)sender {
     if (_tfValue.text.length > 0) [ShareManager shared].hostName = _tfValue.text;
-//    if (hostName.length == 0) return;
     [_btnProceed setUserInteractionEnabled:NO];
     [_indicatorView setHidden:NO];
     [_indicatorView startAnimating];
@@ -97,34 +98,32 @@
     NSLog(@"path: %@", path);
     BOOL success =  [receivedData writeToFile:path atomically:YES];
     if (success) {
-        [Answers logCustomEventWithName:@"save file success" customAttributes:nil];
+//        [Answers logCustomEventWithName:@"save file success" customAttributes:nil];
         [self unzipFile];
     }else {
-        [Answers logCustomEventWithName:@"save file false" customAttributes:nil];
+//        [Answers logCustomEventWithName:@"save file false" customAttributes:nil];
     }
 }
 
 - (void)unzipFile {
-    NSString *zipPath = [[self applicationDocumentsDirectory].path
-                         stringByAppendingPathComponent:fileName];
+    NSString *zipPath = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:fileName];
 //    zipPath = [[NSBundle mainBundle] pathForResource:@"HOTMasterDataFull_02.12_180110_090203_01.10" ofType:@"zip"];
     NSString *unzipPath = [self applicationDocumentsDirectory].path;
     BOOL success =  [SSZipArchive unzipFileAtPath:zipPath toDestination:unzipPath];
     NSLog(@"unzipPath: %@", unzipPath);
     if (success) {
-        [Answers logCustomEventWithName:@"unzip file success" customAttributes:nil];
+//        [Answers logCustomEventWithName:@"unzip file success" customAttributes:nil];
         [self saveCategoryToDb];
     }else {
-        [Answers logCustomEventWithName:@"unzip file false" customAttributes:nil];
+//        [Answers logCustomEventWithName:@"unzip file false" customAttributes:nil];
     }
 }
 
 - (NSString *)getContentFile:(NSString *)fileName {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
-//    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName
-//                                                     ofType:@"txt"];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     return content;
 }
@@ -166,7 +165,7 @@
         isDownloadFile = YES;
         [self downloadZipFile];
         
-        [Answers logCustomEventWithName:fileName customAttributes:nil];
+//        [Answers logCustomEventWithName:fileName customAttributes:nil];
     }
 }
 
@@ -191,7 +190,7 @@
     //save category to db
     NSString* content = [self getContentFile:KEY_CATEGORY_TABLE_FILE_NAME];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
-    [Answers logCustomEventWithName:[NSString stringWithFormat:@"category %d", (int)lines.count] customAttributes:nil];
+//    [Answers logCustomEventWithName:[NSString stringWithFormat:@"category %d", (int)lines.count] customAttributes:nil];
     int indexOfCateId = 0;
     int indexOfCateName = 0;
     for (int i=0;i<lines.count;i++)
@@ -224,7 +223,7 @@
     //save category to db
     NSString* content = [self getContentFile:KEY_MENU_CONTENT_TABLE_FILE_NAME];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
-    [Answers logCustomEventWithName:[NSString stringWithFormat:@"menu %d", (int)lines.count] customAttributes:nil];
+//    [Answers logCustomEventWithName:[NSString stringWithFormat:@"menu %d", (int)lines.count] customAttributes:nil];
     int indexOfCateId = 0;
     int indexOfProductId = 0;
     for (int i=0;i<lines.count;i++)
@@ -257,7 +256,7 @@
     //save product to db
     NSString* content = [self getContentFile:KEY_PRODUCT_TABLE_FILE_NAME];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
-    [Answers logCustomEventWithName:[NSString stringWithFormat:@"product %d", (int)lines.count] customAttributes:nil];
+//    [Answers logCustomEventWithName:[NSString stringWithFormat:@"product %d", (int)lines.count] customAttributes:nil];
     int indexOfId = 0;
     int indexOfPrice = 0;
     int indexOfName = 0;
