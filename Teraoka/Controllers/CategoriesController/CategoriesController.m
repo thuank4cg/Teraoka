@@ -108,16 +108,21 @@
     [self.productsColView registerNib:[UINib nibWithNibName:@"ProductCell" bundle:nil] forCellWithReuseIdentifier:@"ProductCellID"];
     [self.productsColView reloadData];
 }
+
 - (IBAction)homeAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (IBAction)orderCart:(id)sender {
 //    OrderSummaryController *vc = [[OrderSummaryController alloc] initWithNibName:@"OrderSummaryController" bundle:nil];
 //    [self.navigationController pushViewController:vc animated:YES];
     [self showOrderCart];
 }
+
 - (IBAction)callWaiter:(id)sender {
+    
 }
+
 - (IBAction)viewBill:(id)sender {
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:nil
@@ -140,6 +145,7 @@
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (categoryIndex < categories.count) {
         CategoryModel *cate = categories[categoryIndex];
@@ -147,6 +153,7 @@
     }
     return 0;
 }
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ProductCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ProductCellID" forIndexPath:indexPath];
     
@@ -164,6 +171,7 @@
     
     return cell;
 }
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(itemWidth, itemWidth + KEY_PADDING_BOTTOM_CELL);
 }
@@ -199,13 +207,14 @@
     [self.view addSubview:vc.view];
     [vc didMoveToParentViewController:self];
 }
+
 - (void)backDelegate {
     [self setupQtyBoxView];
     isBackDelegate = YES;
     [self setData];
 }
-- (NSManagedObjectContext *)managedObjectContext
-{
+
+- (NSManagedObjectContext *)managedObjectContext {
     NSManagedObjectContext *context = nil;
     id delegate = [[UIApplication sharedApplication] delegate];
     if ([delegate performSelector:@selector(managedObjectContext)]) {
@@ -213,6 +222,7 @@
     }
     return context;
 }
+
 // dummy data
 - (void)setData {
     if (!isBackDelegate) categoryIndex = 0;

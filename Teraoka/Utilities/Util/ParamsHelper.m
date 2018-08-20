@@ -14,6 +14,7 @@
 #define REQUEST_ID @"request_id"
 
 @implementation ParamsHelper
+
 + (ParamsHelper *)shared {
     static ParamsHelper *_shared = nil;
     static dispatch_once_t onceToken;
@@ -43,7 +44,6 @@
 - (NSData *)collectData {
     NSMutableData *mCollectData = [NSMutableData new];
     //Header
-//    [mCollectData appendBytes:"68" "71" "0" "0" length:4];
     [mCollectData appendData:[self convertStringToBytesArr:@"68" length:1]];
     [mCollectData appendData:[self convertStringToBytesArr:@"71" length:1]];
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
@@ -65,18 +65,14 @@
     //Data
     [mCollectData appendData:[self requestData]];
     
-//    NSString *newLine = @"test\r\n";
-//    NSData *requestData = [newLine dataUsingEncoding:NSUTF8StringEncoding];
-//    [mCollectData appendData:requestData];
-    
     return mCollectData;
 }
 
 - (NSMutableData *)requestData {
     NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
     /**XRequestHeaderData**/
     //version
-//    [mCollectData appendBytes:"0" "1" "15" "0" length:4];
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
     [mCollectData appendData:[self convertStringToBytesArr:@"1" length:1]];
     [mCollectData appendData:[self convertStringToBytesArr:@"15" length:1]];
@@ -187,6 +183,7 @@
     int numberOfObj = (int)[ShareManager shared].cartArr.count;
     //Number of object
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
+    
     /**XTransactionPaymentData[]**/
     for (ProductModel *product in [ShareManager shared].cartArr) {
         //Id
@@ -203,6 +200,7 @@
     }
     //Number of object
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
+    
     /**XTransactionItemData[]**/
     for (ProductModel *product in [ShareManager shared].cartArr) {
         //PLU No
@@ -212,13 +210,9 @@
         //Weight
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         //Item Flag
-//        [mCollectData appendBytes:"0" "0" length:4];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
         //Item status
-//        [mCollectData appendBytes:"0" "0" "0" "0" length:4];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
@@ -272,19 +266,14 @@
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         //Set item addon price
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+        
         /**XItemOptionData**/
         /****XCondimentData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         /****XCookingInstructionData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         /****XServingTimeData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         /****XFreeInstructionData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
     }
@@ -305,4 +294,5 @@
 
     return  requestId;
 }
+
 @end

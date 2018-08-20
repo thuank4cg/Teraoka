@@ -37,6 +37,7 @@
     self.lbReceipt.text = [NSString stringWithFormat:@"Receipt: %d", self.receipt];
     self.lbQueue.text = [NSString stringWithFormat:@"Order number: %d", self.queueNumber];
 }
+
 - (IBAction)backTohome:(id)sender {
     for (UIViewController *vc in self.navigationController.viewControllers) {
         if ([vc isKindOfClass:[CategoriesController class]]) {
@@ -45,6 +46,7 @@
         }
     }
 }
+
 - (IBAction)viewExistingOrder:(id)sender {
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:nil

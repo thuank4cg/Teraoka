@@ -35,11 +35,13 @@
     
     [self setupView];
 }
+
 - (void)setupView {
     self.tblView.delegate = self;
     self.tblView.dataSource = self;
     [self.tblView registerNib:[UINib nibWithNibName:@"ExistingOrderCell" bundle:nil] forCellReuseIdentifier:@"ExistingOrderCellID"];
 }
+
 - (void)onBack:(id)sender {
     for (UIViewController *vc in self.navigationController.viewControllers) {
         if ([vc isKindOfClass:[CategoriesController class]]) {
@@ -49,6 +51,7 @@
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (IBAction)callForBill:(id)sender {
     if (products.count == 0) return;
     BillCompleteController *vc = [[BillCompleteController alloc] initWithNibName:@"BillCompleteController" bundle:nil];
@@ -59,15 +62,18 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return products.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ExistingOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExistingOrderCellID" forIndexPath:indexPath];
     ProductModel *product = products[indexPath.row];
     [cell setDataForCell:product];
     return cell;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 120;
 }
@@ -85,6 +91,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     return [[UIView alloc] init];
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 1;
 }

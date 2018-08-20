@@ -69,6 +69,7 @@
     self.containerView.layer.shadowRadius = 3.0;
     self.containerView.layer.masksToBounds = NO;
 }
+
 - (IBAction)backAction:(id)sender {
 //    for (UIViewController *vc in self.navigationController.viewControllers) {
 //        if ([vc isKindOfClass:[CategoriesController class]]) {
@@ -82,6 +83,7 @@
     [self.delegate backDelegate];
     [self.view removeFromSuperview];
 }
+
 - (IBAction)sendOrder:(id)sender {
     if (products.count == 0) return;
     for (ProductModel *product in products) {
@@ -130,13 +132,16 @@
 //    }
     [self sendTransaction];
 }
+
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return products.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     OrderSummaryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OrderSummaryCellID" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -171,6 +176,7 @@
     };
     return cell;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 150;
 }
@@ -242,14 +248,17 @@
         [self stopProcessView];
     }
 }
+
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
     [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:10 tag:0];
 }
+
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
     NSLog(@"didWriteDataWithTag");
     [asyncSocket readDataWithTimeout:10 tag:0];
 }
+
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSLog(@"didReadData");
     
@@ -285,6 +294,7 @@
         [self stopProcessView];
     }
 }
+
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     if (err.domain == NSPOSIXErrorDomain) {
         [Util showAlert:MSG_ERROR vc:self];

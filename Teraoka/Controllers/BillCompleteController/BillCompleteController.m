@@ -21,6 +21,7 @@
     // Do any additional setup after loading the view from its nib.
     [ShareManager shared].existingOrderArr = nil;
 }
+
 - (IBAction)backToHome:(id)sender {
     for (UIViewController *vc in self.navigationController.viewControllers) {
         if ([vc isKindOfClass:[HomeController class]]) {

@@ -9,8 +9,8 @@
 #import "ShareManager.h"
 
 @implementation ShareManager
-+ (ShareManager *)shared
-{
+
++ (ShareManager *)shared {
     static ShareManager *_shared = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -19,11 +19,11 @@
     return _shared;
 }
 
-- (id)init
-{
+- (id)init {
     if (self = [super init]) {
         
     }
     return self;
 }
+
 @end

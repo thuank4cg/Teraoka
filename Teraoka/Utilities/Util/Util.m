@@ -10,18 +10,20 @@
 #import <SIAlertView.h>
 
 @implementation Util
+
 + (NSString *)convertDataToString:(NSData *)myData {
     NSString *dataStr = [[NSString alloc] initWithData:myData encoding:NSUTF8StringEncoding];
     return dataStr;
 }
+
 + (void)saveFileToDocumentDirectory:(NSString *)dataStr {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"myData.zip"];
     [dataStr writeToFile:appFile atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
-+ (NSString *)hexadecimalString:(NSData *)receivedData
-{
+
++ (NSString *)hexadecimalString:(NSData *)receivedData {
     /* Returns hexadecimal string of NSData. Empty string if data is empty.   */
     
     const unsigned char *dataBuffer = (const unsigned char *)[receivedData bytes];
@@ -41,6 +43,7 @@
     
     return [NSString stringWithString:hexString];
 }
+
 + (void)showAlert:(NSString *)msg vc:(UIViewController *)vc {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action){
@@ -49,6 +52,7 @@
     [alert addAction:okAction];
     [vc presentViewController:alert animated:YES completion:nil];
 }
+
 + (int)hexStringToInt:(NSString *)hex {
     NSScanner* pScanner = [NSScanner scannerWithString: hex];
     
@@ -56,4 +60,5 @@
     [pScanner scanHexInt: &iValue];
     return iValue;
 }
+
 @end

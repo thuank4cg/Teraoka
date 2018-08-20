@@ -20,6 +20,7 @@
 
 
 @interface SplashController () <WRRequestDelegate, NSStreamDelegate>
+
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet TextfieldCustom *tfValue;
 @property (weak, nonatomic) IBOutlet ButtonCustom *btnProceed;
@@ -56,6 +57,7 @@
     [_indicatorView startAnimating];
     [self listDirectoryContents];
 }
+
 #pragma mark - Custom method
 - (void)listDirectoryContents {
     WRRequestListDirectory * listDir = [[WRRequestListDirectory alloc] init];
@@ -69,6 +71,7 @@
     
     [listDir start];
 }
+
 - (void)downloadZipFile {
     WRRequestDownload * downloadFile = [[WRRequestDownload alloc] init];
     downloadFile.delegate = self;
@@ -82,10 +85,12 @@
     //we start the request
     [downloadFile start];
 }
+
 - (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
                                                    inDomains:NSUserDomainMask] lastObject];
 }
+
 - (void)saveFile:(NSData *)receivedData {
     NSString *path = [[self applicationDocumentsDirectory].path
                       stringByAppendingPathComponent:fileName];
@@ -98,6 +103,7 @@
         [Answers logCustomEventWithName:@"save file false" customAttributes:nil];
     }
 }
+
 - (void)unzipFile {
     NSString *zipPath = [[self applicationDocumentsDirectory].path
                          stringByAppendingPathComponent:fileName];
@@ -112,6 +118,7 @@
         [Answers logCustomEventWithName:@"unzip file false" customAttributes:nil];
     }
 }
+
 - (NSString *)getContentFile:(NSString *)fileName {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -121,6 +128,7 @@
     NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     return content;
 }
+
 #pragma mark - WRRequestDelegate
 - (void)requestCompleted:(WRRequest *)request {
     //called after 'request' is completed successfully
@@ -161,6 +169,7 @@
         [Answers logCustomEventWithName:fileName customAttributes:nil];
     }
 }
+
 - (void)requestFailed:(WRRequest *)request {
     NSLog(@"%@", request.error.message);
     [_indicatorView stopAnimating];
@@ -209,6 +218,7 @@
     }
     [self saveMenuContentToDb];
 }
+
 - (void)saveMenuContentToDb {
     NSManagedObjectContext *context = [self managedObjectContext];
     //save category to db
@@ -241,6 +251,7 @@
     }
     [self saveProductToDb];
 }
+
 - (void)saveProductToDb {
     NSManagedObjectContext *context = [self managedObjectContext];
     //save product to db

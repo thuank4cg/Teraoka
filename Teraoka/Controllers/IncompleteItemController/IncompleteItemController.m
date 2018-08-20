@@ -31,9 +31,11 @@
     self.containerView.layer.shadowRadius = 3.0;
     self.containerView.layer.masksToBounds = NO;
 }
+
 - (IBAction)yesAction:(id)sender {
     [self onBack:nil];
 }
+
 - (IBAction)noAction:(id)sender {
     for (UIViewController *vc in self.navigationController.viewControllers) {
         if ([vc isKindOfClass:[CategoriesController class]]) {

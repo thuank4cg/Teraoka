@@ -19,6 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
+
 - (IBAction)proceedAction:(id)sender {
     HomeController *vc = [[HomeController alloc] initWithNibName:@"HomeController" bundle:nil];
     [self.navigationController pushViewController:vc animated:YES];
