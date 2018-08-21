@@ -53,6 +53,9 @@
 }
 
 - (void)setupView {
+    self.view.backgroundColor = [UIColor clearColor];
+    self.view.opaque = false;
+    
     self.tblView.delegate = self;
     self.tblView.dataSource = self;
     [self.tblView setSeparatorColor:[UIColor clearColor]];

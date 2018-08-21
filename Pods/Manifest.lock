@@ -1,4 +1,5 @@
 PODS:
+  - ActionSheetPicker-3.0 (2.3.0)
   - CocoaAsyncSocket (7.6.2)
   - Crashlytics (3.9.3):
     - Fabric (~> 1.7.2)
@@ -10,6 +11,7 @@ PODS:
   - TPKeyboardAvoiding (1.2)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0 (~> 2.3.0)
   - CocoaAsyncSocket
   - Crashlytics
   - Fabric
@@ -20,6 +22,7 @@ DEPENDENCIES:
   - TPKeyboardAvoiding (= 1.2)
 
 SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
   CocoaAsyncSocket: 3541e024f48c54b251638ef72d51dd42808de932
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
@@ -29,6 +32,6 @@ SPEC CHECKSUMS:
   SSZipArchive: 14401ade5f8e82aba1ff03e9f88e9de60937ae60
   TPKeyboardAvoiding: aa2f77b2619dd52d5d0bd4fc7e875976a515bf8b
 
-PODFILE CHECKSUM: 50ec30121a523676cf2a0f98e4ae86ea72ad01cb
+PODFILE CHECKSUM: 92ccef99323dae9c4bfff6b7f575fec512f62d45
 
 COCOAPODS: 1.4.0

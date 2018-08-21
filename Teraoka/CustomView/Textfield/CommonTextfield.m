@@ -26,7 +26,7 @@
 }
 
 - (void)initation {
-    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 50)];
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 50)];
     self.leftView = paddingView;
     self.leftViewMode = UITextFieldViewModeAlways;
 }

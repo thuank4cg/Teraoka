@@ -281,3 +281,26 @@ Pods/Pods.xcodeproj/xcuserdata/Thuan.xcuserdatad/xcschemes/Masonry.xcscheme
 Pods/Target Support Files/Masonry/Masonry-dummy.m
 Pods/Target Support Files/Masonry/Masonry-prefix.pch
 Pods/Target Support Files/Masonry/Masonry.xcconfig
+Pods/Headers/Private/ActionSheetPicker-3.0/AbstractActionSheetPicker.h
+Pods/Headers/Private/ActionSheetPicker-3.0/ActionSheetCustomPicker.h
+Pods/Headers/Private/ActionSheetPicker-3.0/ActionSheetCustomPickerDelegate.h
+Pods/Headers/Private/ActionSheetPicker-3.0/ActionSheetDatePicker.h
+Pods/Headers/Private/ActionSheetPicker-3.0/ActionSheetDistancePicker.h
+Pods/Headers/Private/ActionSheetPicker-3.0/ActionSheetLocalePicker.h
+Pods/Headers/Private/ActionSheetPicker-3.0/ActionSheetMultipleStringPicker.h
+Pods/Headers/Private/ActionSheetPicker-3.0/ActionSheetPicker.h
+Pods/Headers/Private/ActionSheetPicker-3.0/ActionSheetStringPicker.h
+Pods/Headers/Private/ActionSheetPicker-3.0/DistancePickerView.h
+Pods/Headers/Private/ActionSheetPicker-3.0/SWActionSheet.h
+Pods/Headers/Public/ActionSheetPicker-3.0/AbstractActionSheetPicker.h
+Pods/Headers/Public/ActionSheetPicker-3.0/ActionSheetCustomPicker.h
+Pods/Headers/Public/ActionSheetPicker-3.0/ActionSheetCustomPickerDelegate.h
+Pods/Headers/Public/ActionSheetPicker-3.0/ActionSheetDatePicker.h
+Pods/Headers/Public/ActionSheetPicker-3.0/ActionSheetDistancePicker.h
+Pods/Headers/Public/ActionSheetPicker-3.0/ActionSheetLocalePicker.h
+Pods/Headers/Public/ActionSheetPicker-3.0/ActionSheetMultipleStringPicker.h
+Pods/Headers/Public/ActionSheetPicker-3.0/ActionSheetPicker.h
+Pods/Headers/Public/ActionSheetPicker-3.0/ActionSheetStringPicker.h
+Pods/Headers/Public/ActionSheetPicker-3.0/DistancePickerView.h
+Pods/Headers/Public/ActionSheetPicker-3.0/SWActionSheet.h
+Teraoka.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist

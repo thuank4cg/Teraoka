@@ -18,6 +18,7 @@
 #define PASSWORD @"teraoka"
 
 #define KEY_SAVED_DATA @"IS_SAVED_DATA"
+#define KEY_SAVED_SETTING @"IS_SAVED_SETTING"
 
 #define KEY_FONT_BOLD @"SFUIDisplay-Bold"
 #define KEY_FONT_REGULAR @"SFUIDisplay-Regular"

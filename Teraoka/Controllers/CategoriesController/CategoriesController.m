@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *productsColView;
 @property (weak, nonatomic) IBOutlet UIView *containerCategoryView;
 @property (weak, nonatomic) IBOutlet UIView *menuBoxView;
+@property (weak, nonatomic) IBOutlet UIView *restartOrderView;
 @property (weak, nonatomic) IBOutlet UIView *qtyBoxView;
 @property (weak, nonatomic) IBOutlet UILabel *lbQty;
 
@@ -82,13 +83,22 @@
     self.containerCategoryView.layer.masksToBounds = NO;
     
     self.menuBoxView.clipsToBounds = YES;
-    self.menuBoxView.layer.cornerRadius = 5;
+    self.menuBoxView.layer.cornerRadius = 15;
     
     self.menuBoxView.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.menuBoxView.layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
     self.menuBoxView.layer.shadowOpacity = 0.2;
     self.menuBoxView.layer.shadowRadius = 3.0;
     self.menuBoxView.layer.masksToBounds = NO;
+    
+    self.restartOrderView.clipsToBounds = YES;
+    self.restartOrderView.layer.cornerRadius = 8;
+    
+    self.restartOrderView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.restartOrderView.layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
+    self.restartOrderView.layer.shadowOpacity = 0.2;
+    self.restartOrderView.layer.shadowRadius = 3.0;
+    self.restartOrderView.layer.masksToBounds = NO;
     
     CategoryView *cateView = [[[NSBundle mainBundle] loadNibNamed:@"CategoryView" owner:self options:nil] objectAtIndex:0];
     cateView.frame = CGRectMake(0, 0, CGRectGetWidth(self.containerCategoryView.frame), CGRectGetHeight(self.containerCategoryView.frame));

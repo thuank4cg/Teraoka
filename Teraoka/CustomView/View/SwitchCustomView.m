@@ -11,7 +11,7 @@
 #import "UIColor+HexString.h"
 
 @interface SwitchCustomView()
-@property (nonatomic, assign) BOOL isOn;
+@property (nonatomic, assign) BOOL value;
 @end
 
 @implementation SwitchCustomView
@@ -70,8 +70,8 @@
 }
 
 - (void)turnOn {
-    if (self.isOn) return;
-    self.isOn = YES;
+    if (self.value) return;
+    self.value = YES;
     self.layer.borderColor = [[UIColor colorWithHexString:@"38bea5"] CGColor];
     self.enabledBtn.backgroundColor = [UIColor colorWithHexString:@"38bea5"];
     [self.enabledBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -80,13 +80,25 @@
 }
 
 - (void)turnOff {
-    if (!self.isOn) return;
-    self.isOn = NO;
+    if (!self.value) return;
+    self.value = NO;
     self.layer.borderColor = [[UIColor colorWithHexString:@"b2b2b2"] CGColor];
     self.enabledBtn.backgroundColor = [UIColor clearColor];
     [self.enabledBtn setTitleColor:[UIColor colorWithHexString:@"b2b2b2"] forState:UIControlStateNormal];
     self.disabledBtn.backgroundColor = [UIColor colorWithHexString:@"b2b2b2"];
     [self.disabledBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
+- (BOOL)isOn {
+    return self.value;
+}
+
+- (void)setOn:(BOOL)isOn {
+    if (isOn) {
+        [self turnOn];
+    } else {
+        [self turnOff];
+    }
 }
 
 @end

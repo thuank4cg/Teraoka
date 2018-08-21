@@ -11,4 +11,6 @@
 @interface SwitchCustomView : UIView
 @property (nonatomic, strong) UIButton *enabledBtn;
 @property (nonatomic, strong) UIButton *disabledBtn;
+- (BOOL)isOn;
+- (void)setOn:(BOOL)isOn;
 @end

@@ -114,6 +114,9 @@
 		737B48A5212AB18A00B02B3D /* SwitchCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 737B48A4212AB18A00B02B3D /* SwitchCustomView.m */; };
 		737B48A8212ACC0700B02B3D /* CommonTextfield.m in Sources */ = {isa = PBXBuildFile; fileRef = 737B48A7212ACC0700B02B3D /* CommonTextfield.m */; };
 		7382C8601FDE2B0300952250 /* WhiteRaccoon.m in Sources */ = {isa = PBXBuildFile; fileRef = 7382C85E1FDE2B0300952250 /* WhiteRaccoon.m */; };
+		73840E9A212C0A8700904454 /* EnterPassAccessSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73840E98212C0A8700904454 /* EnterPassAccessSettingController.m */; };
+		73840E9B212C0A8700904454 /* EnterPassAccessSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73840E99212C0A8700904454 /* EnterPassAccessSettingController.xib */; };
+		73840E9F212C18AF00904454 /* SettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 73840E9E212C18AF00904454 /* SettingModel.m */; };
 		7384AD271F9990B100E996AD /* ProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7384AD261F9990B100E996AD /* ProductModel.m */; };
 		7384AD2B1F99917D00E996AD /* CategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7384AD2A1F99917D00E996AD /* CategoryModel.m */; };
 		7384AD2F1F99986D00E996AD /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7384AD2E1F99986D00E996AD /* ShareManager.m */; };
@@ -274,6 +277,11 @@
 		737B48A7212ACC0700B02B3D /* CommonTextfield.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonTextfield.m; sourceTree = "<group>"; };
 		7382C85E1FDE2B0300952250 /* WhiteRaccoon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteRaccoon.m; sourceTree = "<group>"; };
 		7382C85F1FDE2B0300952250 /* WhiteRaccoon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteRaccoon.h; sourceTree = "<group>"; };
+		73840E97212C0A8700904454 /* EnterPassAccessSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterPassAccessSettingController.h; sourceTree = "<group>"; };
+		73840E98212C0A8700904454 /* EnterPassAccessSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnterPassAccessSettingController.m; sourceTree = "<group>"; };
+		73840E99212C0A8700904454 /* EnterPassAccessSettingController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnterPassAccessSettingController.xib; sourceTree = "<group>"; };
+		73840E9D212C18AF00904454 /* SettingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingModel.h; sourceTree = "<group>"; };
+		73840E9E212C18AF00904454 /* SettingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingModel.m; sourceTree = "<group>"; };
 		7384AD251F9990B100E996AD /* ProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductModel.h; sourceTree = "<group>"; };
 		7384AD261F9990B100E996AD /* ProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductModel.m; sourceTree = "<group>"; };
 		7384AD291F99917D00E996AD /* CategoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryModel.h; sourceTree = "<group>"; };
@@ -388,6 +396,7 @@
 		730FE0CE1F95A1FE0045A234 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				73840E9C212C189700904454 /* SettingModel */,
 				7384AD281F99917000E996AD /* CategoryModel */,
 				7384AD241F998ED300E996AD /* ProductModel */,
 			);
@@ -397,6 +406,7 @@
 		730FE0CF1F95A2120045A234 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				73840E96212C0A3800904454 /* EnterPassAccessSetting */,
 				737B4895212AA00300B02B3D /* SettingsController */,
 				73A6606D1FE2649F00FB80B8 /* SplashController */,
 				7357EEB31F975A60001EB56B /* BillCompleteController */,
@@ -822,6 +832,25 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		73840E96212C0A3800904454 /* EnterPassAccessSetting */ = {
+			isa = PBXGroup;
+			children = (
+				73840E97212C0A8700904454 /* EnterPassAccessSettingController.h */,
+				73840E98212C0A8700904454 /* EnterPassAccessSettingController.m */,
+				73840E99212C0A8700904454 /* EnterPassAccessSettingController.xib */,
+			);
+			path = EnterPassAccessSetting;
+			sourceTree = "<group>";
+		};
+		73840E9C212C189700904454 /* SettingModel */ = {
+			isa = PBXGroup;
+			children = (
+				73840E9D212C18AF00904454 /* SettingModel.h */,
+				73840E9E212C18AF00904454 /* SettingModel.m */,
+			);
+			path = SettingModel;
+			sourceTree = "<group>";
+		};
 		7384AD241F998ED300E996AD /* ProductModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1008,6 +1037,7 @@
 				7357EEAC1F9753DA001EB56B /* ExistingOrderHeader.xib in Resources */,
 				736574691FA04E8E008E59CA /* Bread1.jpg in Resources */,
 				7336754B1FE25F2200F0AFF8 /* 4003.png in Resources */,
+				73840E9B212C0A8700904454 /* EnterPassAccessSettingController.xib in Resources */,
 				733675611FE25F2200F0AFF8 /* 3007.png in Resources */,
 				733675531FE25F2200F0AFF8 /* 2001.png in Resources */,
 				730FE0C41F95A1690045A234 /* Assets.xcassets in Resources */,
@@ -1118,6 +1148,7 @@
 				7357EE7E1F9713CD001EB56B /* NewOrderAddedController.m in Sources */,
 				730FE0F31F95AB950045A234 /* EnterTableController.m in Sources */,
 				739853571FBC3AF50024E87C /* CategoryView.m in Sources */,
+				73840E9A212C0A8700904454 /* EnterPassAccessSettingController.m in Sources */,
 				730FE11A1F96032F0045A234 /* NewOrderController.m in Sources */,
 				73A660711FE264B000FB80B8 /* SplashController.m in Sources */,
 				730FE0E51F95A6B40045A234 /* UIColor+HexString.m in Sources */,
@@ -1142,6 +1173,7 @@
 				7357EEA81F974EEB001EB56B /* ExistingOrderCell.m in Sources */,
 				730FE0B61F95A1690045A234 /* main.m in Sources */,
 				7357EE841F9714D1001EB56B /* OrderSummaryController.m in Sources */,
+				73840E9F212C18AF00904454 /* SettingModel.m in Sources */,
 				730FE10D1F95EBAF0045A234 /* CategoryCell.m in Sources */,
 				730FE1041F95E8960045A234 /* CategoriesController.m in Sources */,
 				737B48A5212AB18A00B02B3D /* SwitchCustomView.m in Sources */,

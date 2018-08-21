@@ -62,7 +62,7 @@
 
 - (IBAction)settingAction:(id)sender {
     SettingsController *settingVc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
-    [self presentViewController:settingVc animated:NO completion:nil];
+    [self presentViewController:settingVc animated:YES completion:nil];
 }
 
 #pragma mark - Custom method
