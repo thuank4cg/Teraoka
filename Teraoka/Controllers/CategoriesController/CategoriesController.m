@@ -93,20 +93,38 @@
 }
 
 - (IBAction)viewBill:(id)sender {
-    UIAlertController * alert = [UIAlertController
-                                 alertControllerWithTitle:nil
-                                 message:@"\"View Bill\" function is not applicable for Demo"
-                                 preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertController * alert = [UIAlertController
+//                                 alertControllerWithTitle:nil
+//                                 message:@"\"View Bill\" function is not applicable for Demo"
+//                                 preferredStyle:UIAlertControllerStyleAlert];
+//
+//    UIAlertAction* yesButton = [UIAlertAction
+//                                actionWithTitle:@"Ok"
+//                                style:UIAlertActionStyleDefault
+//                                handler:^(UIAlertAction * action) {
+//                                    //Handle your yes please button action here
+//                                }];
+//
+//    [alert addAction:yesButton];
+//    [self presentViewController:alert animated:YES completion:nil];
+//    if ([ShareManager shared].existingOrderArr.count == 0) return;
     
-    UIAlertAction* yesButton = [UIAlertAction
-                                actionWithTitle:@"Ok"
-                                style:UIAlertActionStyleDefault
-                                handler:^(UIAlertAction * action) {
-                                    //Handle your yes please button action here
-                                }];
+    [self.homeArrowIcon setHidden:YES];
+    [self.orderArrowIcon setHidden:YES];
+    [self.waiterArrowIcon setHidden:YES];
+    [self.billArrowIcon setHidden:NO];
     
-    [alert addAction:yesButton];
-    [self presentViewController:alert animated:YES completion:nil];
+    ViewExistingOrderController *vc = [[ViewExistingOrderController alloc] initWithNibName:@"ViewExistingOrderController" bundle:nil];
+    vc.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    [self addChildViewController:vc];
+    [self.view addSubview:vc.view];
+    [vc didMoveToParentViewController:self];
+}
+
+- (IBAction)restartOrderAction:(id)sender {
+    [ShareManager shared].cartArr = nil;
+    [ShareManager shared].existingOrderArr = nil;
+    [self setupQtyBoxView];
 }
 
 - (void)setupView {
@@ -345,7 +363,8 @@
                     product.originalPrice = [NSString stringWithFormat:@"%@", [productObj valueForKey:@"price"]];
                     product.qty = @"1";
                     product.options = [[NSMutableArray alloc] init];
-                    NSArray *options = @[@"Add option 1", @"Add option 2", @"Add option 3"];
+                    
+                    NSArray *options = @[@"Option 1", @"Option 2", @"Option 3"];
                     for (NSString *tittle in options) {
                         ProductOption *option = [[ProductOption alloc] init];
                         option.tittle = tittle;
@@ -353,18 +372,18 @@
                         option.options = [NSMutableArray new];
                         
                         ProductOptionValue *optionValue = [[ProductOptionValue alloc] init];
-                        optionValue.isCheck = NO;
-                        optionValue.tittle = @"Option A";
+                        optionValue.isCheck = YES;
+                        optionValue.tittle = @"Choice A";
                         [option.options addObject:optionValue];
                         
                         ProductOptionValue *optionValue2 = [[ProductOptionValue alloc] init];
                         optionValue2.isCheck = NO;
-                        optionValue2.tittle = @"Option B";
+                        optionValue2.tittle = @"Choice B";
                         [option.options addObject:optionValue2];
                         
                         ProductOptionValue *optionValue3 = [[ProductOptionValue alloc] init];
                         optionValue3.isCheck = NO;
-                        optionValue3.tittle = @"Option C";
+                        optionValue3.tittle = @"Choice C";
                         [option.options addObject:optionValue3];
                         
                         [product.options addObject:option];

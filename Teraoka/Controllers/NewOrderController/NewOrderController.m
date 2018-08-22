@@ -29,7 +29,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *productName;
 @property (weak, nonatomic) IBOutlet UIView *increaseBox;
 @property (weak, nonatomic) IBOutlet UIView *decreaseBox;
-@property (weak, nonatomic) IBOutlet UIView *containerFootView;
+@property (weak, nonatomic) IBOutlet UIView *containerHeaderView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @end
@@ -53,9 +53,6 @@
 }
 
 - (void)setupView {
-    self.view.backgroundColor = [UIColor clearColor];
-    self.view.opaque = false;
-    
     self.tblView.delegate = self;
     self.tblView.dataSource = self;
     [self.tblView setSeparatorColor:[UIColor clearColor]];
@@ -75,17 +72,32 @@
     self.decreaseBox.layer.cornerRadius = CGRectGetHeight(self.decreaseBox.frame)/2;
     
     // Shadow and Radius
-    self.containerFootView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.containerFootView.layer.shadowOffset = CGSizeMake(0.0f, 4.0f);
-    self.containerFootView.layer.shadowOpacity = 0.2;
-    self.containerFootView.layer.shadowRadius = 3.0;
-    self.containerFootView.layer.masksToBounds = NO;
+    self.containerHeaderView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.containerHeaderView.layer.shadowOffset = CGSizeMake(0.0f, 4.0f);
+    self.containerHeaderView.layer.shadowOpacity = 0.2;
+    self.containerHeaderView.layer.shadowRadius = 3.0;
+    self.containerHeaderView.layer.masksToBounds = NO;
     
     self.containerView.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.containerView.layer.shadowOffset = CGSizeMake(8.0f, 8.0f);
     self.containerView.layer.shadowOpacity = 0.2;
     self.containerView.layer.shadowRadius = 3.0;
     self.containerView.layer.masksToBounds = NO;
+    
+    CGFloat heightTblView = 420;
+    
+    if (self.product.options.count == 0) {
+        heightTblView = 100;
+    } else if (self.product.options.count < 3) {
+        heightTblView = self.product.options.count * 140;
+    }
+    
+    for (NSLayoutConstraint *constraint in self.tblView.constraints) {
+        if (constraint.firstAttribute == NSLayoutAttributeHeight) {
+            constraint.constant = heightTblView;
+            break;
+        }
+    }
 }
 
 - (IBAction)qtyDecrease:(id)sender {
@@ -94,17 +106,20 @@
     self.tfQty.text = [NSString stringWithFormat:@"%d", --qty];
     self.product.qty = self.tfQty.text;
 }
+
 - (IBAction)qtyIncrease:(id)sender {
     int qty = [self.tfQty.text intValue];
     self.tfQty.text = [NSString stringWithFormat:@"%d", ++qty];
     self.product.qty = self.tfQty.text;
 }
+
 - (IBAction)backAction:(id)sender {
 //    IncompleteItemController *vc = [[IncompleteItemController alloc] initWithNibName:@"IncompleteItemController" bundle:nil];
 //    [self.navigationController pushViewController:vc animated:NO];
     [self.delegate backDelegate];
     [self.view removeFromSuperview];
 }
+
 - (IBAction)sendAction:(id)sender {
     if (![ShareManager shared].cartArr) [ShareManager shared].cartArr = [NSMutableArray new];
     
@@ -148,8 +163,6 @@
         [[ShareManager shared].cartArr addObject:self.product];
     }
     
-    
-    
 //    OrderSummaryController *vc = [[OrderSummaryController alloc] initWithNibName:@"OrderSummaryController" bundle:nil];
 //    [self.navigationController pushViewController:vc animated:YES];
     [self.delegate backDelegate];
@@ -159,26 +172,27 @@
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return self.product.options.count;
-    return 0;
+    return self.product.options.count;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     OptionTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionTableCellID" forIndexPath:indexPath];
     ProductOption *option = self.product.options[indexPath.section];
     [cell setDataForCell:option];
 //    cell.backgroundColor = [UIColor yellowColor];
     return cell;
-
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return (CGRectGetHeight(self.tblView.frame)/3)/2;
+    return 70;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tblView.frame), (CGRectGetHeight(self.tblView.frame)/3)/2)];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tblView.frame), 70)];
 //    header.backgroundColor = [UIColor redColor];
     ProductOption *option = self.product.options[section];
     UILabel *lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(25, 10, CGRectGetWidth(header.frame), CGRectGetHeight(header.frame) - 10)];
@@ -189,9 +203,11 @@
     
     return header;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return (CGRectGetHeight(self.tblView.frame)/3)/2;
+    return 70;
 }
+
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tblView.frame), 1)];
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(footer.frame), 1)];
@@ -201,6 +217,7 @@
     [footer addSubview:line];
     return  footer;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 1;
 }

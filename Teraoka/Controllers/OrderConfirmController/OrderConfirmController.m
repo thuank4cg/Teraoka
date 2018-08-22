@@ -11,6 +11,7 @@
 #import "HomeController.h"
 #import "ShareManager.h"
 #import "CategoriesController.h"
+#import "ViewExistingOrderController.h"
 
 @interface OrderConfirmController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -47,22 +48,28 @@
     }
 }
 
-- (IBAction)viewExistingOrder:(id)sender {
-    UIAlertController * alert = [UIAlertController
-                                 alertControllerWithTitle:nil
-                                 message:@"\"View Bill\" function is not applicable for Demo"
-                                 preferredStyle:UIAlertControllerStyleAlert];
+- (IBAction)viewBill:(id)sender {
+//    UIAlertController * alert = [UIAlertController
+//                                 alertControllerWithTitle:nil
+//                                 message:@"\"View Bill\" function is not applicable for Demo"
+//                                 preferredStyle:UIAlertControllerStyleAlert];
+//
+//    UIAlertAction* yesButton = [UIAlertAction
+//                                actionWithTitle:@"Ok"
+//                                style:UIAlertActionStyleDefault
+//                                handler:^(UIAlertAction * action) {
+//                                    //Handle your yes please button action here
+//
+//                                }];
+//
+//    [alert addAction:yesButton];
+//    [self presentViewController:alert animated:YES completion:nil];
     
-    UIAlertAction* yesButton = [UIAlertAction
-                                actionWithTitle:@"Ok"
-                                style:UIAlertActionStyleDefault
-                                handler:^(UIAlertAction * action) {
-                                    //Handle your yes please button action here
-                                    
-                                }];
-    
-    [alert addAction:yesButton];
-    [self presentViewController:alert animated:YES completion:nil];
+    ViewExistingOrderController *vc = [[ViewExistingOrderController alloc] initWithNibName:@"ViewExistingOrderController" bundle:nil];
+    vc.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    [self addChildViewController:vc];
+    [self.view addSubview:vc.view];
+    [vc didMoveToParentViewController:self];
 
 }
 

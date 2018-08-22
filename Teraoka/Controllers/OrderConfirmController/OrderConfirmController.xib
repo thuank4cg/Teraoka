@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -34,63 +35,79 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KMZ-f5-OQh">
-                    <rect key="frame" x="212" y="184" width="600" height="400"/>
+                    <rect key="frame" x="177" y="184" width="670" height="400"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your order has been sent!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXN-Dz-Uv2">
-                            <rect key="frame" x="140" y="163.5" width="321" height="33"/>
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="28"/>
+                            <rect key="frame" x="198" y="175" width="275.5" height="30"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="25"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_v" translatesAutoresizingMaskIntoConstraints="NO" id="AM9-fG-BSB">
-                            <rect key="frame" x="244" y="31.5" width="112" height="82"/>
+                            <rect key="frame" x="285" y="60" width="100" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="E7l-D1-oR8"/>
+                                <constraint firstAttribute="width" constant="100" id="QhO-Ad-ZrQ"/>
+                            </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receipt" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDg-b7-vuq">
-                            <rect key="frame" x="140" y="201.5" width="96" height="33"/>
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="28"/>
+                            <rect key="frame" x="198" y="210" width="82" height="30"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="25"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receipt" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6A-10-Hbt">
-                            <rect key="frame" x="140" y="239.5" width="96" height="33"/>
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="28"/>
+                            <rect key="frame" x="198" y="245" width="82" height="30"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="25"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbg-UT-fNg">
-                            <rect key="frame" x="146" y="297.5" width="307" height="73"/>
+                            <rect key="frame" x="30" y="295" width="294.5" height="70"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="73" id="JOF-Up-jnK"/>
-                                <constraint firstAttribute="width" constant="307" id="jW6-rA-WcP"/>
+                                <constraint firstAttribute="height" constant="70" id="L3U-EN-Xlb"/>
+                                <constraint firstAttribute="width" secondItem="mbg-UT-fNg" secondAttribute="height" multiplier="610:145" id="u5i-AS-maX"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                            <state key="normal" backgroundImage="home_btn"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
+                            <state key="normal" title="OKAY" backgroundImage="home_gray_btn">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
                                 <action selector="backTohome:" destination="-1" eventType="touchUpInside" id="N2t-ya-AQp"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OKAY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUV-4g-Vsn">
-                            <rect key="frame" x="270" y="321" width="59" height="26"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sc6-wz-xG1">
+                            <rect key="frame" x="345.5" y="295" width="294.5" height="70"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Sc6-wz-xG1" secondAttribute="height" multiplier="610:145" id="CZJ-eu-ET3"/>
+                                <constraint firstAttribute="height" constant="70" id="nSY-g9-gg1"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <state key="normal" title="VIEW BILL" backgroundImage="view_bill_btn">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="backTohome:" destination="-1" eventType="touchUpInside" id="4Eu-Za-QKl"/>
+                                <action selector="viewBill:" destination="-1" eventType="touchUpInside" id="jTz-UA-wif"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="mbg-UT-fNg" firstAttribute="top" secondItem="p6A-10-Hbt" secondAttribute="bottom" constant="20" id="18U-OT-tU5"/>
                         <constraint firstItem="fDg-b7-vuq" firstAttribute="leading" secondItem="OXN-Dz-Uv2" secondAttribute="leading" id="3SZ-ic-tHp"/>
                         <constraint firstItem="p6A-10-Hbt" firstAttribute="leading" secondItem="fDg-b7-vuq" secondAttribute="leading" id="7Ah-si-zpA"/>
+                        <constraint firstAttribute="trailing" secondItem="Sc6-wz-xG1" secondAttribute="trailing" constant="30" id="KN2-eA-J4R"/>
                         <constraint firstItem="p6A-10-Hbt" firstAttribute="top" secondItem="fDg-b7-vuq" secondAttribute="bottom" constant="5" id="LMg-Fk-mcq"/>
                         <constraint firstItem="AM9-fG-BSB" firstAttribute="centerX" secondItem="KMZ-f5-OQh" secondAttribute="centerX" id="Nuw-s7-ch5"/>
-                        <constraint firstAttribute="width" constant="600" id="UnW-Kb-6e2"/>
+                        <constraint firstAttribute="width" constant="670" id="UnW-Kb-6e2"/>
                         <constraint firstItem="fDg-b7-vuq" firstAttribute="top" secondItem="OXN-Dz-Uv2" secondAttribute="bottom" constant="5" id="UwU-jo-Yte"/>
-                        <constraint firstItem="OXN-Dz-Uv2" firstAttribute="centerY" secondItem="KMZ-f5-OQh" secondAttribute="centerY" constant="-20" id="WeU-qm-f1Z"/>
-                        <constraint firstItem="mbg-UT-fNg" firstAttribute="top" secondItem="p6A-10-Hbt" secondAttribute="bottom" constant="25" id="X0b-t0-i2t"/>
+                        <constraint firstItem="AM9-fG-BSB" firstAttribute="top" secondItem="KMZ-f5-OQh" secondAttribute="top" constant="60" id="WaR-Gl-XlF"/>
+                        <constraint firstItem="OXN-Dz-Uv2" firstAttribute="centerY" secondItem="KMZ-f5-OQh" secondAttribute="centerY" constant="-10" id="WeU-qm-f1Z"/>
                         <constraint firstAttribute="height" constant="400" id="aFx-oP-Cx1"/>
-                        <constraint firstItem="OXN-Dz-Uv2" firstAttribute="top" secondItem="AM9-fG-BSB" secondAttribute="bottom" constant="50" id="ofH-dG-hZa"/>
-                        <constraint firstItem="EUV-4g-Vsn" firstAttribute="centerX" secondItem="mbg-UT-fNg" secondAttribute="centerX" id="sOg-AR-hKX"/>
-                        <constraint firstItem="EUV-4g-Vsn" firstAttribute="centerY" secondItem="mbg-UT-fNg" secondAttribute="centerY" id="sSb-Zw-D77"/>
+                        <constraint firstItem="mbg-UT-fNg" firstAttribute="leading" secondItem="KMZ-f5-OQh" secondAttribute="leading" constant="30" id="yTe-8q-pQE"/>
                         <constraint firstItem="OXN-Dz-Uv2" firstAttribute="centerX" secondItem="KMZ-f5-OQh" secondAttribute="centerX" id="ypC-f5-Bcc"/>
+                        <constraint firstItem="Sc6-wz-xG1" firstAttribute="top" secondItem="mbg-UT-fNg" secondAttribute="top" id="z60-NH-tRU"/>
                     </constraints>
                 </view>
             </subviews>
@@ -99,7 +116,6 @@
                 <constraint firstAttribute="trailing" secondItem="5Be-lw-SgZ" secondAttribute="trailing" id="3J1-0g-1PH"/>
                 <constraint firstItem="5Be-lw-SgZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6GB-a8-NAx"/>
                 <constraint firstItem="KMZ-f5-OQh" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="RdF-iB-yzS"/>
-                <constraint firstItem="mbg-UT-fNg" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Wsd-Ta-DpL"/>
                 <constraint firstItem="KMZ-f5-OQh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="fre-ag-IaQ"/>
                 <constraint firstAttribute="bottom" secondItem="5Be-lw-SgZ" secondAttribute="bottom" id="lPf-y7-43z"/>
                 <constraint firstItem="5Be-lw-SgZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="yiS-lX-4Aj"/>
@@ -108,7 +124,8 @@
     </objects>
     <resources>
         <image name="bg_order_confirm" width="1024" height="768"/>
-        <image name="home_btn" width="305" height="72"/>
+        <image name="home_gray_btn" width="610" height="145"/>
         <image name="ic_v" width="112" height="82"/>
+        <image name="view_bill_btn" width="610" height="145"/>
     </resources>
 </document>

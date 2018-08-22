@@ -36,21 +36,21 @@
                     <rect key="frame" x="673" y="512" width="20" height="20"/>
                 </activityIndicatorView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajK-YP-84g">
-                    <rect key="frame" x="532.5" y="408" width="302" height="228.5"/>
+                    <rect key="frame" x="507.5" y="398" width="352" height="248.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DELIOUS SELF ORDER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jA-m8-6sg">
-                            <rect key="frame" x="-12.5" y="0.0" width="327" height="38.5"/>
+                            <rect key="frame" x="12.5" y="0.0" width="327" height="38.5"/>
                             <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="32"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PF0-OK-UUy">
-                            <rect key="frame" x="0.0" y="88.5" width="302" height="60"/>
+                            <rect key="frame" x="0.0" y="88.5" width="352" height="70"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="60" id="F9c-fb-gWR"/>
+                                <constraint firstAttribute="height" constant="70" id="F9c-fb-gWR"/>
                                 <constraint firstAttribute="width" secondItem="PF0-OK-UUy" secondAttribute="height" multiplier="988:196" id="bqt-V7-ecu"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="20"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
                             <inset key="titleEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="START ORDER" backgroundImage="start_order_btn">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,8 +60,8 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jg4-uo-yzv">
-                            <rect key="frame" x="0.0" y="168.5" width="302" height="60"/>
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="20"/>
+                            <rect key="frame" x="0.0" y="178.5" width="352" height="70"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
                             <inset key="titleEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="SETTINGS" backgroundImage="goto_setting_btn">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

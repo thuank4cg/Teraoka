@@ -89,47 +89,49 @@
     for (ProductModel *product in products) {
         if ([product.qty intValue] == 0) [products removeObject:product];
     }
-//    if ([ShareManager shared].existingOrderArr.count == 0) {
-//        [ShareManager shared].existingOrderArr = products;
-//    }else {
-//        for (ProductModel *product in products) {
-//            BOOL isAdd = YES;
-//            for (ProductModel *existingProduct in [ShareManager shared].existingOrderArr) {
-//                if ([product.ids isEqualToString:existingProduct.ids]) {
-//                    isAdd = NO;
-//                    NSString *optionStr1 = @"";
-//                    for (ProductOption *option in product.options) {
-//                        for (ProductOptionValue *value in option.options) {
-//                            if (value.isCheck) {
-//                                optionStr1 = [optionStr1 stringByAppendingString:value.tittle];
-//                                optionStr1 = [optionStr1 stringByAppendingString:@"\n"];
-//                            }
-//                        }
-//                    }
-//
-//                    NSString *optionStr2 = @"";
-//                    for (ProductOption *option in existingProduct.options) {
-//                        for (ProductOptionValue *value in option.options) {
-//                            if (value.isCheck) {
-//                                optionStr2 = [optionStr2 stringByAppendingString:value.tittle];
-//                                optionStr2 = [optionStr2 stringByAppendingString:@"\n"];
-//                            }
-//                        }
-//                    }
-//
-//                    if ([optionStr1 isEqualToString:optionStr2]) {
-//                        int qty = [product.qty intValue];
-//                        qty += [existingProduct.qty intValue];
-//                        existingProduct.qty = [NSString stringWithFormat:@"%d", qty];
-//                    }else {
-//                        [[ShareManager shared].existingOrderArr addObject:product];
-//                    }
-//                    break;
-//                }
-//            }
-//            if (isAdd) [[ShareManager shared].existingOrderArr addObject:product];
-//        }
-//    }
+    
+    if ([ShareManager shared].existingOrderArr.count == 0) {
+        [ShareManager shared].existingOrderArr = products;
+    } else {
+        for (ProductModel *product in products) {
+            BOOL isAdd = YES;
+            for (ProductModel *existingProduct in [ShareManager shared].existingOrderArr) {
+                if ([product.ids isEqualToString:existingProduct.ids]) {
+                    isAdd = NO;
+                    NSString *optionStr1 = @"";
+                    for (ProductOption *option in product.options) {
+                        for (ProductOptionValue *value in option.options) {
+                            if (value.isCheck) {
+                                optionStr1 = [optionStr1 stringByAppendingString:value.tittle];
+                                optionStr1 = [optionStr1 stringByAppendingString:@"\n"];
+                            }
+                        }
+                    }
+
+                    NSString *optionStr2 = @"";
+                    for (ProductOption *option in existingProduct.options) {
+                        for (ProductOptionValue *value in option.options) {
+                            if (value.isCheck) {
+                                optionStr2 = [optionStr2 stringByAppendingString:value.tittle];
+                                optionStr2 = [optionStr2 stringByAppendingString:@"\n"];
+                            }
+                        }
+                    }
+
+                    if ([optionStr1 isEqualToString:optionStr2]) {
+                        int qty = [product.qty intValue];
+                        qty += [existingProduct.qty intValue];
+                        existingProduct.qty = [NSString stringWithFormat:@"%d", qty];
+                    }else {
+                        [[ShareManager shared].existingOrderArr addObject:product];
+                    }
+                    break;
+                }
+            }
+            if (isAdd) [[ShareManager shared].existingOrderArr addObject:product];
+        }
+    }
+    
     [self sendTransaction];
 }
 

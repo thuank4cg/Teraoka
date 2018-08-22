@@ -358,7 +358,7 @@
                                         <constraint firstAttribute="height" constant="60" id="YZZ-As-ett"/>
                                         <constraint firstAttribute="width" secondItem="8Nw-BH-8np" secondAttribute="height" multiplier="830:145" id="hkN-19-TaA"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
                                     <state key="normal" title="SAVE CHANGES" backgroundImage="save_btn">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
