@@ -24,17 +24,28 @@
 #import "CategoryView.h"
 #import "Util.h"
 #import "APPConstants.h"
+#import "ShareManager.h"
+#import "EnterPassAccessSettingController.h"
+#import <View+MASAdditions.h>
+#import "SettingsController.h"
 
 #define KEY_PADDING_BOTTOM_CELL 65
 #define CELL_SPACE 15
 
-@interface CategoriesController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface CategoriesController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, EnterPassAccessDelegate>
+
 @property (weak, nonatomic) IBOutlet UICollectionView *productsColView;
 @property (weak, nonatomic) IBOutlet UIView *containerCategoryView;
 @property (weak, nonatomic) IBOutlet UIView *menuBoxView;
 @property (weak, nonatomic) IBOutlet UIView *restartOrderView;
 @property (weak, nonatomic) IBOutlet UIView *qtyBoxView;
 @property (weak, nonatomic) IBOutlet UILabel *lbQty;
+@property (weak, nonatomic) IBOutlet UIImageView *homeArrowIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *orderArrowIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *waiterArrowIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *billArrowIcon;
+@property (weak, nonatomic) IBOutlet UIView *waiterMenuView;
+@property (weak, nonatomic) IBOutlet UIButton *settingBtn;
 
 @end
 
@@ -43,21 +54,107 @@
     NSMutableArray *categories;
     int categoryIndex;
     NewOrderController *newOrderVC;
+    EnterPassAccessSettingController *enterPassSettingVC;
     BOOL isBackDelegate;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    self.qtyBoxView.layer.cornerRadius = CGRectGetWidth(self.qtyBoxView.frame)/2;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self setupView];
     [self setupQtyBoxView];
     isBackDelegate = NO;
     [self setData];
+}
+
+- (IBAction)homeAction:(id)sender {
+    [self.homeArrowIcon setHidden:NO];
+    [self.orderArrowIcon setHidden:YES];
+    [self.waiterArrowIcon setHidden:YES];
+    [self.billArrowIcon setHidden:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)orderCart:(id)sender {
+    //    OrderSummaryController *vc = [[OrderSummaryController alloc] initWithNibName:@"OrderSummaryController" bundle:nil];
+    //    [self.navigationController pushViewController:vc animated:YES];
+    [self showOrderCart];
+}
+
+- (IBAction)callWaiter:(id)sender {
+    [self.homeArrowIcon setHidden:YES];
+    [self.orderArrowIcon setHidden:YES];
+    [self.waiterArrowIcon setHidden:NO];
+    [self.billArrowIcon setHidden:YES];
+}
+
+- (IBAction)viewBill:(id)sender {
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:nil
+                                 message:@"\"View Bill\" function is not applicable for Demo"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"Ok"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    //Handle your yes please button action here
+                                }];
+    
+    [alert addAction:yesButton];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)setupView {
+    self.qtyBoxView.layer.cornerRadius = CGRectGetWidth(self.qtyBoxView.frame)/2;
+    
+    // Shadow and Radius
+    self.containerCategoryView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.containerCategoryView.layer.shadowOffset = CGSizeMake(0.0f, 4.0f);
+    self.containerCategoryView.layer.shadowOpacity = 0.2;
+    self.containerCategoryView.layer.shadowRadius = 3.0;
+    self.containerCategoryView.layer.masksToBounds = NO;
+    
+    self.menuBoxView.clipsToBounds = YES;
+    self.menuBoxView.layer.cornerRadius = 10;
+    
+    self.menuBoxView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.menuBoxView.layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
+    self.menuBoxView.layer.shadowOpacity = 0.2;
+    self.menuBoxView.layer.shadowRadius = 3.0;
+    self.menuBoxView.layer.masksToBounds = NO;
+    
+    self.restartOrderView.clipsToBounds = YES;
+    self.restartOrderView.layer.cornerRadius = 5;
+    
+    self.restartOrderView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.restartOrderView.layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
+    self.restartOrderView.layer.shadowOpacity = 0.2;
+    self.restartOrderView.layer.shadowRadius = 3.0;
+    self.restartOrderView.layer.masksToBounds = NO;
+    
+    CGFloat heightWaiterMenu = 110;
+    if ([ShareManager shared].setting.abilityRequestForBill) {
+        [self.waiterMenuView setHidden:NO];
+    } else {
+        [self.waiterMenuView setHidden:YES];
+        heightWaiterMenu = 0;
+    }
+    
+    for (NSLayoutConstraint *constraint in self.waiterMenuView.constraints) {
+        if (constraint.firstAttribute == NSLayoutAttributeHeight) {
+            constraint.constant = heightWaiterMenu;
+            break;
+        }
+    }
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gotoSettingAction:)];
+    [longPress setMinimumPressDuration:3];
+    [self.settingBtn addGestureRecognizer:longPress];
 }
 
 - (void)setupQtyBoxView {
@@ -74,32 +171,7 @@
     }
 }
 
-- (void)setupView {
-    // Shadow and Radius
-    self.containerCategoryView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.containerCategoryView.layer.shadowOffset = CGSizeMake(0.0f, 4.0f);
-    self.containerCategoryView.layer.shadowOpacity = 0.2;
-    self.containerCategoryView.layer.shadowRadius = 3.0;
-    self.containerCategoryView.layer.masksToBounds = NO;
-    
-    self.menuBoxView.clipsToBounds = YES;
-    self.menuBoxView.layer.cornerRadius = 15;
-    
-    self.menuBoxView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.menuBoxView.layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
-    self.menuBoxView.layer.shadowOpacity = 0.2;
-    self.menuBoxView.layer.shadowRadius = 3.0;
-    self.menuBoxView.layer.masksToBounds = NO;
-    
-    self.restartOrderView.clipsToBounds = YES;
-    self.restartOrderView.layer.cornerRadius = 8;
-    
-    self.restartOrderView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.restartOrderView.layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
-    self.restartOrderView.layer.shadowOpacity = 0.2;
-    self.restartOrderView.layer.shadowRadius = 3.0;
-    self.restartOrderView.layer.masksToBounds = NO;
-    
+- (void)setupCategoryView {
     CategoryView *cateView = [[[NSBundle mainBundle] loadNibNamed:@"CategoryView" owner:self options:nil] objectAtIndex:0];
     cateView.frame = CGRectMake(0, 0, CGRectGetWidth(self.containerCategoryView.frame), CGRectGetHeight(self.containerCategoryView.frame));
     cateView.categoryIndex = categoryIndex;
@@ -119,36 +191,20 @@
     [self.productsColView reloadData];
 }
 
-- (IBAction)homeAction:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)orderCart:(id)sender {
-//    OrderSummaryController *vc = [[OrderSummaryController alloc] initWithNibName:@"OrderSummaryController" bundle:nil];
-//    [self.navigationController pushViewController:vc animated:YES];
-    [self showOrderCart];
-}
-
-- (IBAction)callWaiter:(id)sender {
+- (void)gotoSettingAction:(id)sender {
+    if (enterPassSettingVC) return;
     
-}
-
-- (IBAction)viewBill:(id)sender {
-    UIAlertController * alert = [UIAlertController
-                                 alertControllerWithTitle:nil
-                                 message:@"\"View Bill\" function is not applicable for Demo"
-                                 preferredStyle:UIAlertControllerStyleAlert];
+    enterPassSettingVC = [[EnterPassAccessSettingController alloc] initWithNibName:@"EnterPassAccessSettingController" bundle:nil];
+    enterPassSettingVC.delegate = self;
+    [self addChildViewController:enterPassSettingVC];
+    [self.view addSubview:enterPassSettingVC.view];
+    [enterPassSettingVC didMoveToParentViewController:self];
     
-    UIAlertAction* yesButton = [UIAlertAction
-                                actionWithTitle:@"Ok"
-                                style:UIAlertActionStyleDefault
-                                handler:^(UIAlertAction * action) {
-                                    //Handle your yes please button action here
-                                }];
-    
-    [alert addAction:yesButton];
-    [self presentViewController:alert animated:YES completion:nil];
-
+    [enterPassSettingVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.equalTo(enterPassSettingVC.view.superview);
+        make.width.equalTo(enterPassSettingVC.view.superview.mas_width);
+        make.height.equalTo(enterPassSettingVC.view.superview.mas_height);
+    }];
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
@@ -206,10 +262,17 @@
 - (void)showOrderCart {
     [self setupQtyBoxView];
     if ([ShareManager shared].cartArr.count == 0) return;
+    
+    [self.homeArrowIcon setHidden:YES];
+    [self.orderArrowIcon setHidden:NO];
+    [self.waiterArrowIcon setHidden:YES];
+    [self.billArrowIcon setHidden:YES];
+    
     if (newOrderVC) {
         [newOrderVC.view removeFromSuperview];
         newOrderVC = nil;
     }
+    
     OrderSummaryController *vc = [[OrderSummaryController alloc] initWithNibName:@"OrderSummaryController" bundle:nil];
     vc.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     vc.delegate = self;
@@ -315,11 +378,17 @@
         [categories addObject:cateModel];
         
         if (i == categoriesArr.count) {
-            [self setupView];
+            [self setupCategoryView];
         }
     }
-    
-//    [self setupView];
+}
+
+//MARK: EnterPassAccessDelegate
+
+- (void)didEnterPassSuccess {
+    enterPassSettingVC = nil;
+    SettingsController *vc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 @end

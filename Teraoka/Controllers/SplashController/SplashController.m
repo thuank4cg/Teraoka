@@ -18,9 +18,11 @@
 #import "Util.h"
 #import <Crashlytics/Answers.h>
 #import "SettingsController.h"
+#import "EnterPassAccessSettingController.h"
+#import <View+MASAdditions.h>
+#import "ShareManager.h"
 
-
-@interface SplashController () <WRRequestDelegate, NSStreamDelegate>
+@interface SplashController () <WRRequestDelegate, NSStreamDelegate, EnterPassAccessDelegate>
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet TextfieldCustom *tfValue;
@@ -45,11 +47,18 @@
     [self removeDataForEntity:@"Product"];
     
     isDownloadFile = NO;
-    [ShareManager shared].hostName = HOST_NAME;
+    
+    NSString *json = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_SAVED_SETTING];
+    SettingModel *setting = [[SettingModel alloc] initWithString:json error:nil];
+    
+    if (setting.serverIP.length == 0) {
+        setting.serverIP = HOST_NAME;
+    }
+    
+    [ShareManager shared].setting = setting;
 }
 
 - (IBAction)proceed:(id)sender {
-    if (_tfValue.text.length > 0) [ShareManager shared].hostName = _tfValue.text;
     [_btnProceed setUserInteractionEnabled:NO];
     [_indicatorView setHidden:NO];
     [_indicatorView startAnimating];
@@ -61,8 +70,17 @@
 }
 
 - (IBAction)settingAction:(id)sender {
-    SettingsController *settingVc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
-    [self presentViewController:settingVc animated:YES completion:nil];
+    EnterPassAccessSettingController *settingVc = [[EnterPassAccessSettingController alloc] initWithNibName:@"EnterPassAccessSettingController" bundle:nil];
+    settingVc.delegate = self;
+    [self addChildViewController:settingVc];
+    [self.view addSubview:settingVc.view];
+    [settingVc didMoveToParentViewController:self];
+    
+    [settingVc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.equalTo(settingVc.view.superview);
+        make.width.equalTo(settingVc.view.superview.mas_width);
+        make.height.equalTo(settingVc.view.superview.mas_height);
+    }];
 }
 
 #pragma mark - Custom method
@@ -72,7 +90,7 @@
     
     listDir.path = @"../opt/datamanager/thot";
     
-    listDir.hostname = [ShareManager shared].hostName;
+    listDir.hostname = [ShareManager shared].setting.serverIP;
     listDir.username = USERNAME;
     listDir.password = PASSWORD;
     
@@ -85,7 +103,7 @@
     
     downloadFile.path = [NSString stringWithFormat:@"../opt/datamanager/thot/%@", fileName];
     
-    downloadFile.hostname = [ShareManager shared].hostName;
+    downloadFile.hostname = [ShareManager shared].setting.serverIP;
     downloadFile.username = USERNAME;
     downloadFile.password = PASSWORD;
     
@@ -323,6 +341,13 @@
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:rootVC];
     [navc setNavigationBarHidden:YES];
     appDelegate.window.rootViewController = navc;
+}
+
+//MARK: EnterPassAccessDelegate
+
+- (void)didEnterPassSuccess {
+    SettingsController *vc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 @end

@@ -21,6 +21,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EnterPassAccessSettingController">
             <connections>
+                <outlet property="containerView" destination="bKi-XU-yqh" id="xEL-zN-t4y"/>
+                <outlet property="tfValue" destination="WAQ-BL-QCo" id="szp-gg-8nq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,12 +31,12 @@
             <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lbk-ie-igM">
+                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lbk-ie-igM">
                     <rect key="frame" x="0.0" y="20" width="1366" height="1004"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKi-XU-yqh">
-                    <rect key="frame" x="383" y="322" width="600" height="400"/>
+                    <rect key="frame" x="383" y="262" width="600" height="400"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WAQ-BL-QCo" customClass="CommonTextfield">
                             <rect key="frame" x="50" y="170" width="500" height="60"/>
@@ -44,7 +46,7 @@
                             </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="20"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter the correct password to access the settings page." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckz-Qq-F7S">
                             <rect key="frame" x="50" y="102" width="500" height="53"/>
@@ -59,20 +61,39 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6d-4G-tQ3">
-                            <rect key="frame" x="174" y="280" width="252" height="60"/>
+                            <rect key="frame" x="305" y="280" width="265" height="60"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="60" id="9vs-JO-mMu"/>
-                                <constraint firstAttribute="width" secondItem="q6d-4G-tQ3" secondAttribute="height" multiplier="610:145" id="Y3h-bt-nUR"/>
+                                <constraint firstAttribute="width" secondItem="q6d-4G-tQ3" secondAttribute="height" multiplier="640:145" id="642-5c-CiQ"/>
+                                <constraint firstAttribute="height" constant="60" id="ABV-V9-bUC"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="20"/>
                             <state key="normal" title="SUBMIT" backgroundImage="submit_btn">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="submitAction:" destination="-1" eventType="touchUpInside" id="b0P-bU-gxi"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWn-Xn-lub">
+                            <rect key="frame" x="30" y="280" width="265" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="9qk-Ie-Zz0"/>
+                                <constraint firstAttribute="width" secondItem="KWn-Xn-lub" secondAttribute="height" multiplier="640:145" id="U5b-eu-7Mg"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="20"/>
+                            <state key="normal" title="BACK" backgroundImage="back_btn">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="backAction:" destination="-1" eventType="touchUpInside" id="97E-dM-MKp"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="q6d-4G-tQ3" firstAttribute="centerX" secondItem="WAQ-BL-QCo" secondAttribute="centerX" id="36U-Sd-FSG"/>
+                        <constraint firstItem="q6d-4G-tQ3" firstAttribute="top" secondItem="WAQ-BL-QCo" secondAttribute="bottom" constant="50" id="1cO-q8-ucw"/>
+                        <constraint firstItem="KWn-Xn-lub" firstAttribute="top" secondItem="WAQ-BL-QCo" secondAttribute="bottom" constant="50" id="2Ft-d7-iJ1"/>
+                        <constraint firstAttribute="trailing" secondItem="q6d-4G-tQ3" secondAttribute="trailing" constant="30" id="3Jv-k3-nhl"/>
                         <constraint firstItem="WAQ-BL-QCo" firstAttribute="centerY" secondItem="bKi-XU-yqh" secondAttribute="centerY" id="EoB-uj-hjv"/>
                         <constraint firstItem="cmE-yE-4IU" firstAttribute="centerX" secondItem="ckz-Qq-F7S" secondAttribute="centerX" id="Ilj-wT-yER"/>
                         <constraint firstItem="ckz-Qq-F7S" firstAttribute="trailing" secondItem="WAQ-BL-QCo" secondAttribute="trailing" id="Mn0-It-nd5"/>
@@ -80,16 +101,16 @@
                         <constraint firstAttribute="width" constant="600" id="TA1-4g-G06"/>
                         <constraint firstAttribute="height" constant="400" id="afs-1d-mMb"/>
                         <constraint firstItem="WAQ-BL-QCo" firstAttribute="top" secondItem="ckz-Qq-F7S" secondAttribute="bottom" constant="15" id="dmS-5M-Gcg"/>
+                        <constraint firstItem="KWn-Xn-lub" firstAttribute="leading" secondItem="bKi-XU-yqh" secondAttribute="leading" constant="30" id="fHC-Gf-ysk"/>
                         <constraint firstItem="ckz-Qq-F7S" firstAttribute="leading" secondItem="WAQ-BL-QCo" secondAttribute="leading" id="ore-c1-G9U"/>
                         <constraint firstItem="ckz-Qq-F7S" firstAttribute="top" secondItem="cmE-yE-4IU" secondAttribute="bottom" constant="20" id="pUM-Z6-X1x"/>
-                        <constraint firstItem="q6d-4G-tQ3" firstAttribute="top" secondItem="WAQ-BL-QCo" secondAttribute="bottom" constant="50" id="tKw-cp-rnF"/>
                         <constraint firstAttribute="trailing" secondItem="WAQ-BL-QCo" secondAttribute="trailing" constant="50" id="zhc-Pd-vE7"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="bKi-XU-yqh" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="7NF-ql-kEm"/>
+                <constraint firstItem="bKi-XU-yqh" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" constant="-60" id="7NF-ql-kEm"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="Lbk-ie-igM" secondAttribute="bottom" id="7iB-y0-pKi"/>
                 <constraint firstItem="Lbk-ie-igM" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="B4f-j0-6Fm"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Lbk-ie-igM" secondAttribute="trailing" id="Cch-y1-6Qw"/>
@@ -100,6 +121,7 @@
         </view>
     </objects>
     <resources>
+        <image name="back_btn" width="360" height="72"/>
         <image name="submit_btn" width="610" height="145"/>
     </resources>
 </document>

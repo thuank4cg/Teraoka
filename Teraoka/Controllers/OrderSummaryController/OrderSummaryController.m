@@ -233,7 +233,7 @@
     [_btnBack setUserInteractionEnabled:NO];
     [_btnSend setUserInteractionEnabled:NO];
     
-    NSString *host = [ShareManager shared].hostName;
+    NSString *host = [ShareManager shared].setting.serverIP;
     uint16_t port = PORT;
 
     NSError *error = nil;

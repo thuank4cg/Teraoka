@@ -8,6 +8,10 @@
 
 #import "BaseController.h"
 
-@interface EnterPassAccessSettingController : BaseController
+@protocol EnterPassAccessDelegate <NSObject>
+- (void)didEnterPassSuccess;
+@end
 
+@interface EnterPassAccessSettingController : BaseController
+@property (weak, nonatomic) id<EnterPassAccessDelegate> delegate;
 @end

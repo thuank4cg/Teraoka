@@ -15,6 +15,7 @@
 #import "SettingModel.h"
 #import <JSONModel.h>
 #import "Util.h"
+#import "ShareManager.h"
 
 @interface SettingsController ()
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfIPAddress;
@@ -27,6 +28,9 @@
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfTableNo;
 @property (weak, nonatomic) IBOutlet SwitchCustomView *requestForAssistanceView;
 @property (weak, nonatomic) IBOutlet SwitchCustomView *requestForBillView;
+@property (weak, nonatomic) IBOutlet UIStackView *requestForAssistanceContainerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topPaddingRequestForAssistanceContainerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightRequestForAssistanceContainerView;
 
 @end
 
@@ -77,11 +81,21 @@
         case Fix_ed:
             [self.fixedBtn selected];
             [self.preOrderBtn unselected];
+            
+            [self.requestForAssistanceContainerView setHidden:NO];
+            self.heightRequestForAssistanceContainerView.constant = 55;
+            self.topPaddingRequestForAssistanceContainerView.constant = 50;
+            
             break;
             
         default:
             [self.fixedBtn unselected];
             [self.preOrderBtn selected];
+            
+            [self.requestForAssistanceContainerView setHidden:YES];
+            self.heightRequestForAssistanceContainerView.constant = 0;
+            self.topPaddingRequestForAssistanceContainerView.constant = 0;
+            
             break;
     }
 }
@@ -128,6 +142,10 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [Util showAlert:@"Save changes successfully" vc:self];
+    
+    json = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_SAVED_SETTING];
+    setting = [[SettingModel alloc] initWithString:json error:nil];
+    [ShareManager shared].setting = setting;
 }
 
 - (void)setupView {
@@ -174,11 +192,21 @@
         case Fix_ed:
             [self.fixedBtn selected];
             [self.preOrderBtn unselected];
+            
+            [self.requestForAssistanceContainerView setHidden:NO];
+            self.heightRequestForAssistanceContainerView.constant = 55;
+            self.topPaddingRequestForAssistanceContainerView.constant = 50;
+            
             break;
             
         default:
             [self.fixedBtn unselected];
             [self.preOrderBtn selected];
+            
+            [self.requestForAssistanceContainerView setHidden:YES];
+            self.heightRequestForAssistanceContainerView.constant = 0;
+            self.topPaddingRequestForAssistanceContainerView.constant = 0;
+            
             break;
     }
     
