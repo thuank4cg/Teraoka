@@ -56,9 +56,9 @@
 }
 
 - (IBAction)startOrderAction:(id)sender {
-//    [self saveCategoryToDb];
-    [ProgressHUD show:nil Interaction:NO];
-    [self listDirectoryContents];
+    [self saveCategoryToDb];
+//    [ProgressHUD show:nil Interaction:NO];
+//    [self listDirectoryContents];
 }
 
 - (IBAction)settingAction:(id)sender {

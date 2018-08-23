@@ -49,21 +49,21 @@
                             <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter the correct password to access the settings page." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckz-Qq-F7S">
-                            <rect key="frame" x="50" y="128.5" width="600" height="26.5"/>
+                            <rect key="frame" x="70" y="97" width="560" height="53"/>
                             <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STAFF ACCESS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmE-yE-4IU">
-                            <rect key="frame" x="261" y="78.5" width="177" height="30"/>
+                            <rect key="frame" x="261" y="47" width="177" height="30"/>
                             <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="25"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6d-4G-tQ3">
-                            <rect key="frame" x="361" y="280" width="309" height="70"/>
+                            <rect key="frame" x="365.5" y="280" width="294.5" height="70"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="q6d-4G-tQ3" secondAttribute="height" multiplier="640:145" id="642-5c-CiQ"/>
+                                <constraint firstAttribute="width" secondItem="q6d-4G-tQ3" secondAttribute="height" multiplier="610:145" id="642-5c-CiQ"/>
                                 <constraint firstAttribute="height" constant="70" id="ABV-V9-bUC"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
@@ -75,13 +75,13 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWn-Xn-lub">
-                            <rect key="frame" x="30" y="280" width="309" height="70"/>
+                            <rect key="frame" x="40" y="280" width="294.5" height="70"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="70" id="9qk-Ie-Zz0"/>
-                                <constraint firstAttribute="width" secondItem="KWn-Xn-lub" secondAttribute="height" multiplier="640:145" id="U5b-eu-7Mg"/>
+                                <constraint firstAttribute="width" secondItem="KWn-Xn-lub" secondAttribute="height" multiplier="610:145" id="U5b-eu-7Mg"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
-                            <state key="normal" title="BACK" backgroundImage="back_btn">
+                            <state key="normal" title="BACK" backgroundImage="home_gray_btn">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -93,16 +93,16 @@
                     <constraints>
                         <constraint firstItem="q6d-4G-tQ3" firstAttribute="top" secondItem="WAQ-BL-QCo" secondAttribute="bottom" constant="50" id="1cO-q8-ucw"/>
                         <constraint firstItem="KWn-Xn-lub" firstAttribute="top" secondItem="WAQ-BL-QCo" secondAttribute="bottom" constant="50" id="2Ft-d7-iJ1"/>
-                        <constraint firstAttribute="trailing" secondItem="q6d-4G-tQ3" secondAttribute="trailing" constant="30" id="3Jv-k3-nhl"/>
+                        <constraint firstAttribute="trailing" secondItem="q6d-4G-tQ3" secondAttribute="trailing" constant="40" id="3Jv-k3-nhl"/>
                         <constraint firstItem="WAQ-BL-QCo" firstAttribute="centerY" secondItem="bKi-XU-yqh" secondAttribute="centerY" id="EoB-uj-hjv"/>
                         <constraint firstItem="cmE-yE-4IU" firstAttribute="centerX" secondItem="ckz-Qq-F7S" secondAttribute="centerX" id="Ilj-wT-yER"/>
-                        <constraint firstItem="ckz-Qq-F7S" firstAttribute="trailing" secondItem="WAQ-BL-QCo" secondAttribute="trailing" id="Mn0-It-nd5"/>
+                        <constraint firstItem="ckz-Qq-F7S" firstAttribute="trailing" secondItem="WAQ-BL-QCo" secondAttribute="trailing" constant="-20" id="Mn0-It-nd5"/>
                         <constraint firstItem="WAQ-BL-QCo" firstAttribute="leading" secondItem="bKi-XU-yqh" secondAttribute="leading" constant="50" id="PoB-Jn-Bnd"/>
                         <constraint firstAttribute="width" constant="700" id="TA1-4g-G06"/>
                         <constraint firstAttribute="height" constant="400" id="afs-1d-mMb"/>
-                        <constraint firstItem="WAQ-BL-QCo" firstAttribute="top" secondItem="ckz-Qq-F7S" secondAttribute="bottom" constant="15" id="dmS-5M-Gcg"/>
-                        <constraint firstItem="KWn-Xn-lub" firstAttribute="leading" secondItem="bKi-XU-yqh" secondAttribute="leading" constant="30" id="fHC-Gf-ysk"/>
-                        <constraint firstItem="ckz-Qq-F7S" firstAttribute="leading" secondItem="WAQ-BL-QCo" secondAttribute="leading" id="ore-c1-G9U"/>
+                        <constraint firstItem="WAQ-BL-QCo" firstAttribute="top" secondItem="ckz-Qq-F7S" secondAttribute="bottom" constant="20" id="dmS-5M-Gcg"/>
+                        <constraint firstItem="KWn-Xn-lub" firstAttribute="leading" secondItem="bKi-XU-yqh" secondAttribute="leading" constant="40" id="fHC-Gf-ysk"/>
+                        <constraint firstItem="ckz-Qq-F7S" firstAttribute="leading" secondItem="WAQ-BL-QCo" secondAttribute="leading" constant="20" id="ore-c1-G9U"/>
                         <constraint firstItem="ckz-Qq-F7S" firstAttribute="top" secondItem="cmE-yE-4IU" secondAttribute="bottom" constant="20" id="pUM-Z6-X1x"/>
                         <constraint firstAttribute="trailing" secondItem="WAQ-BL-QCo" secondAttribute="trailing" constant="50" id="zhc-Pd-vE7"/>
                     </constraints>
@@ -121,7 +121,7 @@
         </view>
     </objects>
     <resources>
-        <image name="back_btn" width="360" height="72"/>
+        <image name="home_gray_btn" width="610" height="145"/>
         <image name="submit_btn" width="610" height="145"/>
     </resources>
 </document>
