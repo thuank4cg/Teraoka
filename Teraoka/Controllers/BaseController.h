@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface BaseController : UIViewController
-- (IBAction)onBack:(id)sender;
 
+- (IBAction)onBack:(id)sender;
+- (void)sendTransaction;
+- (void)getExistingOrder;
 
 @end

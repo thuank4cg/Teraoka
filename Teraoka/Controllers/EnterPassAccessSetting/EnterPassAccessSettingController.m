@@ -9,6 +9,7 @@
 #import "EnterPassAccessSettingController.h"
 #import "CommonTextfield.h"
 #import "Util.h"
+#import "ShareManager.h"
 
 @interface EnterPassAccessSettingController ()
 
@@ -34,7 +35,12 @@
 }
 
 - (IBAction)submitAction:(id)sender {
-    if (![self.tfValue.text isEqualToString:@"123456"]) {
+    NSString *pass = @"123456";
+    if ([ShareManager shared].setting.password.length > 0) {
+        pass = [ShareManager shared].setting.password;
+    }
+    
+    if (![self.tfValue.text isEqualToString:pass]) {
         [Util showAlert:@"Password is incorrect" vc:self];
         return;
     }

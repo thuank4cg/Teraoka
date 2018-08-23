@@ -120,6 +120,10 @@
 		7384AD271F9990B100E996AD /* ProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7384AD261F9990B100E996AD /* ProductModel.m */; };
 		7384AD2B1F99917D00E996AD /* CategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7384AD2A1F99917D00E996AD /* CategoryModel.m */; };
 		7384AD2F1F99986D00E996AD /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7384AD2E1F99986D00E996AD /* ShareManager.m */; };
+		7386F1DA212E4F36001DAC8D /* OutOfStockController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7386F1D8212E4F36001DAC8D /* OutOfStockController.m */; };
+		7386F1DB212E4F36001DAC8D /* OutOfStockController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7386F1D9212E4F36001DAC8D /* OutOfStockController.xib */; };
+		7386F1E1212E52AB001DAC8D /* OutOfStockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7386F1DF212E52AB001DAC8D /* OutOfStockCell.m */; };
+		7386F1E2212E52AB001DAC8D /* OutOfStockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7386F1E0212E52AB001DAC8D /* OutOfStockCell.xib */; };
 		739853521FBC38B30024E87C /* CategoryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 739853501FBC38B30024E87C /* CategoryCollectionCell.m */; };
 		739853531FBC38B30024E87C /* CategoryCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 739853511FBC38B30024E87C /* CategoryCollectionCell.xib */; };
 		739853571FBC3AF50024E87C /* CategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 739853561FBC3AF50024E87C /* CategoryView.m */; };
@@ -288,6 +292,12 @@
 		7384AD2A1F99917D00E996AD /* CategoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryModel.m; sourceTree = "<group>"; };
 		7384AD2D1F99986D00E996AD /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareManager.h; sourceTree = "<group>"; };
 		7384AD2E1F99986D00E996AD /* ShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareManager.m; sourceTree = "<group>"; };
+		7386F1D7212E4F36001DAC8D /* OutOfStockController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutOfStockController.h; sourceTree = "<group>"; };
+		7386F1D8212E4F36001DAC8D /* OutOfStockController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutOfStockController.m; sourceTree = "<group>"; };
+		7386F1D9212E4F36001DAC8D /* OutOfStockController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutOfStockController.xib; sourceTree = "<group>"; };
+		7386F1DE212E52AB001DAC8D /* OutOfStockCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutOfStockCell.h; sourceTree = "<group>"; };
+		7386F1DF212E52AB001DAC8D /* OutOfStockCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutOfStockCell.m; sourceTree = "<group>"; };
+		7386F1E0212E52AB001DAC8D /* OutOfStockCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutOfStockCell.xib; sourceTree = "<group>"; };
 		7398534F1FBC38B30024E87C /* CategoryCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryCollectionCell.h; sourceTree = "<group>"; };
 		739853501FBC38B30024E87C /* CategoryCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryCollectionCell.m; sourceTree = "<group>"; };
 		739853511FBC38B30024E87C /* CategoryCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionCell.xib; sourceTree = "<group>"; };
@@ -406,6 +416,7 @@
 		730FE0CF1F95A2120045A234 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7386F1D6212E4EED001DAC8D /* OutOfStockController */,
 				73840E96212C0A3800904454 /* EnterPassAccessSetting */,
 				737B4895212AA00300B02B3D /* SettingsController */,
 				73A6606D1FE2649F00FB80B8 /* SplashController */,
@@ -601,6 +612,7 @@
 		730FE1071F95EB670045A234 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				7386F1DD212E5286001DAC8D /* OutOfStockCell */,
 				7357EEA11F974EB8001EB56B /* ExistingOrderCell */,
 				7357EE861F973773001EB56B /* OrderSummaryCell */,
 				7357EE671F96F84D001EB56B /* OptionCell */,
@@ -890,6 +902,26 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		7386F1D6212E4EED001DAC8D /* OutOfStockController */ = {
+			isa = PBXGroup;
+			children = (
+				7386F1D7212E4F36001DAC8D /* OutOfStockController.h */,
+				7386F1D8212E4F36001DAC8D /* OutOfStockController.m */,
+				7386F1D9212E4F36001DAC8D /* OutOfStockController.xib */,
+			);
+			path = OutOfStockController;
+			sourceTree = "<group>";
+		};
+		7386F1DD212E5286001DAC8D /* OutOfStockCell */ = {
+			isa = PBXGroup;
+			children = (
+				7386F1DE212E52AB001DAC8D /* OutOfStockCell.h */,
+				7386F1DF212E52AB001DAC8D /* OutOfStockCell.m */,
+				7386F1E0212E52AB001DAC8D /* OutOfStockCell.xib */,
+			);
+			path = OutOfStockCell;
+			sourceTree = "<group>";
+		};
 		7398534E1FBC38900024E87C /* CategoryCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1031,6 +1063,7 @@
 				736574731FA04E8E008E59CA /* Drinks2.jpg in Resources */,
 				739853531FBC38B30024E87C /* CategoryCollectionCell.xib in Resources */,
 				733675511FE25F2200F0AFF8 /* 2003.png in Resources */,
+				7386F1E2212E52AB001DAC8D /* OutOfStockCell.xib in Resources */,
 				7336754D1FE25F2200F0AFF8 /* 4006.png in Resources */,
 				733675661FE25F2200F0AFF8 /* 1001.png in Resources */,
 				733675601FE25F2200F0AFF8 /* 3003.png in Resources */,
@@ -1059,6 +1092,7 @@
 				736574711FA04E8E008E59CA /* Chocolate3.jpg in Resources */,
 				730FE0FF1F95B18B0045A234 /* HomeController.xib in Resources */,
 				7365746F1FA04E8E008E59CA /* Chocolate1.jpg in Resources */,
+				7386F1DB212E4F36001DAC8D /* OutOfStockController.xib in Resources */,
 				7336755F1FE25F2200F0AFF8 /* 1006.png in Resources */,
 				733675621FE25F2200F0AFF8 /* 1002.png in Resources */,
 				730FE0F41F95AB950045A234 /* EnterTableController.xib in Resources */,
@@ -1127,10 +1161,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Teraoka/Pods-Teraoka-resources.sh",
+				"${PODS_ROOT}/ProgressHUD/ProgressHUD/ProgressHUD/ProgressHUD.bundle",
 				"${PODS_ROOT}/SIAlertView/SIAlertView/SIAlertView.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ProgressHUD.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SIAlertView.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1145,10 +1181,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7386F1E1212E52AB001DAC8D /* OutOfStockCell.m in Sources */,
 				7357EE7E1F9713CD001EB56B /* NewOrderAddedController.m in Sources */,
 				730FE0F31F95AB950045A234 /* EnterTableController.m in Sources */,
 				739853571FBC3AF50024E87C /* CategoryView.m in Sources */,
 				73840E9A212C0A8700904454 /* EnterPassAccessSettingController.m in Sources */,
+				7386F1DA212E4F36001DAC8D /* OutOfStockController.m in Sources */,
 				730FE11A1F96032F0045A234 /* NewOrderController.m in Sources */,
 				73A660711FE264B000FB80B8 /* SplashController.m in Sources */,
 				730FE0E51F95A6B40045A234 /* UIColor+HexString.m in Sources */,

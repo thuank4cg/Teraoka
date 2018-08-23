@@ -17,6 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CategoriesController">
             <connections>
                 <outlet property="billArrowIcon" destination="rci-l3-lub" id="43D-8R-6It"/>
+                <outlet property="billMenuIcon" destination="qm7-CV-QWQ" id="gYR-Aj-nCe"/>
                 <outlet property="containerCategoryView" destination="aG9-MJ-0Ip" id="9Bi-FZ-h8c"/>
                 <outlet property="homeArrowIcon" destination="B7u-00-Nms" id="hNJ-bB-HXP"/>
                 <outlet property="lbQty" destination="AfJ-75-6di" id="1E1-JV-fXj"/>

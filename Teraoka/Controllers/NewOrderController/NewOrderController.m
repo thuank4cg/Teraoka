@@ -20,6 +20,7 @@
 #import "APPConstants.h"
 #import "UIColor+HexString.h"
 #import "ParamsHelper.h"
+#import "Util.h"
 
 @interface NewOrderController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
@@ -121,6 +122,21 @@
 }
 
 - (IBAction)sendAction:(id)sender {
+    BOOL isSelectedOption = NO;
+    for (ProductOption *option in self.product.options) {
+        for (ProductOptionValue *value in option.options) {
+            if (value.isCheck) {
+                isSelectedOption = YES;
+                break;
+            }
+        }
+    }
+    
+    if (!isSelectedOption && self.product.options.count > 0) {
+        [Util showAlert:@"Please select at least one option" vc:self];
+        return;
+    }
+    
     if (![ShareManager shared].cartArr) [ShareManager shared].cartArr = [NSMutableArray new];
     
     if ([ShareManager shared].cartArr.count > 0) {

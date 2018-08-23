@@ -11,4 +11,5 @@
 @interface CategoriesController : BaseController
 - (void)showOrderCart;
 - (void)backDelegate;
+- (void)showOutOfStockScreen;
 @end

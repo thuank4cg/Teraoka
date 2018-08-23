@@ -28,6 +28,8 @@
 #import "EnterPassAccessSettingController.h"
 #import <View+MASAdditions.h>
 #import "SettingsController.h"
+#import <ProgressHUD.h>
+#import "OutOfStockController.h"
 
 #define KEY_PADDING_BOTTOM_CELL 65
 #define CELL_SPACE 15
@@ -45,6 +47,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *waiterArrowIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *billArrowIcon;
 @property (weak, nonatomic) IBOutlet UIView *waiterMenuView;
+@property (weak, nonatomic) IBOutlet UIImageView *billMenuIcon;
 @property (weak, nonatomic) IBOutlet UIButton *settingBtn;
 
 @end
@@ -107,7 +110,8 @@
 //
 //    [alert addAction:yesButton];
 //    [self presentViewController:alert animated:YES completion:nil];
-//    if ([ShareManager shared].existingOrderArr.count == 0) return;
+    
+    if ([ShareManager shared].existingOrderArr.count == 0) return;
     
     [self.homeArrowIcon setHidden:YES];
     [self.orderArrowIcon setHidden:YES];
@@ -122,9 +126,32 @@
 }
 
 - (IBAction)restartOrderAction:(id)sender {
-    [ShareManager shared].cartArr = nil;
-    [ShareManager shared].existingOrderArr = nil;
-    [self setupQtyBoxView];
+    if ([ShareManager shared].cartArr.count == 0) return;
+    
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:nil
+                                 message:@"Do you want to restart order?"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* noButton = [UIAlertAction
+                                actionWithTitle:@"Cancel"
+                                style:UIAlertActionStyleDestructive
+                                handler:^(UIAlertAction * action) {
+                                    //Handle your yes please button action here
+                                }];
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"Ok"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    [ShareManager shared].cartArr = nil;
+                                    [ShareManager shared].existingOrderArr = nil;
+                                    [self setupQtyBoxView];
+                                }];
+    
+    [alert addAction:noButton];
+    [alert addAction:yesButton];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)setupView {
@@ -183,9 +210,15 @@
             qty += [product.qty intValue];
         }
         self.lbQty.text = [NSString stringWithFormat:@"%d", qty];
-    }else {
+    } else {
         self.qtyBoxView.hidden = YES;
         self.lbQty.text = @"0";
+    }
+    
+    if ([ShareManager shared].existingOrderArr.count == 0) {
+        self.billMenuIcon.alpha = 0.5;
+    } else {
+        self.billMenuIcon.alpha = 1.0;
     }
 }
 
@@ -286,11 +319,6 @@
     [self.waiterArrowIcon setHidden:YES];
     [self.billArrowIcon setHidden:YES];
     
-    if (newOrderVC) {
-        [newOrderVC.view removeFromSuperview];
-        newOrderVC = nil;
-    }
-    
     OrderSummaryController *vc = [[OrderSummaryController alloc] initWithNibName:@"OrderSummaryController" bundle:nil];
     vc.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     vc.delegate = self;
@@ -300,9 +328,26 @@
 }
 
 - (void)backDelegate {
+    if (newOrderVC) {
+        newOrderVC = nil;
+    }
+    
     [self setupQtyBoxView];
     isBackDelegate = YES;
     [self setData];
+}
+
+- (void)showOutOfStockScreen {
+    OutOfStockController *vc = [[OutOfStockController alloc] initWithNibName:@"OutOfStockController" bundle:nil];
+    [self addChildViewController:vc];
+    [self.view addSubview:vc.view];
+    [vc didMoveToParentViewController:self];
+    
+    [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.equalTo(vc.view.superview);
+        make.width.equalTo(vc.view.superview.mas_width);
+        make.height.equalTo(vc.view.superview.mas_height);
+    }];
 }
 
 - (NSManagedObjectContext *)managedObjectContext {
@@ -372,7 +417,7 @@
                         option.options = [NSMutableArray new];
                         
                         ProductOptionValue *optionValue = [[ProductOptionValue alloc] init];
-                        optionValue.isCheck = YES;
+                        optionValue.isCheck = NO;
                         optionValue.tittle = @"Choice A";
                         [option.options addObject:optionValue];
                         

@@ -18,7 +18,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashController">
             <connections>
-                <outlet property="indicatorView" destination="Mvx-44-z0z" id="R1X-iN-olS"/>
                 <outlet property="settingBtn" destination="jg4-uo-yzv" id="fvo-0g-7c6"/>
                 <outlet property="startOrderBtn" destination="PF0-OK-UUy" id="Byz-HP-wOO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -32,9 +31,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_home" translatesAutoresizingMaskIntoConstraints="NO" id="JTs-1L-oAt">
                     <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                 </imageView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Mvx-44-z0z">
-                    <rect key="frame" x="673" y="512" width="20" height="20"/>
-                </activityIndicatorView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajK-YP-84g">
                     <rect key="frame" x="507.5" y="398" width="352" height="248.5"/>
                     <subviews>
@@ -88,14 +84,12 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Mvx-44-z0z" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="4Aq-PR-H9d"/>
                 <constraint firstItem="JTs-1L-oAt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8jv-tU-Vhe"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="JTs-1L-oAt" secondAttribute="trailing" id="J1l-5X-euM"/>
                 <constraint firstItem="ajK-YP-84g" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="Q1g-ed-STr"/>
                 <constraint firstItem="ajK-YP-84g" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="RFf-Bu-9SB"/>
                 <constraint firstAttribute="bottom" secondItem="JTs-1L-oAt" secondAttribute="bottom" id="a68-7J-4zo"/>
                 <constraint firstItem="JTs-1L-oAt" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="gHf-2b-wOe"/>
-                <constraint firstItem="Mvx-44-z0z" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="vG1-0T-Poz"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>

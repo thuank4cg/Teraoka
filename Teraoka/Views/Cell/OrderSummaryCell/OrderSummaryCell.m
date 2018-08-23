@@ -56,10 +56,12 @@
     self.tfQty.text = product.qty;
     if (product.image.length > 0) self.productImage.image = [UIImage imageNamed:product.image];
     
+    BOOL isSelectedOption = NO;
     NSString* optionStr = @"<p style='line-height:1.8;text-align:center'>";
     for (ProductOption *option in product.options) {
         for (ProductOptionValue *value in option.options) {
             if (value.isCheck) {
+                isSelectedOption = YES;
                 optionStr = [optionStr stringByAppendingString:[NSString stringWithFormat:@"<span style='color:#000000;font-size:17px;font-family:SFUIDisplay-Bold'>%@:</span> <span style='color:#5A5A5A;font-size:17px;font-family:SFUIDisplay-Regular'>%@</span><br>", option.tittle, value.tittle]];
             }
         }
@@ -67,7 +69,7 @@
     optionStr = [optionStr stringByAppendingString:@"</p>"];
     NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[optionStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     
-    self.lbOptions.attributedText = attrStr;
+    if (isSelectedOption) self.lbOptions.attributedText = attrStr;
 }
 - (IBAction)qtyDecrease:(id)sender {
     int qty = [self.tfQty.text intValue];

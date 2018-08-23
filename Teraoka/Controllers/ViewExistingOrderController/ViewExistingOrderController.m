@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
 @property (weak, nonatomic) IBOutlet UILabel *lbTotalBill;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UIButton *callForBillBtn;
 
 @end
 
@@ -29,13 +31,12 @@
     // Do any additional setup after loading the view from its nib.
     products = [ShareManager shared].existingOrderArr;
     
-    float total = 0;
-    for (ProductModel *product in products) {
-        total += [product.qty intValue] * [product.priceNumber floatValue];
-    }
-    self.lbTotalBill.text = [NSString stringWithFormat:@"$%.2f", total];
-    
     [self setupView];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.view removeFromSuperview];
 }
 
 - (IBAction)backAction:(id)sender {
@@ -55,9 +56,25 @@
     self.headerView.layer.shadowRadius = 3.0;
     self.headerView.layer.masksToBounds = NO;
     
+    self.containerView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.containerView.layer.shadowOffset = CGSizeMake(8.0f, 8.0f);
+    self.containerView.layer.shadowOpacity = 0.2;
+    self.containerView.layer.shadowRadius = 3.0;
+    self.containerView.layer.masksToBounds = NO;
+    
     self.tblView.delegate = self;
     self.tblView.dataSource = self;
     [self.tblView registerNib:[UINib nibWithNibName:@"ExistingOrderCell" bundle:nil] forCellReuseIdentifier:@"ExistingOrderCellID"];
+    
+    float total = 0;
+    for (ProductModel *product in products) {
+        total += [product.qty intValue] * [product.priceNumber floatValue];
+    }
+    self.lbTotalBill.text = [NSString stringWithFormat:@"$%.2f", total];
+    
+    if (![ShareManager shared].setting.abilityRequestForBill) {
+        [self.callForBillBtn setHidden:YES];
+    }
 }
 
 - (void)onBack:(id)sender {

@@ -14,4 +14,5 @@ target 'Teraoka' do
   pod 'Crashlytics'
   pod 'Masonry',              '~> 1.0'
   pod 'ActionSheetPicker-3.0', '~> 2.3.0'
+  pod 'ProgressHUD'
 end

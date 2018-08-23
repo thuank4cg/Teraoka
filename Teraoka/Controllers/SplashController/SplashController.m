@@ -21,12 +21,10 @@
 #import "EnterPassAccessSettingController.h"
 #import <View+MASAdditions.h>
 #import "ShareManager.h"
+#import <ProgressHUD.h>
 
 @interface SplashController () <WRRequestDelegate, NSStreamDelegate, EnterPassAccessDelegate>
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
-@property (weak, nonatomic) IBOutlet TextfieldCustom *tfValue;
-@property (weak, nonatomic) IBOutlet ButtonCustom *btnProceed;
 @property (weak, nonatomic) IBOutlet UIButton *startOrderBtn;
 @property (weak, nonatomic) IBOutlet UIButton *settingBtn;
 
@@ -40,7 +38,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [_indicatorView setHidden:YES];
     
     [self removeDataForEntity:@"Category"];
     [self removeDataForEntity:@"MenuContent"];
@@ -58,15 +55,10 @@
     [ShareManager shared].setting = setting;
 }
 
-- (IBAction)proceed:(id)sender {
-    [_btnProceed setUserInteractionEnabled:NO];
-    [_indicatorView setHidden:NO];
-    [_indicatorView startAnimating];
-    [self listDirectoryContents];
-}
-
 - (IBAction)startOrderAction:(id)sender {
-    [self saveCategoryToDb];
+//    [self saveCategoryToDb];
+    [ProgressHUD show:nil Interaction:NO];
+    [self listDirectoryContents];
 }
 
 - (IBAction)settingAction:(id)sender {
@@ -195,9 +187,7 @@
 
 - (void)requestFailed:(WRRequest *)request {
     NSLog(@"%@", request.error.message);
-    [_indicatorView stopAnimating];
-    [_indicatorView setHidden:YES];
-    if (!isDownloadFile) [_btnProceed setUserInteractionEnabled:YES];
+    [ProgressHUD dismiss];
 }
 
 #pragma mark - save data to db
@@ -308,8 +298,7 @@
             }
         }
     }
-    [_indicatorView stopAnimating];
-    [_indicatorView setHidden:YES];
+    [ProgressHUD dismiss];
     [self showCategoriesScreen];
 }
 
