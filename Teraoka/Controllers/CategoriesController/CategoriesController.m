@@ -31,6 +31,13 @@
 #import <ProgressHUD.h>
 #import "OutOfStockController.h"
 
+typedef NS_ENUM(NSInteger, MENU_ITEMS) {
+    Home = 0,
+    Order,
+    Waiter,
+    Bill
+};
+
 #define KEY_PADDING_BOTTOM_CELL 65
 #define CELL_SPACE 15
 
@@ -54,6 +61,7 @@
 
 @implementation CategoriesController  {
     CGFloat itemWidth;
+    NSMutableArray *menuIcons;
     NSMutableArray *categories;
     int categoryIndex;
     NewOrderController *newOrderVC;
@@ -75,10 +83,7 @@
 }
 
 - (IBAction)homeAction:(id)sender {
-    [self.homeArrowIcon setHidden:NO];
-    [self.orderArrowIcon setHidden:YES];
-    [self.waiterArrowIcon setHidden:YES];
-    [self.billArrowIcon setHidden:YES];
+    [self selectedMenuAt:Home];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -89,10 +94,7 @@
 }
 
 - (IBAction)callWaiter:(id)sender {
-    [self.homeArrowIcon setHidden:YES];
-    [self.orderArrowIcon setHidden:YES];
-    [self.waiterArrowIcon setHidden:NO];
-    [self.billArrowIcon setHidden:YES];
+    [self selectedMenuAt:Waiter];
 }
 
 - (IBAction)viewBill:(id)sender {
@@ -113,10 +115,7 @@
     
     if ([ShareManager shared].existingOrderArr.count == 0) return;
     
-    [self.homeArrowIcon setHidden:YES];
-    [self.orderArrowIcon setHidden:YES];
-    [self.waiterArrowIcon setHidden:YES];
-    [self.billArrowIcon setHidden:NO];
+    [self selectedMenuAt:Bill];
     
     ViewExistingOrderController *vc = [[ViewExistingOrderController alloc] initWithNibName:@"ViewExistingOrderController" bundle:nil];
     vc.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
@@ -156,6 +155,12 @@
 
 - (void)setupView {
     self.qtyBoxView.layer.cornerRadius = CGRectGetWidth(self.qtyBoxView.frame)/2;
+    
+    menuIcons = [NSMutableArray new];
+    [menuIcons addObject:self.homeArrowIcon];
+    [menuIcons addObject:self.orderArrowIcon];
+    [menuIcons addObject:self.waiterArrowIcon];
+    [menuIcons addObject:self.billMenuIcon];
     
     // Shadow and Radius
     self.containerCategoryView.layer.shadowColor = [[UIColor blackColor] CGColor];
@@ -314,10 +319,7 @@
     [self setupQtyBoxView];
     if ([ShareManager shared].cartArr.count == 0) return;
     
-    [self.homeArrowIcon setHidden:YES];
-    [self.orderArrowIcon setHidden:NO];
-    [self.waiterArrowIcon setHidden:YES];
-    [self.billArrowIcon setHidden:YES];
+    [self selectedMenuAt:Order];
     
     OrderSummaryController *vc = [[OrderSummaryController alloc] initWithNibName:@"OrderSummaryController" bundle:nil];
     vc.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
@@ -348,6 +350,15 @@
         make.width.equalTo(vc.view.superview.mas_width);
         make.height.equalTo(vc.view.superview.mas_height);
     }];
+}
+
+- (void)selectedMenuAt:(int)index {
+    for (UIImageView *icon in menuIcons) {
+        [icon setHidden:YES];
+    }
+    
+    UIImageView *icon = (UIImageView *)[menuIcons objectAtIndex:index];
+    [icon setHidden:NO];
 }
 
 - (NSManagedObjectContext *)managedObjectContext {
