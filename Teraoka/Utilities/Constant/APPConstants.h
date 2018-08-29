@@ -19,6 +19,7 @@
 
 #define KEY_SAVED_DATA @"IS_SAVED_DATA"
 #define KEY_SAVED_SETTING @"IS_SAVED_SETTING"
+#define KEY_CURRENT_LANGUAGE @"KEY_CURRENT_LANGUAGE"
 
 #define KEY_FONT_BOLD @"SFUIDisplay-Bold"
 #define KEY_FONT_REGULAR @"SFUIDisplay-Regular"
@@ -46,5 +47,11 @@
 #define REPLY_LAST_EVENT_ID 4
 #define REPLY_STATUS 4
 #define REPLY_DATA_SIZE 4
+
+//language
+#define KEY_LANG_EN @"en"
+#define KEY_LANG_CH @"zh-Hans"
+
+#define KEY_LANGUAGE_ARR @[@"English", @"Chinese"]
 
 #endif /* APPConstants_h */

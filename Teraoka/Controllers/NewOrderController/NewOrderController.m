@@ -21,6 +21,7 @@
 #import "UIColor+HexString.h"
 #import "ParamsHelper.h"
 #import "Util.h"
+#import "LocalizeHelper.h"
 
 @interface NewOrderController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
@@ -32,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UIView *decreaseBox;
 @property (weak, nonatomic) IBOutlet UIView *containerHeaderView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UILabel *backBtnTitle;
+@property (weak, nonatomic) IBOutlet UILabel *submitBtnTitle;
 
 @end
 
@@ -51,6 +54,13 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.view removeFromSuperview];
+}
+
+- (void)loadLocalizable {
+    [super loadLocalizable];
+    
+    self.backBtnTitle.text = LocalizedString(@"SC05_002");
+    self.submitBtnTitle.text = LocalizedString(@"SC05_003");
 }
 
 - (void)setupView {

@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  Teraoka
+
+  Created by Thuan on 8/29/18.
+  Copyright © 2018 ss. All rights reserved.
+*/
+
+"SC04_001" =    "菜单";
+"SC04_002" =    "家";
+"SC04_003" =    "服务员";
+"SC04_004" =    "命令";
+"SC04_005" =    "法案";
+"SC04_006" =    "重启订单";
+"SC05_001" =    "选项";
+"SC05_002" =    "背部";
+"SC05_003" =    "提交订单";

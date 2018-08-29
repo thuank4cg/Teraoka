@@ -39,8 +39,17 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadLocalizable];
+}
+
 - (IBAction)onBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)loadLocalizable {
+    
 }
 
 - (void)sendTransaction {

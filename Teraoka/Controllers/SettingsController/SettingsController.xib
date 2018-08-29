@@ -24,6 +24,7 @@
                 <outlet property="dineinBtn" destination="yEf-AM-i1o" id="Kau-uY-rLF"/>
                 <outlet property="fixedBtn" destination="yPg-FP-Js1" id="lIc-bR-VT0"/>
                 <outlet property="heightRequestForAssistanceContainerView" destination="bSD-MK-fuM" id="zi0-aj-bef"/>
+                <outlet property="languageValueLb" destination="3oB-ZF-GWn" id="3Ju-sR-yop"/>
                 <outlet property="preOrderBtn" destination="E9R-ow-Oi7" id="S2X-FX-xho"/>
                 <outlet property="quickServeBtn" destination="Qy2-xH-uys" id="EqD-2O-8kz"/>
                 <outlet property="requestForAssistanceContainerView" destination="T6e-cf-cck" id="Z96-nd-IE7"/>

@@ -12,6 +12,7 @@
 #import "APPConstants.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "LocalizeHelper.h"
 
 @interface AppDelegate ()
 
@@ -24,6 +25,12 @@
     // Override point for customization after application launch.
     
     [Fabric with:@[[Crashlytics class]]];
+    
+    NSString *lang = KEY_LANG_EN;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_CURRENT_LANGUAGE]) {
+        lang = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_CURRENT_LANGUAGE];
+    }
+    LocalizationSetLanguage(lang);
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     SplashController *splashVC = [[SplashController alloc] initWithNibName:@"SplashController" bundle:nil];

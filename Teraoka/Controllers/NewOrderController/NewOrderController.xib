@@ -20,6 +20,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewOrderController">
             <connections>
+                <outlet property="backBtnTitle" destination="doj-lU-HdF" id="pUd-bB-heQ"/>
                 <outlet property="containerHeaderView" destination="cEH-3e-0jE" id="x8R-xL-AdW"/>
                 <outlet property="containerView" destination="QCf-Un-Ufk" id="u06-Z8-u9r"/>
                 <outlet property="decreaseBox" destination="XFd-3M-zR6" id="0rY-VD-OnZ"/>
@@ -27,6 +28,7 @@
                 <outlet property="productImage" destination="EXq-Ma-KGd" id="XjB-s5-96e"/>
                 <outlet property="productName" destination="TPP-IZ-GCG" id="bX7-6H-cvt"/>
                 <outlet property="productPrice" destination="CDc-Ux-O72" id="trG-7A-IEu"/>
+                <outlet property="submitBtnTitle" destination="nN9-mL-x41" id="T7r-GE-Bgc"/>
                 <outlet property="tblView" destination="ecf-b4-sb3" id="ZKI-ht-B4f"/>
                 <outlet property="tfQty" destination="9PP-ZF-u5j" id="Uub-7O-GlB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -95,8 +97,8 @@
                                         <action selector="sendAction:" destination="-1" eventType="touchUpInside" id="tUv-O8-gfw"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add to cart" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nN9-mL-x41">
-                                    <rect key="frame" x="555.5" y="34" width="112.5" height="26"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUBMIT ORDER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nN9-mL-x41">
+                                    <rect key="frame" x="532" y="34" width="159.5" height="26"/>
                                     <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>

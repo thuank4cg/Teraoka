@@ -90,6 +90,8 @@
 		7357EEAC1F9753DA001EB56B /* ExistingOrderHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7357EEAB1F9753DA001EB56B /* ExistingOrderHeader.xib */; };
 		7357EEB71F975A6D001EB56B /* BillCompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7357EEB51F975A6D001EB56B /* BillCompleteController.m */; };
 		7357EEB81F975A6D001EB56B /* BillCompleteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7357EEB61F975A6D001EB56B /* BillCompleteController.xib */; };
+		736401B9213646F800953773 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 736401BB213646F800953773 /* Localizable.strings */; };
+		736401BF213648BF00953773 /* LocalizeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 736401BE213648BF00953773 /* LocalizeHelper.m */; };
 		736574691FA04E8E008E59CA /* Bread1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 736574571FA04E8E008E59CA /* Bread1.jpg */; };
 		7365746A1FA04E8E008E59CA /* Bread2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 736574581FA04E8E008E59CA /* Bread2.jpg */; };
 		7365746B1FA04E8E008E59CA /* Bread3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 736574591FA04E8E008E59CA /* Bread3.jpg */; };
@@ -252,6 +254,12 @@
 		7357EEB41F975A6D001EB56B /* BillCompleteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillCompleteController.h; sourceTree = "<group>"; };
 		7357EEB51F975A6D001EB56B /* BillCompleteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillCompleteController.m; sourceTree = "<group>"; };
 		7357EEB61F975A6D001EB56B /* BillCompleteController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillCompleteController.xib; sourceTree = "<group>"; };
+		736401B52136415E00953773 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		736401B62136415E00953773 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		736401BA213646F800953773 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		736401BC213646FF00953773 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		736401BD213648BF00953773 /* LocalizeHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalizeHelper.h; sourceTree = "<group>"; };
+		736401BE213648BF00953773 /* LocalizeHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalizeHelper.m; sourceTree = "<group>"; };
 		736574571FA04E8E008E59CA /* Bread1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Bread1.jpg; sourceTree = "<group>"; };
 		736574581FA04E8E008E59CA /* Bread2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Bread2.jpg; sourceTree = "<group>"; };
 		736574591FA04E8E008E59CA /* Bread3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Bread3.jpg; sourceTree = "<group>"; };
@@ -450,6 +458,7 @@
 				730FE0D41F95A2B10045A234 /* Application */,
 				730FE0D51F95A2B10045A234 /* Storyboards */,
 				730FE0D61F95A2B10045A234 /* Image */,
+				736401BB213646F800953773 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -898,6 +907,8 @@
 				7309BBE01FB4077800790808 /* Util.m */,
 				73DC91B91FE2BC6500AD86E6 /* ParamsHelper.h */,
 				73DC91BA1FE2BC6500AD86E6 /* ParamsHelper.m */,
+				736401BD213648BF00953773 /* LocalizeHelper.h */,
+				736401BE213648BF00953773 /* LocalizeHelper.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -987,7 +998,7 @@
 				TargetAttributes = {
 					730FE0B01F95A1690045A234 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = NTR2MPTQ2A;
+						DevelopmentTeam = U469N7T3UR;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -999,6 +1010,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 730FE0A81F95A1690045A234;
 			productRefGroup = 730FE0B21F95A1690045A234 /* Products */;
@@ -1028,6 +1040,7 @@
 				733675491FE25F2200F0AFF8 /* 3008.png in Resources */,
 				736574781FA04E8E008E59CA /* Soups1.jpg in Resources */,
 				733675651FE25F2200F0AFF8 /* 3004.png in Resources */,
+				736401B9213646F800953773 /* Localizable.strings in Resources */,
 				730FE1131F95EC180045A234 /* ProductCell.xib in Resources */,
 				7336754E1FE25F2200F0AFF8 /* 4004.png in Resources */,
 				7357EE731F96FA43001EB56B /* OptionCollectionCell.xib in Resources */,
@@ -1183,6 +1196,7 @@
 			files = (
 				7386F1E1212E52AB001DAC8D /* OutOfStockCell.m in Sources */,
 				7357EE7E1F9713CD001EB56B /* NewOrderAddedController.m in Sources */,
+				736401BF213648BF00953773 /* LocalizeHelper.m in Sources */,
 				730FE0F31F95AB950045A234 /* EnterTableController.m in Sources */,
 				739853571FBC3AF50024E87C /* CategoryView.m in Sources */,
 				73840E9A212C0A8700904454 /* EnterPassAccessSettingController.m in Sources */,
@@ -1235,6 +1249,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				730FE0BE1F95A1690045A234 /* Base */,
+				736401B52136415E00953773 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			path = ../..;
@@ -1244,9 +1259,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				730FE0C61F95A1690045A234 /* Base */,
+				736401B62136415E00953773 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			path = ../..;
+			sourceTree = "<group>";
+		};
+		736401BB213646F800953773 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				736401BA213646F800953773 /* en */,
+				736401BC213646FF00953773 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1256,6 +1281,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1305,6 +1331,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1350,19 +1377,19 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nakarin Bunjerdluk (9LMKG7VUU9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nakarin Bunjerdluk (9LMKG7VUU9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Office Productivity Solution Pte. Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Office Productivity Solution Pte. Ltd.";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = NTR2MPTQ2A;
+				DEVELOPMENT_TEAM = U469N7T3UR;
 				INFOPLIST_FILE = Teraoka/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tvo.parentkid.inapp.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "38613190-2ebb-4bb3-b13c-bb76847514d8";
-				PROVISIONING_PROFILE_SPECIFIER = "Tittle test";
+				PROVISIONING_PROFILE = "36d1105c-df15-4b45-8d76-ccdce6e2db70";
+				PROVISIONING_PROFILE_SPECIFIER = "OPS Distribution 2018";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1373,18 +1400,18 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nakarin Bunjerdluk (9LMKG7VUU9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nakarin Bunjerdluk (9LMKG7VUU9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Office Productivity Solution Pte. Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Office Productivity Solution Pte. Ltd.";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = NTR2MPTQ2A;
+				DEVELOPMENT_TEAM = U469N7T3UR;
 				INFOPLIST_FILE = Teraoka/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tvo.parentkid.inapp.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cd068048-a54a-456f-bb8f-dc8c7bd97e9a";
-				PROVISIONING_PROFILE_SPECIFIER = "Tittle test";
+				PROVISIONING_PROFILE = "36d1105c-df15-4b45-8d76-ccdce6e2db70";
+				PROVISIONING_PROFILE_SPECIFIER = "OPS Distribution 2018";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

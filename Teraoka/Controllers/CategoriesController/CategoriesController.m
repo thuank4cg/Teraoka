@@ -30,6 +30,8 @@
 #import "SettingsController.h"
 #import <ProgressHUD.h>
 #import "OutOfStockController.h"
+#import "LocalizeHelper.h"
+#import "LocalizeHelper.h"
 
 typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     Home = 0,
@@ -56,6 +58,12 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
 @property (weak, nonatomic) IBOutlet UIView *waiterMenuView;
 @property (weak, nonatomic) IBOutlet UIImageView *billMenuIcon;
 @property (weak, nonatomic) IBOutlet UIButton *settingBtn;
+@property (weak, nonatomic) IBOutlet UILabel *headerMenuTitleLb;
+@property (weak, nonatomic) IBOutlet UILabel *homeMenuTitleLb;
+@property (weak, nonatomic) IBOutlet UILabel *orderMenuTitleLb;
+@property (weak, nonatomic) IBOutlet UILabel *waiterMenuTitleLb;
+@property (weak, nonatomic) IBOutlet UILabel *billMenuTitleLb;
+@property (weak, nonatomic) IBOutlet UILabel *restartOrderLb;
 
 @end
 
@@ -80,6 +88,17 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     [self setupQtyBoxView];
     isBackDelegate = NO;
     [self setData];
+}
+
+- (void)loadLocalizable {
+    [super loadLocalizable];
+    
+    self.headerMenuTitleLb.text = LocalizedString(@"SC04_001");
+    self.homeMenuTitleLb.text = LocalizedString(@"SC04_002");
+    self.orderMenuTitleLb.text = LocalizedString(@"SC04_004");
+    self.waiterMenuTitleLb.text = LocalizedString(@"SC04_003");
+    self.billMenuTitleLb.text = LocalizedString(@"SC04_005");
+    self.restartOrderLb.text = LocalizedString(@"SC04_006");
 }
 
 - (IBAction)homeAction:(id)sender {
@@ -420,7 +439,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
                     product.qty = @"1";
                     product.options = [[NSMutableArray alloc] init];
                     
-                    NSArray *options = @[@"Option 1", @"Option 2", @"Option 3"];
+                    NSArray *options = @[[NSString stringWithFormat:@"%@ 1", LocalizedString(@"SC05_001")], [NSString stringWithFormat:@"%@ 2", LocalizedString(@"SC05_001")], [NSString stringWithFormat:@"%@ 3", LocalizedString(@"SC05_001")]];
                     for (NSString *tittle in options) {
                         ProductOption *option = [[ProductOption alloc] init];
                         option.tittle = tittle;
@@ -429,17 +448,17 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
                         
                         ProductOptionValue *optionValue = [[ProductOptionValue alloc] init];
                         optionValue.isCheck = NO;
-                        optionValue.tittle = @"Choice A";
+                        optionValue.tittle = [NSString stringWithFormat:@"%@ A", LocalizedString(@"SC05_001")];
                         [option.options addObject:optionValue];
                         
                         ProductOptionValue *optionValue2 = [[ProductOptionValue alloc] init];
                         optionValue2.isCheck = NO;
-                        optionValue2.tittle = @"Choice B";
+                        optionValue2.tittle = [NSString stringWithFormat:@"%@ B", LocalizedString(@"SC05_001")];
                         [option.options addObject:optionValue2];
                         
                         ProductOptionValue *optionValue3 = [[ProductOptionValue alloc] init];
                         optionValue3.isCheck = NO;
-                        optionValue3.tittle = @"Choice C";
+                        optionValue3.tittle = [NSString stringWithFormat:@"%@ C", LocalizedString(@"SC05_001")];
                         [option.options addObject:optionValue3];
                         
                         [product.options addObject:option];

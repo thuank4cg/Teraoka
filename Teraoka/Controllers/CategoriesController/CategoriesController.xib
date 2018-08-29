@@ -18,17 +18,23 @@
             <connections>
                 <outlet property="billArrowIcon" destination="rci-l3-lub" id="43D-8R-6It"/>
                 <outlet property="billMenuIcon" destination="qm7-CV-QWQ" id="gYR-Aj-nCe"/>
+                <outlet property="billMenuTitleLb" destination="zM5-9L-E5G" id="8Gh-95-Zez"/>
                 <outlet property="containerCategoryView" destination="aG9-MJ-0Ip" id="9Bi-FZ-h8c"/>
+                <outlet property="headerMenuTitleLb" destination="14d-J6-UBH" id="rCQ-LW-jYK"/>
                 <outlet property="homeArrowIcon" destination="B7u-00-Nms" id="hNJ-bB-HXP"/>
+                <outlet property="homeMenuTitleLb" destination="3YF-Qp-EcK" id="zTJ-Jr-nku"/>
                 <outlet property="lbQty" destination="AfJ-75-6di" id="1E1-JV-fXj"/>
                 <outlet property="menuBoxView" destination="min-e3-mv4" id="kzV-jX-vGF"/>
                 <outlet property="orderArrowIcon" destination="NCD-Pd-emv" id="8Cv-47-CSV"/>
+                <outlet property="orderMenuTitleLb" destination="XXC-YK-6NN" id="KJj-MG-BCG"/>
                 <outlet property="productsColView" destination="0sX-Lf-TFV" id="xRZ-pE-pVj"/>
                 <outlet property="qtyBoxView" destination="P4t-Nj-qoz" id="1gJ-e5-gBu"/>
+                <outlet property="restartOrderLb" destination="ykR-Xn-MgH" id="qQ3-R5-gNr"/>
                 <outlet property="restartOrderView" destination="Z5E-iI-tZw" id="Zdo-ma-NP8"/>
                 <outlet property="settingBtn" destination="YvL-OC-oxG" id="z4e-aH-Wbg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="waiterArrowIcon" destination="4QD-V9-mp9" id="cjr-A6-LCu"/>
+                <outlet property="waiterMenuTitleLb" destination="3ar-7b-Ufy" id="VjJ-bw-2Af"/>
                 <outlet property="waiterMenuView" destination="2of-MK-OJq" id="TMq-wZ-wVO"/>
             </connections>
         </placeholder>

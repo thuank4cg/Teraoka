@@ -13,5 +13,6 @@
 - (IBAction)onBack:(id)sender;
 - (void)sendTransaction;
 - (void)getExistingOrder;
+- (void)loadLocalizable;
 
 @end

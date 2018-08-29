@@ -16,6 +16,7 @@
 #import <JSONModel.h>
 #import "Util.h"
 #import "ShareManager.h"
+#import "LocalizeHelper.h"
 
 @interface SettingsController ()
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfIPAddress;
@@ -31,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UIStackView *requestForAssistanceContainerView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topPaddingRequestForAssistanceContainerView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightRequestForAssistanceContainerView;
+@property (weak, nonatomic) IBOutlet UILabel *languageValueLb;
 
 @end
 
@@ -101,17 +103,23 @@
 }
 
 - (IBAction)selectLanguageAction:(id)sender {
-//    NSArray *colors = [NSArray arrayWithObjects:@"Red", @"Green", @"Blue", @"Orange", nil];
-//    
-//    [ActionSheetStringPicker showPickerWithTitle:@"Select Language"
-//                                            rows:colors
-//                                initialSelection:0
-//                                     doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-//                                           
-//                                     }
-//                                     cancelBlock:^(ActionSheetStringPicker *picker) {
-//                                         
-//                                     } origin:sender];
+    NSArray *items = KEY_LANGUAGE_ARR;
+    NSArray *languages = [NSArray arrayWithObjects:KEY_LANG_EN, KEY_LANG_CH, nil];
+    
+    [ActionSheetStringPicker showPickerWithTitle:@"Select Language"
+                                            rows:items
+                                initialSelection:0
+                                     doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                                         [[NSUserDefaults standardUserDefaults] setObject:languages[selectedIndex] forKey:KEY_CURRENT_LANGUAGE];
+                                         [[NSUserDefaults standardUserDefaults] synchronize];
+                                         
+                                         LocalizationSetLanguage(languages[selectedIndex]);
+                                         
+                                         self.languageValueLb.text = items[selectedIndex];
+                                     }
+                                     cancelBlock:^(ActionSheetStringPicker *picker) {
+                                         
+                                     } origin:sender];
 }
 
 - (IBAction)saveAction:(id)sender {
@@ -165,6 +173,8 @@
     [self.fixedBtn selected];
     [self.preOrderBtn unselected];
     
+    [self getCurrentLanguage];
+    
     [self setupData];
 }
 
@@ -213,6 +223,20 @@
     self.tfTableNo.text = [NSString stringWithFormat:@"%d", setting.tableNo];
     [self.requestForAssistanceView setOn:setting.abilityRequestForAssistance];
     [self.requestForBillView setOn:setting.abilityRequestForBill];
+}
+
+- (void)getCurrentLanguage {
+    NSArray *items = KEY_LANGUAGE_ARR;
+    NSArray *languages = @[KEY_LANG_EN, KEY_LANG_CH];
+    
+    NSString *lang = KEY_LANG_EN;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_CURRENT_LANGUAGE]) {
+        lang = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_CURRENT_LANGUAGE];
+    }
+    
+    int index = (int)[languages indexOfObject:lang];
+    
+    self.languageValueLb.text = items[index];
 }
 
 @end
