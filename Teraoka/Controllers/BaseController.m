@@ -20,7 +20,7 @@
 #import "ProductOptionValue.h"
 
 #define STATUS_REPLY_OK @"00000000"
-#define MSG_ERROR @"submission failed due to connection error"
+#define MSG_ERROR @"Submission failed due to connection error"
 
 @interface BaseController () <GCDAsyncSocketDelegate, NSStreamDelegate>
 
