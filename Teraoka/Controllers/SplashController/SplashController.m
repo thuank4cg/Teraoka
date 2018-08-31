@@ -48,6 +48,8 @@
     NSString *json = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_SAVED_SETTING];
     SettingModel *setting = [[SettingModel alloc] initWithString:json error:nil];
     
+    if (!setting) setting = [[SettingModel alloc] init];
+    
     if (setting.serverIP.length == 0) {
         setting.serverIP = HOST_NAME;
     }

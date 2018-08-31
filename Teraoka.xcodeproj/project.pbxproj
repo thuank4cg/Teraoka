@@ -974,7 +974,6 @@
 				730FE0AD1F95A1690045A234 /* Sources */,
 				730FE0AE1F95A1690045A234 /* Frameworks */,
 				730FE0AF1F95A1690045A234 /* Resources */,
-				808971E20FFBB85B6A881783 /* [CP] Embed Pods Frameworks */,
 				FE675B5F754E0B09E80F58AA /* [CP] Copy Pods Resources */,
 				731644BC2003331F00DE7B1C /* ShellScript */,
 			);
@@ -1133,21 +1132,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" d355ec7a9c06d664257c70fae043d4de0ca27706 46ea225a71df2a1aa0334bbfd18c6b3944543f56e8d00ad6ca067df3cf082310";
-		};
-		808971E20FFBB85B6A881783 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Teraoka/Pods-Teraoka-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		BF14BC45F389411406DF59F7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

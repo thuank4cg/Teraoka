@@ -23,6 +23,19 @@ DEPENDENCIES:
   - SSZipArchive
   - TPKeyboardAvoiding (= 1.2)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ActionSheetPicker-3.0
+    - CocoaAsyncSocket
+    - Crashlytics
+    - Fabric
+    - JSONModel
+    - Masonry
+    - ProgressHUD
+    - SIAlertView
+    - SSZipArchive
+    - TPKeyboardAvoiding
+
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
   CocoaAsyncSocket: 3541e024f48c54b251638ef72d51dd42808de932
@@ -37,4 +50,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6c3246c24d8e07b8579d413b34f4c13697777074
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
