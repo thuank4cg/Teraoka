@@ -179,7 +179,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     [menuIcons addObject:self.homeArrowIcon];
     [menuIcons addObject:self.orderArrowIcon];
     [menuIcons addObject:self.waiterArrowIcon];
-    [menuIcons addObject:self.billMenuIcon];
+    [menuIcons addObject:self.billArrowIcon];
     
     // Shadow and Radius
     self.containerCategoryView.layer.shadowColor = [[UIColor blackColor] CGColor];
