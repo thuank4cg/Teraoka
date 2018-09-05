@@ -167,7 +167,7 @@
         replyDataSize += 2; //Store Status
         replyDataSize += 4; //Table Status
         replyDataSize += 4; //Bill Status
-        replyDataSize += 4; //Item Flag
+        replyDataSize += 4; //Item Flag 
         replyDataSize += 2; //Discount type
         replyDataSize += 4; //Event Type
         replyDataSize += 2; //Event state
