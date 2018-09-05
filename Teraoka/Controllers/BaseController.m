@@ -153,9 +153,28 @@
         int transactionNumberResponse = [Util hexStringToInt:[Util hexadecimalString:transactionNumber]];
         NSLog(@"%d %d", receiptResponse, transactionNumberResponse);
         
+        location += 8;
+        
         [self getExistingOrder];
         
         [ShareManager shared].cartArr = nil;
+        
+        /**XOutOfStockData**/
+        
+        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+        NSData *dataNumOfObject = [replyData subdataWithRange:NSMakeRange(0, 4)];
+        int numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+        
+        location += 4; //Number of object
+        
+        /**XOutOfStockDataStruct**/
+        
+        for (int i=0;i<numOfObject;i++) {
+            replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+            NSData *dataPluNo = [replyData subdataWithRange:NSMakeRange(0, 4)];
+            int pluNo = [Util hexStringToInt:[Util hexadecimalString:dataPluNo]];
+            NSLog(@"%d", pluNo);
+        }
         
         OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
         vc.receipt = receiptResponse;
