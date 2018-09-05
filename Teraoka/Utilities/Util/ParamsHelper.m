@@ -77,15 +77,16 @@
     [mCollectData appendData:[self convertStringToBytesArr:@"1" length:1]];
     [mCollectData appendData:[self convertStringToBytesArr:@"15" length:1]];
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
+    //00010f00
     
     //Request ID
-    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", [self generatorRequestId]] length:4]];
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", [self generatorRequestId]] length:4]]; //24
     
     //Terminal No
     [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]];
     
     //Staff ID
-    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:4]];
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];//30
     
     //Sending Date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -109,14 +110,14 @@
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
     
+    /**XCouponData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"3" length:2]]; //Coupon status
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
+    
     /**XGuestPaxData**/
     
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //PAX
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
-    
-    /**XCouponData**/
-    
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Coupon status
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
     
     /**XBillOptionData**/
@@ -141,7 +142,8 @@
     for (ProductModel *product in [ShareManager shared].cartArr) {
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.ids] length:4]];
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
