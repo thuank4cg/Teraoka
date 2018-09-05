@@ -153,7 +153,7 @@
         int transactionNumberResponse = [Util hexStringToInt:[Util hexadecimalString:transactionNumber]];
         NSLog(@"%d %d", receiptResponse, transactionNumberResponse);
         
-        location += 8;
+        location += replyData.length;
         
         [self getExistingOrder];
         
@@ -161,8 +161,8 @@
         
         /**XOutOfStockData**/
         
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        NSData *dataNumOfObject = [replyData subdataWithRange:NSMakeRange(0, 4)];
+        NSData *outOfStockData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+        NSData *dataNumOfObject = [outOfStockData subdataWithRange:NSMakeRange(0, 4)];
         int numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
         
         location += 4; //Number of object
@@ -181,409 +181,409 @@
         vc.queueNumber = transactionNumberResponse;
         [self.navigationController pushViewController:vc animated:NO];
     } else {
-        int replyDataSize = 0;
-        
-        replyDataSize += 2; //Store Status
-        replyDataSize += 4; //Table Status
-        replyDataSize += 4; //Bill Status
-        replyDataSize += 4; //Item Flag
-        replyDataSize += 2; //Discount type
-        replyDataSize += 4; //Event Type
-        replyDataSize += 2; //Event state
-        replyDataSize += 2; //Item preparation status
-        
-        /**XRequestHeaderData**/
-        
-        replyDataSize += 4; //Version
-        replyDataSize += 4; //Request ID
-        replyDataSize += 2; //Terminal No
-        replyDataSize += 4; //Staff ID
-        replyDataSize += 4; //Sending Date
-        replyDataSize += 4; //Sending Time
-        
-        /**XTableStatusDataStruct**/
-        
-        replyDataSize += 4; //Table No
-        replyDataSize += 4; //Table Status
-        
-        /**XBillIdData**/
-        
-        replyDataSize += 4; //Bill No
-        replyDataSize += 4; //Primary Server Version
-        replyDataSize += 4; //Backup Server Version
-        
-        /**XGuestPaxData**/
-        
-        replyDataSize += 2; //PAX
-        
-        location = location + REPLY_STATUS + replyDataSize;
-        NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        NSData *dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        int numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XGuestPaxDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 2; //Guest Type
-            replyDataSize += 2; //Number of object
-        }
-        
-        /**XCouponData**/
-        
-        replyDataSize += 2; //Coupon status
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XCouponDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 2; //Coupon No
-            replyDataSize += 4; //Coupon Value
-            replyDataSize += 2; //Coupon Qty
-        }
-        
-        /**XSendOrderData**/
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XSendOrderDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 4; //PLU No
-            replyDataSize += 2; //Qty
-            replyDataSize += 4; //Current Price (Overrided price, 0 is no overrided price)
-            replyDataSize += 4; //Item Flag
-            
-            /**XItemOptionData**/
-            
-            //XCondimentData
-            
-            location = location + replyDataSize;
-            replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-            dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-            numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-            
-            replyDataSize += 4; //Number of object
-            
-            //XCondimentDataStruct
-            for (int i=0;i<numOfObject;i++) {
-                replyDataSize += 4; //Condiment No (PLU No)
-                replyDataSize += 2; //Condiment Qty
-            }
-            
-            //XCookingInstructionData
-            
-            location = location + replyDataSize;
-            replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-            dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-            numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-            
-            replyDataSize += 4; //Number of object
-            
-            //XCookingInstructionStruct
-            for (int i=0;i<numOfObject;i++) {
-                replyDataSize += 2; //Cooking Instruction No
-                replyDataSize += 2; //Cooking Instruction Qty
-            }
-            
-            //XServingTimeData
-            
-            location = location + replyDataSize;
-            replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-            dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-            numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-            
-            replyDataSize += 4; //Number of object
-            
-            //XServingTimeDataStruct
-            for (int i=0;i<numOfObject;i++) {
-                replyDataSize += 2; //Serving Time No
-                replyDataSize += 2; //Serving Time Qty
-            }
-            
-            //XFreeInstructionData
-            replyDataSize += 4; //Free instruction data size
-            replyDataSize += 0; //Free instruction data
-        }
-        
-        /**XItemPreparationData**/
-        
-        replyDataSize += 2; //Item preparation status
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XItemPreparationDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 4; //Item Id
-            replyDataSize += 2; //Qty
-        }
-        
-        /**XCompletedItemData**/
-        
-        replyDataSize += 4; //Table No
-        
-        //XBillIdData
-        replyDataSize += 4; //Bill No
-        replyDataSize += 4; //Primary Server Version
-        replyDataSize += 4; //Backup Server Version
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XCompletedItemDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 4; //Item Id
-            replyDataSize += 2; //Qty
-            replyDataSize += 2; //PLU No
-        }
-        
-        /**XBillOptionData**/
-        
-        replyDataSize += 2; //Cooking instruction status
-        
-        /**XCookingInstructionData**/
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XCookingInstructionStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 2; //Cooking Instruction No
-            replyDataSize += 2; //Cooking Instruction Qty
-        }
-        
-        /**XServingTimeData**/
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XServingTimeDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 2; //Serving Time No
-            replyDataSize += 2; //Serving Time Qty
-        }
-        
-        /**XFreeInstructionData**/
-        
-        replyDataSize += 4; //Free instruction data size
-        replyDataSize += 0; //Free instruction data
-        
-        /**XItemPreparationData**/
-        
-        replyDataSize += 2; //Item preparation status
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XItemPreparationDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 4; //Item Id
-            replyDataSize += 2; //Qty
-        }
-        
-        /**XCompletedItemData**/
-        
-        replyDataSize += 4; //Table No
-        
-        /**XBillIdData**/
-        
-        replyDataSize += 4; //Bill No
-        replyDataSize += 4; //Primary Server Version
-        replyDataSize += 4; //Backup Server Version
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XCompletedItemDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 4; //Item Id
-            replyDataSize += 2; //Qty
-            replyDataSize += 4; //PLU No
-        }
-        
-        /**XBillOptionData**/
-        
-        replyDataSize += 2; //Cooking instruction status
-        
-        /**XCookingInstructionData**/
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XCookingInstructionStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 2; //Cooking Instruction No
-            replyDataSize += 2; //Cooking Instruction Qty
-        }
-        
-        /**XFreeRemarkData**/
-        
-        replyDataSize += 2; //Free remark status
-        replyDataSize += 4; //Free remark data size
-        replyDataSize += 0; //Free remark data
-        
-        /**XSplitBillReplyItemData**/
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XSplitBillReplyItemDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 4; //Item Id
-            replyDataSize += 4; //Unit Price
-        }
-        
-        /**XSplitBillAmountDataStruct**/
-        
-        replyDataSize += 2; //Split type
-        replyDataSize += 4; //Split amount or pax
-        
-        /**XItemOptionCancelData**/
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XItemOptionCancelDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 2; //Item Option Type
-            replyDataSize += 4; //Item Option No
-            replyDataSize += 2; //Item Option Qty
-        }
-        
-        /**XEventStateData**/
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XEventStateDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 4; //Event id
-            replyDataSize += 2; //Event state
-        }
-        
-        /**XEventData**/
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XEventDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            replyDataSize += 4; //Event Id
-            replyDataSize += 4; //Event type
-            replyDataSize += 4; //Event Category
-            replyDataSize += 2; //Event Level
-            replyDataSize += 2; //Event Terminal No
-            replyDataSize += 4; //Event Date
-            replyDataSize += 4; //Event Time
-            replyDataSize += 4; //Event type Data 1
-            replyDataSize += 4; //Event type Data 2
-            replyDataSize += 4; //Event type Data 3
-            replyDataSize += 4; //Event type Data 4
-            replyDataSize += 4; //Event type Data 5
-            replyDataSize += 4; //Event type Data 6
-            replyDataSize += 4; //Event type Data 7
-            replyDataSize += 4; //Event type Data 8
-            replyDataSize += 2; //Event state
-            replyDataSize += 4; //Event Message Size
-            replyDataSize += 0; //Event Message
-        }
-        
-        /**XOutOfStockData**/
-        
-        location = location + replyDataSize;
-        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
-        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
-        
-        replyDataSize += 4; //Number of object
-        
-        /**XOutOfStockDataStruct**/
-        
-        for (int i=0;i<numOfObject;i++) {
-            location = location + replyDataSize;
-            replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-            NSData *dataPluNo = [replyData subdataWithRange:NSMakeRange(0, 4)];
-            int pluNo = [Util hexStringToInt:[Util hexadecimalString:dataPluNo]];
-            
-            replyDataSize += 4; //PLU No
-            replyDataSize += 2; //Qty
-        }
-        
-//        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
+//        int replyDataSize = 0;
+//
+//        replyDataSize += 2; //Store Status
+//        replyDataSize += 4; //Table Status
+//        replyDataSize += 4; //Bill Status
+//        replyDataSize += 4; //Item Flag
+//        replyDataSize += 2; //Discount type
+//        replyDataSize += 4; //Event Type
+//        replyDataSize += 2; //Event state
+//        replyDataSize += 2; //Item preparation status
+//
+//        /**XRequestHeaderData**/
+//
+//        replyDataSize += 4; //Version
+//        replyDataSize += 4; //Request ID
+//        replyDataSize += 2; //Terminal No
+//        replyDataSize += 4; //Staff ID
+//        replyDataSize += 4; //Sending Date
+//        replyDataSize += 4; //Sending Time
+//
+//        /**XTableStatusDataStruct**/
+//
+//        replyDataSize += 4; //Table No
+//        replyDataSize += 4; //Table Status
+//
+//        /**XBillIdData**/
+//
+//        replyDataSize += 4; //Bill No
+//        replyDataSize += 4; //Primary Server Version
+//        replyDataSize += 4; //Backup Server Version
+//
+//        /**XGuestPaxData**/
+//
+//        replyDataSize += 2; //PAX
+//
+//        location = location + REPLY_STATUS + replyDataSize;
 //        NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-//        httpResponse = [[NSString alloc] initWithData:replyData encoding:NSUTF8StringEncoding];
-//        if (httpResponse.length == 0) {
-//            httpResponse = MSG_ERROR;
+//        NSData *dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        int numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XGuestPaxDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 2; //Guest Type
+//            replyDataSize += 2; //Number of object
 //        }
-//        [Util showAlert:httpResponse vc:self];
+//
+//        /**XCouponData**/
+//
+//        replyDataSize += 2; //Coupon status
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XCouponDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 2; //Coupon No
+//            replyDataSize += 4; //Coupon Value
+//            replyDataSize += 2; //Coupon Qty
+//        }
+//
+//        /**XSendOrderData**/
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XSendOrderDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 4; //PLU No
+//            replyDataSize += 2; //Qty
+//            replyDataSize += 4; //Current Price (Overrided price, 0 is no overrided price)
+//            replyDataSize += 4; //Item Flag
+//
+//            /**XItemOptionData**/
+//
+//            //XCondimentData
+//
+//            location = location + replyDataSize;
+//            replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//            dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//            numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//            replyDataSize += 4; //Number of object
+//
+//            //XCondimentDataStruct
+//            for (int i=0;i<numOfObject;i++) {
+//                replyDataSize += 4; //Condiment No (PLU No)
+//                replyDataSize += 2; //Condiment Qty
+//            }
+//
+//            //XCookingInstructionData
+//
+//            location = location + replyDataSize;
+//            replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//            dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//            numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//            replyDataSize += 4; //Number of object
+//
+//            //XCookingInstructionStruct
+//            for (int i=0;i<numOfObject;i++) {
+//                replyDataSize += 2; //Cooking Instruction No
+//                replyDataSize += 2; //Cooking Instruction Qty
+//            }
+//
+//            //XServingTimeData
+//
+//            location = location + replyDataSize;
+//            replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//            dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//            numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//            replyDataSize += 4; //Number of object
+//
+//            //XServingTimeDataStruct
+//            for (int i=0;i<numOfObject;i++) {
+//                replyDataSize += 2; //Serving Time No
+//                replyDataSize += 2; //Serving Time Qty
+//            }
+//
+//            //XFreeInstructionData
+//            replyDataSize += 4; //Free instruction data size
+//            replyDataSize += 0; //Free instruction data
+//        }
+//
+//        /**XItemPreparationData**/
+//
+//        replyDataSize += 2; //Item preparation status
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XItemPreparationDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 4; //Item Id
+//            replyDataSize += 2; //Qty
+//        }
+//
+//        /**XCompletedItemData**/
+//
+//        replyDataSize += 4; //Table No
+//
+//        //XBillIdData
+//        replyDataSize += 4; //Bill No
+//        replyDataSize += 4; //Primary Server Version
+//        replyDataSize += 4; //Backup Server Version
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XCompletedItemDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 4; //Item Id
+//            replyDataSize += 2; //Qty
+//            replyDataSize += 2; //PLU No
+//        }
+//
+//        /**XBillOptionData**/
+//
+//        replyDataSize += 2; //Cooking instruction status
+//
+//        /**XCookingInstructionData**/
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XCookingInstructionStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 2; //Cooking Instruction No
+//            replyDataSize += 2; //Cooking Instruction Qty
+//        }
+//
+//        /**XServingTimeData**/
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XServingTimeDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 2; //Serving Time No
+//            replyDataSize += 2; //Serving Time Qty
+//        }
+//
+//        /**XFreeInstructionData**/
+//
+//        replyDataSize += 4; //Free instruction data size
+//        replyDataSize += 0; //Free instruction data
+//
+//        /**XItemPreparationData**/
+//
+//        replyDataSize += 2; //Item preparation status
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XItemPreparationDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 4; //Item Id
+//            replyDataSize += 2; //Qty
+//        }
+//
+//        /**XCompletedItemData**/
+//
+//        replyDataSize += 4; //Table No
+//
+//        /**XBillIdData**/
+//
+//        replyDataSize += 4; //Bill No
+//        replyDataSize += 4; //Primary Server Version
+//        replyDataSize += 4; //Backup Server Version
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XCompletedItemDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 4; //Item Id
+//            replyDataSize += 2; //Qty
+//            replyDataSize += 4; //PLU No
+//        }
+//
+//        /**XBillOptionData**/
+//
+//        replyDataSize += 2; //Cooking instruction status
+//
+//        /**XCookingInstructionData**/
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XCookingInstructionStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 2; //Cooking Instruction No
+//            replyDataSize += 2; //Cooking Instruction Qty
+//        }
+//
+//        /**XFreeRemarkData**/
+//
+//        replyDataSize += 2; //Free remark status
+//        replyDataSize += 4; //Free remark data size
+//        replyDataSize += 0; //Free remark data
+//
+//        /**XSplitBillReplyItemData**/
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XSplitBillReplyItemDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 4; //Item Id
+//            replyDataSize += 4; //Unit Price
+//        }
+//
+//        /**XSplitBillAmountDataStruct**/
+//
+//        replyDataSize += 2; //Split type
+//        replyDataSize += 4; //Split amount or pax
+//
+//        /**XItemOptionCancelData**/
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XItemOptionCancelDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 2; //Item Option Type
+//            replyDataSize += 4; //Item Option No
+//            replyDataSize += 2; //Item Option Qty
+//        }
+//
+//        /**XEventStateData**/
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XEventStateDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 4; //Event id
+//            replyDataSize += 2; //Event state
+//        }
+//
+//        /**XEventData**/
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XEventDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            replyDataSize += 4; //Event Id
+//            replyDataSize += 4; //Event type
+//            replyDataSize += 4; //Event Category
+//            replyDataSize += 2; //Event Level
+//            replyDataSize += 2; //Event Terminal No
+//            replyDataSize += 4; //Event Date
+//            replyDataSize += 4; //Event Time
+//            replyDataSize += 4; //Event type Data 1
+//            replyDataSize += 4; //Event type Data 2
+//            replyDataSize += 4; //Event type Data 3
+//            replyDataSize += 4; //Event type Data 4
+//            replyDataSize += 4; //Event type Data 5
+//            replyDataSize += 4; //Event type Data 6
+//            replyDataSize += 4; //Event type Data 7
+//            replyDataSize += 4; //Event type Data 8
+//            replyDataSize += 2; //Event state
+//            replyDataSize += 4; //Event Message Size
+//            replyDataSize += 0; //Event Message
+//        }
+//
+//        /**XOutOfStockData**/
+//
+//        location = location + replyDataSize;
+//        replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//        dataNumOfObject= [replyData subdataWithRange:NSMakeRange(0, 4)];
+//        numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+//
+//        replyDataSize += 4; //Number of object
+//
+//        /**XOutOfStockDataStruct**/
+//
+//        for (int i=0;i<numOfObject;i++) {
+//            location = location + replyDataSize;
+//            replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+//            NSData *dataPluNo = [replyData subdataWithRange:NSMakeRange(0, 4)];
+//            int pluNo = [Util hexStringToInt:[Util hexadecimalString:dataPluNo]];
+//
+//            replyDataSize += 4; //PLU No
+//            replyDataSize += 2; //Qty
+//        }
+        
+        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
+        NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+        httpResponse = [[NSString alloc] initWithData:replyData encoding:NSUTF8StringEncoding];
+        if (httpResponse.length == 0) {
+            httpResponse = MSG_ERROR;
+        }
+        [Util showAlert:httpResponse vc:self];
     }
 }
 
