@@ -105,35 +105,19 @@
     
     /**XBillIdData**/
     
-    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:4]]; //Bill No
-    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:4]]; //Primary Server Version
-    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:4]]; //Backup Server Version
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Bill No
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
     
     /**XGuestPaxData**/
     
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //PAX
-    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:4]]; //Number of object
-    
-    /**XGuestPaxDataStruct**/
-    
-    int numOfObject = 1;
-    for (int i=0;i<numOfObject;i++) {
-        [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Guest Type
-        [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Guest Pax
-    }
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
     
     /**XCouponData**/
     
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Coupon status
-    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:4]]; //Number of object
-    
-    /**XCouponDataStruct**/
-    
-    for (int i=0;i<numOfObject;i++) {
-        [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Coupon No
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Coupon Value
-        [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Coupon Qty
-    }
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
     
     /**XBillOptionData**/
     
@@ -146,6 +130,7 @@
     /**XFreeRemarkData**/
     
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Free remark status
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Free remark data size
     
     /**XSendOrderData**/
     
