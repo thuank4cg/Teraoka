@@ -72,21 +72,21 @@
     NSMutableData *mCollectData = [[NSMutableData alloc] init];
     
     /**XRequestHeaderData**/
+    
     //version
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
     [mCollectData appendData:[self convertStringToBytesArr:@"1" length:1]];
     [mCollectData appendData:[self convertStringToBytesArr:@"15" length:1]];
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
-    //00010f00
     
     //Request ID
-    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", [self generatorRequestId]] length:4]]; //24
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", [self generatorRequestId]] length:4]];
     
     //Terminal No
     [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]];
     
     //Staff ID
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];//30
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
     
     //Sending Date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -101,8 +101,6 @@
     
     //Table No
     [mCollectData appendData:[self convertStringToBytesArr:@"1" length:4]];
-    
-    /******/
     
     /**XBillIdData**/
     
@@ -140,19 +138,24 @@
     /**XSendOrderDataStruct**/
     
     for (ProductModel *product in [ShareManager shared].cartArr) {
-        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.ids] length:4]];
-        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.ids] length:4]]; //PLU No
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]]; //Qty
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Current price
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Item Flag
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Item Flag
+        
+        /**XCondimentData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         
+        /**XCookingInstructionData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+        
+        /**XServingTimeData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+        
+        /**XFreeInstructionData**/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
     }
-    
-    /******/
     
 //    /**XTransactionData**/
 //    int totalPrice = 0;
@@ -324,13 +327,13 @@
 //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
 //
 //        /**XItemOptionData**/
-//        /****XCondimentData**/
+//        /****XCondimentData***/
 //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-//        /****XCookingInstructionData**/
+//        /****XCookingInstructionData***/
 //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-//        /****XServingTimeData**/
+//        /****XServingTimeData***/
 //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-//        /****XFreeInstructionData**/
+//        /****XFreeInstructionData***/
 //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
 //    }
     
