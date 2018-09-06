@@ -11,6 +11,7 @@
 #import "ProductModel.h"
 #import "ShareManager.h"
 #import "OutOfStockModel.h"
+#import "Util.h"
 
 @interface OutOfStockController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -58,6 +59,21 @@
             }
         }
     }
+    
+    products = [NSMutableArray new];
+    
+    for (ProductModel *product in [ShareManager shared].cartArr) {
+        if ([product.qty intValue] > 0) {
+            [products addObject:product];
+        }
+    }
+    
+    if (products.count == 0) {
+        [Util showAlert:@"No product to proceed." vc:self];
+        return;
+    }
+    
+    [ShareManager shared].cartArr = products;
     
     [self sendPOSRequest:SendTransaction];
 }

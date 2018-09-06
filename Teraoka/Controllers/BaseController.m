@@ -185,8 +185,6 @@
         NSString *errorID = [Util hexadecimalString:dataErrorID];
         
         if ([errorID isEqualToString:ERROR_ID_OUT_OF_STOCK]) {
-            [Util showAlert:@"Out of stock." vc:self];
-            
             location = location + REPLY_STATUS + REPLY_DATA_SIZE + 14;
             
             /**XOutOfStockData**/
@@ -242,6 +240,7 @@
         [self getExistingOrder];
         
         [ShareManager shared].cartArr = nil;
+        [ShareManager shared].outOfStockArr = nil;
         
         OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
         vc.receipt = receiptResponse;
