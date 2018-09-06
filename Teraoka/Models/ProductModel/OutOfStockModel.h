@@ -10,5 +10,5 @@
 
 @interface OutOfStockModel : NSObject
 @property (nonatomic, strong) NSString *ids;
-@property (nonatomic, strong) NSMutableArray *qty;
+@property (nonatomic, strong) NSString *qty;
 @end

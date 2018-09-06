@@ -181,7 +181,7 @@
         [self sendPOSRequest:SendTransaction];
     } else {
         NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        NSData *dataErrorID = [replyData subdataWithRange:NSMakeRange(0, 4)];
+        NSData *dataErrorID = [replyData subdataWithRange:NSMakeRange(0, 2)];
         NSString *errorID = [Util hexadecimalString:dataErrorID];
         
         if ([errorID isEqualToString:ERROR_ID_OUT_OF_STOCK]) {
@@ -209,8 +209,8 @@
                 int pluQty = [Util hexStringToInt:[Util hexadecimalString:dataPluQty]];
                 
                 OutOfStockModel *model = [[OutOfStockModel alloc] init];
-                model.ids = pluNo;
-                model.qty = pluQty;
+                model.ids = [NSString stringWithFormat:@"%d", pluNo];
+                model.qty = [NSString stringWithFormat:@"%d", pluQty];
                 
                 [outOfStockArr addObject:model];
                 
