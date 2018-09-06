@@ -48,6 +48,9 @@
 #define REPLY_STATUS 4
 #define REPLY_DATA_SIZE 4
 
+//error id
+#define ERROR_ID_OUT_OF_STOCK @"0401"
+
 //language
 #define KEY_LANG_EN @"en"
 #define KEY_LANG_CH @"zh-Hans"

@@ -57,7 +57,7 @@
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", commandSize] length:4]];
     
     //Command Id
-    [mCollectData appendData:[self convertStringToBytesArr:@"13200" length:4]];
+    [mCollectData appendData:[self convertStringToBytesArr:@"10502" length:4]];
 
     //Data size
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", dataSize] length:4]];
