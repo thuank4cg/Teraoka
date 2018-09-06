@@ -10,6 +10,7 @@
 #import "OutOfStockCell.h"
 #import "ProductModel.h"
 #import "ShareManager.h"
+#import "OutOfStockModel.h"
 
 @interface OutOfStockController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -19,14 +20,23 @@
 @end
 
 @implementation OutOfStockController {
-    NSArray *products;
+    NSMutableArray *products;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    products = [ShareManager shared].cartArr;
+    products = [NSMutableArray new];
+    
+    for (OutOfStockModel *model in [ShareManager shared].outOfStockArr) {
+        for (ProductModel *product in [ShareManager shared].cartArr) {
+            if ([model.ids isEqualToString:product.ids]) {
+                [products addObject:product];
+                product.qtyAvailable = model.qty;
+            }
+        }
+    }
     
     [self setupView];
 }
@@ -41,7 +51,15 @@
 }
 
 - (IBAction)yesAction:(id)sender {
-    [self sendTransaction];
+    for (OutOfStockModel *model in [ShareManager shared].outOfStockArr) {
+        for (ProductModel *product in [ShareManager shared].cartArr) {
+            if ([model.ids isEqualToString:product.ids]) {
+                product.qty = model.qty;
+            }
+        }
+    }
+    
+    [self sendPOSRequest:SendTransaction];
 }
 
 //MARK: Custom method

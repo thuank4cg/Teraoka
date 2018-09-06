@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum
+{
+    SendOrder = 1,
+    SendTransaction
+} CommandName;
+
 @interface ParamsHelper : NSObject
 + (ParamsHelper *)shared;
-- (NSMutableData *)collectData;
+- (NSMutableData *)collectData:(CommandName)commandName;
 @end

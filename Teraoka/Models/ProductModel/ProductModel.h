@@ -21,5 +21,6 @@
 @property (nonatomic, strong) NSString<Optional> *priceNumber;
 @property (nonatomic, strong) NSString<Optional> *originalPrice;
 @property (nonatomic, strong) NSString<Optional> *qty;
+@property (nonatomic, strong) NSString<Optional> *qtyAvailable;
 @property (nonatomic, strong) NSMutableArray *options;
 @end

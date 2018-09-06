@@ -16,6 +16,7 @@
 #import "ProductModel.h"
 #import "ProductOptionValue.h"
 #import "ProductOption.h"
+#import "APPConstants.h"
 
 @interface OrderSummaryController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -37,6 +38,12 @@
     products = [ShareManager shared].cartArr;
     
     [self setupView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOutOfStock:) name:KEY_NOTIFY_OUT_OF_STOCK object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -78,7 +85,12 @@
     
     [ShareManager shared].cartArr = products;
     
-//    [self sendTransaction];
+    [self sendPOSRequest:SendOrder];
+}
+
+//MARK: Custom method
+
+- (void)showOutOfStock:(NSNotification *)notification {
     [self.delegate showOutOfStockScreen];
     [self.view removeFromSuperview];
 }

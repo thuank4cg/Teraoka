@@ -12,12 +12,12 @@
 #import <ProgressHUD.h>
 #import "ShareManager.h"
 #import "APPConstants.h"
-#import "ParamsHelper.h"
 #import "Util.h"
 #import "OrderConfirmController.h"
 #import "ProductModel.h"
 #import "ProductOption.h"
 #import "ProductOptionValue.h"
+#import "OutOfStockModel.h"
 
 #define STATUS_REPLY_OK @"00000000"
 #define MSG_ERROR @"Submission failed due to connection error"
@@ -32,6 +32,7 @@
     NSInputStream *inputStream;
     CFReadStreamRef readStream;
     CFReadStreamRef writeStream;
+    CommandName commandName;
 }
 
 - (void)viewDidLoad {
@@ -52,7 +53,9 @@
     
 }
 
-- (void)sendTransaction {
+- (void)sendPOSRequest:(CommandName)_commandName {
+    commandName = _commandName;
+    
     [ProgressHUD show:nil Interaction:NO];
     //    if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable)
     //    {
@@ -126,7 +129,17 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
-    [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:10 tag:0];
+    switch (commandName) {
+        case SendOrder:
+            [asyncSocket writeData:[ParamsHelper.shared collectData:SendOrder] withTimeout:10 tag:0];
+            break;
+        case SendTransaction:
+            [asyncSocket writeData:[ParamsHelper.shared collectData:SendTransaction] withTimeout:10 tag:0];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
@@ -138,33 +151,15 @@
     NSLog(@"didReadData");
     [ProgressHUD dismiss];
     
-//    int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
-//
-//    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
-//    NSString *httpResponse = [Util hexadecimalString:replyStatus];
-//    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
-//        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
-//        NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-//        NSData *dataReceipt = [replyData subdataWithRange:NSMakeRange(0, 4)];
-//        NSData *transactionNumber = [replyData subdataWithRange:NSMakeRange(4, 4)];
-//
-//        int receiptResponse = [Util hexStringToInt:[Util hexadecimalString:dataReceipt]];
-//        int transactionNumberResponse = [Util hexStringToInt:[Util hexadecimalString:transactionNumber]];
-//        NSLog(@"%d %d", receiptResponse, transactionNumberResponse);
-//
-//        [self getExistingOrder];
-//
-//        [ShareManager shared].cartArr = nil;
-//
-//        OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
-//        vc.receipt = receiptResponse;
-//        vc.queueNumber = transactionNumberResponse;
-//        [self.navigationController pushViewController:vc animated:NO];
-//    } else {
-//        [Util showAlert:MSG_ERROR vc:self];
-//    }
-    
-    [self handleDataSendOrder:data];
+    switch (commandName) {
+        case SendOrder:
+            [self handleDataSendOrder:data];
+            break;
+        case SendTransaction:
+            [self handleDataSendTransaction:data];
+        default:
+            break;
+    }
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
@@ -183,7 +178,7 @@
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
     if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
-        [Util showAlert:@"Send order successfully." vc:self];
+        [self sendPOSRequest:SendTransaction];
     } else {
         NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
         NSData *dataErrorID = [replyData subdataWithRange:NSMakeRange(0, 4)];
@@ -204,17 +199,56 @@
             
             /**XOutOfStockDataStruct**/
             
+            NSMutableArray *outOfStockArr = [NSMutableArray new];
+            
             for (int i=0;i<numOfObject;i++) {
                 NSData *dataPlu = [data subdataWithRange:NSMakeRange(location, data.length - location)];
                 NSData *dataPluNo = [dataPlu subdataWithRange:NSMakeRange(0, 4)];
                 NSData *dataPluQty = [dataPlu subdataWithRange:NSMakeRange(4, 2)];
                 int pluNo = [Util hexStringToInt:[Util hexadecimalString:dataPluNo]];
                 int pluQty = [Util hexStringToInt:[Util hexadecimalString:dataPluQty]];
+                
+                OutOfStockModel *model = [[OutOfStockModel alloc] init];
+                model.ids = pluNo;
+                model.qty = pluQty;
+                
+                [outOfStockArr addObject:model];
+                
                 location += 6;
             }
+            [ShareManager shared].outOfStockArr = outOfStockArr;
+            [[NSNotificationCenter defaultCenter] postNotificationName:KEY_NOTIFY_OUT_OF_STOCK object:nil];
         } else {
             [Util showAlert:MSG_ERROR vc:self];
         }
+    }
+}
+
+- (void)handleDataSendTransaction:(NSData *)data {
+    int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
+    
+    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
+    NSString *httpResponse = [Util hexadecimalString:replyStatus];
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
+        NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+        NSData *dataReceipt = [replyData subdataWithRange:NSMakeRange(0, 4)];
+        NSData *transactionNumber = [replyData subdataWithRange:NSMakeRange(4, 4)];
+        
+        int receiptResponse = [Util hexStringToInt:[Util hexadecimalString:dataReceipt]];
+        int transactionNumberResponse = [Util hexStringToInt:[Util hexadecimalString:transactionNumber]];
+        NSLog(@"%d %d", receiptResponse, transactionNumberResponse);
+        
+        [self getExistingOrder];
+        
+        [ShareManager shared].cartArr = nil;
+        
+        OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
+        vc.receipt = receiptResponse;
+        vc.queueNumber = transactionNumberResponse;
+        [self.navigationController pushViewController:vc animated:NO];
+    } else {
+        [Util showAlert:MSG_ERROR vc:self];
     }
 }
 

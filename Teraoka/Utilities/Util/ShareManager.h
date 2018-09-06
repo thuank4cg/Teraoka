@@ -12,6 +12,7 @@
 @interface ShareManager : NSObject
 @property (nonatomic, strong) NSMutableArray *cartArr;
 @property (nonatomic, strong) NSMutableArray *existingOrderArr;
+@property (nonatomic, strong) NSMutableArray *outOfStockArr;
 @property (nonatomic, strong) SettingModel *setting;
 + (ShareManager *)shared;
 @end

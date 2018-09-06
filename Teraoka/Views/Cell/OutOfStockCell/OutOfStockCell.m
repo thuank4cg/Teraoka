@@ -8,6 +8,7 @@
 
 #import "OutOfStockCell.h"
 #import "UIColor+HexString.h"
+#import "ShareManager.h"
 
 @interface OutOfStockCell()
 
@@ -34,7 +35,8 @@
 - (void)setupCell:(ProductModel *)product {
     self.lbProductName.text = product.name;
     if (product.image.length > 0) self.productImage.image = [UIImage imageNamed:product.image];
-    self.lbAmount.text = [NSString stringWithFormat:@"%@ of %@", product.qty, product.qty];
+    
+    self.lbAmount.text = [NSString stringWithFormat:@"%@ of %@", product.qtyAvailable, product.qty];
 }
 
 @end

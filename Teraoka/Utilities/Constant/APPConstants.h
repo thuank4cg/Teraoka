@@ -24,6 +24,8 @@
 #define KEY_FONT_BOLD @"SFUIDisplay-Bold"
 #define KEY_FONT_REGULAR @"SFUIDisplay-Regular"
 
+#define KEY_NOTIFY_OUT_OF_STOCK @"out_of_stock_notification"
+
 #define KEY_SURFFIX_FILE @"txt"
 #define KEY_PRODUCT_TABLE_FILE_NAME @"plu"
 #define KEY_CATEGORY_TABLE_FILE_NAME @"menu_category"
