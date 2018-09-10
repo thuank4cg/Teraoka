@@ -91,6 +91,9 @@
 		7357EEAC1F9753DA001EB56B /* ExistingOrderHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7357EEAB1F9753DA001EB56B /* ExistingOrderHeader.xib */; };
 		7357EEB71F975A6D001EB56B /* BillCompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7357EEB51F975A6D001EB56B /* BillCompleteController.m */; };
 		7357EEB81F975A6D001EB56B /* BillCompleteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7357EEB61F975A6D001EB56B /* BillCompleteController.xib */; };
+		736095F12146286F001EBAB7 /* english.csv in Resources */ = {isa = PBXBuildFile; fileRef = 736095F02146286E001EBAB7 /* english.csv */; };
+		736095F521462CD0001EBAB7 /* LanguageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 736095F421462CD0001EBAB7 /* LanguageModel.m */; };
+		736095F821463163001EBAB7 /* NSString+KeyLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 736095F721463163001EBAB7 /* NSString+KeyLanguage.m */; };
 		736401B9213646F800953773 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 736401BB213646F800953773 /* Localizable.strings */; };
 		736401BF213648BF00953773 /* LocalizeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 736401BE213648BF00953773 /* LocalizeHelper.m */; };
 		736574691FA04E8E008E59CA /* Bread1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 736574571FA04E8E008E59CA /* Bread1.jpg */; };
@@ -257,6 +260,11 @@
 		7357EEB41F975A6D001EB56B /* BillCompleteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillCompleteController.h; sourceTree = "<group>"; };
 		7357EEB51F975A6D001EB56B /* BillCompleteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillCompleteController.m; sourceTree = "<group>"; };
 		7357EEB61F975A6D001EB56B /* BillCompleteController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillCompleteController.xib; sourceTree = "<group>"; };
+		736095F02146286E001EBAB7 /* english.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = english.csv; sourceTree = "<group>"; };
+		736095F321462CD0001EBAB7 /* LanguageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageModel.h; sourceTree = "<group>"; };
+		736095F421462CD0001EBAB7 /* LanguageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanguageModel.m; sourceTree = "<group>"; };
+		736095F621463163001EBAB7 /* NSString+KeyLanguage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+KeyLanguage.h"; sourceTree = "<group>"; };
+		736095F721463163001EBAB7 /* NSString+KeyLanguage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+KeyLanguage.m"; sourceTree = "<group>"; };
 		736401B52136415E00953773 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		736401B62136415E00953773 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		736401BA213646F800953773 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -402,6 +410,7 @@
 		730FE0B41F95A1690045A234 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				736095F02146286E001EBAB7 /* english.csv */,
 				73EC12732005F872005C11C6 /* HOTMasterDataFull_02.12_180110_090203_01.10.zip */,
 				73EC12712005F31F005C11C6 /* HOTMasterDataFull_02.12_180110_085203_01.38.zip */,
 				7334D2D4200477C1009853BB /* HOTMasterDataFull_02.12_171214_143505_01.29.zip */,
@@ -417,6 +426,7 @@
 		730FE0CE1F95A1FE0045A234 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				736095F221462C9E001EBAB7 /* Language */,
 				73840E9C212C189700904454 /* SettingModel */,
 				7384AD281F99917000E996AD /* CategoryModel */,
 				7384AD241F998ED300E996AD /* ProductModel */,
@@ -547,6 +557,8 @@
 				730FE0E21F95A6B40045A234 /* UIColor+HexString.m */,
 				730FE0E31F95A6B40045A234 /* UIView+Nib.h */,
 				730FE0E41F95A6B40045A234 /* UIView+Nib.m */,
+				736095F621463163001EBAB7 /* NSString+KeyLanguage.h */,
+				736095F721463163001EBAB7 /* NSString+KeyLanguage.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -837,6 +849,15 @@
 			path = BillCompleteController;
 			sourceTree = "<group>";
 		};
+		736095F221462C9E001EBAB7 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				736095F321462CD0001EBAB7 /* LanguageModel.h */,
+				736095F421462CD0001EBAB7 /* LanguageModel.m */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
 		737B4895212AA00300B02B3D /* SettingsController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1110,6 +1131,7 @@
 				730FE0FF1F95B18B0045A234 /* HomeController.xib in Resources */,
 				7365746F1FA04E8E008E59CA /* Chocolate1.jpg in Resources */,
 				7386F1DB212E4F36001DAC8D /* OutOfStockController.xib in Resources */,
+				736095F12146286F001EBAB7 /* english.csv in Resources */,
 				7336755F1FE25F2200F0AFF8 /* 1006.png in Resources */,
 				733675621FE25F2200F0AFF8 /* 1002.png in Resources */,
 				730FE0F41F95AB950045A234 /* EnterTableController.xib in Resources */,
@@ -1200,9 +1222,11 @@
 				739853521FBC38B30024E87C /* CategoryCollectionCell.m in Sources */,
 				7357EE9F1F974BE6001EB56B /* ViewExistingOrderController.m in Sources */,
 				730FE0DB1F95A5230045A234 /* TextfieldCustom.m in Sources */,
+				736095F821463163001EBAB7 /* NSString+KeyLanguage.m in Sources */,
 				7382C8601FDE2B0300952250 /* WhiteRaccoon.m in Sources */,
 				7384AD271F9990B100E996AD /* ProductModel.m in Sources */,
 				7357EE721F96FA43001EB56B /* OptionCollectionCell.m in Sources */,
+				736095F521462CD0001EBAB7 /* LanguageModel.m in Sources */,
 				730FE1121F95EC180045A234 /* ProductCell.m in Sources */,
 				7357EE991F974B0B001EB56B /* OrderConfirmController.m in Sources */,
 				737B489D212AAB0300B02B3D /* CommonButton.m in Sources */,

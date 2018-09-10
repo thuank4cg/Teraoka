@@ -22,6 +22,7 @@
 #import "ParamsHelper.h"
 #import "Util.h"
 #import "LocalizeHelper.h"
+#import "NSString+KeyLanguage.h"
 
 @interface NewOrderController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
@@ -59,8 +60,8 @@
 - (void)loadLocalizable {
     [super loadLocalizable];
     
-    self.backBtnTitle.text = LocalizedString(@"SC05_002");
-    self.submitBtnTitle.text = LocalizedString(@"SC05_003");
+    self.backBtnTitle.text = @"SC05_011".localizedString;
+    self.submitBtnTitle.text = @"SC05_012".localizedString;
 }
 
 - (void)setupView {

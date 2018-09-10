@@ -12,11 +12,15 @@
 #import "ShareManager.h"
 #import "CategoriesController.h"
 #import "ViewExistingOrderController.h"
+#import "NSString+KeyLanguage.h"
 
 @interface OrderConfirmController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UILabel *lbReceipt;
 @property (weak, nonatomic) IBOutlet UILabel *lbQueue;
+@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
+@property (weak, nonatomic) IBOutlet UIButton *okBtn;
+@property (weak, nonatomic) IBOutlet UIButton *viewBillBtn;
 
 @end
 
@@ -37,6 +41,14 @@
     
     self.lbReceipt.text = [NSString stringWithFormat:@"Receipt: %d", self.receipt];
     self.lbQueue.text = [NSString stringWithFormat:@"Order number: %d", self.queueNumber];
+}
+
+- (void)loadLocalizable {
+    [super loadLocalizable];
+    
+    self.lbTitle.text = @"SC08_021".localizedString;
+    [self.okBtn setTitle:@"SC08_022".localizedString.uppercaseString forState:UIControlStateNormal];
+    [self.viewBillBtn setTitle:@"SC08_023".localizedString.uppercaseString forState:UIControlStateNormal];
 }
 
 - (IBAction)backTohome:(id)sender {

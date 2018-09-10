@@ -31,7 +31,7 @@
 #import <ProgressHUD.h>
 #import "OutOfStockController.h"
 #import "LocalizeHelper.h"
-#import "LocalizeHelper.h"
+#import "NSString+KeyLanguage.h"
 
 typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     Home = 0,
@@ -93,12 +93,12 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
 - (void)loadLocalizable {
     [super loadLocalizable];
     
-    self.headerMenuTitleLb.text = LocalizedString(@"SC04_001");
-    self.homeMenuTitleLb.text = LocalizedString(@"SC04_002");
-    self.orderMenuTitleLb.text = LocalizedString(@"SC04_004");
-    self.waiterMenuTitleLb.text = LocalizedString(@"SC04_003");
-    self.billMenuTitleLb.text = LocalizedString(@"SC04_005");
-    self.restartOrderLb.text = LocalizedString(@"SC04_006");
+    self.headerMenuTitleLb.text = @"SC04_004".localizedString;
+    self.homeMenuTitleLb.text = @"SC04_006".localizedString;
+    self.waiterMenuTitleLb.text = @"SC04_007".localizedString;
+    self.orderMenuTitleLb.text = @"SC04_008".localizedString;
+    self.billMenuTitleLb.text = @"SC04_009".localizedString;
+    self.restartOrderLb.text = @"SC04_010".localizedString;
 }
 
 - (IBAction)homeAction:(id)sender {
@@ -439,7 +439,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
                     product.qty = @"1";
                     product.options = [[NSMutableArray alloc] init];
                     
-                    NSArray *options = @[[NSString stringWithFormat:@"%@ 1", LocalizedString(@"SC05_001")], [NSString stringWithFormat:@"%@ 2", LocalizedString(@"SC05_001")], [NSString stringWithFormat:@"%@ 3", LocalizedString(@"SC05_001")]];
+                    NSArray *options = @[[NSString stringWithFormat:@"%@ 1", @"SC05_013".localizedString], [NSString stringWithFormat:@"%@ 2", @"SC05_013".localizedString], [NSString stringWithFormat:@"%@ 3", @"SC05_013".localizedString]];
                     for (NSString *tittle in options) {
                         ProductOption *option = [[ProductOption alloc] init];
                         option.tittle = tittle;
@@ -448,17 +448,17 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
                         
                         ProductOptionValue *optionValue = [[ProductOptionValue alloc] init];
                         optionValue.isCheck = NO;
-                        optionValue.tittle = [NSString stringWithFormat:@"%@ A", LocalizedString(@"SC05_001")];
+                        optionValue.tittle = [NSString stringWithFormat:@"%@ A", @"SC05_013".localizedString];
                         [option.options addObject:optionValue];
                         
                         ProductOptionValue *optionValue2 = [[ProductOptionValue alloc] init];
                         optionValue2.isCheck = NO;
-                        optionValue2.tittle = [NSString stringWithFormat:@"%@ B", LocalizedString(@"SC05_001")];
+                        optionValue2.tittle = [NSString stringWithFormat:@"%@ B", @"SC05_013".localizedString];
                         [option.options addObject:optionValue2];
                         
                         ProductOptionValue *optionValue3 = [[ProductOptionValue alloc] init];
                         optionValue3.isCheck = NO;
-                        optionValue3.tittle = [NSString stringWithFormat:@"%@ C", LocalizedString(@"SC05_001")];
+                        optionValue3.tittle = [NSString stringWithFormat:@"%@ C", @"SC05_013".localizedString];
                         [option.options addObject:optionValue3];
                         
                         [product.options addObject:option];

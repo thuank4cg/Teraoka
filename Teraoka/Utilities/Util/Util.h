@@ -15,4 +15,5 @@
 + (NSString *)hexadecimalString:(NSData *)receivedData;
 + (void)showAlert:(NSString *)msg vc:(UIViewController *)vc;
 + (int)hexStringToInt:(NSString *)hex;
++ (void)setLanguage:(NSString *)fileName;
 @end

@@ -22,9 +22,11 @@
 #import <View+MASAdditions.h>
 #import "ShareManager.h"
 #import <ProgressHUD.h>
+#import "NSString+KeyLanguage.h"
 
 @interface SplashController () <WRRequestDelegate, NSStreamDelegate, EnterPassAccessDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
 @property (weak, nonatomic) IBOutlet UIButton *startOrderBtn;
 @property (weak, nonatomic) IBOutlet UIButton *settingBtn;
 
@@ -57,10 +59,18 @@
     [ShareManager shared].setting = setting;
 }
 
+- (void)loadLocalizable {
+    [super loadLocalizable];
+    
+    self.lbTitle.text = @"SC01_001".localizedString;
+    [self.startOrderBtn setTitle:@"SC01_002".localizedString forState:UIControlStateNormal];
+    [self.settingBtn setTitle:@"SC01_003".localizedString forState:UIControlStateNormal];
+}
+
 - (IBAction)startOrderAction:(id)sender {
-//    [self saveCategoryToDb];
-    [ProgressHUD show:nil Interaction:NO];
-    [self listDirectoryContents];
+    [self saveCategoryToDb];
+//    [ProgressHUD show:nil Interaction:NO];
+//    [self listDirectoryContents];
 }
 
 - (IBAction)settingAction:(id)sender {
@@ -138,10 +148,10 @@
 }
 
 - (NSString *)getContentFile:(NSString *)fileName {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
-//    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     return content;
 }

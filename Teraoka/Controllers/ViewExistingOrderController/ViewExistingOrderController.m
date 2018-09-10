@@ -11,14 +11,22 @@
 #import "ShareManager.h"
 #import "BillCompleteController.h"
 #import "CategoriesController.h"
+#import "NSString+KeyLanguage.h"
 
 @interface ViewExistingOrderController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
+@property (weak, nonatomic) IBOutlet UILabel *lbTotalBillTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lbTotalBill;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIButton *callForBillBtn;
+@property (weak, nonatomic) IBOutlet UIButton *backBtn;
+@property (weak, nonatomic) IBOutlet UIButton *callBtn;
+@property (weak, nonatomic) IBOutlet UILabel *lbHeaderItem;
+@property (weak, nonatomic) IBOutlet UILabel *lbHeaderOption;
+@property (weak, nonatomic) IBOutlet UILabel *lbHeaderQty;
+@property (weak, nonatomic) IBOutlet UILabel *lbHeaderPrice;
 
 @end
 
@@ -37,6 +45,19 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.view removeFromSuperview];
+}
+
+- (void)loadLocalizable {
+    [super loadLocalizable];
+    
+    self.lbTotalBillTitle.text = @"SC10_029".localizedString;
+    [self.backBtn setTitle:@"SC10_036".localizedString forState:UIControlStateNormal];
+    [self.callBtn setTitle:@"SC10_037".localizedString forState:UIControlStateNormal];
+    
+    self.lbHeaderItem.text = @"SC10_030".localizedString;
+    self.lbHeaderOption.text = @"SC10_031".localizedString;
+    self.lbHeaderQty.text = @"SC10_032".localizedString;
+    self.lbHeaderPrice.text = @"SC10_033".localizedString;
 }
 
 - (IBAction)backAction:(id)sender {

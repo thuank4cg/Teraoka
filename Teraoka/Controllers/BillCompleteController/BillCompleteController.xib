@@ -20,7 +20,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BillCompleteController">
             <connections>
+                <outlet property="backBtn" destination="r93-lI-PGC" id="WJo-6e-woT"/>
                 <outlet property="containerView" destination="JWN-E5-AFx" id="wx4-kd-2s0"/>
+                <outlet property="lbTitle1" destination="kAN-YG-Cpx" id="1ZO-IM-67t"/>
+                <outlet property="lbTitle2" destination="QZm-v3-Wh7" id="mDQ-CM-GS1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

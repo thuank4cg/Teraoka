@@ -10,6 +10,7 @@
 #import "TextfieldCustom.h"
 #import "ProductOptionValue.h"
 #import "ProductOption.h"
+#import "NSString+KeyLanguage.h"
 
 @interface OrderSummaryCell ()
 @property (weak, nonatomic) IBOutlet TextfieldCustom *tfQty;
@@ -50,9 +51,13 @@
 - (void)setDataForCell:(int)row product:(ProductModel *)product {
     _row = row;
     _product = product;
+    
     self.lbProductName.text = product.name;
+    self.lbOptions.text = @"SC07_017".localizedString;
+    
 //    if (product.qty == 0) [self.lbNotice setHidden:NO];
 //    else [self.lbNotice setHidden:YES];
+    
     self.tfQty.text = product.qty;
     if (product.image.length > 0) self.productImage.image = [UIImage imageNamed:product.image];
     
@@ -66,6 +71,7 @@
             }
         }
     }
+    
     optionStr = [optionStr stringByAppendingString:@"</p>"];
     NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[optionStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     

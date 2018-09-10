@@ -13,6 +13,8 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "LocalizeHelper.h"
+#import "ShareManager.h"
+#import "Util.h"
 
 @interface AppDelegate ()
 
@@ -30,7 +32,8 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_CURRENT_LANGUAGE]) {
         lang = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_CURRENT_LANGUAGE];
     }
-    LocalizationSetLanguage(lang);
+    
+    [Util setLanguage:lang];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     SplashController *splashVC = [[SplashController alloc] initWithNibName:@"SplashController" bundle:nil];

@@ -54,8 +54,8 @@
 #define ERROR_ID_OUT_OF_STOCK @"0401"
 
 //language
-#define KEY_LANG_EN @"en"
-#define KEY_LANG_CH @"zh-Hans"
+#define KEY_LANG_EN @"English"
+#define KEY_LANG_CH @"Chinese"
 
 #define KEY_LANGUAGE_ARR @[@"English", @"Chinese"]
 

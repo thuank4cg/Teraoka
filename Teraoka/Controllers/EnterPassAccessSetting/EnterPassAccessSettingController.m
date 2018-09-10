@@ -10,11 +10,16 @@
 #import "CommonTextfield.h"
 #import "Util.h"
 #import "ShareManager.h"
+#import "NSString+KeyLanguage.h"
 
 @interface EnterPassAccessSettingController ()
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfValue;
+@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
+@property (weak, nonatomic) IBOutlet UILabel *lbSubTitle;
+@property (weak, nonatomic) IBOutlet UIButton *backBtn;
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 
 @end
 
@@ -32,6 +37,16 @@
     self.containerView.layer.shadowOpacity = 0.5;
     self.containerView.layer.shadowRadius = 3.0;
     self.containerView.layer.masksToBounds = NO;
+}
+
+- (void)loadLocalizable {
+    [super loadLocalizable];
+    
+    self.lbTitle.text = @"SC12_041".localizedString;
+    self.lbSubTitle.text = @"SC12_042".localizedString;
+    
+    [self.backBtn setTitle:@"SC10_036".localizedString forState:UIControlStateNormal];
+    [self.submitBtn setTitle:@"SC12_043".localizedString forState:UIControlStateNormal];
 }
 
 - (IBAction)submitAction:(id)sender {

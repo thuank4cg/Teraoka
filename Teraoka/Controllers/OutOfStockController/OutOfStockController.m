@@ -12,11 +12,16 @@
 #import "ShareManager.h"
 #import "OutOfStockModel.h"
 #import "Util.h"
+#import "NSString+KeyLanguage.h"
 
 @interface OutOfStockController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UILabel *lbTitle1;
+@property (weak, nonatomic) IBOutlet UILabel *lbTitle2;
+@property (weak, nonatomic) IBOutlet UIButton *noBtn;
+@property (weak, nonatomic) IBOutlet UIButton *yesBtn;
 
 @end
 
@@ -45,6 +50,15 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.view removeFromSuperview];
+}
+
+- (void)loadLocalizable {
+    [super loadLocalizable];
+    
+    self.lbTitle1.text = @"SC09_024".localizedString;
+    self.lbTitle2.text = @"SC09_025".localizedString;
+    [self.noBtn setTitle:@"SC09_027".localizedString forState:UIControlStateNormal];
+    [self.yesBtn setTitle:@"SC09_028".localizedString forState:UIControlStateNormal];
 }
 
 - (IBAction)noAction:(id)sender {

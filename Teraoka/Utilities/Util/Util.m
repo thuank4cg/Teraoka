@@ -8,6 +8,8 @@
 
 #import "Util.h"
 #import <SIAlertView.h>
+#import "LanguageModel.h"
+#import "ShareManager.h"
 
 @implementation Util
 
@@ -59,6 +61,26 @@
     unsigned int iValue;
     [pScanner scanHexInt: &iValue];
     return iValue;
+}
+
++ (void)setLanguage:(NSString *)fileName {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName.lowercaseString ofType:@"csv"];
+    NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
+    NSArray *rows = [content componentsSeparatedByString:@"\n"];
+    
+    NSMutableArray *languages = [NSMutableArray new];
+    
+    for (NSString *row in rows){
+        NSArray *data = [row componentsSeparatedByString:@","];
+        if (data.count > 1) {
+            LanguageModel *language = [[LanguageModel alloc] init];
+            language.key = [data objectAtIndex:0];
+            language.value = [data objectAtIndex:1];
+            [languages addObject:language];
+        }
+    }
+    
+    [ShareManager shared].languages = languages;
 }
 
 @end

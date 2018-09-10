@@ -10,6 +10,7 @@
 #import "ProductOption.h"
 #import "ProductOptionValue.h"
 #import "UIColor+HexString.h"
+#import "NSString+KeyLanguage.h"
 
 @interface ExistingOrderCell()
 @property (weak, nonatomic) IBOutlet UIImageView *productImage;
@@ -52,7 +53,7 @@
     float price = [product.qty intValue] * [product.priceNumber floatValue];
     self.lbPrice.text = [NSString stringWithFormat:@"$%.2f", price];
     
-    self.lbStatus.text = @"Delivered";
+    self.lbStatus.text = @"SC10_034".localizedString;
 }
 
 @end

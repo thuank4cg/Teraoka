@@ -83,6 +83,7 @@
             <connections>
                 <outlet property="containerView" destination="g4D-Tp-CZu" id="kbc-Qh-HsJ"/>
                 <outlet property="lbAmount" destination="1z3-Ca-2AV" id="N16-it-uRh"/>
+                <outlet property="lbAvailable" destination="n3k-on-y9V" id="Uzv-XI-WkZ"/>
                 <outlet property="lbProductName" destination="F4k-T5-yyZ" id="DV9-By-9WD"/>
                 <outlet property="productImage" destination="tO3-dl-Sak" id="Ote-Ay-kGt"/>
             </connections>

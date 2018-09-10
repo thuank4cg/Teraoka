@@ -1,0 +1,66 @@
+KEY,VALUE
+SC01_001,DELIOUS SELF ORDER
+SC01_002,START ORDER
+SC01_003,SETTINGS
+SC04_004,MENU
+SC04_005,CATEGORY 01
+SC04_006,HOME
+SC04_007,WAITER
+SC04_008,ORDERS
+SC04_009,BILL
+SC04_010,RESTART ORDER
+SC05_011,BACK
+SC05_012,ADD
+SC05_013,Add Option
+SC07_014,ITEM
+SC07_015,OPTION
+SC07_016,QTY
+SC07_017,No options available
+SC07_018,Item will be removed
+SC07_019,BACK
+SC07_020,SUBMIT ORDER
+SC08_021,Your order has been sent
+SC08_022,Okay
+SC08_023,View Bill
+SC09_024,The following items are out of stock
+SC09_025,Do you want to proceed
+SC09_026,available
+SC09_027,NO
+SC09_028,YES
+SC10_029,BILL TOTAL
+SC10_030,ITEM
+SC10_031,OPTION
+SC10_032,QTY
+SC10_033,PRICE
+SC10_034,Delivered
+SC10_035,Pending
+SC10_036,BACK
+SC10_037,CALL FOR BILL
+SC11_038,Please hold Onn as we bring the bill to you.
+SC11_039,We give to see you again
+SC11_040,BACK TO HOME
+SC12_041,STAFF ACCESS
+SC12_042,Please enter the correct password to access the settings page.
+SC12_043,SUBMIT
+SC12_044,SETTINGS
+SC12_045,Please enter your server IP
+SC12_046,Select Language
+SC12_047,Set your password
+SC12_048,Select Mode
+SC12_049,Table Selection
+SC12_050,Ability to request for waiter’s assistance
+SC12_051,Ability to request for bill
+SC12_052,SAVE CHANGES
+SC12_053,Fetch Languages
+SC12_054,Loading…
+SC12_055,New Password
+SC12_056,Confirm Password
+SC12_057,Quick Serve
+SC12_058,Dine-in
+SC12_059,Fixed
+SC12_060,Pre-order
+SC12_061,Enter Table No.
+SC12_062,Enabled
+SC12_063,Disabled
+SC12_064,Enabled
+SC12_065,Disabled

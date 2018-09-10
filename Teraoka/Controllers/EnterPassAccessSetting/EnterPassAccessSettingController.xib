@@ -21,7 +21,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EnterPassAccessSettingController">
             <connections>
+                <outlet property="backBtn" destination="KWn-Xn-lub" id="bKC-Z6-TvT"/>
                 <outlet property="containerView" destination="bKi-XU-yqh" id="xEL-zN-t4y"/>
+                <outlet property="lbSubTitle" destination="ckz-Qq-F7S" id="quq-2Y-a0A"/>
+                <outlet property="lbTitle" destination="cmE-yE-4IU" id="7hv-ge-DqT"/>
+                <outlet property="submitBtn" destination="q6d-4G-tQ3" id="oxa-NM-vzn"/>
                 <outlet property="tfValue" destination="WAQ-BL-QCo" id="szp-gg-8nq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

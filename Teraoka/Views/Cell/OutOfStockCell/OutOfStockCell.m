@@ -9,6 +9,7 @@
 #import "OutOfStockCell.h"
 #import "UIColor+HexString.h"
 #import "ShareManager.h"
+#import "NSString+KeyLanguage.h"
 
 @interface OutOfStockCell()
 
@@ -16,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *productImage;
 @property (weak, nonatomic) IBOutlet UILabel *lbProductName;
 @property (weak, nonatomic) IBOutlet UILabel *lbAmount;
-
+@property (weak, nonatomic) IBOutlet UILabel *lbAvailable;
 
 @end
 
@@ -30,6 +31,8 @@
     self.containerView.layer.cornerRadius = 3;
     self.containerView.layer.borderWidth = 1;
     self.containerView.layer.borderColor = [UIColor colorWithHexString:@"f2f2f2"].CGColor;
+    
+    self.lbAvailable.text = @"SC09_026".localizedString;
 }
 
 - (void)setupCell:(ProductModel *)product {

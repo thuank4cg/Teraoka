@@ -20,10 +20,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewExistingOrderController">
             <connections>
+                <outlet property="backBtn" destination="jV7-Lj-uTO" id="MB9-Ab-hXa"/>
+                <outlet property="callBtn" destination="cyR-Xo-hWi" id="oOw-Ya-FLz"/>
                 <outlet property="callForBillBtn" destination="cyR-Xo-hWi" id="O4R-rF-yga"/>
                 <outlet property="containerView" destination="104-Zj-wsX" id="BnD-wL-4Yl"/>
                 <outlet property="headerView" destination="DAk-6i-GKt" id="Sp5-2g-L8e"/>
+                <outlet property="lbHeaderItem" destination="Anb-qW-MFh" id="tva-WS-g2N"/>
+                <outlet property="lbHeaderOption" destination="6Tu-uU-PEU" id="XjF-IC-D0A"/>
+                <outlet property="lbHeaderPrice" destination="Jd7-KB-TVD" id="kHz-sV-uWS"/>
+                <outlet property="lbHeaderQty" destination="31D-cN-jTv" id="MeX-vg-UoP"/>
                 <outlet property="lbTotalBill" destination="3TW-Dl-LAR" id="cbh-By-NpG"/>
+                <outlet property="lbTotalBillTitle" destination="GIG-zR-5TY" id="Do0-V6-gsZ"/>
                 <outlet property="tblView" destination="ZGs-yb-cKp" id="gIu-MK-DBO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

@@ -23,7 +23,11 @@
             <connections>
                 <outlet property="collectionView" destination="aX4-aT-rgh" id="65f-I9-YTd"/>
                 <outlet property="containerView" destination="PGD-Ig-20q" id="LfP-yZ-6YI"/>
+                <outlet property="lbTitle1" destination="2SV-9X-o44" id="Kdg-ZS-Vkz"/>
+                <outlet property="lbTitle2" destination="l6r-92-xFv" id="HO3-x0-Och"/>
+                <outlet property="noBtn" destination="het-0B-745" id="g13-WP-bGe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yesBtn" destination="HYm-ge-i9v" id="pwM-pq-GXQ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

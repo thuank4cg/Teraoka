@@ -17,6 +17,7 @@
 #import "ProductOptionValue.h"
 #import "ProductOption.h"
 #import "APPConstants.h"
+#import "NSString+KeyLanguage.h"
 
 @interface OrderSummaryController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -40,6 +41,13 @@
     [self setupView];
 }
 
+- (void)loadLocalizable {
+    [super loadLocalizable];
+    
+    [self.btnBack setTitle:@"SC07_019".localizedString forState:UIControlStateNormal];
+    [self.btnSend setTitle:@"SC07_020".localizedString forState:UIControlStateNormal];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -48,6 +56,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.view removeFromSuperview];
 }
 
@@ -151,6 +160,16 @@
     header.layer.shadowOpacity = 0.5;
     header.layer.shadowRadius = 3.0;
     header.layer.masksToBounds = NO;
+    
+    UILabel *lbl = (UILabel *)[header viewWithTag:1];
+    lbl.text = @"SC07_014".localizedString;
+    
+    lbl = (UILabel *)[header viewWithTag:2];
+    lbl.text = @"SC07_015".localizedString;
+    
+    lbl = (UILabel *)[header viewWithTag:3];
+    lbl.text = @"SC07_016".localizedString;
+    
     return header;
 }
 

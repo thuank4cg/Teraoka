@@ -23,7 +23,10 @@
                 <outlet property="containerView" destination="KMZ-f5-OQh" id="t7V-ML-Gab"/>
                 <outlet property="lbQueue" destination="p6A-10-Hbt" id="XJg-lM-oOR"/>
                 <outlet property="lbReceipt" destination="fDg-b7-vuq" id="8cZ-gr-W9R"/>
+                <outlet property="lbTitle" destination="OXN-Dz-Uv2" id="tYf-Zs-ojc"/>
+                <outlet property="okBtn" destination="mbg-UT-fNg" id="tGY-C1-tai"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewBillBtn" destination="Sc6-wz-xG1" id="NEj-v5-dmL"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
