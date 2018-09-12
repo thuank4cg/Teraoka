@@ -117,7 +117,11 @@
     [mCollectData appendData:[self convertStringToBytesArr:timeStr length:4]];
     
     //Table No
-    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:4]];
+    NSString *tableNo = @"0";
+    if ([ShareManager shared].setting && [ShareManager shared].setting.tableSelection == Fix_ed) {
+        tableNo = [NSString stringWithFormat:@"%d", [ShareManager shared].setting.tableNo];
+    }
+    [mCollectData appendData:[self convertStringToBytesArr:tableNo length:4]];
     
     /**XBillIdData**/
     

@@ -30,9 +30,9 @@
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfTableNo;
 @property (weak, nonatomic) IBOutlet SwitchCustomView *requestForAssistanceView;
 @property (weak, nonatomic) IBOutlet SwitchCustomView *requestForBillView;
-@property (weak, nonatomic) IBOutlet UIStackView *requestForAssistanceContainerView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topPaddingRequestForAssistanceContainerView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightRequestForAssistanceContainerView;
+@property (weak, nonatomic) IBOutlet UIStackView *requestTaleNoContainerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topPaddingTableNoContainerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightTableNoContainerView;
 @property (weak, nonatomic) IBOutlet UILabel *languageValueLb;
 @property (weak, nonatomic) IBOutlet UILabel *lbTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lbPleaseEnterIP;
@@ -72,6 +72,7 @@
     self.lbRequestForBill.text = @"SC12_051".localizedString;
     
     [self.fetchLanguageBtn setTitle:@"SC12_053".localizedString forState:UIControlStateNormal];
+    self.languageValueLb.text = @"SC12_054".localizedString;
     self.tfNewPassword.placeholder = @"SC12_055".localizedString;
     self.tfConfirmPassword.placeholder = @"SC12_056".localizedString;
     [self.quickServeBtn setTitle:@"SC12_057".localizedString forState:UIControlStateNormal];
@@ -123,9 +124,9 @@
             [self.fixedBtn selected];
             [self.preOrderBtn unselected];
             
-            [self.requestForAssistanceContainerView setHidden:NO];
-            self.heightRequestForAssistanceContainerView.constant = 55;
-            self.topPaddingRequestForAssistanceContainerView.constant = 50;
+            [self.requestTaleNoContainerView setHidden:NO];
+            self.heightTableNoContainerView.constant = 50;
+            self.topPaddingTableNoContainerView.constant = 10;
             
             break;
             
@@ -133,9 +134,9 @@
             [self.fixedBtn unselected];
             [self.preOrderBtn selected];
             
-            [self.requestForAssistanceContainerView setHidden:YES];
-            self.heightRequestForAssistanceContainerView.constant = 0;
-            self.topPaddingRequestForAssistanceContainerView.constant = 0;
+            [self.requestTaleNoContainerView setHidden:YES];
+            self.heightTableNoContainerView.constant = 0;
+            self.topPaddingTableNoContainerView.constant = 0;
             
             break;
     }
@@ -151,9 +152,9 @@
                                          [[NSUserDefaults standardUserDefaults] setObject:items[selectedIndex] forKey:KEY_CURRENT_LANGUAGE];
                                          [[NSUserDefaults standardUserDefaults] synchronize];
                                          
-                                         [Util setLanguage:items[selectedIndex]];
+                                         [Util setLanguage:items[0]];
                                          
-                                         self.languageValueLb.text = items[selectedIndex];
+                                         self.languageValueLb.text = items[0];
                                      }
                                      cancelBlock:^(ActionSheetStringPicker *picker) {
                                          
@@ -195,6 +196,9 @@
 }
 
 - (void)setupView {
+    self.lbRequestForWaiter.adjustsFontSizeToFitWidth = YES;
+    self.lbRequestForBill.adjustsFontSizeToFitWidth = YES;
+    
     self.requestForAssistanceView.enabledBtn.titleLabel.font = [UIFont fontWithName:KEY_FONT_BOLD size:20];
     self.requestForAssistanceView.disabledBtn.titleLabel.font = [UIFont fontWithName:KEY_FONT_BOLD size:20];
     
@@ -241,9 +245,9 @@
             [self.fixedBtn selected];
             [self.preOrderBtn unselected];
             
-            [self.requestForAssistanceContainerView setHidden:NO];
-            self.heightRequestForAssistanceContainerView.constant = 55;
-            self.topPaddingRequestForAssistanceContainerView.constant = 50;
+            [self.requestTaleNoContainerView setHidden:NO];
+            self.heightTableNoContainerView.constant = 50;
+            self.topPaddingTableNoContainerView.constant = 10;
             
             break;
             
@@ -251,9 +255,9 @@
             [self.fixedBtn unselected];
             [self.preOrderBtn selected];
             
-            [self.requestForAssistanceContainerView setHidden:YES];
-            self.heightRequestForAssistanceContainerView.constant = 0;
-            self.topPaddingRequestForAssistanceContainerView.constant = 0;
+            [self.requestTaleNoContainerView setHidden:YES];
+            self.heightTableNoContainerView.constant = 0;
+            self.topPaddingTableNoContainerView.constant = 0;
             
             break;
     }

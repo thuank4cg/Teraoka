@@ -60,36 +60,28 @@
                                         <constraint firstAttribute="height" constant="70" id="HE5-cU-HPy"/>
                                         <constraint firstAttribute="width" secondItem="Q3A-vn-yTM" secondAttribute="height" multiplier="720:145" id="TGb-1q-pzw"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                    <state key="normal" backgroundImage="back_btn"/>
+                                    <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
+                                    <state key="normal" title="BACK" backgroundImage="back_btn">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="backAction:" destination="-1" eventType="touchUpInside" id="d4E-Sb-DeY"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BACK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86B-SF-1nT">
-                                    <rect key="frame" x="209.5" y="34.5" width="59" height="26"/>
-                                    <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z31-mz-uDT">
                                     <rect key="frame" x="452.5" y="12" width="347.5" height="70"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="70" id="8Ve-Ro-KYg"/>
                                         <constraint firstAttribute="width" secondItem="Z31-mz-uDT" secondAttribute="height" multiplier="720:145" id="SAk-3I-dQC"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                    <state key="normal" backgroundImage="ok_btn"/>
+                                    <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
+                                    <state key="normal" title="SUBMIT ORDER" backgroundImage="ok_btn">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="sendOrder:" destination="-1" eventType="touchUpInside" id="N2E-fb-Aox"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUBMIT ORDER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPd-Ja-xN1">
-                                    <rect key="frame" x="532" y="34.5" width="159.5" height="26"/>
-                                    <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -97,11 +89,7 @@
                                 <constraint firstItem="Z31-mz-uDT" firstAttribute="top" secondItem="FWU-P5-AN5" secondAttribute="top" constant="12" id="81C-Cv-9OU"/>
                                 <constraint firstAttribute="height" constant="85" id="8pd-f4-ZUr"/>
                                 <constraint firstAttribute="trailing" secondItem="Z31-mz-uDT" secondAttribute="trailing" constant="50" id="RuJ-Wl-ass"/>
-                                <constraint firstItem="kPd-Ja-xN1" firstAttribute="centerY" secondItem="Z31-mz-uDT" secondAttribute="centerY" id="hnK-SO-fmx"/>
-                                <constraint firstItem="86B-SF-1nT" firstAttribute="centerY" secondItem="Q3A-vn-yTM" secondAttribute="centerY" id="j6s-0K-gL7"/>
-                                <constraint firstItem="86B-SF-1nT" firstAttribute="centerX" secondItem="Q3A-vn-yTM" secondAttribute="centerX" constant="15" id="nb1-AI-kn6"/>
                                 <constraint firstItem="Q3A-vn-yTM" firstAttribute="top" secondItem="FWU-P5-AN5" secondAttribute="top" constant="12" id="sgj-3I-G5a"/>
-                                <constraint firstItem="kPd-Ja-xN1" firstAttribute="centerX" secondItem="Z31-mz-uDT" secondAttribute="centerX" constant="-15" id="ydK-tA-nhn"/>
                             </constraints>
                         </view>
                     </subviews>

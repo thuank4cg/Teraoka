@@ -24,7 +24,7 @@
                 <outlet property="dineinBtn" destination="yEf-AM-i1o" id="Kau-uY-rLF"/>
                 <outlet property="fetchLanguageBtn" destination="wbk-fm-3II" id="Lpc-7L-ITi"/>
                 <outlet property="fixedBtn" destination="yPg-FP-Js1" id="lIc-bR-VT0"/>
-                <outlet property="heightRequestForAssistanceContainerView" destination="bSD-MK-fuM" id="zi0-aj-bef"/>
+                <outlet property="heightTableNoContainerView" destination="Xos-uL-geh" id="ohH-pD-6eY"/>
                 <outlet property="languageValueLb" destination="3oB-ZF-GWn" id="3Ju-sR-yop"/>
                 <outlet property="lbPleaseEnterIP" destination="Xzj-yc-54D" id="BUk-uE-7l9"/>
                 <outlet property="lbRequestForBill" destination="fpj-Si-lyG" id="Tv5-5A-ham"/>
@@ -36,15 +36,15 @@
                 <outlet property="lbTitle" destination="nS1-zj-pGT" id="NSx-dm-M2L"/>
                 <outlet property="preOrderBtn" destination="E9R-ow-Oi7" id="S2X-FX-xho"/>
                 <outlet property="quickServeBtn" destination="Qy2-xH-uys" id="EqD-2O-8kz"/>
-                <outlet property="requestForAssistanceContainerView" destination="T6e-cf-cck" id="Z96-nd-IE7"/>
                 <outlet property="requestForAssistanceView" destination="X5X-ws-j7T" id="Gn7-cm-hHz"/>
                 <outlet property="requestForBillView" destination="hvh-cT-Qtc" id="Vsi-2L-wqp"/>
+                <outlet property="requestTaleNoContainerView" destination="N7C-Mf-XUk" id="Rds-oL-XQB"/>
                 <outlet property="saveBtn" destination="8Nw-BH-8np" id="HDh-Oo-SXS"/>
                 <outlet property="tfConfirmPassword" destination="nay-mZ-nuH" id="GVF-dZ-0VL"/>
                 <outlet property="tfIPAddress" destination="rpp-BX-EmB" id="dqM-b4-Ukd"/>
                 <outlet property="tfNewPassword" destination="LkY-Ka-PFK" id="8X9-Em-kCc"/>
                 <outlet property="tfTableNo" destination="4tL-nK-isu" id="mdf-qH-khY"/>
-                <outlet property="topPaddingRequestForAssistanceContainerView" destination="cZe-sg-24p" id="vg2-Nk-sw3"/>
+                <outlet property="topPaddingTableNoContainerView" destination="Zth-Gr-75d" id="mrg-X2-fPu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
