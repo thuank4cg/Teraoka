@@ -18,6 +18,7 @@
 #import "ProductOption.h"
 #import "APPConstants.h"
 #import "NSString+KeyLanguage.h"
+#import "Util.h"
 
 @interface OrderSummaryController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -87,6 +88,12 @@
 }
 
 - (IBAction)sendOrder:(id)sender {
+    SettingModel *setting = [ShareManager shared].setting;
+    if (setting && setting.selectMode == Dine_in && setting.tableSelection == Fix_ed && setting.tableNo == 0) {
+        [Util showAlert:@"Please enter table no in settings" vc:self];
+        return;
+    }
+    
     if (products.count == 0) return;
     for (ProductModel *product in products) {
         if ([product.qty intValue] == 0) [products removeObject:product];

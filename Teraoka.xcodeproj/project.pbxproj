@@ -64,6 +64,9 @@
 		733675651FE25F2200F0AFF8 /* 3004.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675451FE25F2200F0AFF8 /* 3004.png */; };
 		733675661FE25F2200F0AFF8 /* 1001.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675461FE25F2200F0AFF8 /* 1001.png */; };
 		733675671FE25F2200F0AFF8 /* 3005.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675471FE25F2200F0AFF8 /* 3005.png */; };
+		7336D84C214F527A004908E0 /* WaiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7336D84A214F527A004908E0 /* WaiterController.m */; };
+		7336D84D214F527A004908E0 /* WaiterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7336D84B214F527A004908E0 /* WaiterController.xib */; };
+		7336D850214F5889004908E0 /* ContainerCommonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7336D84F214F5889004908E0 /* ContainerCommonView.m */; };
 		7344596B1FECAA09006D3BEF /* menu_category.txt in Resources */ = {isa = PBXBuildFile; fileRef = 734459681FECAA09006D3BEF /* menu_category.txt */; };
 		7344596C1FECAA09006D3BEF /* menu_contents.txt in Resources */ = {isa = PBXBuildFile; fileRef = 734459691FECAA09006D3BEF /* menu_contents.txt */; };
 		7344596D1FECAA09006D3BEF /* plu.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7344596A1FECAA09006D3BEF /* plu.txt */; };
@@ -222,6 +225,11 @@
 		733675451FE25F2200F0AFF8 /* 3004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3004.png; sourceTree = "<group>"; };
 		733675461FE25F2200F0AFF8 /* 1001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1001.png; sourceTree = "<group>"; };
 		733675471FE25F2200F0AFF8 /* 3005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3005.png; sourceTree = "<group>"; };
+		7336D849214F527A004908E0 /* WaiterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaiterController.h; sourceTree = "<group>"; };
+		7336D84A214F527A004908E0 /* WaiterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaiterController.m; sourceTree = "<group>"; };
+		7336D84B214F527A004908E0 /* WaiterController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaiterController.xib; sourceTree = "<group>"; };
+		7336D84E214F5889004908E0 /* ContainerCommonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContainerCommonView.h; sourceTree = "<group>"; };
+		7336D84F214F5889004908E0 /* ContainerCommonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContainerCommonView.m; sourceTree = "<group>"; };
 		734459681FECAA09006D3BEF /* menu_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_category.txt; sourceTree = "<group>"; };
 		734459691FECAA09006D3BEF /* menu_contents.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_contents.txt; sourceTree = "<group>"; };
 		7344596A1FECAA09006D3BEF /* plu.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plu.txt; sourceTree = "<group>"; };
@@ -437,6 +445,7 @@
 		730FE0CF1F95A2120045A234 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7336D848214F5249004908E0 /* WaiterController */,
 				7386F1D6212E4EED001DAC8D /* OutOfStockController */,
 				73840E96212C0A3800904454 /* EnterPassAccessSetting */,
 				737B4895212AA00300B02B3D /* SettingsController */,
@@ -716,6 +725,16 @@
 			path = ImagesForProduct;
 			sourceTree = "<group>";
 		};
+		7336D848214F5249004908E0 /* WaiterController */ = {
+			isa = PBXGroup;
+			children = (
+				7336D849214F527A004908E0 /* WaiterController.h */,
+				7336D84A214F527A004908E0 /* WaiterController.m */,
+				7336D84B214F527A004908E0 /* WaiterController.xib */,
+			);
+			path = WaiterController;
+			sourceTree = "<group>";
+		};
 		7357EE671F96F84D001EB56B /* OptionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -873,6 +892,8 @@
 			children = (
 				737B48A3212AB18A00B02B3D /* SwitchCustomView.h */,
 				737B48A4212AB18A00B02B3D /* SwitchCustomView.m */,
+				7336D84E214F5889004908E0 /* ContainerCommonView.h */,
+				7336D84F214F5889004908E0 /* ContainerCommonView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1103,6 +1124,7 @@
 				733675511FE25F2200F0AFF8 /* 2003.png in Resources */,
 				7386F1E2212E52AB001DAC8D /* OutOfStockCell.xib in Resources */,
 				7336754D1FE25F2200F0AFF8 /* 4006.png in Resources */,
+				7336D84D214F527A004908E0 /* WaiterController.xib in Resources */,
 				733675661FE25F2200F0AFF8 /* 1001.png in Resources */,
 				733675601FE25F2200F0AFF8 /* 3003.png in Resources */,
 				7357EEAC1F9753DA001EB56B /* ExistingOrderHeader.xib in Resources */,
@@ -1206,6 +1228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7386F1E1212E52AB001DAC8D /* OutOfStockCell.m in Sources */,
+				7336D850214F5889004908E0 /* ContainerCommonView.m in Sources */,
 				7357EE7E1F9713CD001EB56B /* NewOrderAddedController.m in Sources */,
 				736401BF213648BF00953773 /* LocalizeHelper.m in Sources */,
 				730FE0F31F95AB950045A234 /* EnterTableController.m in Sources */,
@@ -1213,6 +1236,7 @@
 				73840E9A212C0A8700904454 /* EnterPassAccessSettingController.m in Sources */,
 				7386F1DA212E4F36001DAC8D /* OutOfStockController.m in Sources */,
 				730FE11A1F96032F0045A234 /* NewOrderController.m in Sources */,
+				7336D84C214F527A004908E0 /* WaiterController.m in Sources */,
 				73A660711FE264B000FB80B8 /* SplashController.m in Sources */,
 				730FE0E51F95A6B40045A234 /* UIColor+HexString.m in Sources */,
 				73B9A72B1F9DA4C8004680E4 /* ProductOption.m in Sources */,

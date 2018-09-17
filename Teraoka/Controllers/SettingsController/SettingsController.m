@@ -106,11 +106,19 @@
         case Quick_Serve:
             [self.quickServeBtn selected];
             [self.dineinBtn unselected];
+            
+            [self hiddenTableNo:YES];
+            
             break;
             
         default:
             [self.quickServeBtn unselected];
             [self.dineinBtn selected];
+            
+            if (tableSelectionValue == Fix_ed) {
+                [self hiddenTableNo:NO];
+            }
+            
             break;
     }
 }
@@ -124,9 +132,9 @@
             [self.fixedBtn selected];
             [self.preOrderBtn unselected];
             
-            [self.requestTaleNoContainerView setHidden:NO];
-            self.heightTableNoContainerView.constant = 50;
-            self.topPaddingTableNoContainerView.constant = 10;
+            if (selectModeValue == Dine_in) {
+                [self hiddenTableNo:NO];
+            }
             
             break;
             
@@ -134,9 +142,7 @@
             [self.fixedBtn unselected];
             [self.preOrderBtn selected];
             
-            [self.requestTaleNoContainerView setHidden:YES];
-            self.heightTableNoContainerView.constant = 0;
-            self.topPaddingTableNoContainerView.constant = 0;
+            [self hiddenTableNo:YES];
             
             break;
     }
@@ -169,10 +175,17 @@
         }
     }
     
-    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    if ([self.tfTableNo.text rangeOfCharacterFromSet:notDigits].location != NSNotFound) {
-        [Util showAlert:@"Table No must be numeric" vc:self];
-        return;
+    if (selectModeValue == Dine_in && tableSelectionValue == Fix_ed) {
+        NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+        if ([self.tfTableNo.text rangeOfCharacterFromSet:notDigits].location != NSNotFound) {
+            [Util showAlert:@"Table No must be numeric" vc:self];
+            return;
+        }
+        
+        if ([self.tfTableNo.text isEqualToString:@"0"]) {
+            [Util showAlert:@"Table No must be greater than 0" vc:self];
+            return;
+        }
     }
     
     SettingModel *setting = [[SettingModel alloc] init];
@@ -245,9 +258,11 @@
             [self.fixedBtn selected];
             [self.preOrderBtn unselected];
             
-            [self.requestTaleNoContainerView setHidden:NO];
-            self.heightTableNoContainerView.constant = 50;
-            self.topPaddingTableNoContainerView.constant = 10;
+            if (selectModeValue == Dine_in) {
+                [self hiddenTableNo:NO];
+            } else {
+                [self hiddenTableNo:YES];
+            }
             
             break;
             
@@ -255,9 +270,7 @@
             [self.fixedBtn unselected];
             [self.preOrderBtn selected];
             
-            [self.requestTaleNoContainerView setHidden:YES];
-            self.heightTableNoContainerView.constant = 0;
-            self.topPaddingTableNoContainerView.constant = 0;
+            [self hiddenTableNo:YES];
             
             break;
     }
@@ -265,6 +278,18 @@
     self.tfTableNo.text = [NSString stringWithFormat:@"%d", setting.tableNo];
     [self.requestForAssistanceView setOn:setting.abilityRequestForAssistance];
     [self.requestForBillView setOn:setting.abilityRequestForBill];
+}
+
+- (void)hiddenTableNo:(BOOL)isHidden {
+    if (isHidden) {
+        [self.requestTaleNoContainerView setHidden:YES];
+        self.heightTableNoContainerView.constant = 0;
+        self.topPaddingTableNoContainerView.constant = 0;
+    } else {
+        [self.requestTaleNoContainerView setHidden:NO];
+        self.heightTableNoContainerView.constant = 50;
+        self.topPaddingTableNoContainerView.constant = 10;
+    }
 }
 
 - (void)getCurrentLanguage {

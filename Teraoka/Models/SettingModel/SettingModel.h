@@ -9,12 +9,12 @@
 #import "JSONModel.h"
 
 typedef NS_ENUM(NSInteger, SELECT_MODE) {
-    Quick_Serve = 1,
+    Quick_Serve = 0,
     Dine_in
 };
 
 typedef NS_ENUM(NSInteger, TABLE_SELECTION) {
-    Fix_ed = 1,
+    Fix_ed = 0,
     Pre_order
 };
 

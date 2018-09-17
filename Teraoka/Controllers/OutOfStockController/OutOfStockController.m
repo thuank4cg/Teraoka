@@ -107,6 +107,7 @@
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
@@ -124,6 +125,21 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(200, 280);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    
+    NSInteger cellCount = [collectionView.dataSource collectionView:collectionView numberOfItemsInSection:section];
+    if (cellCount > 0) {
+        CGFloat cellWidth = 200;
+        CGFloat totalCellWidth = cellWidth * cellCount + 10 * (cellCount - 1);
+        CGFloat contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right;
+        if(totalCellWidth < contentWidth) {
+            CGFloat padding = (contentWidth - totalCellWidth) / 2.0;
+            return UIEdgeInsetsMake(0, padding, 0, padding);
+        }
+    }
+    return UIEdgeInsetsZero;
 }
 
 @end

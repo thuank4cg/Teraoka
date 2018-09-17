@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad12_9" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Display-Bold.otf">
+            <string>SFUIDisplay-Bold</string>
+        </array>
+        <array key="SF-UI-Display-Regular.otf">
+            <string>SFUIDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WaiterController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.68999999999999995" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Fj-TL-elR">
+                    <rect key="frame" x="0.0" y="20" width="1366" height="1004"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSZ-2K-csn" customClass="ContainerCommonView">
+                    <rect key="frame" x="383" y="322" width="600" height="400"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A waiter will attend to you shortly." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lM4-d4-fjz">
+                            <rect key="frame" x="121" y="185" width="358.5" height="30"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="25"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IA3-zt-o8P">
+                            <rect key="frame" x="153" y="285" width="294" height="70"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="70" id="GHk-Wk-oyu"/>
+                                <constraint firstAttribute="width" secondItem="IA3-zt-o8P" secondAttribute="height" multiplier="610:145" id="x0w-Qx-lwF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
+                            <state key="normal" title="OKAY" backgroundImage="home_btn">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="okAction:" destination="-1" eventType="touchUpInside" id="D7q-vX-XNt"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_waiter_blue" translatesAutoresizingMaskIntoConstraints="NO" id="ogQ-FG-lvI">
+                            <rect key="frame" x="240" y="45" width="120" height="120"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="120" id="g5h-7Y-58M"/>
+                                <constraint firstAttribute="width" constant="120" id="xqu-lZ-JfO"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="KqR-d5-2Mq" firstAttribute="bottom" secondItem="IA3-zt-o8P" secondAttribute="bottom" constant="45" id="39U-9p-481"/>
+                        <constraint firstItem="lM4-d4-fjz" firstAttribute="top" secondItem="ogQ-FG-lvI" secondAttribute="bottom" constant="20" id="8Jx-Ll-dlm"/>
+                        <constraint firstAttribute="height" constant="400" id="D5v-kd-MRW"/>
+                        <constraint firstAttribute="width" constant="600" id="I7T-B4-dNP"/>
+                        <constraint firstItem="IA3-zt-o8P" firstAttribute="centerX" secondItem="eSZ-2K-csn" secondAttribute="centerX" id="MUw-uU-kRl"/>
+                        <constraint firstItem="lM4-d4-fjz" firstAttribute="centerY" secondItem="KqR-d5-2Mq" secondAttribute="centerY" id="VZH-xC-5fX"/>
+                        <constraint firstItem="lM4-d4-fjz" firstAttribute="centerX" secondItem="eSZ-2K-csn" secondAttribute="centerX" id="Yj3-nq-C0k"/>
+                        <constraint firstItem="ogQ-FG-lvI" firstAttribute="centerX" secondItem="eSZ-2K-csn" secondAttribute="centerX" id="fHT-6r-RMR"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="KqR-d5-2Mq"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="1Fj-TL-elR" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="4UC-7V-132"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="1Fj-TL-elR" secondAttribute="trailing" id="O7u-Jl-zUo"/>
+                <constraint firstItem="eSZ-2K-csn" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="RVc-aP-2IG"/>
+                <constraint firstItem="eSZ-2K-csn" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="afi-SI-EVm"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="1Fj-TL-elR" secondAttribute="bottom" id="jXr-j9-vFs"/>
+                <constraint firstItem="1Fj-TL-elR" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="upQ-xW-2cq"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="home_btn" width="305" height="72"/>
+        <image name="ic_waiter_blue" width="257" height="257"/>
+    </resources>
+</document>

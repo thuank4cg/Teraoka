@@ -117,7 +117,7 @@
     [mCollectData appendData:[self convertStringToBytesArr:timeStr length:4]];
     
     //Table No
-    NSString *tableNo = @"0";
+    NSString *tableNo = @"1";
     if ([ShareManager shared].setting && [ShareManager shared].setting.tableSelection == Fix_ed) {
         tableNo = [NSString stringWithFormat:@"%d", [ShareManager shared].setting.tableNo];
     }

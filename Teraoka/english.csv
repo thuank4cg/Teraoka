@@ -23,7 +23,7 @@ SC08_021,Your order has been sent
 SC08_022,Okay
 SC08_023,View Bill
 SC09_024,The following items are out of stock
-SC09_025,Do you want to proceed
+SC09_025,Do you want to proceed?
 SC09_026,available
 SC09_027,NO
 SC09_028,YES
@@ -36,8 +36,8 @@ SC10_034,Delivered
 SC10_035,Pending
 SC10_036,BACK
 SC10_037,CALL FOR BILL
-SC11_038,Please hold Onn as we bring the bill to you.
-SC11_039,We give to see you again
+SC11_038,Please hold on as we bring the bill to you.
+SC11_039,We hope to see you again!
 SC11_040,BACK TO HOME
 SC12_041,STAFF ACCESS
 SC12_042,Please enter the correct password to access the settings page.

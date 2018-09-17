@@ -75,7 +75,7 @@
         if (data.count > 1) {
             LanguageModel *language = [[LanguageModel alloc] init];
             language.key = [data objectAtIndex:0];
-            language.value = [data objectAtIndex:1];
+            language.value = [[data objectAtIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
             [languages addObject:language];
         }
     }

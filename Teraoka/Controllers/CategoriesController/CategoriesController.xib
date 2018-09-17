@@ -31,7 +31,7 @@
                 <outlet property="qtyBoxView" destination="P4t-Nj-qoz" id="1gJ-e5-gBu"/>
                 <outlet property="restartOrderLb" destination="ykR-Xn-MgH" id="qQ3-R5-gNr"/>
                 <outlet property="restartOrderView" destination="Z5E-iI-tZw" id="Zdo-ma-NP8"/>
-                <outlet property="settingBtn" destination="YvL-OC-oxG" id="z4e-aH-Wbg"/>
+                <outlet property="settingBtn" destination="Zgh-Z1-vA8" id="rPv-bq-eO8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="waiterArrowIcon" destination="4QD-V9-mp9" id="cjr-A6-LCu"/>
                 <outlet property="waiterMenuTitleLb" destination="3ar-7b-Ufy" id="VjJ-bw-2Af"/>
@@ -60,11 +60,20 @@
                             </constraints>
                             <state key="normal" image="setting_icon"/>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zgh-Z1-vA8">
+                            <rect key="frame" x="964" y="5" width="55" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="55" id="Azy-Ou-2lY"/>
+                            </constraints>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.7803921568627451" green="0.83921568627450982" blue="0.84313725490196079" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
+                        <constraint firstItem="Zgh-Z1-vA8" firstAttribute="top" secondItem="Fxd-Ta-ISS" secondAttribute="top" constant="5" id="Ijw-qt-Tkg"/>
                         <constraint firstAttribute="trailing" secondItem="YvL-OC-oxG" secondAttribute="trailing" constant="20" id="Ky5-29-ywS"/>
+                        <constraint firstAttribute="bottom" secondItem="Zgh-Z1-vA8" secondAttribute="bottom" constant="5" id="Snz-0H-cTR"/>
                         <constraint firstItem="14d-J6-UBH" firstAttribute="centerY" secondItem="Fxd-Ta-ISS" secondAttribute="centerY" id="XqK-1e-m4H"/>
+                        <constraint firstAttribute="trailing" secondItem="Zgh-Z1-vA8" secondAttribute="trailing" constant="5" id="ckI-t2-Gt5"/>
                         <constraint firstItem="14d-J6-UBH" firstAttribute="centerX" secondItem="Fxd-Ta-ISS" secondAttribute="centerX" id="dhZ-NH-HnD"/>
                         <constraint firstItem="YvL-OC-oxG" firstAttribute="centerY" secondItem="Fxd-Ta-ISS" secondAttribute="centerY" id="fQZ-P1-FNf"/>
                         <constraint firstAttribute="height" constant="65" id="qgk-kg-LZb"/>

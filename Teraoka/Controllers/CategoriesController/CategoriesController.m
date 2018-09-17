@@ -32,6 +32,7 @@
 #import "OutOfStockController.h"
 #import "LocalizeHelper.h"
 #import "NSString+KeyLanguage.h"
+#import "WaiterController.h"
 
 typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     Home = 0,
@@ -114,6 +115,19 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
 
 - (IBAction)callWaiter:(id)sender {
     [self selectedMenuAt:Waiter];
+    
+    WaiterController *vc = [[WaiterController alloc] initWithNibName:@"WaiterController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    [self addChildViewController:vc];
+    [self.view addSubview:vc.view];
+    [vc didMoveToParentViewController:self];
+    
+    [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.equalTo(vc.view.superview);
+        make.width.equalTo(vc.view.superview.mas_width);
+        make.height.equalTo(vc.view.superview.mas_height);
+    }];
 }
 
 - (IBAction)viewBill:(id)sender {
@@ -222,7 +236,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     }
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gotoSettingAction:)];
-    [longPress setMinimumPressDuration:3];
+    [longPress setMinimumPressDuration:2];
     [self.settingBtn addGestureRecognizer:longPress];
 }
 
@@ -325,7 +339,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
             newOrderVC.product = cate.products[indexPath.row];
         }
     }
-//    [self.navigationController pushViewController:vc animated:NO];
+
     newOrderVC.delegate = self;
     newOrderVC.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     [self addChildViewController:newOrderVC];
@@ -334,6 +348,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
 }
 
 #pragma mark - Custom method
+
 - (void)showOrderCart {
     [self setupQtyBoxView];
     if ([ShareManager shared].cartArr.count == 0) return;
