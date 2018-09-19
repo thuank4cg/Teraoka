@@ -33,6 +33,7 @@
                 <outlet property="lbSelectMode" destination="x5b-mL-Pst" id="ri7-0O-C6e"/>
                 <outlet property="lbSetPassword" destination="zDt-7A-4Yr" id="onW-U2-XSZ"/>
                 <outlet property="lbTableSelection" destination="F2t-gS-h9Y" id="12y-aA-WZR"/>
+                <outlet property="lbTableSelectionNotice" destination="LtL-oZ-wk8" id="Ay6-pf-1bV"/>
                 <outlet property="lbTitle" destination="nS1-zj-pGT" id="NSx-dm-M2L"/>
                 <outlet property="preOrderBtn" destination="E9R-ow-Oi7" id="S2X-FX-xho"/>
                 <outlet property="quickServeBtn" destination="Qy2-xH-uys" id="EqD-2O-8kz"/>
@@ -377,11 +378,22 @@
                                         <action selector="saveAction:" destination="-1" eventType="touchUpInside" id="Kob-g4-XBv"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Table selection is not applicable for Quick Serve mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LtL-oZ-wk8">
+                                    <rect key="frame" x="501" y="450" width="380" height="50"/>
+                                    <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="14"/>
+                                    <color key="textColor" red="0.8862745098" green="0.062745098040000002" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="LtL-oZ-wk8" firstAttribute="height" secondItem="zpm-Zd-HHC" secondAttribute="height" id="1pw-P2-ejI"/>
                                 <constraint firstItem="EfS-w2-k2s" firstAttribute="top" secondItem="lsJ-N0-jid" secondAttribute="bottom" constant="50" id="3z9-9a-AU5"/>
+                                <constraint firstItem="LtL-oZ-wk8" firstAttribute="top" secondItem="zpm-Zd-HHC" secondAttribute="top" id="4g7-ZN-84s"/>
                                 <constraint firstItem="T6e-cf-cck" firstAttribute="leading" secondItem="N7C-Mf-XUk" secondAttribute="leading" id="78U-6D-Rw2"/>
+                                <constraint firstItem="LtL-oZ-wk8" firstAttribute="width" secondItem="zpm-Zd-HHC" secondAttribute="width" id="Agy-2f-eJE"/>
+                                <constraint firstItem="LtL-oZ-wk8" firstAttribute="leading" secondItem="zpm-Zd-HHC" secondAttribute="leading" id="Ap7-c6-7Yd"/>
                                 <constraint firstItem="8Nw-BH-8np" firstAttribute="centerX" secondItem="aff-0P-bhl" secondAttribute="centerX" id="EVo-YI-1Bc"/>
                                 <constraint firstItem="F5X-yD-UdT" firstAttribute="leading" secondItem="T6e-cf-cck" secondAttribute="leading" id="F96-j8-aUg"/>
                                 <constraint firstItem="S0R-hv-OUq" firstAttribute="leading" secondItem="9wc-Ra-QDs" secondAttribute="leading" id="HBQ-uf-xjc"/>

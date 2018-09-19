@@ -18,6 +18,7 @@
 #import "ShareManager.h"
 #import "LocalizeHelper.h"
 #import "NSString+KeyLanguage.h"
+#import "UIColor+HexString.h"
 
 @interface SettingsController ()
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfIPAddress;
@@ -44,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbRequestForWaiter;
 @property (weak, nonatomic) IBOutlet UILabel *lbRequestForBill;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
+@property (weak, nonatomic) IBOutlet UILabel *lbTableSelectionNotice;
 
 @end
 
@@ -109,6 +111,8 @@
             
             [self hiddenTableNo:YES];
             
+            [self greyOutTableSelectionButton:YES];
+            
             break;
             
         default:
@@ -118,6 +122,8 @@
             if (tableSelectionValue == Fix_ed) {
                 [self hiddenTableNo:NO];
             }
+            
+            [self greyOutTableSelectionButton:NO];
             
             break;
     }
@@ -244,6 +250,9 @@
         case Quick_Serve:
             [self.quickServeBtn selected];
             [self.dineinBtn unselected];
+            
+            [self greyOutTableSelectionButton:YES];
+            
             break;
             
         default:
@@ -289,6 +298,14 @@
         [self.requestTaleNoContainerView setHidden:NO];
         self.heightTableNoContainerView.constant = 50;
         self.topPaddingTableNoContainerView.constant = 10;
+    }
+}
+
+- (void)greyOutTableSelectionButton:(BOOL)isGrey {
+    if (isGrey) {
+        [self.lbTableSelectionNotice setHidden:NO];
+    } else {
+        [self.lbTableSelectionNotice setHidden:YES];
     }
 }
 

@@ -129,19 +129,19 @@
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
     
-    /**XCouponData**/
-    
-    [mCollectData appendData:[self convertStringToBytesArr:@"3" length:2]]; //Coupon status
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
-    
     /**XGuestPaxData**/
     
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //PAX
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
     
+    /**XCouponData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"3" length:2]]; //Coupon status
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
+    
     /**XBillOptionData**/
     
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Cooking instruction status
+    [mCollectData appendData:[self convertStringToBytesArr:@"3" length:2]]; //Cooking instruction status
     
     /**XCookingInstructionData**/
     
@@ -149,7 +149,7 @@
     
     /**XFreeRemarkData**/
     
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Free remark status
+    [mCollectData appendData:[self convertStringToBytesArr:@"2" length:2]]; //Free remark status
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Free remark data size
     
     /**XSendOrderData**/
