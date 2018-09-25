@@ -33,6 +33,7 @@
 #import "LocalizeHelper.h"
 #import "NSString+KeyLanguage.h"
 #import "WaiterController.h"
+#import "SplashController.h"
 
 typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     Home = 0,
@@ -496,8 +497,12 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
 
 - (void)didEnterPassSuccess {
     enterPassSettingVC = nil;
-    SettingsController *vc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
-    [self presentViewController:vc animated:YES completion:nil];
+//    SettingsController *vc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
+//    [self presentViewController:vc animated:YES completion:nil];
+    SplashController *rootVC = [[SplashController alloc] initWithNibName:@"SplashController" bundle:nil];
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:rootVC];
+    [navc setNavigationBarHidden:YES];
+    appDelegate.window.rootViewController = navc;
 }
 
 @end

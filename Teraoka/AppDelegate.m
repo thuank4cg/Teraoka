@@ -15,6 +15,7 @@
 #import "LocalizeHelper.h"
 #import "ShareManager.h"
 #import "Util.h"
+#import "EnterLicenseController.h"
 
 @interface AppDelegate ()
 
@@ -36,7 +37,7 @@
     [Util setLanguage:lang];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    SplashController *splashVC = [[SplashController alloc] initWithNibName:@"SplashController" bundle:nil];
+    EnterLicenseController *splashVC = [[EnterLicenseController alloc] initWithNibName:@"EnterLicenseController" bundle:nil];
     self.window.rootViewController = splashVC;
     [self.window makeKeyAndVisible];
     

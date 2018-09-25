@@ -58,9 +58,15 @@
             commandId = @"10502";
             requestData = [self requestSendOrderData];
             break;
+            
         case SendTransaction:
             commandId = @"13200";
             requestData = [self requestSendTransactionData];
+            break;
+            
+        case GetInventory:
+            commandId = @"13300";
+            requestData = [self requestGetInventoryData];
             break;
             
         default:
@@ -85,7 +91,7 @@
     return mCollectData;
 }
 
-- (NSMutableData *)requestSendOrderData {
+- (NSData *)requestHeaderData {
     NSMutableData *mCollectData = [[NSMutableData alloc] init];
     
     /**XRequestHeaderData**/
@@ -116,9 +122,19 @@
     NSString *timeStr = [formatter stringFromDate:[NSDate date]];
     [mCollectData appendData:[self convertStringToBytesArr:timeStr length:4]];
     
+    return mCollectData;
+}
+
+- (NSMutableData *)requestSendOrderData {
+    NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
+    /**XRequestHeaderData**/
+    
+    [mCollectData appendData:[self requestHeaderData]];
+    
     //Table No
-    NSString *tableNo = @"1";
-    if ([ShareManager shared].setting && [ShareManager shared].setting.tableSelection == Fix_ed) {
+    NSString *tableNo = @"0";
+    if ([ShareManager shared].setting && [ShareManager shared].setting.tableNo > 0) {
         tableNo = [NSString stringWithFormat:@"%d", [ShareManager shared].setting.tableNo];
     }
     [mCollectData appendData:[self convertStringToBytesArr:tableNo length:4]];
@@ -187,33 +203,10 @@
     
     /**XRequestHeaderData**/
     
-    //version
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
-    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:1]];
-    [mCollectData appendData:[self convertStringToBytesArr:@"15" length:1]];
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
-    
-    //Request ID
-    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", [self generatorRequestId]] length:4]];
-    
-    //Terminal No
-    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]];
-    
-    //Staff ID
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
-    //Sending Date
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyyMMdd";
-    NSString *dateStr = [formatter stringFromDate:[NSDate date]];
-    [mCollectData appendData:[self convertStringToBytesArr:dateStr length:4]];
-    
-    //Sending Time
-    formatter.dateFormat = @"hhmmss";
-    NSString *timeStr = [formatter stringFromDate:[NSDate date]];
-    [mCollectData appendData:[self convertStringToBytesArr:timeStr length:4]];
+    [mCollectData appendData:[self requestHeaderData]];
     
     /**XTransactionData**/
+    
     int totalPrice = 0;
     for (ProductModel *product in [ShareManager shared].cartArr) {
         totalPrice += [product.originalPrice intValue] * [product.qty intValue];
@@ -391,6 +384,30 @@
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         /****XFreeInstructionData***/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+    }
+    
+    return mCollectData;
+}
+
+- (NSMutableData *)requestGetInventoryData {
+    NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
+    /**XRequestHeaderData**/
+    
+    [mCollectData appendData:[self requestHeaderData]];
+    
+    /**XInventoryPluData**/
+    
+    int numberOfObj = (int)[ShareManager shared].cartArr.count;
+    
+    //Number of object
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
+    
+    /**XInventoryPluDataStruct[n]**/
+    
+    for (ProductModel *product in [ShareManager shared].cartArr) {
+        //PLU No
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.ids] length:4]];
     }
     
     return mCollectData;

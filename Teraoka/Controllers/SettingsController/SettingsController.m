@@ -20,7 +20,7 @@
 #import "NSString+KeyLanguage.h"
 #import "UIColor+HexString.h"
 
-@interface SettingsController ()
+@interface SettingsController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfIPAddress;
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfNewPassword;
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfConfirmPassword;
@@ -119,9 +119,11 @@
             [self.quickServeBtn unselected];
             [self.dineinBtn selected];
             
-            if (tableSelectionValue == Fix_ed) {
-                [self hiddenTableNo:NO];
-            }
+//            if (tableSelectionValue == Fix_ed) {
+//                [self hiddenTableNo:NO];
+//            }
+            
+            [self hiddenTableNo:NO];
             
             [self greyOutTableSelectionButton:NO];
             
@@ -138,9 +140,9 @@
             [self.fixedBtn selected];
             [self.preOrderBtn unselected];
             
-            if (selectModeValue == Dine_in) {
-                [self hiddenTableNo:NO];
-            }
+//            if (selectModeValue == Dine_in) {
+//                [self hiddenTableNo:NO];
+//            }
             
             break;
             
@@ -148,7 +150,7 @@
             [self.fixedBtn unselected];
             [self.preOrderBtn selected];
             
-            [self hiddenTableNo:YES];
+//            [self hiddenTableNo:YES];
             
             break;
     }
@@ -234,14 +236,15 @@
     [self.fixedBtn selected];
     [self.preOrderBtn unselected];
     
+    self.tfTableNo.delegate = self;
+    
     [self getCurrentLanguage];
     
     [self setupData];
 }
 
 - (void)setupData {
-    NSString *json = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_SAVED_SETTING];
-    SettingModel *setting = [[SettingModel alloc] initWithString:json error:nil];
+    SettingModel *setting = [ShareManager shared].setting;
     
     self.tfIPAddress.text = setting.serverIP;
     
@@ -252,12 +255,16 @@
             [self.dineinBtn unselected];
             
             [self greyOutTableSelectionButton:YES];
+            [self hiddenTableNo:YES];
             
             break;
             
         default:
             [self.quickServeBtn unselected];
             [self.dineinBtn selected];
+            
+            [self greyOutTableSelectionButton:NO];
+            [self hiddenTableNo:NO];
             break;
     }
     
@@ -267,24 +274,16 @@
             [self.fixedBtn selected];
             [self.preOrderBtn unselected];
             
-            if (selectModeValue == Dine_in) {
-                [self hiddenTableNo:NO];
-            } else {
-                [self hiddenTableNo:YES];
-            }
-            
             break;
             
         default:
             [self.fixedBtn unselected];
             [self.preOrderBtn selected];
             
-            [self hiddenTableNo:YES];
-            
             break;
     }
     
-    self.tfTableNo.text = [NSString stringWithFormat:@"%d", setting.tableNo];
+    if (setting.tableNo > 0) self.tfTableNo.text = [NSString stringWithFormat:@"%d", setting.tableNo];
     [self.requestForAssistanceView setOn:setting.abilityRequestForAssistance];
     [self.requestForBillView setOn:setting.abilityRequestForBill];
 }
@@ -320,6 +319,27 @@
     int index = (int)[items indexOfObject:lang];
     
     self.languageValueLb.text = items[index];
+}
+
+- (void)showTableNoList {
+    NSArray *items = @[@"1", @"2", @"3", @"4", @"5"];
+    
+    [ActionSheetStringPicker showPickerWithTitle:@"Select Table"
+                                            rows:items
+                                initialSelection:0
+                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                                           self.tfTableNo.text = items[selectedIndex];
+                                       }
+                                     cancelBlock:^(ActionSheetStringPicker *picker) {
+                                         
+                                     } origin:self.tfTableNo];
+}
+
+//MARK: UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    [self showTableNoList];
+    return NO;
 }
 
 @end

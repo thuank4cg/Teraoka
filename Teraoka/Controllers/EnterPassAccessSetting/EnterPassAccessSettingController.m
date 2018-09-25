@@ -12,6 +12,8 @@
 #import "ShareManager.h"
 #import "NSString+KeyLanguage.h"
 
+#define DEFAULT_PASSWORD @"159088"
+
 @interface EnterPassAccessSettingController ()
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -50,12 +52,15 @@
 }
 
 - (IBAction)submitAction:(id)sender {
-    NSString *pass = @"123456";
+    if (self.tfValue.text.length == 0) return;
+    
+    NSString *pass1 = DEFAULT_PASSWORD;
+    NSString *pass2 = @"";
     if ([ShareManager shared].setting.password.length > 0) {
-        pass = [ShareManager shared].setting.password;
+        pass2 = [ShareManager shared].setting.password;
     }
     
-    if (![self.tfValue.text isEqualToString:pass]) {
+    if (![self.tfValue.text isEqualToString:pass1] && ![self.tfValue.text isEqualToString:pass2]) {
         [Util showAlert:@"Password is incorrect" vc:self];
         return;
     }

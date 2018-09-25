@@ -23,8 +23,9 @@
 #import "ShareManager.h"
 #import <ProgressHUD.h>
 #import "NSString+KeyLanguage.h"
+#import "StartOrderController.h"
 
-@interface SplashController () <WRRequestDelegate, NSStreamDelegate, EnterPassAccessDelegate>
+@interface SplashController () <WRRequestDelegate, NSStreamDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *lbTitle;
 @property (weak, nonatomic) IBOutlet UIButton *startOrderBtn;
@@ -68,26 +69,36 @@
 }
 
 - (IBAction)startOrderAction:(id)sender {
+    StartOrderController *vc = [[StartOrderController alloc] initWithNibName:@"StartOrderController" bundle:nil];
+    [self presentViewController:vc animated:NO completion:nil];
+}
+
+- (IBAction)settingAction:(id)sender {
+//    EnterPassAccessSettingController *settingVc = [[EnterPassAccessSettingController alloc] initWithNibName:@"EnterPassAccessSettingController" bundle:nil];
+//    settingVc.delegate = self;
+//    [self addChildViewController:settingVc];
+//    [self.view addSubview:settingVc.view];
+//    [settingVc didMoveToParentViewController:self];
+//
+//    [settingVc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.leading.top.equalTo(settingVc.view.superview);
+//        make.width.equalTo(settingVc.view.superview.mas_width);
+//        make.height.equalTo(settingVc.view.superview.mas_height);
+//    }];
+    
+    SettingsController *vc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+#pragma mark - Custom method
+
+- (void)doGetContents {
 //    [self saveCategoryToDb];
+    
     [ProgressHUD show:nil Interaction:NO];
     [self listDirectoryContents];
 }
 
-- (IBAction)settingAction:(id)sender {
-    EnterPassAccessSettingController *settingVc = [[EnterPassAccessSettingController alloc] initWithNibName:@"EnterPassAccessSettingController" bundle:nil];
-    settingVc.delegate = self;
-    [self addChildViewController:settingVc];
-    [self.view addSubview:settingVc.view];
-    [settingVc didMoveToParentViewController:self];
-    
-    [settingVc.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.top.equalTo(settingVc.view.superview);
-        make.width.equalTo(settingVc.view.superview.mas_width);
-        make.height.equalTo(settingVc.view.superview.mas_height);
-    }];
-}
-
-#pragma mark - Custom method
 - (void)listDirectoryContents {
     WRRequestListDirectory * listDir = [[WRRequestListDirectory alloc] init];
     listDir.delegate = self;
@@ -128,7 +139,7 @@
     if (success) {
 //        [Answers logCustomEventWithName:@"save file success" customAttributes:nil];
         [self unzipFile];
-    }else {
+    } else {
 //        [Answers logCustomEventWithName:@"save file false" customAttributes:nil];
     }
 }
@@ -142,7 +153,7 @@
     if (success) {
 //        [Answers logCustomEventWithName:@"unzip file success" customAttributes:nil];
         [self saveCategoryToDb];
-    }else {
+    } else {
 //        [Answers logCustomEventWithName:@"unzip file false" customAttributes:nil];
     }
 }
@@ -157,6 +168,7 @@
 }
 
 #pragma mark - WRRequestDelegate
+
 - (void)requestCompleted:(WRRequest *)request {
     //called after 'request' is completed successfully
 //    NSLog(@"%@ completed!", request);
@@ -203,6 +215,7 @@
 }
 
 #pragma mark - save data to db
+
 - (void)saveCategoryToDb {
 //    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_DATA]) {
 //        [self showCategoriesScreen];
@@ -346,9 +359,9 @@
 
 //MARK: EnterPassAccessDelegate
 
-- (void)didEnterPassSuccess {
-    SettingsController *vc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
-    [self presentViewController:vc animated:YES completion:nil];
-}
+//- (void)didEnterPassSuccess {
+//    SettingsController *vc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
+//    [self presentViewController:vc animated:YES completion:nil];
+//}
 
 @end

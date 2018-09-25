@@ -89,7 +89,11 @@
     
     [ShareManager shared].cartArr = products;
     
-    [self sendPOSRequest:SendTransaction];
+    if ([ShareManager shared].setting.selectMode == Quick_Serve) {
+        [self sendPOSRequest:SendTransaction];
+    } else {
+        [self sendPOSRequest:SendOrder];
+    }
 }
 
 //MARK: Custom method

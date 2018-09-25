@@ -125,6 +125,18 @@
     }
 }
 
+- (void)showOrderConfirmScreen:(int)receipt transaction:(int)transaction {
+    [self getExistingOrder];
+    
+    [ShareManager shared].cartArr = nil;
+    [ShareManager shared].outOfStockArr = nil;
+    
+    OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
+    vc.receipt = receipt;
+    vc.queueNumber = transaction;
+    [self.navigationController pushViewController:vc animated:NO];
+}
+
 //MARK: GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
@@ -135,6 +147,9 @@
             break;
         case SendTransaction:
             [asyncSocket writeData:[ParamsHelper.shared collectData:SendTransaction] withTimeout:10 tag:0];
+            break;
+        case GetInventory:
+            [asyncSocket writeData:[ParamsHelper.shared collectData:GetInventory] withTimeout:10 tag:0];
             break;
             
         default:
@@ -157,6 +172,10 @@
             break;
         case SendTransaction:
             [self handleDataSendTransaction:data];
+            break;
+        case GetInventory:
+            [self handleDataGetInventory:data];
+            break;
         default:
             break;
     }
@@ -178,7 +197,7 @@
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
     if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
-        [self sendPOSRequest:SendTransaction];
+        [self showOrderConfirmScreen:0 transaction:0];
     } else {
         NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
         NSData *dataErrorID = [replyData subdataWithRange:NSMakeRange(0, 2)];
@@ -191,9 +210,9 @@
             
             NSData *outOfStockData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
             NSData *dataNumOfObject = [outOfStockData subdataWithRange:NSMakeRange(0, 4)];
-            int numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
+            location += 4;
             
-            location += 4; //Number of object
+            int numOfObject = [Util hexStringToInt:[Util hexadecimalString:dataNumOfObject]];
             
             /**XOutOfStockDataStruct**/
             
@@ -231,21 +250,70 @@
         location = location + REPLY_STATUS + REPLY_DATA_SIZE;
         NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
         NSData *dataReceipt = [replyData subdataWithRange:NSMakeRange(0, 4)];
-        NSData *transactionNumber = [replyData subdataWithRange:NSMakeRange(4, 4)];
+        NSData *dataTransactionNumber = [replyData subdataWithRange:NSMakeRange(4, 4)];
         
-        int receiptResponse = [Util hexStringToInt:[Util hexadecimalString:dataReceipt]];
-        int transactionNumberResponse = [Util hexStringToInt:[Util hexadecimalString:transactionNumber]];
-        NSLog(@"%d %d", receiptResponse, transactionNumberResponse);
+        int receipt = [Util hexStringToInt:[Util hexadecimalString:dataReceipt]];
+        int transactionNumber = [Util hexStringToInt:[Util hexadecimalString:dataTransactionNumber]];
         
-        [self getExistingOrder];
+        [self showOrderConfirmScreen:receipt transaction:transactionNumber];
+    } else {
+        [Util showAlert:MSG_ERROR vc:self];
+    }
+}
+
+- (void)handleDataGetInventory:(NSData *)data {
+    int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
+    
+    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
+    NSString *httpResponse = [Util hexadecimalString:replyStatus];
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
         
-        [ShareManager shared].cartArr = nil;
-        [ShareManager shared].outOfStockArr = nil;
+        /**XInventoryData**/
+        NSData *inventoryData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+        NSData *numberOfObjectData = [inventoryData subdataWithRange:NSMakeRange(0, 4)];
+        location += 4;
         
-        OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
-        vc.receipt = receiptResponse;
-        vc.queueNumber = transactionNumberResponse;
-        [self.navigationController pushViewController:vc animated:NO];
+        int numberOfObject = [Util hexStringToInt:[Util hexadecimalString:numberOfObjectData]];
+        
+        if (numberOfObject == 0) {
+            [self sendPOSRequest:SendTransaction];
+            return;
+        }
+        
+        /**XInventoryItemData**/
+        
+        NSMutableArray *outOfStockArr = [NSMutableArray new];
+        
+        for (int i=0;i<numberOfObject;i++) {
+            NSData *inventoryItemData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+            NSData *pluNoData = [inventoryItemData subdataWithRange:NSMakeRange(0, 4)];
+            NSData *leftOverData = [inventoryItemData subdataWithRange:NSMakeRange(4, 4)];
+            NSData *totalInData = [inventoryItemData subdataWithRange:NSMakeRange(8, 4)];
+            NSData *totalOutData = [inventoryItemData subdataWithRange:NSMakeRange(12, 4)];
+            NSData *salesData = [inventoryItemData subdataWithRange:NSMakeRange(16, 4)];
+            NSData *onHandData = [inventoryItemData subdataWithRange:NSMakeRange(20, 4)];
+            
+            int pluNo = [Util hexStringToInt:[Util hexadecimalString:pluNoData]];
+            int leftOver = [Util hexStringToInt:[Util hexadecimalString:leftOverData]];
+            int totalIn = [Util hexStringToInt:[Util hexadecimalString:totalInData]];
+            int totalOut = [Util hexStringToInt:[Util hexadecimalString:totalOutData]];
+            int sales = [Util hexStringToInt:[Util hexadecimalString:salesData]];
+            int onHand = [Util hexStringToInt:[Util hexadecimalString:onHandData]];
+            
+            NSLog(@"%d - %d - %d - %d - %d - %d", pluNo, leftOver, totalIn, totalOut, sales, onHand);
+            
+            OutOfStockModel *model = [[OutOfStockModel alloc] init];
+            model.ids = [NSString stringWithFormat:@"%d", pluNo];
+            model.qty = [NSString stringWithFormat:@"%d", onHand];
+            
+            [outOfStockArr addObject:model];
+            
+            location += 24;
+        }
+        
+        [ShareManager shared].outOfStockArr = outOfStockArr;
+        [[NSNotificationCenter defaultCenter] postNotificationName:KEY_NOTIFY_OUT_OF_STOCK object:nil];
     } else {
         [Util showAlert:MSG_ERROR vc:self];
     }

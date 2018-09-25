@@ -117,6 +117,10 @@
 		736574781FA04E8E008E59CA /* Soups1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 736574661FA04E8E008E59CA /* Soups1.jpg */; };
 		736574791FA04E8E008E59CA /* Soups2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 736574671FA04E8E008E59CA /* Soups2.jpg */; };
 		7365747A1FA04E8E008E59CA /* Soups3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 736574681FA04E8E008E59CA /* Soups3.jpg */; };
+		7369AD692158C5E700210EC9 /* StartOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7369AD672158C5E700210EC9 /* StartOrderController.m */; };
+		7369AD6A2158C5E700210EC9 /* StartOrderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7369AD682158C5E700210EC9 /* StartOrderController.xib */; };
+		7369AD6F2158E89C00210EC9 /* EnterLicenseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7369AD6D2158E89C00210EC9 /* EnterLicenseController.m */; };
+		7369AD702158E89C00210EC9 /* EnterLicenseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7369AD6E2158E89C00210EC9 /* EnterLicenseController.xib */; };
 		737B4899212AA02400B02B3D /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 737B4897212AA02400B02B3D /* SettingsController.m */; };
 		737B489A212AA02400B02B3D /* SettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737B4898212AA02400B02B3D /* SettingsController.xib */; };
 		737B489D212AAB0300B02B3D /* CommonButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 737B489C212AAB0300B02B3D /* CommonButton.m */; };
@@ -297,6 +301,12 @@
 		736574661FA04E8E008E59CA /* Soups1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Soups1.jpg; sourceTree = "<group>"; };
 		736574671FA04E8E008E59CA /* Soups2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Soups2.jpg; sourceTree = "<group>"; };
 		736574681FA04E8E008E59CA /* Soups3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Soups3.jpg; sourceTree = "<group>"; };
+		7369AD662158C5E700210EC9 /* StartOrderController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartOrderController.h; sourceTree = "<group>"; };
+		7369AD672158C5E700210EC9 /* StartOrderController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartOrderController.m; sourceTree = "<group>"; };
+		7369AD682158C5E700210EC9 /* StartOrderController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartOrderController.xib; sourceTree = "<group>"; };
+		7369AD6C2158E89C00210EC9 /* EnterLicenseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterLicenseController.h; sourceTree = "<group>"; };
+		7369AD6D2158E89C00210EC9 /* EnterLicenseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnterLicenseController.m; sourceTree = "<group>"; };
+		7369AD6E2158E89C00210EC9 /* EnterLicenseController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnterLicenseController.xib; sourceTree = "<group>"; };
 		737B4896212AA02400B02B3D /* SettingsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		737B4897212AA02400B02B3D /* SettingsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		737B4898212AA02400B02B3D /* SettingsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsController.xib; sourceTree = "<group>"; };
@@ -445,6 +455,8 @@
 		730FE0CF1F95A2120045A234 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7369AD6B2158E87700210EC9 /* EnterLicenseController */,
+				7369AD652158C5CD00210EC9 /* StartOrderController */,
 				7336D848214F5249004908E0 /* WaiterController */,
 				7386F1D6212E4EED001DAC8D /* OutOfStockController */,
 				73840E96212C0A3800904454 /* EnterPassAccessSetting */,
@@ -877,6 +889,26 @@
 			path = Language;
 			sourceTree = "<group>";
 		};
+		7369AD652158C5CD00210EC9 /* StartOrderController */ = {
+			isa = PBXGroup;
+			children = (
+				7369AD662158C5E700210EC9 /* StartOrderController.h */,
+				7369AD672158C5E700210EC9 /* StartOrderController.m */,
+				7369AD682158C5E700210EC9 /* StartOrderController.xib */,
+			);
+			path = StartOrderController;
+			sourceTree = "<group>";
+		};
+		7369AD6B2158E87700210EC9 /* EnterLicenseController */ = {
+			isa = PBXGroup;
+			children = (
+				7369AD6C2158E89C00210EC9 /* EnterLicenseController.h */,
+				7369AD6D2158E89C00210EC9 /* EnterLicenseController.m */,
+				7369AD6E2158E89C00210EC9 /* EnterLicenseController.xib */,
+			);
+			path = EnterLicenseController;
+			sourceTree = "<group>";
+		};
 		737B4895212AA00300B02B3D /* SettingsController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1081,12 +1113,14 @@
 				736574761FA04E8E008E59CA /* Fruits2.jpg in Resources */,
 				7344596D1FECAA09006D3BEF /* plu.txt in Resources */,
 				730FE0C71F95A1690045A234 /* LaunchScreen.storyboard in Resources */,
+				7369AD702158E89C00210EC9 /* EnterLicenseController.xib in Resources */,
 				7357EEA01F974BE6001EB56B /* ViewExistingOrderController.xib in Resources */,
 				7336754A1FE25F2200F0AFF8 /* 4002.png in Resources */,
 				733675491FE25F2200F0AFF8 /* 3008.png in Resources */,
 				736574781FA04E8E008E59CA /* Soups1.jpg in Resources */,
 				733675651FE25F2200F0AFF8 /* 3004.png in Resources */,
 				736401B9213646F800953773 /* Localizable.strings in Resources */,
+				7369AD6A2158C5E700210EC9 /* StartOrderController.xib in Resources */,
 				730FE1131F95EC180045A234 /* ProductCell.xib in Resources */,
 				7336754E1FE25F2200F0AFF8 /* 4004.png in Resources */,
 				7357EE731F96FA43001EB56B /* OptionCollectionCell.xib in Resources */,
@@ -1254,10 +1288,12 @@
 				730FE1121F95EC180045A234 /* ProductCell.m in Sources */,
 				7357EE991F974B0B001EB56B /* OrderConfirmController.m in Sources */,
 				737B489D212AAB0300B02B3D /* CommonButton.m in Sources */,
+				7369AD692158C5E700210EC9 /* StartOrderController.m in Sources */,
 				7384AD2B1F99917D00E996AD /* CategoryModel.m in Sources */,
 				7357EE6D1F96F9F3001EB56B /* OptionTableCell.m in Sources */,
 				7384AD2F1F99986D00E996AD /* ShareManager.m in Sources */,
 				737B48A8212ACC0700B02B3D /* CommonTextfield.m in Sources */,
+				7369AD6F2158E89C00210EC9 /* EnterLicenseController.m in Sources */,
 				730FE0B91F95A1690045A234 /* AppDelegate.m in Sources */,
 				7357EEA81F974EEB001EB56B /* ExistingOrderCell.m in Sources */,
 				730FE0B61F95A1690045A234 /* main.m in Sources */,

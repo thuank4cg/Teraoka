@@ -40,7 +40,7 @@ SC11_038,Please hold on as we bring the bill to you.
 SC11_039,We hope to see you again!
 SC11_040,BACK TO HOME
 SC12_041,STAFF ACCESS
-SC12_042,Please enter the correct password to access the settings page.
+SC12_042,Please enter the correct password to exit.
 SC12_043,SUBMIT
 SC12_044,SETTINGS
 SC12_045,Please enter your server IP
@@ -59,7 +59,7 @@ SC12_057,Quick Serve
 SC12_058,Dine-in
 SC12_059,Fixed
 SC12_060,Pre-order
-SC12_061,Enter Table No.
+SC12_061,Select Table.
 SC12_062,Enabled
 SC12_063,Disabled
 SC12_064,Enabled
