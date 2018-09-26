@@ -217,13 +217,6 @@
 #pragma mark - save data to db
 
 - (void)saveCategoryToDb {
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_DATA]) {
-//        [self showCategoriesScreen];
-//        return;
-//    }
-//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KEY_SAVED_DATA];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-
     NSLog(@"Documents Directory: %@", [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
     NSManagedObjectContext *context = [self managedObjectContext];
     //save category to db

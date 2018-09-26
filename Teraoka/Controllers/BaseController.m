@@ -301,11 +301,11 @@
             int sales = [Util hexStringToInt:[Util hexadecimalString:salesData]];
             int onHand = [Util hexStringToInt:[Util hexadecimalString:onHandData]];
             
-            NSLog(@"%d - %d - %d - %d - %d - %d", pluNo, leftOver, totalIn, totalOut, sales, onHand);
+            NSLog(@"(%d) - (%d) - (%d) - (%d) - (%d) - (%d)", pluNo, leftOver, totalIn, totalOut, sales, onHand);
             
             OutOfStockModel *model = [[OutOfStockModel alloc] init];
             model.ids = [NSString stringWithFormat:@"%d", pluNo];
-            model.qty = [NSString stringWithFormat:@"%d", onHand];
+            model.qty = [NSString stringWithFormat:@"%d", (onHand < 0)?0:onHand];
             
             [outOfStockArr addObject:model];
             
