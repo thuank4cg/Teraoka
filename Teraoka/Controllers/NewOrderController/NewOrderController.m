@@ -10,12 +10,10 @@
 #import "OptionTableCell.h"
 #import "CategoryCell.h"
 #import "TextfieldCustom.h"
-#import "ProductOption.h"
 #import "ShareManager.h"
 #import "NewOrderAddedController.h"
 #import "IncompleteItemController.h"
 #import "ProductModel.h"
-#import "ProductOptionValue.h"
 #import "OrderSummaryController.h"
 #import "APPConstants.h"
 #import "UIColor+HexString.h"
@@ -23,6 +21,8 @@
 #import "Util.h"
 #import "LocalizeHelper.h"
 #import "NSString+KeyLanguage.h"
+#import "OptionGroupModel.h"
+#import "OptionModel.h"
 
 @interface NewOrderController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
@@ -98,10 +98,16 @@
     
     CGFloat heightTblView = 420;
     
-    if (self.product.options.count == 0) {
+    int numberOfGroup = 0;
+    for (int i = 0;i<self.product.options.count;i++) {
+        OptionGroupModel *group = self.product.options[i];
+        if (group.optionList.count > 0) numberOfGroup++;
+    }
+    
+    if (numberOfGroup == 0) {
         heightTblView = 100;
-    } else if (self.product.options.count < 3) {
-        heightTblView = self.product.options.count * 140;
+    } else if (numberOfGroup < 3) {
+        heightTblView = numberOfGroup * 140;
     }
     
     for (NSLayoutConstraint *constraint in self.tblView.constraints) {
@@ -134,9 +140,9 @@
 
 - (IBAction)sendAction:(id)sender {
     BOOL isSelectedOption = NO;
-    for (ProductOption *option in self.product.options) {
-        for (ProductOptionValue *value in option.options) {
-            if (value.isCheck) {
+    for (OptionGroupModel *optionGroup in self.product.options) {
+        for (OptionModel *option in optionGroup.optionList) {
+            if (option.isCheck) {
                 isSelectedOption = YES;
                 break;
             }
@@ -153,23 +159,23 @@
     if ([ShareManager shared].cartArr.count > 0) {
         BOOL isAdd = YES;
         for (ProductModel *product in [ShareManager shared].cartArr) {
-            if ([product.ids isEqualToString:self.product.ids]) {
+            if ([product.productNo isEqualToString:self.product.productNo]) {
                 isAdd = NO;
                 NSString *optionStr1 = @"";
-                for (ProductOption *option in product.options) {
-                    for (ProductOptionValue *value in option.options) {
-                        if (value.isCheck) {
-                            optionStr1 = [optionStr1 stringByAppendingString:value.tittle];
+                for (OptionGroupModel *optionGroup in product.options) {
+                    for (OptionModel *option in optionGroup.optionList) {
+                        if (option.isCheck) {
+                            optionStr1 = [optionStr1 stringByAppendingString:option.name];
                             optionStr1 = [optionStr1 stringByAppendingString:@"\n"];
                         }
                     }
                 }
                 
                 NSString *optionStr2 = @"";
-                for (ProductOption *option in self.product.options) {
-                    for (ProductOptionValue *value in option.options) {
-                        if (value.isCheck) {
-                            optionStr2 = [optionStr2 stringByAppendingString:value.tittle];
+                for (OptionGroupModel *optionGroup in self.product.options) {
+                    for (OptionModel *option in optionGroup.optionList) {
+                        if (option.isCheck) {
+                            optionStr2 = [optionStr2 stringByAppendingString:option.name];
                             optionStr2 = [optionStr2 stringByAppendingString:@"\n"];
                         }
                     }
@@ -208,22 +214,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     OptionTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionTableCellID" forIndexPath:indexPath];
-    ProductOption *option = self.product.options[indexPath.section];
-    [cell setDataForCell:option];
+    OptionGroupModel *optionGroup = self.product.options[indexPath.section];
+    [cell setDataForCell:optionGroup];
 //    cell.backgroundColor = [UIColor yellowColor];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    OptionGroupModel *optionGroup = self.product.options[indexPath.section];
+    if (optionGroup.optionList.count == 0) return 0;
     return 70;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tblView.frame), 70)];
 //    header.backgroundColor = [UIColor redColor];
-    ProductOption *option = self.product.options[section];
+    OptionGroupModel *optionGroup = self.product.options[section];
     UILabel *lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(25, 10, CGRectGetWidth(header.frame), CGRectGetHeight(header.frame) - 10)];
-    lbTitle.text = option.tittle;
+    lbTitle.text = optionGroup.name;
     [lbTitle setTextColor:[UIColor colorWithHexString:@"272727"]];
     lbTitle.font = [UIFont fontWithName:KEY_FONT_BOLD size:17];
     [header addSubview:lbTitle];
@@ -232,6 +240,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    OptionGroupModel *optionGroup = self.product.options[section];
+    if (optionGroup.optionList.count == 0) return 0;
     return 70;
 }
 

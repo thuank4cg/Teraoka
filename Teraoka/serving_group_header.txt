@@ -1,0 +1,3 @@
+serving_group_no,desc_name,desc_name1,desc_name2,desc_name3,desc_name4,short_name,short_name1,short_name2,short_name3,short_name4,thot_dsp_col,qty_check
+1,"Serving Time Group 1","","","","","","","","","",2,1
+2,"Serving Time Group 2","","","","","","","","","",2,1

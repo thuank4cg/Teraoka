@@ -1,0 +1,5 @@
+serving_group_no,serving_timing_no,sorting_no,default_flag
+1,1,0,0
+1,2,0,0
+2,3,0,0
+2,4,0,0

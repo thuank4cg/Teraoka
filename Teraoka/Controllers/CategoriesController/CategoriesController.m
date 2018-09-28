@@ -18,8 +18,6 @@
 #import "ShareManager.h"
 #import "CategoryModel.h"
 #import "ProductModel.h"
-#import "ProductOption.h"
-#import "ProductOptionValue.h"
 #import "OrderSummaryController.h"
 #import "CategoryView.h"
 #import "Util.h"
@@ -410,42 +408,42 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     if (!isBackDelegate) categoryIndex = 0;
     categories = [NSMutableArray new];
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Category"];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:MENU_CATEGORY_TABLE_NAME];
     NSArray *categoriesArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     int i = 0;
     for (NSManagedObject *category in categoriesArr) {
         CategoryModel *cateModel = [[CategoryModel alloc] init];
-        cateModel.ids = [category valueForKey:@"id"];
-        cateModel.category_name = [category valueForKey:@"name"];
+        cateModel.category_no = [category valueForKey:@"category_no"];
+        cateModel.category_name = [category valueForKey:@"category_name"];
         if (i == categoryIndex) cateModel.isSelected = YES;
         else cateModel.isSelected = NO;
         i++;
         
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"MenuContent"];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:MENU_CONTENTS_TABLE_NAME];
         NSArray *contents = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
         
         NSMutableArray *productIds = [NSMutableArray new];
         for (NSManagedObject *content in contents) {
-            NSString *categoryIdStr = [content valueForKey:@"category_id"];
-            if ([categoryIdStr isEqualToString:cateModel.ids]) {
-                [productIds addObject:[content valueForKey:@"product_id"]];
+            NSString *categoryIdStr = [content valueForKey:@"category_no"];
+            if ([categoryIdStr isEqualToString:cateModel.category_no]) {
+                [productIds addObject:[content valueForKey:@"plu_no"]];
             }
         }
         
         cateModel.products = [NSMutableArray new];
         
         for (NSString *productId in productIds) {
-            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Product"];
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PLU_TABLE_NAME];
             NSArray *products = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
             
             for (NSManagedObject *productObj in products) {
-                NSString *productIdStr = [productObj valueForKey:@"id"];
+                NSString *productIdStr = [productObj valueForKey:@"plu_no"];
                 if ([productIdStr isEqualToString:productId]) {
                     ProductModel *product = [[ProductModel alloc] init];
-                    product.ids = [productObj valueForKey:@"id"];
-                    product.image = [NSString stringWithFormat:@"%@.png", [productObj valueForKey:@"id"]];
-                    product.name = [NSString stringWithFormat:@"%@", [productObj valueForKey:@"name"]];
+                    product.productNo = [productObj valueForKey:@"plu_no"];
+                    product.image = [NSString stringWithFormat:@"%@.png", [productObj valueForKey:@"plu_no"]];
+                    product.name = [NSString stringWithFormat:@"%@", [productObj valueForKey:@"item_name"]];
                     
                     float price = [[productObj valueForKey:@"price"] floatValue]/100;
                     
@@ -453,32 +451,13 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
                     product.priceNumber = [NSString stringWithFormat:@"%.2f", price];
                     product.originalPrice = [NSString stringWithFormat:@"%@", [productObj valueForKey:@"price"]];
                     product.qty = @"1";
-                    product.options = [[NSMutableArray alloc] init];
-                    
-                    NSArray *options = @[[NSString stringWithFormat:@"%@ 1", @"SC05_013".localizedString], [NSString stringWithFormat:@"%@ 2", @"SC05_013".localizedString], [NSString stringWithFormat:@"%@ 3", @"SC05_013".localizedString]];
-                    for (NSString *tittle in options) {
-                        ProductOption *option = [[ProductOption alloc] init];
-                        option.tittle = tittle;
-                        
-                        option.options = [NSMutableArray new];
-                        
-                        ProductOptionValue *optionValue = [[ProductOptionValue alloc] init];
-                        optionValue.isCheck = NO;
-                        optionValue.tittle = [NSString stringWithFormat:@"%@ A", @"SC05_013".localizedString];
-                        [option.options addObject:optionValue];
-                        
-                        ProductOptionValue *optionValue2 = [[ProductOptionValue alloc] init];
-                        optionValue2.isCheck = NO;
-                        optionValue2.tittle = [NSString stringWithFormat:@"%@ B", @"SC05_013".localizedString];
-                        [option.options addObject:optionValue2];
-                        
-                        ProductOptionValue *optionValue3 = [[ProductOptionValue alloc] init];
-                        optionValue3.isCheck = NO;
-                        optionValue3.tittle = [NSString stringWithFormat:@"%@ C", @"SC05_013".localizedString];
-                        [option.options addObject:optionValue3];
-                        
-                        [product.options addObject:option];
-                    }
+                    product.optionSource = [[productObj valueForKey:@"option_source"] intValue];
+                    product.optionSourceNo = [[productObj valueForKey:@"option_source_no"] intValue];
+                    product.servingSource = [[productObj valueForKey:@"serving_source"] intValue];
+                    product.servingSourceNo = [[productObj valueForKey:@"serving_source_no"] intValue];
+                    product.commentSource = [[productObj valueForKey:@"comment_source"] intValue];
+                    product.commentSourceNo = [[productObj valueForKey:@"comment_source_no"] intValue];
+                    product.options = [product getOptionGroupList];
                     
                     [cateModel.products addObject:product];
                 }

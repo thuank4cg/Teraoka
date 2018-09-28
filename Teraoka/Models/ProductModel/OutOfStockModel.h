@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface OutOfStockModel : NSObject
-@property (nonatomic, strong) NSString *ids;
+@property (nonatomic, strong) NSString *productNo;
 @property (nonatomic, strong) NSString *qty;
 @end

@@ -15,9 +15,9 @@
 #import "Util.h"
 #import "OrderConfirmController.h"
 #import "ProductModel.h"
-#import "ProductOption.h"
-#import "ProductOptionValue.h"
 #import "OutOfStockModel.h"
+#import "OptionGroupModel.h"
+#import "OptionModel.h"
 
 #define STATUS_REPLY_OK @"00000000"
 #define MSG_ERROR @"Submission failed due to connection error"
@@ -88,23 +88,23 @@
         for (ProductModel *product in [ShareManager shared].cartArr) {
             BOOL isAdd = YES;
             for (ProductModel *existingProduct in [ShareManager shared].existingOrderArr) {
-                if ([product.ids isEqualToString:existingProduct.ids]) {
+                if ([product.productNo isEqualToString:existingProduct.productNo]) {
                     isAdd = NO;
                     NSString *optionStr1 = @"";
-                    for (ProductOption *option in product.options) {
-                        for (ProductOptionValue *value in option.options) {
-                            if (value.isCheck) {
-                                optionStr1 = [optionStr1 stringByAppendingString:value.tittle];
+                    for (OptionGroupModel *group in product.options) {
+                        for (OptionModel *option in group.optionList) {
+                            if (option.isCheck) {
+                                optionStr1 = [optionStr1 stringByAppendingString:option.name];
                                 optionStr1 = [optionStr1 stringByAppendingString:@"\n"];
                             }
                         }
                     }
                     
                     NSString *optionStr2 = @"";
-                    for (ProductOption *option in existingProduct.options) {
-                        for (ProductOptionValue *value in option.options) {
-                            if (value.isCheck) {
-                                optionStr2 = [optionStr2 stringByAppendingString:value.tittle];
+                    for (OptionGroupModel *group in existingProduct.options) {
+                        for (OptionModel *option in group.optionList) {
+                            if (option.isCheck) {
+                                optionStr2 = [optionStr2 stringByAppendingString:option.name];
                                 optionStr2 = [optionStr2 stringByAppendingString:@"\n"];
                             }
                         }
@@ -226,7 +226,7 @@
                 int pluQty = [Util hexStringToInt:[Util hexadecimalString:dataPluQty]];
                 
                 OutOfStockModel *model = [[OutOfStockModel alloc] init];
-                model.ids = [NSString stringWithFormat:@"%d", pluNo];
+                model.productNo = [NSString stringWithFormat:@"%d", pluNo];
                 model.qty = [NSString stringWithFormat:@"%d", pluQty];
                 
                 [outOfStockArr addObject:model];
@@ -304,7 +304,7 @@
             NSLog(@"(%d) - (%d) - (%d) - (%d) - (%d) - (%d)", pluNo, leftOver, totalIn, totalOut, sales, onHand);
             
             OutOfStockModel *model = [[OutOfStockModel alloc] init];
-            model.ids = [NSString stringWithFormat:@"%d", pluNo];
+            model.productNo = [NSString stringWithFormat:@"%d", pluNo];
             model.qty = [NSString stringWithFormat:@"%d", (onHand < 0)?0:onHand];
             
             [outOfStockArr addObject:model];

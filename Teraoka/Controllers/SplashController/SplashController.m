@@ -42,9 +42,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self removeDataForEntity:@"Category"];
-    [self removeDataForEntity:@"MenuContent"];
-    [self removeDataForEntity:@"Product"];
+    [self removeDataForEntity:MENU_CATEGORY_TABLE_NAME];
+    [self removeDataForEntity:MENU_CONTENTS_TABLE_NAME];
+    [self removeDataForEntity:PLU_TABLE_NAME];
+    [self removeDataForEntity:OPTION_GROUP_HEADER_TABLE_NAME];
+    [self removeDataForEntity:OPTION_GROUP_TABLE_NAME];
+    [self removeDataForEntity:COMMENT_GROUP_HEADER_TABLE_NAME];
+    [self removeDataForEntity:COMMENT_GROUP_TABLE_NAME];
+    [self removeDataForEntity:COMMENT_TABLE_NAME];
+    [self removeDataForEntity:COMMENT_SET_TABLE_NAME];
+    [self removeDataForEntity:SERVING_SET_TABLE_NAME];
+    [self removeDataForEntity:SERVING_GROUP_HEADER_TABLE_NAME];
+    [self removeDataForEntity:SERVING_GROUP_TABLE_NAME];
+    [self removeDataForEntity:SERVING_TIMING_TABLE_NAME];
+    [self removeDataForEntity:OPTION_SET_TABLE_NAME];
     
     isDownloadFile = NO;
     
@@ -69,6 +80,11 @@
 }
 
 - (IBAction)startOrderAction:(id)sender {
+    if ([ShareManager shared].setting.tableNo > 0) {
+        [self doGetContents];
+        return;
+    }
+    
     StartOrderController *vc = [[StartOrderController alloc] initWithNibName:@"StartOrderController" bundle:nil];
     [self presentViewController:vc animated:NO completion:nil];
 }
@@ -93,10 +109,10 @@
 #pragma mark - Custom method
 
 - (void)doGetContents {
-//    [self saveCategoryToDb];
+    [self saveDataToDb];
     
-    [ProgressHUD show:nil Interaction:NO];
-    [self listDirectoryContents];
+//    [ProgressHUD show:nil Interaction:NO];
+//    [self listDirectoryContents];
 }
 
 - (void)listDirectoryContents {
@@ -152,17 +168,17 @@
     NSLog(@"unzipPath: %@", unzipPath);
     if (success) {
 //        [Answers logCustomEventWithName:@"unzip file success" customAttributes:nil];
-        [self saveCategoryToDb];
+        [self saveDataToDb];
     } else {
 //        [Answers logCustomEventWithName:@"unzip file false" customAttributes:nil];
     }
 }
 
 - (NSString *)getContentFile:(NSString *)fileName {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
-//    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     return content;
 }
@@ -216,106 +232,55 @@
 
 #pragma mark - save data to db
 
-- (void)saveCategoryToDb {
+- (void)saveDataToDbFrom:(NSString *)fileName toTable:(NSString *)tableName {
     NSLog(@"Documents Directory: %@", [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
     NSManagedObjectContext *context = [self managedObjectContext];
     //save category to db
-    NSString* content = [self getContentFile:KEY_CATEGORY_TABLE_FILE_NAME];
+    NSString* content = [self getContentFile:fileName];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
-//    [Answers logCustomEventWithName:[NSString stringWithFormat:@"category %d", (int)lines.count] customAttributes:nil];
-    int indexOfCateId = 0;
-    int indexOfCateName = 0;
+    //    [Answers logCustomEventWithName:[NSString stringWithFormat:@"category %d", (int)lines.count] customAttributes:nil];
+    NSArray *fieldsName = [NSArray new];
     for (int i=0;i<lines.count;i++)
     {
         NSString *line = [lines objectAtIndex:i];
+        if (line.length == 0) break;
+        
         NSArray *fields = [line componentsSeparatedByString:@","];
         if (i == 0) {
-            indexOfCateId = (int)[fields indexOfObject:KEY_CATEGORY_ID];
-            indexOfCateName = (int)[fields indexOfObject:KEY_CATEGORY_NAME];
-        }else {
-            if (fields.count > indexOfCateName) {
-                // Create a new managed object
-                NSManagedObject *newDevice = [NSEntityDescription insertNewObjectForEntityForName:@"Category" inManagedObjectContext:context];
-                [newDevice setValue:[[fields objectAtIndex:indexOfCateId] stringByReplacingOccurrencesOfString:@"\"" withString:@""] forKey:@"id"];
-                [newDevice setValue:[[fields objectAtIndex:indexOfCateName] stringByReplacingOccurrencesOfString:@"\"" withString:@""] forKey:@"name"];
-                
-                NSError *error = nil;
-                // Save the object to persistent store
-                if (![context save:&error]) {
-                    NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-                }
+            fieldsName = [line componentsSeparatedByString:@","];
+        } else {
+            // Create a new managed object
+            NSManagedObject *newDevice = [NSEntityDescription insertNewObjectForEntityForName:tableName inManagedObjectContext:context];
+            
+            for (int fieldIndex=0;fieldIndex<fieldsName.count;fieldIndex++) {
+                NSString *fieldName = [fieldsName objectAtIndex:fieldIndex];
+                [newDevice setValue:[[fields objectAtIndex:fieldIndex] stringByReplacingOccurrencesOfString:@"\"" withString:@""] forKey:fieldName];
+            }
+            
+            NSError *error = nil;
+            // Save the object to persistent store
+            if (![context save:&error]) {
+                NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
             }
         }
     }
-    [self saveMenuContentToDb];
 }
 
-- (void)saveMenuContentToDb {
-    NSManagedObjectContext *context = [self managedObjectContext];
-    //save category to db
-    NSString* content = [self getContentFile:KEY_MENU_CONTENT_TABLE_FILE_NAME];
-    NSArray *lines = [content componentsSeparatedByString:@"\n"];
-//    [Answers logCustomEventWithName:[NSString stringWithFormat:@"menu %d", (int)lines.count] customAttributes:nil];
-    int indexOfCateId = 0;
-    int indexOfProductId = 0;
-    for (int i=0;i<lines.count;i++)
-    {
-        NSString *line = [lines objectAtIndex:i];
-        NSArray *fields = [line componentsSeparatedByString:@","];
-        if (i == 0) {
-            indexOfCateId = (int)[fields indexOfObject:KEY_CATEGORY_ID];
-            indexOfProductId = (int)[fields indexOfObject:KEY_PRODUCT_ID];
-        }else {
-            if (fields.count > indexOfProductId) {
-                // Create a new managed object
-                NSManagedObject *newDevice = [NSEntityDescription insertNewObjectForEntityForName:@"MenuContent" inManagedObjectContext:context];
-                [newDevice setValue:[[fields objectAtIndex:indexOfCateId] stringByReplacingOccurrencesOfString:@"\"" withString:@""] forKey:@"category_id"];
-            [newDevice setValue:[[fields objectAtIndex:indexOfProductId] stringByReplacingOccurrencesOfString:@"\"" withString:@""] forKey:@"product_id"];
-                
-                NSError *error = nil;
-                // Save the object to persistent store
-                if (![context save:&error]) {
-                    NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-                }
-            }
-        }
-    }
-    [self saveProductToDb];
-}
-
-- (void)saveProductToDb {
-    NSManagedObjectContext *context = [self managedObjectContext];
-    //save product to db
-    NSString* content = [self getContentFile:KEY_PRODUCT_TABLE_FILE_NAME];
-    NSArray *lines = [content componentsSeparatedByString:@"\n"];
-//    [Answers logCustomEventWithName:[NSString stringWithFormat:@"product %d", (int)lines.count] customAttributes:nil];
-    int indexOfId = 0;
-    int indexOfPrice = 0;
-    int indexOfName = 0;
-    for (int i=0;i<lines.count;i++)
-    {
-        NSString *line = [lines objectAtIndex:i];
-        NSArray *fields = [line componentsSeparatedByString:@","];
-        if (i == 0) {
-            indexOfId = (int)[fields indexOfObject:KEY_PRODUCT_ID];
-            indexOfPrice = (int)[fields indexOfObject:KEY_PRODUCT_PRICE];
-            indexOfName = (int)[fields indexOfObject:KEY_PRODUCT_NAME];
-        }else {
-            if (fields.count > indexOfPrice) {
-                // Create a new managed object
-                NSManagedObject *newDevice = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:context];
-                [newDevice setValue:[[fields objectAtIndex:indexOfId] stringByReplacingOccurrencesOfString:@"\"" withString:@""] forKey:@"id"];
-                [newDevice setValue:[[fields objectAtIndex:indexOfName] stringByReplacingOccurrencesOfString:@"\"" withString:@""] forKey:@"name"];
-                [newDevice setValue:[[fields objectAtIndex:indexOfPrice] stringByReplacingOccurrencesOfString:@"\"" withString:@""] forKey:@"price"];
-                
-                NSError *error = nil;
-                // Save the object to persistent store
-                if (![context save:&error]) {
-                    NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-                }
-            }
-        }
-    }
+- (void)saveDataToDb {
+    [self saveDataToDbFrom:KEY_CATEGORY_TABLE_FILE_NAME toTable:MENU_CATEGORY_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_MENU_CONTENT_TABLE_FILE_NAME toTable:MENU_CONTENTS_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_PRODUCT_TABLE_FILE_NAME toTable:PLU_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_OPTION_GROUP_HEADER_TABLE_FILE_NAME toTable:OPTION_GROUP_HEADER_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_OPTION_GROUP_TABLE_FILE_NAME toTable:OPTION_GROUP_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_COMMENT_GROUP_HEADER_TABLE_FILE_NAME toTable:COMMENT_GROUP_HEADER_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_COMMENT_GROUP_TABLE_FILE_NAME toTable:COMMENT_GROUP_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_COMMENT_TABLE_FILE_NAME toTable:COMMENT_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_COMMENT_SET_TABLE_FILE_NAME toTable:COMMENT_SET_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_SERVING_SET_TABLE_FILE_NAME toTable:SERVING_SET_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_SERVING_GROUP_HEADER_TABLE_FILE_NAME toTable:SERVING_GROUP_HEADER_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_SERVING_GROUP_TABLE_FILE_NAME toTable:SERVING_GROUP_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_SERVING_TIMING_TABLE_FILE_NAME toTable:SERVING_TIMING_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_OPTION_SET_TABLE_FILE_NAME toTable:OPTION_SET_TABLE_NAME];
     [ProgressHUD dismiss];
     [self showCategoriesScreen];
 }

@@ -1,0 +1,4 @@
+comment_group_no,comment_group_name,comment_group_name1,comment_group_name2,comment_group_name3,comment_group_name4,short_name,short_name1,short_name2,short_name3,short_name4,thot_dsp_col,qty_check,type
+1,"Beef Cooking","","","","","","","","","",1,1,0
+2,"For Drinks","","","","","","","","","",1,1,0
+3,"For Pizza","","","","","","","","","",1,1,0

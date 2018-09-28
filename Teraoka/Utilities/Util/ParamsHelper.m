@@ -176,7 +176,7 @@
     /**XSendOrderDataStruct**/
     
     for (ProductModel *product in [ShareManager shared].cartArr) {
-        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.ids] length:4]]; //PLU No
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]]; //PLU No
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]]; //Qty
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Current price
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Item Flag
@@ -295,7 +295,7 @@
     /**XTransactionPaymentData[]**/
     for (ProductModel *product in [ShareManager shared].cartArr) {
         //Id
-        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.ids] length:4]];
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]];
         //Quantity
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]];
         //Amount
@@ -312,7 +312,7 @@
     /**XTransactionItemData[]**/
     for (ProductModel *product in [ShareManager shared].cartArr) {
         //PLU No
-        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.ids] length:4]];
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]];
         //Quantity
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]];
         //Weight
@@ -407,7 +407,7 @@
     
     for (ProductModel *product in [ShareManager shared].cartArr) {
         //PLU No
-        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.ids] length:4]];
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]];
     }
     
     return mCollectData;

@@ -1,21 +1,200 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17B1003" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Comment" representedClassName="Comment" syncable="YES" codeGenerationType="class">
+        <attribute name="comment_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name4" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="MenuContent" representedClassName="MenuContent" syncable="YES" codeGenerationType="class">
-        <attribute name="category_id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="product_id" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="CommentGroup" representedClassName="CommentGroup" syncable="YES" codeGenerationType="class">
+        <attribute name="comment_group_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="default_flag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sorting_no" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Product" representedClassName="Product" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="CommentGroupHeader" representedClassName="CommentGroupHeader" syncable="YES" codeGenerationType="class">
+        <attribute name="comment_group_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_group_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_group_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_group_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_group_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_group_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="qty_check" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thot_dsp_col" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="CommentSet" representedClassName="CommentSet" syncable="YES" codeGenerationType="class">
+        <attribute name="comment_group_no1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_group_no2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_group_no3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_group_no4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_group_no5" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_set_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_set_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_set_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_set_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_set_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_set_no" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MenuCategory" representedClassName="MenuCategory" syncable="YES" codeGenerationType="class">
+        <attribute name="category_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="display_order" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MenuContents" representedClassName="MenuContents" syncable="YES" codeGenerationType="class">
+        <attribute name="category_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="display_order" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="plu_no" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="OptionGroup" representedClassName="OptionGroup" syncable="YES" codeGenerationType="class">
+        <attribute name="default_flag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_group_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="plu_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sorting_no" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="OptionGroupHeader" representedClassName="OptionGroupHeader" syncable="YES" codeGenerationType="class">
+        <attribute name="option_group_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_group_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_group_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_group_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_group_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_group_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="qty_check" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thot_dsp_col" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="OptionSet" representedClassName="OptionSet" syncable="YES" codeGenerationType="class">
+        <attribute name="option_group_no1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_group_no2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_group_no3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_group_no4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_group_no5" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_set_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_set_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_set_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_set_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_set_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_set_no" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Plu" representedClassName="Plu" syncable="YES" codeGenerationType="class">
+        <attribute name="barcode_data" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_source_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="discount_permission_flag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="exclude_menu_flag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="group_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="item_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="item_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="item_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="item_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="item_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="l_class_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="m_class_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="meal_set_flag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="meal_set_ticket_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="menu_expiry_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="menu_start_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="op_price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_source_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="plu_no" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price_entry_flag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="product_info_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="s_class_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="service_charge_flag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_source_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="suspended_plu_flag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tax_no" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ServingGroup" representedClassName="ServingGroup" syncable="YES" codeGenerationType="class">
+        <attribute name="default_flag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_group_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_timing_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sorting_no" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ServingGroupHeader" representedClassName="ServingGroupHeader" syncable="YES" codeGenerationType="class">
+        <attribute name="desc_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="qty_check" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_group_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thot_dsp_col" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ServingSet" representedClassName="ServingSet" syncable="YES" codeGenerationType="class">
+        <attribute name="serving_group_no1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_group_no2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_group_no3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_group_no4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_group_no5" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_set_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_set_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_set_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_set_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_set_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_set_no" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ServingTiming" representedClassName="ServingTiming" syncable="YES" codeGenerationType="class">
+        <attribute name="desc_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serving_timing_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name4" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-63" positionY="-18" width="128" height="75"/>
-        <element name="Product" positionX="-54" positionY="9" width="128" height="90"/>
-        <element name="MenuContent" positionX="-54" positionY="18" width="128" height="75"/>
+        <element name="Comment" positionX="-18" positionY="162" width="128" height="210"/>
+        <element name="CommentGroupHeader" positionX="-36" positionY="153" width="128" height="255"/>
+        <element name="CommentSet" positionX="0" positionY="171" width="128" height="210"/>
+        <element name="MenuCategory" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="MenuContents" positionX="-54" positionY="18" width="128" height="90"/>
+        <element name="OptionGroup" positionX="-45" positionY="144" width="128" height="105"/>
+        <element name="OptionGroupHeader" positionX="-54" positionY="135" width="128" height="255"/>
+        <element name="OptionSet" positionX="0" positionY="144" width="128" height="210"/>
+        <element name="Plu" positionX="-54" positionY="9" width="128" height="570"/>
+        <element name="ServingGroupHeader" positionX="-9" positionY="135" width="128" height="240"/>
+        <element name="ServingSet" positionX="18" positionY="180" width="128" height="210"/>
+        <element name="ServingTiming" positionX="36" positionY="189" width="128" height="210"/>
+        <element name="ServingGroup" positionX="-9" positionY="135" width="128" height="105"/>
+        <element name="CommentGroup" positionX="0" positionY="144" width="128" height="105"/>
     </elements>
 </model>

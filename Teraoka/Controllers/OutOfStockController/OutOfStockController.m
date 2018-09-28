@@ -37,7 +37,7 @@
     
     for (OutOfStockModel *model in [ShareManager shared].outOfStockArr) {
         for (ProductModel *product in [ShareManager shared].cartArr) {
-            if ([model.ids isEqualToString:product.ids]) {
+            if ([model.productNo isEqualToString:product.productNo]) {
                 [products addObject:product];
                 product.qtyAvailable = model.qty;
             }
@@ -68,7 +68,7 @@
 - (IBAction)yesAction:(id)sender {
     for (OutOfStockModel *model in [ShareManager shared].outOfStockArr) {
         for (ProductModel *product in [ShareManager shared].cartArr) {
-            if ([model.ids isEqualToString:product.ids]) {
+            if ([model.productNo isEqualToString:product.productNo]) {
                 product.qty = model.qty;
             }
         }

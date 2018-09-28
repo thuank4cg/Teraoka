@@ -1,0 +1,11 @@
+comment_no,comment_name,comment_name1,comment_name2,comment_name3,comment_name4,short_name,short_name1,short_name2,short_name3,short_name4
+1,"Well done","","","","","","","","",""
+2,"Medium Cooking","","","","","","","","",""
+3,"More chili","","","","","","","","",""
+4,"Less ice","","","","","","","","",""
+5,"Add topping","","","","","","","","",""
+6,"Add chese","","","","","","","","",""
+7,"No sugar","","","","","","","","",""
+8,"No chili","","","","","","","","",""
+9,"No ice","","","","","","","","",""
+10,"No onion","","","","","","","","",""

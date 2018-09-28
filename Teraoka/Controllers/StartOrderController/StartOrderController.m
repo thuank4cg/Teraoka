@@ -39,14 +39,25 @@
         return;
     }
     
-    [ShareManager shared].setting.tableNo = (int)self.tfTableNo.text;
+    SettingModel *setting = [ShareManager shared].setting;
+    setting.tableNo = [self.tfTableNo.text intValue];
+    
+    NSString *json = [setting toJSONString];
+    [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self doGetContents];
 }
 
 - (IBAction)selectModeAction:(id)sender {
     UIButton *button = (UIButton *)sender;
-    [ShareManager shared].setting.tableSelection = button.tag;
+    
+    SettingModel *setting = [ShareManager shared].setting;
+    setting.tableSelection = button.tag;
+    
+    NSString *json = [setting toJSONString];
+    [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     switch (button.tag) {
         case Fix_ed:
