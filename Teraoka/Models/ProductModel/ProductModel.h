@@ -13,16 +13,16 @@
 
 @end
 
-@interface ProductModel : JSONModel
+@interface ProductModel : NSObject
 
-@property (nonatomic, strong) NSString<Optional> *productNo;
-@property (nonatomic, strong) NSString<Optional> *image;
-@property (nonatomic, strong) NSString<Optional> *name;
-@property (nonatomic, strong) NSString<Optional> *price;
-@property (nonatomic, strong) NSString<Optional> *priceNumber;
-@property (nonatomic, strong) NSString<Optional> *originalPrice;
-@property (nonatomic, strong) NSString<Optional> *qty;
-@property (nonatomic, strong) NSString<Optional> *qtyAvailable;
+@property (nonatomic, strong) NSString *productNo;
+@property (nonatomic, strong) NSString *image;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *price;
+@property (nonatomic, strong) NSString *priceNumber;
+@property (nonatomic, strong) NSString *originalPrice;
+@property (nonatomic, strong) NSString *qty;
+@property (nonatomic, strong) NSString *qtyAvailable;
 @property (nonatomic, strong) NSMutableArray *options;
 @property (nonatomic, assign) int optionSource;
 @property (nonatomic, assign) int optionSourceNo;

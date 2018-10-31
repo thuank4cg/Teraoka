@@ -11,9 +11,9 @@
 #import "ProductModel.h"
 
 
-@interface CategoryModel : JSONModel
-@property (nonatomic, strong) NSString<Optional> *category_no;
-@property (nonatomic, strong) NSString<Optional> *category_name;
-@property (nonatomic, strong) NSMutableArray<Optional> *products;
+@interface CategoryModel : NSObject
+@property (nonatomic, strong) NSString *category_no;
+@property (nonatomic, strong) NSString *category_name;
+@property (nonatomic, strong) NSMutableArray *products;
 @property (nonatomic, assign) BOOL isSelected;
 @end

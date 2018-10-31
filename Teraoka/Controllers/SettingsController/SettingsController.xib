@@ -84,7 +84,7 @@
                         <constraint firstItem="1mK-fq-l1M" firstAttribute="centerY" secondItem="8kJ-nJ-RYM" secondAttribute="centerY" id="jLe-rE-HOX"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILv-OR-3Oi" customClass="TPKeyboardAvoidingScrollView">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILv-OR-3Oi">
                     <rect key="frame" x="0.0" y="90" width="1112" height="1110"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aff-0P-bhl">

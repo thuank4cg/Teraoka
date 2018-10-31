@@ -8,6 +8,9 @@
 
 #import "EnterLicenseController.h"
 #import "SplashController.h"
+#import "APIManager.h"
+#import "Util.h"
+#import <ProgressHUD.h>
 
 @interface EnterLicenseController ()
 
@@ -32,6 +35,29 @@
 }
 
 - (IBAction)submitAction:(id)sender {
+    if (self.tfLicenseKey.text.length == 0) {
+        [Util showAlert:@"Please enter license key." vc:self];
+        return;
+    }
+    
+    [ProgressHUD show:nil Interaction:NO];
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:[NSNumber numberWithInt:1] forKey:@"licensetype"];
+    [params setObject:self.tfLicenseKey.text forKey:@"license"];
+    [params setObject:[NSNumber numberWithInt:1] forKey:@"appid"];
+//    [params setObject:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"uid"];
+    
+    [[APIManager shared] postRequestSuccess:params success:^(id response) {
+        [ProgressHUD dismiss];
+        [self showSplashScreen];
+    } failure:^(id failure) {
+        [Util showAlert:failure vc:self];
+        [ProgressHUD dismiss];
+    }];
+}
+
+- (void)showSplashScreen {
     SplashController *vc = [[SplashController alloc] initWithNibName:@"SplashController" bundle:nil];
     [self presentViewController:vc animated:YES completion:nil];
 }

@@ -31,6 +31,7 @@
 		730FE1131F95EC180045A234 /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730FE1111F95EC180045A234 /* ProductCell.xib */; };
 		730FE11A1F96032F0045A234 /* NewOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 730FE1181F96032F0045A234 /* NewOrderController.m */; };
 		730FE11B1F96032F0045A234 /* NewOrderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730FE1191F96032F0045A234 /* NewOrderController.xib */; };
+		7316B55A216F2F780061DE24 /* ErrorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7316B559216F2F780061DE24 /* ErrorModel.m */; };
 		73203818215C78F100747F37 /* option_group_header.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73203817215C78F100747F37 /* option_group_header.txt */; };
 		7320381A215C795000747F37 /* option_group.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73203819215C794F00747F37 /* option_group.txt */; };
 		7320381C215C797A00747F37 /* comment_group_header.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7320381B215C797900747F37 /* comment_group_header.txt */; };
@@ -112,6 +113,7 @@
 		7357EEAC1F9753DA001EB56B /* ExistingOrderHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7357EEAB1F9753DA001EB56B /* ExistingOrderHeader.xib */; };
 		7357EEB71F975A6D001EB56B /* BillCompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7357EEB51F975A6D001EB56B /* BillCompleteController.m */; };
 		7357EEB81F975A6D001EB56B /* BillCompleteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7357EEB61F975A6D001EB56B /* BillCompleteController.xib */; };
+		735D9B252165C6F500D8FF1B /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 735D9B242165C6F500D8FF1B /* APIManager.m */; };
 		736095F12146286F001EBAB7 /* english.csv in Resources */ = {isa = PBXBuildFile; fileRef = 736095F02146286E001EBAB7 /* english.csv */; };
 		736095F521462CD0001EBAB7 /* LanguageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 736095F421462CD0001EBAB7 /* LanguageModel.m */; };
 		736095F821463163001EBAB7 /* NSString+KeyLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 736095F721463163001EBAB7 /* NSString+KeyLanguage.m */; };
@@ -214,6 +216,8 @@
 		730FE1171F96032F0045A234 /* NewOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewOrderController.h; sourceTree = "<group>"; };
 		730FE1181F96032F0045A234 /* NewOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewOrderController.m; sourceTree = "<group>"; };
 		730FE1191F96032F0045A234 /* NewOrderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewOrderController.xib; sourceTree = "<group>"; };
+		7316B558216F2F780061DE24 /* ErrorModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ErrorModel.h; sourceTree = "<group>"; };
+		7316B559216F2F780061DE24 /* ErrorModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ErrorModel.m; sourceTree = "<group>"; };
 		73203817215C78F100747F37 /* option_group_header.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = option_group_header.txt; sourceTree = "<group>"; };
 		73203819215C794F00747F37 /* option_group.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = option_group.txt; sourceTree = "<group>"; };
 		7320381B215C797900747F37 /* comment_group_header.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = comment_group_header.txt; sourceTree = "<group>"; };
@@ -317,6 +321,8 @@
 		7357EEB41F975A6D001EB56B /* BillCompleteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillCompleteController.h; sourceTree = "<group>"; };
 		7357EEB51F975A6D001EB56B /* BillCompleteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillCompleteController.m; sourceTree = "<group>"; };
 		7357EEB61F975A6D001EB56B /* BillCompleteController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillCompleteController.xib; sourceTree = "<group>"; };
+		735D9B232165C6F500D8FF1B /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		735D9B242165C6F500D8FF1B /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		736095F02146286E001EBAB7 /* english.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = english.csv; sourceTree = "<group>"; };
 		736095F321462CD0001EBAB7 /* LanguageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageModel.h; sourceTree = "<group>"; };
 		736095F421462CD0001EBAB7 /* LanguageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanguageModel.m; sourceTree = "<group>"; };
@@ -501,6 +507,7 @@
 		730FE0CE1F95A1FE0045A234 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7316B557216F2F650061DE24 /* Error */,
 				73387D86215E1D7E00BE023B /* Comment */,
 				73387D7D215E11CE00BE023B /* Serving */,
 				73CE5CC3215CCDF700CDCD15 /* Option */,
@@ -541,6 +548,8 @@
 		730FE0D01F95A2370045A234 /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
+				735D9B232165C6F500D8FF1B /* APIManager.h */,
+				735D9B242165C6F500D8FF1B /* APIManager.m */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -756,6 +765,15 @@
 				730FE1191F96032F0045A234 /* NewOrderController.xib */,
 			);
 			path = NewOrderController;
+			sourceTree = "<group>";
+		};
+		7316B557216F2F650061DE24 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				7316B558216F2F780061DE24 /* ErrorModel.h */,
+				7316B559216F2F780061DE24 /* ErrorModel.m */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		733675271FE25F2200F0AFF8 /* ImagesForProduct */ = {
@@ -1152,6 +1170,7 @@
 				730FE0AF1F95A1690045A234 /* Resources */,
 				FE675B5F754E0B09E80F58AA /* [CP] Copy Pods Resources */,
 				731644BC2003331F00DE7B1C /* ShellScript */,
+				628A1146C0D5A7D20354FCA7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1173,7 +1192,7 @@
 				TargetAttributes = {
 					730FE0B01F95A1690045A234 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = U469N7T3UR;
+						DevelopmentTeam = M726A4GM5C;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -1311,6 +1330,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		628A1146C0D5A7D20354FCA7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Teraoka/Pods-Teraoka-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		731644BC2003331F00DE7B1C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1349,11 +1383,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Teraoka/Pods-Teraoka-resources.sh",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/ProgressHUD/ProgressHUD/ProgressHUD/ProgressHUD.bundle",
 				"${PODS_ROOT}/SIAlertView/SIAlertView/SIAlertView.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ProgressHUD.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SIAlertView.bundle",
 			);
@@ -1415,8 +1451,10 @@
 				73387D76215DC52400BE023B /* OptionSetModel.m in Sources */,
 				730FE10D1F95EBAF0045A234 /* CategoryCell.m in Sources */,
 				73387D83215E157500BE023B /* ServingGroupHeaderModel.m in Sources */,
+				7316B55A216F2F780061DE24 /* ErrorModel.m in Sources */,
 				730FE1041F95E8960045A234 /* CategoriesController.m in Sources */,
 				73387D8C215E1F0700BE023B /* CommentGroupHeaderModel.m in Sources */,
+				735D9B252165C6F500D8FF1B /* APIManager.m in Sources */,
 				73387D79215DCE7700BE023B /* OptionUtils.m in Sources */,
 				737B48A5212AB18A00B02B3D /* SwitchCustomView.m in Sources */,
 				7357EEB71F975A6D001EB56B /* BillCompleteController.m in Sources */,
@@ -1567,19 +1605,19 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Office Productivity Solution Pte. Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Office Productivity Solution Pte. Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: DIGI SINGAPORE PTE. LTD. (M726A4GM5C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DIGI SINGAPORE PTE. LTD. (M726A4GM5C)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = U469N7T3UR;
+				DEVELOPMENT_TEAM = M726A4GM5C;
 				INFOPLIST_FILE = Teraoka/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tvo.customerfacing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ss.customerfacing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "36d1105c-df15-4b45-8d76-ccdce6e2db70";
-				PROVISIONING_PROFILE_SPECIFIER = "OPS Distribution 2018";
+				PROVISIONING_PROFILE = "48cfd7d9-a875-4a8e-9047-6c869d2f09d5";
+				PROVISIONING_PROFILE_SPECIFIER = "Customer Facing Profile";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1590,18 +1628,18 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Office Productivity Solution Pte. Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Office Productivity Solution Pte. Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: DIGI SINGAPORE PTE. LTD. (M726A4GM5C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DIGI SINGAPORE PTE. LTD. (M726A4GM5C)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = U469N7T3UR;
+				DEVELOPMENT_TEAM = M726A4GM5C;
 				INFOPLIST_FILE = Teraoka/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tvo.customerfacing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ss.customerfacing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "36d1105c-df15-4b45-8d76-ccdce6e2db70";
-				PROVISIONING_PROFILE_SPECIFIER = "OPS Distribution 2018";
+				PROVISIONING_PROFILE = "48cfd7d9-a875-4a8e-9047-6c869d2f09d5";
+				PROVISIONING_PROFILE_SPECIFIER = "Customer Facing Profile";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

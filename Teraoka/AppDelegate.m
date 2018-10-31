@@ -16,6 +16,7 @@
 #import "ShareManager.h"
 #import "Util.h"
 #import "EnterLicenseController.h"
+#import <IQKeyboardManager.h>
 
 @interface AppDelegate ()
 
@@ -40,6 +41,8 @@
     EnterLicenseController *splashVC = [[EnterLicenseController alloc] initWithNibName:@"EnterLicenseController" bundle:nil];
     self.window.rootViewController = splashVC;
     [self.window makeKeyAndVisible];
+    
+    [IQKeyboardManager sharedManager].enable = YES;
     
     return YES;
 }
