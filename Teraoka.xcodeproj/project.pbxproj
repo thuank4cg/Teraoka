@@ -1170,7 +1170,6 @@
 				730FE0AF1F95A1690045A234 /* Resources */,
 				FE675B5F754E0B09E80F58AA /* [CP] Copy Pods Resources */,
 				731644BC2003331F00DE7B1C /* ShellScript */,
-				628A1146C0D5A7D20354FCA7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1330,21 +1329,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		628A1146C0D5A7D20354FCA7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Teraoka/Pods-Teraoka-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		731644BC2003331F00DE7B1C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
