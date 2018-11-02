@@ -11,6 +11,7 @@
 #import "APIManager.h"
 #import "Util.h"
 #import <ProgressHUD.h>
+#import "APPConstants.h"
 
 @interface EnterLicenseController ()
 
@@ -50,6 +51,10 @@
     
     [[APIManager shared] postRequestSuccess:params success:^(id response) {
         [ProgressHUD dismiss];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.tfLicenseKey.text forKey:KEY_LICENSE_VALID];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         [self showSplashScreen];
     } failure:^(id failure) {
         [Util showAlert:failure vc:self];

@@ -34,6 +34,7 @@
 - (void)setDataForCell:(ProductModel *)product {
     self.tfQuantity.text = product.qty;
     self.productImage.image = [UIImage imageNamed:product.image];
+    self.lbOptions.text = @"Not applicable";
     
     BOOL isSelectedOption = NO;
     NSString* optionStr = @"<p style='line-height:1.8;text-align:center'>";

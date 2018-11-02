@@ -38,9 +38,19 @@
     [Util setLanguage:lang];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    EnterLicenseController *splashVC = [[EnterLicenseController alloc] initWithNibName:@"EnterLicenseController" bundle:nil];
-    self.window.rootViewController = splashVC;
-    [self.window makeKeyAndVisible];
+    
+    UIViewController *rootVC;
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_LICENSE_VALID]) {
+        rootVC = [[SplashController alloc] initWithNibName:@"SplashController" bundle:nil];
+    } else {
+        rootVC = [[EnterLicenseController alloc] initWithNibName:@"EnterLicenseController" bundle:nil];
+    }
+    
+    if (rootVC) {
+        self.window.rootViewController = rootVC;
+        [self.window makeKeyAndVisible];
+    }
     
     [IQKeyboardManager sharedManager].enable = YES;
     
