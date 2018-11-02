@@ -82,12 +82,12 @@
         }
     }
     
+    [ShareManager shared].cartArr = products;
+    
     if (products.count == 0) {
         [Util showAlert:@"No product to proceed." vc:self];
         return;
     }
-    
-    [ShareManager shared].cartArr = products;
     
     if ([ShareManager shared].setting.selectMode == Quick_Serve) {
         [self sendPOSRequest:SendTransaction];

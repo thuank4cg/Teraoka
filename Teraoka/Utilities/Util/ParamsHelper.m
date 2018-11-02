@@ -69,6 +69,11 @@
             requestData = [self requestGetInventoryData];
             break;
             
+        case CallStaff:
+            commandId = @"10106";
+            requestData = [self requestCallStaffData];
+            break;
+            
         default:
             break;
     }
@@ -409,6 +414,22 @@
         //PLU No
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]];
     }
+    
+    return mCollectData;
+}
+
+- (NSMutableData *)requestCallStaffData {
+    NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
+    /**XRequestHeaderData**/
+    
+    [mCollectData appendData:[self requestHeaderData]];
+    
+    /**XBillIdData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Bill No
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
     
     return mCollectData;
 }

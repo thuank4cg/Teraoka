@@ -13,6 +13,7 @@ typedef enum
     SendOrder = 1,
     SendTransaction,
     GetInventory,
+    CallStaff
 } CommandName;
 
 @interface ParamsHelper : NSObject

@@ -56,7 +56,6 @@
 - (void)sendPOSRequest:(CommandName)_commandName {
     commandName = _commandName;
     
-    [ProgressHUD show:nil Interaction:NO];
     //    if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable)
     //    {
     //        [Util showAlert:MSG_ERROR vc:self];
@@ -151,6 +150,9 @@
         case GetInventory:
             [asyncSocket writeData:[ParamsHelper.shared collectData:GetInventory] withTimeout:10 tag:0];
             break;
+        case CallStaff:
+            [asyncSocket writeData:[ParamsHelper.shared collectData:CallStaff] withTimeout:10 tag:0];
+            break;
             
         default:
             break;
@@ -175,6 +177,9 @@
             break;
         case GetInventory:
             [self handleDataGetInventory:data];
+            break;
+        case CallStaff:
+            [self handleDataCallStaff:data];
             break;
         default:
             break;
@@ -314,6 +319,18 @@
         
         [ShareManager shared].outOfStockArr = outOfStockArr;
         [[NSNotificationCenter defaultCenter] postNotificationName:KEY_NOTIFY_OUT_OF_STOCK object:nil];
+    } else {
+        [Util showAlert:MSG_ERROR vc:self];
+    }
+}
+
+- (void)handleDataCallStaff:(NSData *)data {
+    int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
+    
+    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
+    NSString *httpResponse = [Util hexadecimalString:replyStatus];
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+        NSLog(@"Ok");
     } else {
         [Util showAlert:MSG_ERROR vc:self];
     }
