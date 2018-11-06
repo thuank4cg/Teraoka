@@ -259,14 +259,6 @@
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
     if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
-        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
-        NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        NSData *dataReceipt = [replyData subdataWithRange:NSMakeRange(0, 4)];
-        NSData *dataTransactionNumber = [replyData subdataWithRange:NSMakeRange(4, 4)];
-        
-        int receipt = [Util hexStringToInt:[Util hexadecimalString:dataReceipt]];
-        int transactionNumber = [Util hexStringToInt:[Util hexadecimalString:dataTransactionNumber]];
-        
         [self showOrderConfirmScreen];
     } else {
         [Util showAlert:MSG_ERROR vc:self];

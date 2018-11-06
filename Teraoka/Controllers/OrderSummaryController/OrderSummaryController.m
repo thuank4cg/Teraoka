@@ -47,17 +47,17 @@
     [self.btnSend setTitle:@"SC07_020".localizedString forState:UIControlStateNormal];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOutOfStock:) name:KEY_NOTIFY_OUT_OF_STOCK object:nil];
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOutOfStock:) name:KEY_NOTIFY_OUT_OF_STOCK object:nil];
+//}
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+//- (void)viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 
 - (void)setupView {
     self.tblView.delegate = self;
@@ -117,10 +117,10 @@
 
 //MARK: Custom method
 
-- (void)showOutOfStock:(NSNotification *)notification {
-    [self.delegate showOutOfStockScreen];
-    [self.view removeFromSuperview];
-}
+//- (void)showOutOfStock:(NSNotification *)notification {
+//    [self.delegate showOutOfStockScreen];
+//    [self.view removeFromSuperview];
+//}
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

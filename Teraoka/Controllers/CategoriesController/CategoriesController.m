@@ -88,6 +88,14 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     [self setupQtyBoxView];
     isBackDelegate = NO;
     [self setData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOutOfStock:) name:KEY_NOTIFY_OUT_OF_STOCK object:nil];
+}
+    
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)loadLocalizable {
@@ -237,6 +245,10 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gotoSettingAction:)];
     [longPress setMinimumPressDuration:2];
     [self.settingBtn addGestureRecognizer:longPress];
+}
+    
+- (void)showOutOfStock:(NSNotification *)notification {
+    [self showOutOfStockScreen];
 }
 
 - (void)setupQtyBoxView {
@@ -392,15 +404,6 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     
     UIImageView *icon = (UIImageView *)[menuIcons objectAtIndex:index];
     [icon setHidden:NO];
-}
-
-- (NSManagedObjectContext *)managedObjectContext {
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
 }
 
 // dummy data
