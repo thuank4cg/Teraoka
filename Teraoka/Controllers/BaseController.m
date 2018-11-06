@@ -280,11 +280,6 @@
         
         int numberOfObject = [Util hexStringToInt:[Util hexadecimalString:numberOfObjectData]];
         
-        if (numberOfObject == 0) {
-            [self sendPOSRequest:SendTransaction];
-            return;
-        }
-        
         /**XInventoryItemData**/
         
         NSMutableArray *outOfStockArr = [NSMutableArray new];
@@ -305,15 +300,24 @@
             int sales = [Util hexStringToInt:[Util hexadecimalString:salesData]];
             int onHand = [Util hexStringToInt:[Util hexadecimalString:onHandData]];
             
-            NSLog(@"(%d) - (%d) - (%d) - (%d) - (%d) - (%d)", pluNo, leftOver, totalIn, totalOut, sales, onHand);
-            
-            OutOfStockModel *model = [[OutOfStockModel alloc] init];
-            model.productNo = [NSString stringWithFormat:@"%d", pluNo];
-            model.qty = [NSString stringWithFormat:@"%d", (onHand < 0)?0:onHand];
-            
-            [outOfStockArr addObject:model];
+            for (ProductModel *product in [ShareManager shared].cartArr) {
+                if ([product.productNo intValue] == pluNo && [product.qty intValue] > onHand) {
+                    NSLog(@"(%d) - (%d) - (%d) - (%d) - (%d) - (%d)", pluNo, leftOver, totalIn, totalOut, sales, onHand);
+                    
+                    OutOfStockModel *model = [[OutOfStockModel alloc] init];
+                    model.productNo = [NSString stringWithFormat:@"%d", pluNo];
+                    model.qty = [NSString stringWithFormat:@"%d", (onHand < 0)?0:onHand];
+                    
+                    [outOfStockArr addObject:model];
+                }
+            }
             
             location += 24;
+        }
+        
+        if (outOfStockArr.count == 0) {
+            [self sendPOSRequest:SendTransaction];
+            return;
         }
         
         [ShareManager shared].outOfStockArr = outOfStockArr;

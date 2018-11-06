@@ -45,11 +45,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    saveDataSuccess = NO;
-    didClickStartButton = NO;
-    
-    isDownloadFile = NO;
-    
     NSString *json = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_SAVED_SETTING];
     SettingModel *setting = [[SettingModel alloc] initWithString:json error:nil];
     
@@ -64,6 +59,11 @@
     
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    saveDataSuccess = NO;
+    didClickStartButton = NO;
+    
+    isDownloadFile = NO;
     
     [self removeDataForEntity:MENU_CATEGORY_TABLE_NAME];
     [self removeDataForEntity:MENU_CONTENTS_TABLE_NAME];
@@ -136,10 +136,10 @@
         return;
     }
     
-    [self saveDataToDb];
+//    [self saveDataToDb];
     
-//    [ProgressHUD show:nil Interaction:NO];
-//    [self listDirectoryContents];
+    [ProgressHUD show:nil Interaction:NO];
+    [self listDirectoryContents];
 }
 
 - (void)listDirectoryContents {
@@ -202,10 +202,10 @@
 }
 
 - (NSString *)getContentFile:(NSString *)fileName {
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
+//    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     return content;
 }
