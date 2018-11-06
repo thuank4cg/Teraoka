@@ -124,15 +124,13 @@
     }
 }
 
-- (void)showOrderConfirmScreen:(int)receipt transaction:(int)transaction {
+- (void)showOrderConfirmScreen {
     [self getExistingOrder];
     
     [ShareManager shared].cartArr = nil;
     [ShareManager shared].outOfStockArr = nil;
     
     OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
-    vc.receipt = receipt;
-    vc.queueNumber = transaction;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
@@ -202,7 +200,7 @@
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
     if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
-        [self showOrderConfirmScreen:0 transaction:0];
+        [self showOrderConfirmScreen];
     } else {
         NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
         NSData *dataErrorID = [replyData subdataWithRange:NSMakeRange(0, 2)];
@@ -260,7 +258,7 @@
         int receipt = [Util hexStringToInt:[Util hexadecimalString:dataReceipt]];
         int transactionNumber = [Util hexStringToInt:[Util hexadecimalString:dataTransactionNumber]];
         
-        [self showOrderConfirmScreen:receipt transaction:transactionNumber];
+        [self showOrderConfirmScreen];
     } else {
         [Util showAlert:MSG_ERROR vc:self];
     }

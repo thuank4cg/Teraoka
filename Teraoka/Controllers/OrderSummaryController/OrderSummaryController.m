@@ -16,6 +16,7 @@
 #import "APPConstants.h"
 #import "NSString+KeyLanguage.h"
 #import "Util.h"
+#import "Reachability.h"
 
 @interface OrderSummaryController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -54,8 +55,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self.view removeFromSuperview];
 }
 
 - (void)setupView {
@@ -85,6 +86,13 @@
 }
 
 - (IBAction)sendOrder:(id)sender {
+    Reachability *reach = [Reachability reachabilityForInternetConnection];
+    
+    if (![reach isReachable]) {
+        [Util showAlert:@"Unable to proceed, you do not have any network." vc:self];
+        return;
+    }
+    
     SettingModel *setting = [ShareManager shared].setting;
     if (setting && setting.selectMode == Dine_in && setting.tableSelection == Fix_ed && setting.tableNo == 0) {
         [Util showAlert:@"Please enter table no in settings" vc:self];
@@ -103,6 +111,8 @@
     } else {
         [self sendPOSRequest:SendOrder];
     }
+    
+    [self.view removeFromSuperview];
 }
 
 //MARK: Custom method

@@ -24,6 +24,7 @@
 #import <ProgressHUD.h>
 #import "NSString+KeyLanguage.h"
 #import "StartOrderController.h"
+#import "Reachability.h"
 
 @interface SplashController () <WRRequestDelegate, NSStreamDelegate>
 
@@ -80,6 +81,13 @@
 }
 
 - (IBAction)startOrderAction:(id)sender {
+    Reachability *reach = [Reachability reachabilityForInternetConnection];
+    
+    if (![reach isReachable]) {
+        [Util showAlert:@"Unable to proceed, you do not have any network." vc:self];
+        return;
+    }
+    
     if ([ShareManager shared].setting.tableNo > 0) {
         [self doGetContents];
         return;
@@ -175,10 +183,10 @@
 }
 
 - (NSString *)getContentFile:(NSString *)fileName {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
-//    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     return content;
 }
@@ -228,6 +236,7 @@
 - (void)requestFailed:(WRRequest *)request {
     NSLog(@"%@", request.error.message);
     [ProgressHUD dismiss];
+    [Util showAlert:@"Unable to proceed, you have attempted to connect to an invalid server IP. Please try again with another IP." vc:self];
 }
 
 #pragma mark - save data to db

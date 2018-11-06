@@ -16,8 +16,6 @@
 
 @interface OrderConfirmController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
-//@property (weak, nonatomic) IBOutlet UILabel *lbReceipt;
-//@property (weak, nonatomic) IBOutlet UILabel *lbQueue;
 @property (weak, nonatomic) IBOutlet UILabel *lbTitle;
 @property (weak, nonatomic) IBOutlet UIButton *okBtn;
 @property (weak, nonatomic) IBOutlet UIButton *viewBillBtn;
@@ -38,9 +36,6 @@
     self.containerView.layer.shadowOpacity = 0.5;
     self.containerView.layer.shadowRadius = 3.0;
     self.containerView.layer.masksToBounds = NO;
-    
-//    self.lbReceipt.text = [NSString stringWithFormat:@"Receipt: %d", self.receipt];
-//    self.lbQueue.text = [NSString stringWithFormat:@"Order number: %d", self.queueNumber];
 }
 
 - (void)loadLocalizable {
