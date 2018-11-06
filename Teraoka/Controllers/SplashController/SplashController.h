@@ -9,5 +9,6 @@
 #import "BaseController.h"
 
 @interface SplashController : BaseController
-- (void)doGetContents;
+- (void)showCategoriesScreen;
+- (IBAction)startOrderAction:(id)sender;
 @end

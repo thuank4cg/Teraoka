@@ -41,6 +41,7 @@
 		73203825215C7A0A00747F37 /* serving_group_header.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73203823215C7A0A00747F37 /* serving_group_header.txt */; };
 		73203826215C7A0A00747F37 /* serving_timing.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73203824215C7A0A00747F37 /* serving_timing.txt */; };
 		73203828215C7A1A00747F37 /* option_set.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73203827215C7A1A00747F37 /* option_set.txt */; };
+		7331E2982191531D007A69AF /* table_no.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7331E2972191531D007A69AF /* table_no.txt */; };
 		7334D2D5200477C1009853BB /* HOTMasterDataFull_02.12_171214_143505_01.29.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7334D2D4200477C1009853BB /* HOTMasterDataFull_02.12_171214_143505_01.29.zip */; };
 		733675481FE25F2200F0AFF8 /* 4001.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675281FE25F2200F0AFF8 /* 4001.png */; };
 		733675491FE25F2200F0AFF8 /* 3008.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675291FE25F2200F0AFF8 /* 3008.png */; };
@@ -210,6 +211,7 @@
 		73203824215C7A0A00747F37 /* serving_timing.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = serving_timing.txt; sourceTree = "<group>"; };
 		73203827215C7A1A00747F37 /* option_set.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = option_set.txt; sourceTree = "<group>"; };
 		732679A51FB2E3D80071405F /* APPConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APPConstants.h; sourceTree = "<group>"; };
+		7331E2972191531D007A69AF /* table_no.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = table_no.txt; sourceTree = "<group>"; };
 		7334D2D4200477C1009853BB /* HOTMasterDataFull_02.12_171214_143505_01.29.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = HOTMasterDataFull_02.12_171214_143505_01.29.zip; sourceTree = "<group>"; };
 		733675281FE25F2200F0AFF8 /* 4001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4001.png; sourceTree = "<group>"; };
 		733675291FE25F2200F0AFF8 /* 3008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3008.png; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				73387D84215E194500BE023B /* serving_group.txt */,
 				73387D8D215E223A00BE023B /* comment_group.txt */,
 				739DC346215E2CEB00D226B6 /* plu.txt */,
+				7331E2972191531D007A69AF /* table_no.txt */,
 				733675271FE25F2200F0AFF8 /* ImagesForProduct */,
 				730FE0B51F95A1690045A234 /* main.m */,
 			);
@@ -1172,6 +1175,7 @@
 				7357EE7F1F9713CD001EB56B /* NewOrderAddedController.xib in Resources */,
 				733675671FE25F2200F0AFF8 /* 3005.png in Resources */,
 				73203822215C79D300747F37 /* serving_set.txt in Resources */,
+				7331E2982191531D007A69AF /* table_no.txt in Resources */,
 				730FE0C71F95A1690045A234 /* LaunchScreen.storyboard in Resources */,
 				7369AD702158E89C00210EC9 /* EnterLicenseController.xib in Resources */,
 				7357EEA01F974BE6001EB56B /* ViewExistingOrderController.xib in Resources */,

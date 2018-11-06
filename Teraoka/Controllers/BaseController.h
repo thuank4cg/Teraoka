@@ -15,5 +15,6 @@
 - (void)sendPOSRequest:(CommandName)_commandName;
 - (void)getExistingOrder;
 - (void)loadLocalizable;
+- (NSManagedObjectContext *)managedObjectContext;
 
 @end

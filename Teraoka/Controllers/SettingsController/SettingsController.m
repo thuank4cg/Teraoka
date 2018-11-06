@@ -322,7 +322,15 @@
 }
 
 - (void)showTableNoList {
-    NSArray *items = @[@"1", @"2", @"3", @"4", @"5"];
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:TABLE_NO_TABLE_NAME];
+    NSArray *tableArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    NSMutableArray *items = [NSMutableArray new];
+    
+    for (NSManagedObject *table in tableArr) {
+        [items addObject:[table valueForKey:@"table_no"]];
+    }
     
     [ActionSheetStringPicker showPickerWithTitle:@"Select Table"
                                             rows:items

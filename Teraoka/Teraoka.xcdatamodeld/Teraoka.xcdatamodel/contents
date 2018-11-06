@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Comment" representedClassName="Comment" syncable="YES" codeGenerationType="class">
         <attribute name="comment_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comment_name1" optional="YES" attributeType="String" syncable="YES"/>
@@ -181,8 +181,20 @@
         <attribute name="short_name3" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="short_name4" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="TableNo" representedClassName="TableNo" syncable="YES" codeGenerationType="class">
+        <attribute name="grid_x" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="grid_y" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pixel_height" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pixel_width" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pixel_x" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pixel_y" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="table_area_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="table_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="table_no" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Comment" positionX="-18" positionY="162" width="128" height="210"/>
+        <element name="CommentGroup" positionX="0" positionY="144" width="128" height="105"/>
         <element name="CommentGroupHeader" positionX="-36" positionY="153" width="128" height="255"/>
         <element name="CommentSet" positionX="0" positionY="171" width="128" height="210"/>
         <element name="MenuCategory" positionX="-63" positionY="-18" width="128" height="150"/>
@@ -191,10 +203,10 @@
         <element name="OptionGroupHeader" positionX="-54" positionY="135" width="128" height="255"/>
         <element name="OptionSet" positionX="0" positionY="144" width="128" height="210"/>
         <element name="Plu" positionX="-54" positionY="9" width="128" height="570"/>
+        <element name="ServingGroup" positionX="-9" positionY="135" width="128" height="105"/>
         <element name="ServingGroupHeader" positionX="-9" positionY="135" width="128" height="240"/>
         <element name="ServingSet" positionX="18" positionY="180" width="128" height="210"/>
         <element name="ServingTiming" positionX="36" positionY="189" width="128" height="210"/>
-        <element name="ServingGroup" positionX="-9" positionY="135" width="128" height="105"/>
-        <element name="CommentGroup" positionX="0" positionY="144" width="128" height="105"/>
+        <element name="TableNo" positionX="-9" positionY="135" width="128" height="180"/>
     </elements>
 </model>

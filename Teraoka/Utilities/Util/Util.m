@@ -10,6 +10,7 @@
 #import <SIAlertView.h>
 #import "LanguageModel.h"
 #import "ShareManager.h"
+#import "APPConstants.h"
 
 @implementation Util
 
@@ -81,6 +82,75 @@
     }
     
     [ShareManager shared].languages = languages;
+}
+    
++ (void)showError:(NSString *)errorId vc:(UIViewController *)vc {
+    NSString *msg;
+    
+    if ([errorId isEqualToString:ERROR_ID_INVALID_COMMAND]) {
+        msg = @"Invalid command.";
+    } else if ([errorId isEqualToString:ERROR_ID_SIZE_ERROR]) {
+        msg = @"Invalid command/data size.";
+    } else if ([errorId isEqualToString:ERROR_ID_VER_MISMATCH]) {
+        msg = @"Invalid version.";
+    } else if ([errorId isEqualToString:ERROR_ID_NO_ITEM_DETAIL]) {
+        msg = @"There is no order items.";
+    } else if ([errorId isEqualToString:ERROR_ID_OVER_QTY]) {
+        msg = @"Over quantity.";
+    } else if ([errorId isEqualToString:ERROR_ID_INVALID_COUPON]) {
+        msg = @"Invalid coupon.";
+    } else if ([errorId isEqualToString:ERROR_ID_INVALID_COUPON_COMB]) {
+        msg = @"Invalid coupon combination.";
+    } else if ([errorId isEqualToString:ERROR_ID_VACANT]) {
+        msg = @"There is no items.";
+    } else if ([errorId isEqualToString:ERROR_ID_CHECKOUTED]) {
+        msg = @"Bill was already checkouted.";
+    } else if ([errorId isEqualToString:ERROR_ID_INVALID_BILL]) {
+        msg = @"Invalid Bill.";
+    } else if ([errorId isEqualToString:ERROR_ID_CHECKOUTING]) {
+        msg = @"Bill is checkouting now.";
+    } else if ([errorId isEqualToString:ERROR_ID_BILL_CHANGED]) {
+        msg = @"Bill record is changed at server side";
+    } else if ([errorId isEqualToString:ERROR_ID_BILL_LOCKED]) {
+        msg = @"Bill record is locked at server side";
+    } else if ([errorId isEqualToString:ERROR_ID_OUT_OF_STOCK]) {
+        msg = @"Out of stock.";
+    } else if ([errorId isEqualToString:ERROR_ID_TABLE]) {
+        msg = @"Missing Table.";
+    } else if ([errorId isEqualToString:ERROR_ID_STAFF]) {
+        msg = @"Missing Staff.";
+    } else if ([errorId isEqualToString:ERROR_ID_PLU]) {
+        msg = @"Missing PLU.";
+    } else if ([errorId isEqualToString:ERROR_ID_MEALSET]) {
+        msg = @"Missing Mealset Parent.";
+    } else if ([errorId isEqualToString:ERROR_ID_OPTION]) {
+        msg = @"Missing Option.";
+    } else if ([errorId isEqualToString:ERROR_ID_COMMENT]) {
+        msg = @"Missing Comment.";
+    } else if ([errorId isEqualToString:ERROR_ID_SERVING_TIME]) {
+        msg = @"Missing Servint Time.";
+    } else if ([errorId isEqualToString:ERROR_ID_BUFFET]) {
+        msg = @"Missing Buffet Parent.";
+    } else if ([errorId isEqualToString:ERROR_ID_INVALID_PRINTER_GROUP]) {
+        msg = @"Printer group not exist";
+    } else if ([errorId isEqualToString:ERROR_ID_ACCESSING]) {
+        msg = @"Could not access to DB. Please try again.";
+    } else if ([errorId isEqualToString:ERROR_ID_DB_COLLAPSE]) {
+        msg = @"DB may be collapsed.";
+    } else if ([errorId isEqualToString:ERROR_ID_NO_APPL]) {
+        msg = @"There is no application.";
+    } else if ([errorId isEqualToString:ERROR_ID_NO_AUTHORITY]) {
+        msg = @"You do not have the authority";
+    } else {
+        msg = @"Unknown error was occurred.";
+    }
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action){
+        
+    }];
+    [alert addAction:okAction];
+    [vc presentViewController:alert animated:YES completion:nil];
 }
 
 @end

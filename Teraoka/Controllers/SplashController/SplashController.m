@@ -37,11 +37,33 @@
 @implementation SplashController {
     NSString *fileName;
     BOOL isDownloadFile;
+    BOOL saveDataSuccess;
+    BOOL didClickStartButton;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    saveDataSuccess = NO;
+    didClickStartButton = NO;
+    
+    isDownloadFile = NO;
+    
+    NSString *json = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_SAVED_SETTING];
+    SettingModel *setting = [[SettingModel alloc] initWithString:json error:nil];
+    
+    if (!setting) setting = [[SettingModel alloc] init];
+    
+    if (setting.serverIP.length == 0) {
+        setting.serverIP = HOST_NAME;
+    }
+    
+    [ShareManager shared].setting = setting;
+}
+    
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self removeDataForEntity:MENU_CATEGORY_TABLE_NAME];
     [self removeDataForEntity:MENU_CONTENTS_TABLE_NAME];
@@ -57,19 +79,9 @@
     [self removeDataForEntity:SERVING_GROUP_TABLE_NAME];
     [self removeDataForEntity:SERVING_TIMING_TABLE_NAME];
     [self removeDataForEntity:OPTION_SET_TABLE_NAME];
+    [self removeDataForEntity:TABLE_NO_TABLE_NAME];
     
-    isDownloadFile = NO;
-    
-    NSString *json = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_SAVED_SETTING];
-    SettingModel *setting = [[SettingModel alloc] initWithString:json error:nil];
-    
-    if (!setting) setting = [[SettingModel alloc] init];
-    
-    if (setting.serverIP.length == 0) {
-        setting.serverIP = HOST_NAME;
-    }
-    
-    [ShareManager shared].setting = setting;
+    [self doGetContents];
 }
 
 - (void)loadLocalizable {
@@ -88,8 +100,9 @@
         return;
     }
     
+    didClickStartButton = YES;
     if ([ShareManager shared].setting.tableNo > 0) {
-        [self doGetContents];
+        [self showCategoriesScreen];
         return;
     }
     
@@ -117,10 +130,16 @@
 #pragma mark - Custom method
 
 - (void)doGetContents {
-//    [self saveDataToDb];
+    Reachability *reach = [Reachability reachabilityForInternetConnection];
     
-    [ProgressHUD show:nil Interaction:NO];
-    [self listDirectoryContents];
+    if (![reach isReachable]) {
+        return;
+    }
+    
+    [self saveDataToDb];
+    
+//    [ProgressHUD show:nil Interaction:NO];
+//    [self listDirectoryContents];
 }
 
 - (void)listDirectoryContents {
@@ -290,8 +309,14 @@
     [self saveDataToDbFrom:KEY_SERVING_GROUP_TABLE_FILE_NAME toTable:SERVING_GROUP_TABLE_NAME];
     [self saveDataToDbFrom:KEY_SERVING_TIMING_TABLE_FILE_NAME toTable:SERVING_TIMING_TABLE_NAME];
     [self saveDataToDbFrom:KEY_OPTION_SET_TABLE_FILE_NAME toTable:OPTION_SET_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_TABLE_NO_TABLE_FILE_NAME toTable:TABLE_NO_TABLE_NAME];
     [ProgressHUD dismiss];
-    [self showCategoriesScreen];
+    
+    saveDataSuccess = YES;
+    
+    if (didClickStartButton) {
+        [self showCategoriesScreen];
+    }
 }
 
 - (NSManagedObjectContext *)managedObjectContext {
@@ -318,6 +343,11 @@
 }
 
 - (void)showCategoriesScreen {
+    if (!saveDataSuccess) {
+        [self doGetContents];
+        return;
+    }
+    
     CategoriesController *rootVC = [[CategoriesController alloc] initWithNibName:@"CategoriesController" bundle:nil];
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:rootVC];
     [navc setNavigationBarHidden:YES];
