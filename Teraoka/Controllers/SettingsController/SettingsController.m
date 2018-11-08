@@ -246,7 +246,7 @@
 - (void)setupData {
     SettingModel *setting = [ShareManager shared].setting;
     
-    self.tfIPAddress.text = setting.serverIP;
+//    self.tfIPAddress.text = setting.serverIP;
     
     selectModeValue = setting.selectMode;
     switch (setting.selectMode) {

@@ -315,7 +315,12 @@
     saveDataSuccess = YES;
     
     if (didClickStartButton) {
-        [self showCategoriesScreen];
+        if ([ShareManager shared].setting.tableNo > 0) {
+            [self showCategoriesScreen];
+        } else {
+            StartOrderController *vc = [[StartOrderController alloc] initWithNibName:@"StartOrderController" bundle:nil];
+            [self presentViewController:vc animated:NO completion:nil];
+        }
     }
 }
 

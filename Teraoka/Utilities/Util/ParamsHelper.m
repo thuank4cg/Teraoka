@@ -74,6 +74,11 @@
             requestData = [self requestCallStaffData];
             break;
             
+        case CallBill:
+            commandId = @"11102";
+            requestData = [self requestCallBillData];
+            break;
+            
         default:
             break;
     }
@@ -430,6 +435,26 @@
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Bill No
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
+    
+    return mCollectData;
+}
+    
+- (NSMutableData *)requestCallBillData {
+    NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
+    /**XRequestHeaderData**/
+    
+    [mCollectData appendData:[self requestHeaderData]];
+    
+    /**XBillIdData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Bill No
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
+    
+    /**Terminal No**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]];
     
     return mCollectData;
 }

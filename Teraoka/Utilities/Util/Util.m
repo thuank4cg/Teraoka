@@ -84,62 +84,62 @@
     [ShareManager shared].languages = languages;
 }
     
-+ (void)showError:(NSString *)errorId vc:(UIViewController *)vc {
++ (void)showError:(NSString *)errorID vc:(UIViewController *)vc {
     NSString *msg;
     
-    if ([errorId isEqualToString:ERROR_ID_INVALID_COMMAND]) {
+    if ([errorID isEqualToString:ERROR_ID_INVALID_COMMAND]) {
         msg = @"Invalid command.";
-    } else if ([errorId isEqualToString:ERROR_ID_SIZE_ERROR]) {
+    } else if ([errorID isEqualToString:ERROR_ID_SIZE_ERROR]) {
         msg = @"Invalid command/data size.";
-    } else if ([errorId isEqualToString:ERROR_ID_VER_MISMATCH]) {
+    } else if ([errorID isEqualToString:ERROR_ID_VER_MISMATCH]) {
         msg = @"Invalid version.";
-    } else if ([errorId isEqualToString:ERROR_ID_NO_ITEM_DETAIL]) {
+    } else if ([errorID isEqualToString:ERROR_ID_NO_ITEM_DETAIL]) {
         msg = @"There is no order items.";
-    } else if ([errorId isEqualToString:ERROR_ID_OVER_QTY]) {
+    } else if ([errorID isEqualToString:ERROR_ID_OVER_QTY]) {
         msg = @"Over quantity.";
-    } else if ([errorId isEqualToString:ERROR_ID_INVALID_COUPON]) {
+    } else if ([errorID isEqualToString:ERROR_ID_INVALID_COUPON]) {
         msg = @"Invalid coupon.";
-    } else if ([errorId isEqualToString:ERROR_ID_INVALID_COUPON_COMB]) {
+    } else if ([errorID isEqualToString:ERROR_ID_INVALID_COUPON_COMB]) {
         msg = @"Invalid coupon combination.";
-    } else if ([errorId isEqualToString:ERROR_ID_VACANT]) {
+    } else if ([errorID isEqualToString:ERROR_ID_VACANT]) {
         msg = @"There is no items.";
-    } else if ([errorId isEqualToString:ERROR_ID_CHECKOUTED]) {
+    } else if ([errorID isEqualToString:ERROR_ID_CHECKOUTED]) {
         msg = @"Bill was already checkouted.";
-    } else if ([errorId isEqualToString:ERROR_ID_INVALID_BILL]) {
+    } else if ([errorID isEqualToString:ERROR_ID_INVALID_BILL]) {
         msg = @"Invalid Bill.";
-    } else if ([errorId isEqualToString:ERROR_ID_CHECKOUTING]) {
+    } else if ([errorID isEqualToString:ERROR_ID_CHECKOUTING]) {
         msg = @"Bill is checkouting now.";
-    } else if ([errorId isEqualToString:ERROR_ID_BILL_CHANGED]) {
+    } else if ([errorID isEqualToString:ERROR_ID_BILL_CHANGED]) {
         msg = @"Bill record is changed at server side";
-    } else if ([errorId isEqualToString:ERROR_ID_BILL_LOCKED]) {
+    } else if ([errorID isEqualToString:ERROR_ID_BILL_LOCKED]) {
         msg = @"Bill record is locked at server side";
-    } else if ([errorId isEqualToString:ERROR_ID_OUT_OF_STOCK]) {
+    } else if ([errorID isEqualToString:ERROR_ID_OUT_OF_STOCK]) {
         msg = @"Out of stock.";
-    } else if ([errorId isEqualToString:ERROR_ID_TABLE]) {
+    } else if ([errorID isEqualToString:ERROR_ID_TABLE]) {
         msg = @"Missing Table.";
-    } else if ([errorId isEqualToString:ERROR_ID_STAFF]) {
+    } else if ([errorID isEqualToString:ERROR_ID_STAFF]) {
         msg = @"Missing Staff.";
-    } else if ([errorId isEqualToString:ERROR_ID_PLU]) {
+    } else if ([errorID isEqualToString:ERROR_ID_PLU]) {
         msg = @"Missing PLU.";
-    } else if ([errorId isEqualToString:ERROR_ID_MEALSET]) {
+    } else if ([errorID isEqualToString:ERROR_ID_MEALSET]) {
         msg = @"Missing Mealset Parent.";
-    } else if ([errorId isEqualToString:ERROR_ID_OPTION]) {
+    } else if ([errorID isEqualToString:ERROR_ID_OPTION]) {
         msg = @"Missing Option.";
-    } else if ([errorId isEqualToString:ERROR_ID_COMMENT]) {
+    } else if ([errorID isEqualToString:ERROR_ID_COMMENT]) {
         msg = @"Missing Comment.";
-    } else if ([errorId isEqualToString:ERROR_ID_SERVING_TIME]) {
+    } else if ([errorID isEqualToString:ERROR_ID_SERVING_TIME]) {
         msg = @"Missing Servint Time.";
-    } else if ([errorId isEqualToString:ERROR_ID_BUFFET]) {
+    } else if ([errorID isEqualToString:ERROR_ID_BUFFET]) {
         msg = @"Missing Buffet Parent.";
-    } else if ([errorId isEqualToString:ERROR_ID_INVALID_PRINTER_GROUP]) {
+    } else if ([errorID isEqualToString:ERROR_ID_INVALID_PRINTER_GROUP]) {
         msg = @"Printer group not exist";
-    } else if ([errorId isEqualToString:ERROR_ID_ACCESSING]) {
+    } else if ([errorID isEqualToString:ERROR_ID_ACCESSING]) {
         msg = @"Could not access to DB. Please try again.";
-    } else if ([errorId isEqualToString:ERROR_ID_DB_COLLAPSE]) {
+    } else if ([errorID isEqualToString:ERROR_ID_DB_COLLAPSE]) {
         msg = @"DB may be collapsed.";
-    } else if ([errorId isEqualToString:ERROR_ID_NO_APPL]) {
+    } else if ([errorID isEqualToString:ERROR_ID_NO_APPL]) {
         msg = @"There is no application.";
-    } else if ([errorId isEqualToString:ERROR_ID_NO_AUTHORITY]) {
+    } else if ([errorID isEqualToString:ERROR_ID_NO_AUTHORITY]) {
         msg = @"You do not have the authority";
     } else {
         msg = @"Unknown error was occurred.";
