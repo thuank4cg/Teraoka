@@ -101,12 +101,19 @@
     }
     
     didClickStartButton = YES;
+    
+    if (!saveDataSuccess) {
+        [self doGetContents];
+        return;
+    }
+    
     if ([ShareManager shared].setting.tableNo > 0) {
         [self showCategoriesScreen];
         return;
     }
     
     StartOrderController *vc = [[StartOrderController alloc] initWithNibName:@"StartOrderController" bundle:nil];
+    vc.delegate = self;
     [self presentViewController:vc animated:NO completion:nil];
 }
 
@@ -319,6 +326,7 @@
             [self showCategoriesScreen];
         } else {
             StartOrderController *vc = [[StartOrderController alloc] initWithNibName:@"StartOrderController" bundle:nil];
+            vc.delegate = self;
             [self presentViewController:vc animated:NO completion:nil];
         }
     }
@@ -348,11 +356,6 @@
 }
 
 - (void)showCategoriesScreen {
-    if (!saveDataSuccess) {
-        [self doGetContents];
-        return;
-    }
-    
     CategoriesController *rootVC = [[CategoriesController alloc] initWithNibName:@"CategoriesController" bundle:nil];
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:rootVC];
     [navc setNavigationBarHidden:YES];

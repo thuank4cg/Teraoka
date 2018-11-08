@@ -46,7 +46,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [self startOrderAction:nil];
+    [self.delegate showCategoriesScreen];
 }
 
 - (IBAction)selectModeAction:(id)sender {

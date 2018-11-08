@@ -10,5 +10,4 @@
 
 @interface SplashController : BaseController
 - (void)showCategoriesScreen;
-- (IBAction)startOrderAction:(id)sender;
 @end

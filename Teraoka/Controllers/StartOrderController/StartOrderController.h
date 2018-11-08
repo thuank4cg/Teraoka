@@ -10,5 +10,5 @@
 #import "SplashController.h"
 
 @interface StartOrderController : SplashController
-
+@property (nonatomic, weak) SplashController *delegate;
 @end
