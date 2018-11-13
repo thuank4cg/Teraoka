@@ -160,8 +160,11 @@
         case CallStaff:
             [asyncSocket writeData:[ParamsHelper.shared collectData:CallStaff] withTimeout:10 tag:0];
             break;
-        case CallBill:
-            [asyncSocket writeData:[ParamsHelper.shared collectData:CallBill] withTimeout:10 tag:0];
+        case PrintBill:
+            [asyncSocket writeData:[ParamsHelper.shared collectData:PrintBill] withTimeout:10 tag:0];
+            break;
+        case SendSeated:
+            [asyncSocket writeData:[ParamsHelper.shared collectData:SendSeated] withTimeout:10 tag:0];
             break;
             
         default:
@@ -191,8 +194,11 @@
         case CallStaff:
             [self handleDataCallStaff:data];
             break;
-        case CallBill:
-            [self handleDataCallBill:data];
+        case PrintBill:
+            [self handleDataPrintBill:data];
+            break;
+        case SendSeated:
+            [self handleDataSendSeated:data];
             break;
         default:
             break;
@@ -351,13 +357,33 @@
     }
 }
 
-- (void)handleDataCallBill:(NSData *)data {
+- (void)handleDataPrintBill:(NSData *)data {
     int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
     
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
     if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
         NSLog(@"Ok");
+    } else {
+        NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
+        NSString *errorID = [Util hexadecimalString:errorData];
+        [Util showError:errorID vc:self];
+    }
+}
+
+- (void)handleDataSendSeated:(NSData *)data {
+    int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
+    
+    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
+    NSString *httpResponse = [Util hexadecimalString:replyStatus];
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
+        
+        /**XBillIdData**/
+        NSData *billIdData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+        NSData *billNoData = [billIdData subdataWithRange:NSMakeRange(0, 4)];
+        int billNo = [Util hexStringToInt:[Util hexadecimalString:billNoData]];
+        NSLog(@"%d", billNo);
     } else {
         NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
         NSString *errorID = [Util hexadecimalString:errorData];

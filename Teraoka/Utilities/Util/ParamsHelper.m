@@ -74,9 +74,14 @@
             requestData = [self requestCallStaffData];
             break;
             
-        case CallBill:
-            commandId = @"11102";
-            requestData = [self requestCallBillData];
+        case PrintBill:
+            commandId = @"11101";
+            requestData = [self requestPrintBillData];
+            break;
+            
+        case SendSeated:
+            commandId = @"10501";
+            requestData = [self requestSendSeatedData];
             break;
             
         default:
@@ -439,7 +444,7 @@
     return mCollectData;
 }
     
-- (NSMutableData *)requestCallBillData {
+- (NSMutableData *)requestPrintBillData {
     NSMutableData *mCollectData = [[NSMutableData alloc] init];
     
     /**XRequestHeaderData**/
@@ -452,9 +457,44 @@
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
     
-    /**Terminal No**/
+    /**Printer Group ID**/
     
     [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]];
+    
+    return mCollectData;
+}
+
+- (NSMutableData *)requestSendSeatedData {
+    NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
+    /**XRequestHeaderData**/
+    
+    [mCollectData appendData:[self requestHeaderData]];
+    
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", [ShareManager shared].setting.tableNo] length:4]]; //Table No
+    
+    /**XGuestPaxData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //PAX
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
+    
+    /**XCouponData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"3" length:2]]; //Coupon status
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
+    
+    /**XBillOptionData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"3" length:2]]; //Cooking instruction status
+    
+    /**XCookingInstructionData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
+    
+    /**XFreeRemarkData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"2" length:2]]; //Free remark status
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Free remark data size
     
     return mCollectData;
 }

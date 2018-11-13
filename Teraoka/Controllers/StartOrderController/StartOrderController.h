@@ -9,6 +9,6 @@
 #import "BaseController.h"
 #import "SplashController.h"
 
-@interface StartOrderController : SplashController
+@interface StartOrderController : BaseController
 @property (nonatomic, weak) SplashController *delegate;
 @end
