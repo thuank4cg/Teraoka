@@ -38,6 +38,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47y-eY-KKz" customClass="ContainerCommonView">
                     <rect key="frame" x="358" y="272" width="650" height="500"/>
                     <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yjx-bX-xhT">
+                            <rect key="frame" x="15" y="15" width="42.5" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Yjx-bX-xhT" secondAttribute="height" multiplier="70:58" id="LRl-Q9-NM7"/>
+                                <constraint firstAttribute="height" constant="35" id="pXE-W8-lz4"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="ic_back"/>
+                            <connections>
+                                <action selector="backAction:" destination="-1" eventType="touchUpInside" id="Shb-Up-hbd"/>
+                            </connections>
+                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have not selected a table number." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nw-cD-PTW">
                             <rect key="frame" x="144" y="50" width="361" height="26.5"/>
                             <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="22"/>
@@ -124,7 +135,9 @@
                         <constraint firstItem="6ai-uh-G1D" firstAttribute="top" secondItem="tGq-q0-Gnw" secondAttribute="bottom" constant="50" id="IbU-t8-Qo9"/>
                         <constraint firstItem="RDH-kW-7tK" firstAttribute="centerX" secondItem="2nw-cD-PTW" secondAttribute="centerX" id="U8c-6H-4R5"/>
                         <constraint firstItem="hDd-sE-XKK" firstAttribute="top" secondItem="RDH-kW-7tK" secondAttribute="bottom" constant="40" id="XkF-t2-qXz"/>
+                        <constraint firstItem="Yjx-bX-xhT" firstAttribute="top" secondItem="47y-eY-KKz" secondAttribute="top" constant="15" id="awV-gi-yoK"/>
                         <constraint firstItem="tGq-q0-Gnw" firstAttribute="top" secondItem="hDd-sE-XKK" secondAttribute="bottom" constant="30" id="jQA-gf-3dT"/>
+                        <constraint firstItem="Yjx-bX-xhT" firstAttribute="leading" secondItem="47y-eY-KKz" secondAttribute="leading" constant="15" id="t3Z-P0-hI5"/>
                         <constraint firstItem="2nw-cD-PTW" firstAttribute="centerX" secondItem="47y-eY-KKz" secondAttribute="centerX" id="uhU-vo-TrU"/>
                         <constraint firstItem="6ai-uh-G1D" firstAttribute="centerX" secondItem="47y-eY-KKz" secondAttribute="centerX" id="uml-oK-sgI"/>
                         <constraint firstAttribute="width" constant="650" id="vG7-XF-01d"/>
@@ -145,6 +158,7 @@
     </objects>
     <resources>
         <image name="bg_home" width="1024" height="768"/>
+        <image name="ic_back" width="70" height="58"/>
         <image name="submit_btn" width="610" height="145"/>
     </resources>
 </document>

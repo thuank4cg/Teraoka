@@ -16,5 +16,6 @@
 - (void)getExistingOrder;
 - (void)loadLocalizable;
 - (NSManagedObjectContext *)managedObjectContext;
+- (void)handleDataSendSeated:(NSData *)data;
 
 @end

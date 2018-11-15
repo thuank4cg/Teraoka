@@ -90,6 +90,10 @@
 		73387D8E215E223A00BE023B /* comment_group.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73387D8D215E223A00BE023B /* comment_group.txt */; };
 		7344596B1FECAA09006D3BEF /* menu_category.txt in Resources */ = {isa = PBXBuildFile; fileRef = 734459681FECAA09006D3BEF /* menu_category.txt */; };
 		7344596C1FECAA09006D3BEF /* menu_contents.txt in Resources */ = {isa = PBXBuildFile; fileRef = 734459691FECAA09006D3BEF /* menu_contents.txt */; };
+		734B9B63219C2E4C00921AD9 /* TableSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 734B9B62219C2E4C00921AD9 /* TableSelectionView.m */; };
+		734B9B65219C2E6000921AD9 /* TableSelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 734B9B64219C2E6000921AD9 /* TableSelectionView.xib */; };
+		734B9B6A219C2EFD00921AD9 /* TableSelectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 734B9B68219C2EFD00921AD9 /* TableSelectionViewCell.m */; };
+		734B9B6B219C2EFD00921AD9 /* TableSelectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 734B9B69219C2EFD00921AD9 /* TableSelectionViewCell.xib */; };
 		73504DC521410C8C003C7ADE /* OutOfStockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 73504DC421410C8C003C7ADE /* OutOfStockModel.m */; };
 		7357EE6D1F96F9F3001EB56B /* OptionTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7357EE6B1F96F9F3001EB56B /* OptionTableCell.m */; };
 		7357EE6E1F96F9F3001EB56B /* OptionTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7357EE6C1F96F9F3001EB56B /* OptionTableCell.xib */; };
@@ -270,6 +274,12 @@
 		73387D8D215E223A00BE023B /* comment_group.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = comment_group.txt; sourceTree = "<group>"; };
 		734459681FECAA09006D3BEF /* menu_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_category.txt; sourceTree = "<group>"; };
 		734459691FECAA09006D3BEF /* menu_contents.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_contents.txt; sourceTree = "<group>"; };
+		734B9B61219C2E4C00921AD9 /* TableSelectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableSelectionView.h; sourceTree = "<group>"; };
+		734B9B62219C2E4C00921AD9 /* TableSelectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableSelectionView.m; sourceTree = "<group>"; };
+		734B9B64219C2E6000921AD9 /* TableSelectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableSelectionView.xib; sourceTree = "<group>"; };
+		734B9B67219C2EFD00921AD9 /* TableSelectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableSelectionViewCell.h; sourceTree = "<group>"; };
+		734B9B68219C2EFD00921AD9 /* TableSelectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableSelectionViewCell.m; sourceTree = "<group>"; };
+		734B9B69219C2EFD00921AD9 /* TableSelectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableSelectionViewCell.xib; sourceTree = "<group>"; };
 		73504DC321410C8C003C7ADE /* OutOfStockModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutOfStockModel.h; sourceTree = "<group>"; };
 		73504DC421410C8C003C7ADE /* OutOfStockModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutOfStockModel.m; sourceTree = "<group>"; };
 		7357EE6A1F96F9F3001EB56B /* OptionTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionTableCell.h; sourceTree = "<group>"; };
@@ -663,6 +673,7 @@
 		730FE1061F95EB4C0045A234 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				734B9B60219C2E3000921AD9 /* TableSelectionView */,
 				739853541FBC3A240024E87C /* CategoryView */,
 				7357EEAA1F9753C7001EB56B /* ExistingOrderHeader */,
 				7357EE921F9747CA001EB56B /* OrderSummaryHeader */,
@@ -794,6 +805,27 @@
 				73387D8B215E1F0700BE023B /* CommentGroupHeaderModel.m */,
 			);
 			path = Comment;
+			sourceTree = "<group>";
+		};
+		734B9B60219C2E3000921AD9 /* TableSelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				734B9B66219C2EE800921AD9 /* Cell */,
+				734B9B61219C2E4C00921AD9 /* TableSelectionView.h */,
+				734B9B62219C2E4C00921AD9 /* TableSelectionView.m */,
+				734B9B64219C2E6000921AD9 /* TableSelectionView.xib */,
+			);
+			path = TableSelectionView;
+			sourceTree = "<group>";
+		};
+		734B9B66219C2EE800921AD9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				734B9B67219C2EFD00921AD9 /* TableSelectionViewCell.h */,
+				734B9B68219C2EFD00921AD9 /* TableSelectionViewCell.m */,
+				734B9B69219C2EFD00921AD9 /* TableSelectionViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		7357EE671F96F84D001EB56B /* OptionCell */ = {
@@ -1172,6 +1204,7 @@
 				7336754F1FE25F2200F0AFF8 /* 1008.png in Resources */,
 				73387D85215E194600BE023B /* serving_group.txt in Resources */,
 				73203825215C7A0A00747F37 /* serving_group_header.txt in Resources */,
+				734B9B65219C2E6000921AD9 /* TableSelectionView.xib in Resources */,
 				7357EE7F1F9713CD001EB56B /* NewOrderAddedController.xib in Resources */,
 				733675671FE25F2200F0AFF8 /* 3005.png in Resources */,
 				73203822215C79D300747F37 /* serving_set.txt in Resources */,
@@ -1236,6 +1269,7 @@
 				733675581FE25F2200F0AFF8 /* 2008.png in Resources */,
 				7336754C1FE25F2200F0AFF8 /* 4007.png in Resources */,
 				7344596B1FECAA09006D3BEF /* menu_category.txt in Resources */,
+				734B9B6B219C2EFD00921AD9 /* TableSelectionViewCell.xib in Resources */,
 				7357EE941F9747D7001EB56B /* OrderSummaryHeader.xib in Resources */,
 				733675641FE25F2200F0AFF8 /* 3006.png in Resources */,
 				730FE0BF1F95A1690045A234 /* Main.storyboard in Resources */,
@@ -1349,8 +1383,10 @@
 				7357EE721F96FA43001EB56B /* OptionCollectionCell.m in Sources */,
 				736095F521462CD0001EBAB7 /* LanguageModel.m in Sources */,
 				73387D7C215DD03200BE023B /* OptionGroupHeaderModel.m in Sources */,
+				734B9B6A219C2EFD00921AD9 /* TableSelectionViewCell.m in Sources */,
 				730FE1121F95EC180045A234 /* ProductCell.m in Sources */,
 				7357EE991F974B0B001EB56B /* OrderConfirmController.m in Sources */,
+				734B9B63219C2E4C00921AD9 /* TableSelectionView.m in Sources */,
 				737B489D212AAB0300B02B3D /* CommonButton.m in Sources */,
 				73387D80215E11F000BE023B /* ServingSetModel.m in Sources */,
 				7369AD692158C5E700210EC9 /* StartOrderController.m in Sources */,

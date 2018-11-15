@@ -50,10 +50,6 @@
     
     if (!setting) setting = [[SettingModel alloc] init];
     
-    if (setting.serverIP.length == 0) {
-        setting.serverIP = HOST_NAME;
-    }
-    
     [ShareManager shared].setting = setting;
 }
     
@@ -93,6 +89,11 @@
 }
 
 - (IBAction)startOrderAction:(id)sender {
+    if ([ShareManager shared].setting.serverIP.length == 0) {
+        [Util showAlert:@"Please enter IP to proceed" vc:self];
+        return;
+    }
+    
     Reachability *reach = [Reachability reachabilityForInternetConnection];
     
     if (![reach isReachable]) {
@@ -137,6 +138,8 @@
 #pragma mark - Custom method
 
 - (void)doGetContents {
+    if ([ShareManager shared].setting.serverIP.length == 0) return;
+    
     Reachability *reach = [Reachability reachabilityForInternetConnection];
     
     if (![reach isReachable]) {

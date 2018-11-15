@@ -19,7 +19,6 @@
 #import "OptionGroupModel.h"
 #import "OptionModel.h"
 
-#define STATUS_REPLY_OK @"00000000"
 #define MSG_ERROR @"Submission failed due to connection error"
 
 @interface BaseController () <GCDAsyncSocketDelegate, NSStreamDelegate>
@@ -372,23 +371,7 @@
 }
 
 - (void)handleDataSendSeated:(NSData *)data {
-    int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
     
-    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
-    NSString *httpResponse = [Util hexadecimalString:replyStatus];
-    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
-        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
-        
-        /**XBillIdData**/
-        NSData *billIdData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        NSData *billNoData = [billIdData subdataWithRange:NSMakeRange(0, 4)];
-        int billNo = [Util hexStringToInt:[Util hexadecimalString:billNoData]];
-        NSLog(@"%d", billNo);
-    } else {
-        NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
-        NSString *errorID = [Util hexadecimalString:errorData];
-        [Util showError:errorID vc:self];
-    }
 }
 
 @end

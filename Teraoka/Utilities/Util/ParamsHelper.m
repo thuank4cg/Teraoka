@@ -9,6 +9,7 @@
 #import "ParamsHelper.h"
 #import "ShareManager.h"
 #import "ProductModel.h"
+#import "APPConstants.h"
 
 #define MAX_VALUE 99999999
 #define REQUEST_ID @"request_id"
@@ -437,7 +438,11 @@
     
     /**XBillIdData**/
     
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Bill No
+    NSString *billNo = @"";
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_BILL_NO]) {
+        billNo = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_BILL_NO];
+    }
+    [mCollectData appendData:[self convertStringToBytesArr:billNo length:4]]; //Bill No
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
     
@@ -453,7 +458,11 @@
     
     /**XBillIdData**/
     
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Bill No
+    NSString *billNo = @"";
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_BILL_NO]) {
+        billNo = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_BILL_NO];
+    }
+    [mCollectData appendData:[self convertStringToBytesArr:billNo length:4]]; //Bill No
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
     

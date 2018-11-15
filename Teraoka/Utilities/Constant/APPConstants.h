@@ -12,15 +12,18 @@
 #import "AppDelegate.h"
 #define appDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
-#define HOST_NAME @"192.168.1.100"
+//#define HOST_NAME @"192.168.1.100"
 #define PORT 9088
 #define USERNAME @"root"
 #define PASSWORD @"teraoka"
+
+#define STATUS_REPLY_OK @"00000000"
 
 #define KEY_SAVED_DATA @"IS_SAVED_DATA"
 #define KEY_SAVED_SETTING @"IS_SAVED_SETTING"
 #define KEY_CURRENT_LANGUAGE @"KEY_CURRENT_LANGUAGE"
 #define KEY_LICENSE_VALID @"KEY_LICENSE_VALID"
+#define KEY_SAVED_BILL_NO @"KEY_SAVED_BILL_NO"
 
 #define KEY_FONT_BOLD @"SFUIDisplay-Bold"
 #define KEY_FONT_REGULAR @"SFUIDisplay-Regular"
