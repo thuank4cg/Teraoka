@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TableSelectionViewDelegate <NSObject>
+- (void)didSelectItem:(NSString *)tableNo;
+@end
+
 @interface TableSelectionView : UIView
 
+@property (nonatomic, weak) id<TableSelectionViewDelegate> delegate;
 - (void)setupData:(NSArray *)items;
 
 @end

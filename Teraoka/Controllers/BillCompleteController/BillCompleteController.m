@@ -35,6 +35,8 @@
     self.containerView.layer.shadowOpacity = 0.5;
     self.containerView.layer.shadowRadius = 3.0;
     self.containerView.layer.masksToBounds = NO;
+    
+    [self sendPOSRequest:PrintBill];
 }
 
 - (void)loadLocalizable {

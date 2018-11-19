@@ -19,8 +19,10 @@
 #import "LocalizeHelper.h"
 #import "NSString+KeyLanguage.h"
 #import "UIColor+HexString.h"
+#import "TableSelectionView.h"
+#import <View+MASAdditions.h>
 
-@interface SettingsController () <UITextFieldDelegate>
+@interface SettingsController () <UITextFieldDelegate, TableSelectionViewDelegate>
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfIPAddress;
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfNewPassword;
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfConfirmPassword;
@@ -52,6 +54,7 @@
 @implementation SettingsController {
     SELECT_MODE selectModeValue;
     TABLE_SELECTION tableSelectionValue;
+    UIAlertController *alertController;
 }
 
 - (void)viewDidLoad {
@@ -332,15 +335,41 @@
         [items addObject:[table valueForKey:@"table_no"]];
     }
     
-    [ActionSheetStringPicker showPickerWithTitle:@"Select Table"
-                                            rows:items
-                                initialSelection:0
-                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                                           self.tfTableNo.text = items[selectedIndex];
-                                       }
-                                     cancelBlock:^(ActionSheetStringPicker *picker) {
-                                         
-                                     } origin:self.tfTableNo];
+    UIViewController *controller = [[UIViewController alloc] init];
+    CGRect rect = CGRectMake(0, 0, 270, 250);
+    [controller setPreferredContentSize:rect.size];
+    
+    alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    TableSelectionView *selectionView = [[[NSBundle mainBundle] loadNibNamed:@"TableSelectionView" owner:self options:nil] objectAtIndex:0];
+    [selectionView setupData:items];
+    selectionView.delegate = self;
+    [controller.view addSubview:selectionView];
+    
+    [selectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.equalTo(selectionView.superview);
+        make.width.height.equalTo(selectionView.superview);
+    }];
+    
+    [alertController setModalPresentationStyle:UIModalPresentationPopover];
+    [alertController setValue:controller forKey:@"contentViewController"];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive
+                                                         handler:^(UIAlertAction *action) {}];
+    [alertController addAction:cancelAction];
+    
+    UIPopoverPresentationController *popPresenter = [alertController popoverPresentationController];
+    popPresenter.sourceView = self.tfTableNo;
+    popPresenter.sourceRect = self.tfTableNo.bounds;
+    
+    [self presentViewController:alertController animated:YES completion:^{}];
+}
+
+//MARK: TableSelectionViewDelegate
+
+- (void)didSelectItem:(NSString *)tableNo {
+    self.tfTableNo.text = tableNo;
+    [alertController dismissViewControllerAnimated:YES completion:nil];
 }
 
 //MARK: UITextFieldDelegate

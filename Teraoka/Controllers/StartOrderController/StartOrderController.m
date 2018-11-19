@@ -18,7 +18,7 @@
 #import "TableSelectionView.h"
 #import <View+MASAdditions.h>
 
-@interface StartOrderController () <UITextFieldDelegate>
+@interface StartOrderController () <UITextFieldDelegate, TableSelectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfTableNo;
 @property (weak, nonatomic) IBOutlet CommonButton *fixedBtn;
@@ -26,7 +26,9 @@
 
 @end
 
-@implementation StartOrderController
+@implementation StartOrderController {
+    UIAlertController *alertController;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,6 +53,13 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d", billNo] forKey:KEY_SAVED_BILL_NO];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
+        SettingModel *setting = [ShareManager shared].setting;
+        setting.tableNo = [self.tfTableNo.text intValue];
+        
+        NSString *json = [setting toJSONString];
+        [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         [self.delegate showCategoriesScreen];
     } else {
         NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
@@ -68,13 +77,6 @@
         [Util showAlert:@"Please select table first." vc:self];
         return;
     }
-    
-    SettingModel *setting = [ShareManager shared].setting;
-    setting.tableNo = [self.tfTableNo.text intValue];
-    
-    NSString *json = [setting toJSONString];
-    [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self sendPOSRequest:SendSeated];
 }
@@ -145,41 +147,42 @@
     for (NSManagedObject *table in tableArr) {
         [items addObject:[table valueForKey:@"table_no"]];
     }
-
-    [ActionSheetStringPicker showPickerWithTitle:@"Select Table"
-                                            rows:items
-                                initialSelection:0
-                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                                           self.tfTableNo.text = items[selectedIndex];
-                                       }
-                                     cancelBlock:^(ActionSheetStringPicker *picker) {
-
-                                     } origin:self.tfTableNo];
     
-//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-//
-//    TableSelectionView *selectionView = [[[NSBundle mainBundle] loadNibNamed:@"TableSelectionView" owner:self options:nil] objectAtIndex:0];
-//    [selectionView setupData:items];
-//    [alertController.view addSubview:selectionView];
-//
-//    [selectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.leading.top.equalTo(selectionView.superview);
-//        make.width.height.equalTo(selectionView.superview);
-//    }];
-//
-//    UIAlertAction *somethingAction = [UIAlertAction actionWithTitle:@"Something" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
-//    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
-//    [alertController addAction:somethingAction];
-//    [alertController addAction:cancelAction];
-//
-//    [alertController setModalPresentationStyle:UIModalPresentationPopover];
-//    alertController.preferredContentSize = CGSizeMake(400.0, 400.0);
-//
-//    UIPopoverPresentationController *popPresenter = [alertController popoverPresentationController];
-//    popPresenter.sourceView = self.tfTableNo;
-//    popPresenter.sourceRect = self.tfTableNo.bounds;
-//
-//    [self presentViewController:alertController animated:YES completion:^{}];
+    UIViewController *controller = [[UIViewController alloc] init];
+    CGRect rect = CGRectMake(0, 0, 270, 250);
+    [controller setPreferredContentSize:rect.size];
+    
+    alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+
+    TableSelectionView *selectionView = [[[NSBundle mainBundle] loadNibNamed:@"TableSelectionView" owner:self options:nil] objectAtIndex:0];
+    [selectionView setupData:items];
+    selectionView.delegate = self;
+    [controller.view addSubview:selectionView];
+
+    [selectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.equalTo(selectionView.superview);
+        make.width.height.equalTo(selectionView.superview);
+    }];
+
+    [alertController setModalPresentationStyle:UIModalPresentationPopover];
+    [alertController setValue:controller forKey:@"contentViewController"];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive
+                                                         handler:^(UIAlertAction *action) {}];
+    [alertController addAction:cancelAction];
+
+    UIPopoverPresentationController *popPresenter = [alertController popoverPresentationController];
+    popPresenter.sourceView = self.tfTableNo;
+    popPresenter.sourceRect = self.tfTableNo.bounds;
+
+    [self presentViewController:alertController animated:YES completion:^{}];
+}
+
+//MARK: TableSelectionViewDelegate
+
+- (void)didSelectItem:(NSString *)tableNo {
+    self.tfTableNo.text = tableNo;
+    [alertController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
