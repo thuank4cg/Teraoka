@@ -33,7 +33,10 @@
 }
 - (void)setDataForCell:(ProductModel *)product {
     self.tfQuantity.text = product.qty;
-    self.productImage.image = [UIImage imageNamed:product.image];
+    NSData *imageData = [NSData dataWithContentsOfFile:product.image];
+    if (imageData) {
+        self.productImage.image = [UIImage imageWithData:imageData];
+    }
     self.lbOptions.text = @"Not applicable";
     
     BOOL isSelectedOption = NO;

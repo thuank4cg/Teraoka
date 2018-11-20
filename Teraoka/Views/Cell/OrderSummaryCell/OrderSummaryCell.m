@@ -59,7 +59,10 @@
 //    else [self.lbNotice setHidden:YES];
     
     self.tfQty.text = product.qty;
-    if (product.image.length > 0) self.productImage.image = [UIImage imageNamed:product.image];
+    NSData *imageData = [NSData dataWithContentsOfFile:product.image];
+    if (imageData) {
+        self.productImage.image = [UIImage imageWithData:imageData];
+    }
     
     BOOL isSelectedOption = NO;
     NSString* optionStr = @"<p style='line-height:1.8;text-align:center'>";

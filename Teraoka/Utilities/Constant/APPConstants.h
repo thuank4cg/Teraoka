@@ -17,6 +17,8 @@
 #define USERNAME @"root"
 #define PASSWORD @"teraoka"
 
+#define DOCUMENT_DIRECTORY_ROOT [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject].path
+
 #define STATUS_REPLY_OK @"00000000"
 
 #define KEY_SAVED_DATA @"IS_SAVED_DATA"

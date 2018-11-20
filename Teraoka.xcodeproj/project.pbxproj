@@ -88,7 +88,6 @@
 		73387D89215E1D9600BE023B /* CommentSetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 73387D88215E1D9600BE023B /* CommentSetModel.m */; };
 		73387D8C215E1F0700BE023B /* CommentGroupHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 73387D8B215E1F0700BE023B /* CommentGroupHeaderModel.m */; };
 		73387D8E215E223A00BE023B /* comment_group.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73387D8D215E223A00BE023B /* comment_group.txt */; };
-		7344596B1FECAA09006D3BEF /* menu_category.txt in Resources */ = {isa = PBXBuildFile; fileRef = 734459681FECAA09006D3BEF /* menu_category.txt */; };
 		7344596C1FECAA09006D3BEF /* menu_contents.txt in Resources */ = {isa = PBXBuildFile; fileRef = 734459691FECAA09006D3BEF /* menu_contents.txt */; };
 		734B9B63219C2E4C00921AD9 /* TableSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 734B9B62219C2E4C00921AD9 /* TableSelectionView.m */; };
 		734B9B65219C2E6000921AD9 /* TableSelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 734B9B64219C2E6000921AD9 /* TableSelectionView.xib */; };
@@ -159,6 +158,7 @@
 		73E4DD061FFF151F00BBD349 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E4DD051FFF151F00BBD349 /* Reachability.m */; };
 		73EC12722005F31F005C11C6 /* HOTMasterDataFull_02.12_180110_085203_01.38.zip in Resources */ = {isa = PBXBuildFile; fileRef = 73EC12712005F31F005C11C6 /* HOTMasterDataFull_02.12_180110_085203_01.38.zip */; };
 		73EC12742005F873005C11C6 /* HOTMasterDataFull_02.12_180110_090203_01.10.zip in Resources */ = {isa = PBXBuildFile; fileRef = 73EC12732005F872005C11C6 /* HOTMasterDataFull_02.12_180110_090203_01.10.zip */; };
+		73F9875521A3BEF800F889D3 /* menu_category.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73F9875421A3BEF800F889D3 /* menu_category.txt */; };
 		F534B53E83D60C16002E3C90 /* libPods-Teraoka.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8826900F53921C0151A18A11 /* libPods-Teraoka.a */; };
 /* End PBXBuildFile section */
 
@@ -272,7 +272,6 @@
 		73387D8A215E1F0700BE023B /* CommentGroupHeaderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentGroupHeaderModel.h; sourceTree = "<group>"; };
 		73387D8B215E1F0700BE023B /* CommentGroupHeaderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentGroupHeaderModel.m; sourceTree = "<group>"; };
 		73387D8D215E223A00BE023B /* comment_group.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = comment_group.txt; sourceTree = "<group>"; };
-		734459681FECAA09006D3BEF /* menu_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_category.txt; sourceTree = "<group>"; };
 		734459691FECAA09006D3BEF /* menu_contents.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_contents.txt; sourceTree = "<group>"; };
 		734B9B61219C2E4C00921AD9 /* TableSelectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableSelectionView.h; sourceTree = "<group>"; };
 		734B9B62219C2E4C00921AD9 /* TableSelectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableSelectionView.m; sourceTree = "<group>"; };
@@ -384,6 +383,7 @@
 		73E4DD051FFF151F00BBD349 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		73EC12712005F31F005C11C6 /* HOTMasterDataFull_02.12_180110_085203_01.38.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = HOTMasterDataFull_02.12_180110_085203_01.38.zip; sourceTree = "<group>"; };
 		73EC12732005F872005C11C6 /* HOTMasterDataFull_02.12_180110_090203_01.10.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = HOTMasterDataFull_02.12_180110_090203_01.10.zip; sourceTree = "<group>"; };
+		73F9875421A3BEF800F889D3 /* menu_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_category.txt; sourceTree = "<group>"; };
 		8826900F53921C0151A18A11 /* libPods-Teraoka.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Teraoka.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B4E1C4D574C9122D1A3D981 /* Pods-Teraoka.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teraoka.release.xcconfig"; path = "Pods/Target Support Files/Pods-Teraoka/Pods-Teraoka.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -460,7 +460,7 @@
 				73EC12732005F872005C11C6 /* HOTMasterDataFull_02.12_180110_090203_01.10.zip */,
 				73EC12712005F31F005C11C6 /* HOTMasterDataFull_02.12_180110_085203_01.38.zip */,
 				7334D2D4200477C1009853BB /* HOTMasterDataFull_02.12_171214_143505_01.29.zip */,
-				734459681FECAA09006D3BEF /* menu_category.txt */,
+				73F9875421A3BEF800F889D3 /* menu_category.txt */,
 				734459691FECAA09006D3BEF /* menu_contents.txt */,
 				73203817215C78F100747F37 /* option_group_header.txt */,
 				73203819215C794F00747F37 /* option_group.txt */,
@@ -1250,6 +1250,7 @@
 				733675541FE25F2200F0AFF8 /* 2005.png in Resources */,
 				73387D8E215E223A00BE023B /* comment_group.txt in Resources */,
 				73203818215C78F100747F37 /* option_group_header.txt in Resources */,
+				73F9875521A3BEF800F889D3 /* menu_category.txt in Resources */,
 				739853531FBC38B30024E87C /* CategoryCollectionCell.xib in Resources */,
 				733675511FE25F2200F0AFF8 /* 2003.png in Resources */,
 				7386F1E2212E52AB001DAC8D /* OutOfStockCell.xib in Resources */,
@@ -1268,7 +1269,6 @@
 				7357EEA91F974EEB001EB56B /* ExistingOrderCell.xib in Resources */,
 				733675581FE25F2200F0AFF8 /* 2008.png in Resources */,
 				7336754C1FE25F2200F0AFF8 /* 4007.png in Resources */,
-				7344596B1FECAA09006D3BEF /* menu_category.txt in Resources */,
 				734B9B6B219C2EFD00921AD9 /* TableSelectionViewCell.xib in Resources */,
 				7357EE941F9747D7001EB56B /* OrderSummaryHeader.xib in Resources */,
 				733675641FE25F2200F0AFF8 /* 3006.png in Resources */,

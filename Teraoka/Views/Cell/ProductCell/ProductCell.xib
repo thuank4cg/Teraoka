@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,14 +41,14 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFQ-jC-mu2">
-                                <rect key="frame" x="10" y="207" width="104" height="20"/>
+                                <rect key="frame" x="10" y="207" width="182" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="17"/>
                                 <color key="textColor" red="0.25166743993759155" green="0.43021291494369507" blue="0.51794123649597168" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$3.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xci-sF-nLD">
-                                <rect key="frame" x="10" y="229" width="33.5" height="20"/>
+                                <rect key="frame" x="10" y="229" width="35" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -68,6 +68,7 @@
                             <constraint firstItem="uFQ-jC-mu2" firstAttribute="leading" secondItem="QaY-Q3-TWr" secondAttribute="leading" constant="10" id="XdQ-LG-2vx"/>
                             <constraint firstItem="xci-sF-nLD" firstAttribute="top" secondItem="uFQ-jC-mu2" secondAttribute="bottom" constant="2" id="jid-OQ-Xif"/>
                             <constraint firstAttribute="trailing" secondItem="My6-Tm-SNV" secondAttribute="trailing" id="vZv-tE-fBH"/>
+                            <constraint firstAttribute="trailing" secondItem="uFQ-jC-mu2" secondAttribute="trailing" constant="5" id="xq6-zL-igJ"/>
                         </constraints>
                     </view>
                 </subviews>

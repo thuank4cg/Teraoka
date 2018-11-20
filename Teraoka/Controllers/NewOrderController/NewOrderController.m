@@ -228,7 +228,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tblView.frame), 70)];
-//    header.backgroundColor = [UIColor redColor];
+    header.backgroundColor = [UIColor whiteColor];
     OptionGroupModel *optionGroup = self.product.options[section];
     UILabel *lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(25, 10, CGRectGetWidth(header.frame), CGRectGetHeight(header.frame) - 10)];
     lbTitle.text = optionGroup.name;

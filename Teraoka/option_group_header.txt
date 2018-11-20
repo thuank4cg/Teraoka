@@ -1,3 +1,4 @@
 option_group_no,option_group_name,option_group_name1,option_group_name2,option_group_name3,option_group_name4,short_name,short_name1,short_name2,short_name3,short_name4,thot_dsp_col,qty_check,type
-1,"Condiment Group 1","","","","","","","","","",1,1,0
-2,"Condiment Group 2","","","","","","","","","",1,1,0
+1,"FOR FOOD","","","","","","","","","",1,1,0
+2,"FOR DRINKS","","","","","","","","","",1,1,0
+5,"GROUP 5","","","","","","","","","",1,1,0

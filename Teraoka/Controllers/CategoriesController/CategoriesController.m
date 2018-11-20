@@ -330,7 +330,10 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
             ProductModel *product = cate.products[indexPath.row];
             
             cell.productName.text = product.name;
-            if (product.image.length > 0) cell.productImage.image = [UIImage imageNamed:product.image];
+            NSData *imageData = [NSData dataWithContentsOfFile:product.image];
+            if (imageData) {
+                cell.productImage.image = [UIImage imageWithData:imageData];
+            }
             cell.productPrice.text = product.price;
         }
     }
@@ -447,7 +450,8 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
                 if ([productIdStr isEqualToString:productId]) {
                     ProductModel *product = [[ProductModel alloc] init];
                     product.productNo = [productObj valueForKey:@"plu_no"];
-                    product.image = [NSString stringWithFormat:@"%@.png", [productObj valueForKey:@"plu_no"]];
+                    
+                    product.image = [NSString stringWithFormat:@"%@/opt/pcscale/files/img/plu/plu%@.jpg", DOCUMENT_DIRECTORY_ROOT, [productObj valueForKey:@"plu_no"]];
                     product.name = [NSString stringWithFormat:@"%@", [productObj valueForKey:@"item_name"]];
                     
                     float price = [[productObj valueForKey:@"price"] floatValue]/100;

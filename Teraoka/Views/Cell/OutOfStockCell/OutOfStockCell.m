@@ -37,7 +37,10 @@
 
 - (void)setupCell:(ProductModel *)product {
     self.lbProductName.text = product.name;
-    if (product.image.length > 0) self.productImage.image = [UIImage imageNamed:product.image];
+    NSData *imageData = [NSData dataWithContentsOfFile:product.image];
+    if (imageData) {
+        self.productImage.image = [UIImage imageWithData:imageData];
+    }
     
     self.lbAmount.text = [NSString stringWithFormat:@"%@ of %@", product.qtyAvailable, product.qty];
 }

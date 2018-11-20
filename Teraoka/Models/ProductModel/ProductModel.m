@@ -20,7 +20,7 @@
     
     //CONDIMENTS
     if (self.optionSource > 0) {
-        OptionSetModel *optionSet = [[DatabaseHelper shared] getOptionSet:self.optionSource];
+        OptionSetModel *optionSet = [[DatabaseHelper shared] getOptionSet:self.optionSourceNo];
 
         if (optionSet.optionGroupNo1 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupCondiments:optionSet.optionGroupNo1];
@@ -53,7 +53,7 @@
     
     //SERVING TIME
     if (self.servingSource > 0) {
-        ServingSetModel *servingSet = [[DatabaseHelper shared] getServingSet:self.servingSource];
+        ServingSetModel *servingSet = [[DatabaseHelper shared] getServingSet:self.servingSourceNo];
 
         if (servingSet.servingGroupNo1 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:servingSet.servingGroupNo1];
@@ -86,7 +86,7 @@
     
     //COOKING INSTRUCTION
     if (self.commentSource > 0) {
-        CommentSetModel *commentSet = [[DatabaseHelper shared] getCommentSet:self.commentSource];
+        CommentSetModel *commentSet = [[DatabaseHelper shared] getCommentSet:self.commentSourceNo];
 
         if (commentSet.commentGroupNo1 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupCookingInstruction:commentSet.commentGroupNo1];
