@@ -148,12 +148,12 @@
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"serving_group_no == %d", serving_group_no]];
     NSArray *servingGroupArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    NSMutableArray *servingGroupNos = [NSMutableArray new];
+    NSMutableArray *servingTimingNos = [NSMutableArray new];
     for (NSManagedObject *group in servingGroupArr) {
-        [servingGroupNos addObject:[group valueForKey:@"serving_group_no"]];
+        [servingTimingNos addObject:[group valueForKey:@"serving_timing_no"]];
     }
     
-    if (servingGroupNos.count == 0) {
+    if (servingTimingNos.count == 0) {
         return optionList;
     }
     
@@ -162,7 +162,7 @@
     
     for (NSManagedObject *serving in servingTimingArr) {
         NSString *servingTimingNo = [serving valueForKey:@"serving_timing_no"];
-        if ([servingGroupNos containsObject:servingTimingNo]) {
+        if ([servingTimingNos containsObject:servingTimingNo]) {
             OptionModel *option = [[OptionModel alloc] init];
             option.optionId = [servingTimingNo intValue];
             option.name = [serving valueForKey:@"desc_name"];
@@ -218,12 +218,12 @@
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"comment_group_no == %d", comment_group_no]];
     NSArray *commentGroupArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    NSMutableArray *commentGroupNos = [NSMutableArray new];
+    NSMutableArray *commentNos = [NSMutableArray new];
     for (NSManagedObject *group in commentGroupArr) {
-        [commentGroupNos addObject:[group valueForKey:@"comment_group_no"]];
+        [commentNos addObject:[group valueForKey:@"comment_no"]];
     }
     
-    if (commentGroupNos.count == 0) {
+    if (commentNos.count == 0) {
         return optionList;
     }
     
@@ -232,7 +232,7 @@
     
     for (NSManagedObject *comment in commentArr) {
         NSString *commentNo = [comment valueForKey:@"comment_no"];
-        if ([commentGroupNos containsObject:commentNo]) {
+        if ([commentNos containsObject:commentNo]) {
             OptionModel *option = [[OptionModel alloc] init];
             option.optionId = [commentNo intValue];
             option.name = [comment valueForKey:@"comment_name"];
