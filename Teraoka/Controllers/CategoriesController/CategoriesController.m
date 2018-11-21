@@ -333,6 +333,8 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
             NSData *imageData = [NSData dataWithContentsOfFile:product.image];
             if (imageData) {
                 cell.productImage.image = [UIImage imageWithData:imageData];
+            } else {
+                cell.productImage.image = [UIImage imageNamed:@"no_product_image"];
             }
             cell.productPrice.text = product.price;
         }
@@ -351,7 +353,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
         CategoryModel *cate = categories[categoryIndex];
         if (indexPath.row < cate.products.count) {
             ProductModel *product = cate.products[indexPath.row];
-            product.options = [product getOptionGroupList];
+//            product.options = [product getOptionGroupList];
             newOrderVC.product = product;
         }
     }
@@ -414,6 +416,9 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
 // dummy data
 - (void)setData {
     if (!isBackDelegate) categoryIndex = 0;
+    
+    NSArray *directoryImageContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString stringWithFormat:@"%@%@", DOCUMENT_DIRECTORY_ROOT, PLU_IMAGE_DIRECTORY_PATH] error:nil];
+    
     categories = [NSMutableArray new];
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:MENU_CATEGORY_TABLE_NAME];
@@ -451,7 +456,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
                     ProductModel *product = [[ProductModel alloc] init];
                     product.productNo = [productObj valueForKey:@"plu_no"];
                     
-                    product.image = [NSString stringWithFormat:@"%@/opt/pcscale/files/img/plu/plu%@.jpg", DOCUMENT_DIRECTORY_ROOT, [productObj valueForKey:@"plu_no"]];
+                    product.image = [product getImageName:directoryImageContents];
                     product.name = [NSString stringWithFormat:@"%@", [productObj valueForKey:@"item_name"]];
                     
                     float price = [[productObj valueForKey:@"price"] floatValue]/100;
@@ -466,7 +471,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
                     product.servingSourceNo = [[productObj valueForKey:@"serving_source_no"] intValue];
                     product.commentSource = [[productObj valueForKey:@"comment_source"] intValue];
                     product.commentSourceNo = [[productObj valueForKey:@"comment_source_no"] intValue];
-//                    product.options = [product getOptionGroupList];
+                    product.options = [product getOptionGroupList];
                     
                     [cateModel.products addObject:product];
                 }

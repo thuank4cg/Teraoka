@@ -12,8 +12,27 @@
 #import "OptionGroupModel.h"
 #import "ServingSetModel.h"
 #import "CommentSetModel.h"
+#import "APPConstants.h"
 
 @implementation ProductModel
+
+- (NSString *)getImageName:(NSArray *)directoryImageContents {
+    NSString *prefixImageName = [NSString stringWithFormat:@"plu%@", self.productNo];
+    NSString *fullImageName = @"";
+    
+    for (NSString *content in directoryImageContents) {
+        NSArray *contents = [content componentsSeparatedByString:@"."];
+        if (contents.count > 0) {
+            NSString *prefix = [contents objectAtIndex:0];
+            if ([prefix isEqualToString:prefixImageName]) {
+                fullImageName = content;
+                break;
+            }
+        }
+    }
+    
+    return [NSString stringWithFormat:@"%@%@/%@", DOCUMENT_DIRECTORY_ROOT, PLU_IMAGE_DIRECTORY_PATH, fullImageName];
+}
 
 - (NSMutableArray *)getOptionGroupList {
     NSMutableArray *optionGroupList = [NSMutableArray new];

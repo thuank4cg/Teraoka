@@ -32,5 +32,6 @@
 @property (nonatomic, assign) int commentSourceNo;
 
 - (NSMutableArray *)getOptionGroupList;
+- (NSString *)getImageName:(NSArray *)directoryImageContents;
 
 @end

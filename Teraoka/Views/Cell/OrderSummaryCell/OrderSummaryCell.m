@@ -62,6 +62,8 @@
     NSData *imageData = [NSData dataWithContentsOfFile:product.image];
     if (imageData) {
         self.productImage.image = [UIImage imageWithData:imageData];
+    } else {
+        self.productImage.image = [UIImage imageNamed:@"no_product_image"];
     }
     
     BOOL isSelectedOption = NO;

@@ -79,6 +79,7 @@
     }
     
     [self sendPOSRequest:SendSeated];
+//    [self.delegate showCategoriesScreen];
 }
 
 - (IBAction)selectModeAction:(id)sender {

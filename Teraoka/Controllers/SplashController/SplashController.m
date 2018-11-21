@@ -94,12 +94,12 @@
         return;
     }
     
-    Reachability *reach = [Reachability reachabilityForInternetConnection];
-    
-    if (![reach isReachable]) {
-        [Util showAlert:@"Unable to proceed, you do not have any network." vc:self];
-        return;
-    }
+//    Reachability *reach = [Reachability reachabilityForInternetConnection];
+//
+//    if (![reach isReachable]) {
+//        [Util showAlert:@"Unable to proceed, you do not have any network." vc:self];
+//        return;
+//    }
     
     didClickStartButton = YES;
     
@@ -140,11 +140,11 @@
 - (void)doGetContents {
     if ([ShareManager shared].setting.serverIP.length == 0) return;
     
-    Reachability *reach = [Reachability reachabilityForInternetConnection];
-    
-    if (![reach isReachable]) {
-        return;
-    }
+//    Reachability *reach = [Reachability reachabilityForInternetConnection];
+//    
+//    if (![reach isReachable]) {
+//        return;
+//    }
     
 //    [self saveDataToDb];
     
@@ -193,7 +193,7 @@
 
 - (void)unzipFile {
     NSString *zipPath = [DOCUMENT_DIRECTORY_ROOT stringByAppendingPathComponent:fileName];
-//    zipPath = [[NSBundle mainBundle] pathForResource:@"HOTMasterDataFull_02.12_180110_090203_01.10" ofType:@"zip"];
+//    zipPath = [[NSBundle mainBundle] pathForResource:@"HOTMasterDataFull_Test" ofType:@"zip"];
     NSString *unzipPath = DOCUMENT_DIRECTORY_ROOT;
     BOOL success =  [SSZipArchive unzipFileAtPath:zipPath toDestination:unzipPath];
     NSLog(@"unzipPath: %@", unzipPath);
@@ -219,10 +219,10 @@
 }
 
 - (NSString *)getContentFile:(NSString *)fileName {
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", fileName]];
+//    NSString* filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     return content;
 }

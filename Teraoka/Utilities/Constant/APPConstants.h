@@ -18,6 +18,7 @@
 #define PASSWORD @"teraoka"
 
 #define DOCUMENT_DIRECTORY_ROOT [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject].path
+#define PLU_IMAGE_DIRECTORY_PATH @"/opt/pcscale/files/img/plu"
 
 #define STATUS_REPLY_OK @"00000000"
 
