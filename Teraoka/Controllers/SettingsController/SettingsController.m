@@ -94,12 +94,6 @@
 }
 
 - (IBAction)backAction:(id)sender {
-    for (UIViewController *vc in self.navigationController.viewControllers) {
-        if ([vc isKindOfClass:[SettingsController class]]) {
-            [self.navigationController popViewControllerAnimated:YES];
-            return;
-        }
-    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -122,11 +116,11 @@
             [self.quickServeBtn unselected];
             [self.dineinBtn selected];
             
-//            if (tableSelectionValue == Fix_ed) {
-//                [self hiddenTableNo:NO];
-//            }
-            
-            [self hiddenTableNo:NO];
+            if (tableSelectionValue == Fix_ed) {
+                [self hiddenTableNo:NO];
+            } else {
+                [self hiddenTableNo:YES];
+            }
             
             [self greyOutTableSelectionButton:NO];
             
@@ -143,9 +137,7 @@
             [self.fixedBtn selected];
             [self.preOrderBtn unselected];
             
-//            if (selectModeValue == Dine_in) {
-//                [self hiddenTableNo:NO];
-//            }
+            [self hiddenTableNo:NO];
             
             break;
             
@@ -153,7 +145,7 @@
             [self.fixedBtn unselected];
             [self.preOrderBtn selected];
             
-//            [self hiddenTableNo:YES];
+            [self hiddenTableNo:YES];
             
             break;
     }
@@ -187,14 +179,19 @@
     }
     
     if (selectModeValue == Dine_in && tableSelectionValue == Fix_ed) {
-        NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-        if ([self.tfTableNo.text rangeOfCharacterFromSet:notDigits].location != NSNotFound) {
-            [Util showAlert:@"Table No must be numeric" vc:self];
-            return;
-        }
+//        NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+//        if ([self.tfTableNo.text rangeOfCharacterFromSet:notDigits].location != NSNotFound) {
+//            [Util showAlert:@"Table No must be numeric" vc:self];
+//            return;
+//        }
+//
+//        if ([self.tfTableNo.text isEqualToString:@"0"]) {
+//            [Util showAlert:@"Table No must be greater than 0" vc:self];
+//            return;
+//        }
         
-        if ([self.tfTableNo.text isEqualToString:@"0"]) {
-            [Util showAlert:@"Table No must be greater than 0" vc:self];
+        if (self.tfTableNo.text.length == 0 || [self.tfTableNo.text isEqualToString:@"0"]) {
+            [Util showAlert:@"Please select table" vc:self];
             return;
         }
     }
@@ -214,8 +211,6 @@
     
     [Util showAlert:@"Save changes successfully" vc:self];
     
-    json = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_SAVED_SETTING];
-    setting = [[SettingModel alloc] initWithString:json error:nil];
     [ShareManager shared].setting = setting;
 }
 
@@ -277,11 +272,15 @@
             [self.fixedBtn selected];
             [self.preOrderBtn unselected];
             
+            [self hiddenTableNo:YES];
+            
             break;
             
         default:
             [self.fixedBtn unselected];
             [self.preOrderBtn selected];
+            
+            [self hiddenTableNo:NO];
             
             break;
     }

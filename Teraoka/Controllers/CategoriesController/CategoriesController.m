@@ -228,7 +228,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     self.restartOrderView.layer.masksToBounds = NO;
     
     CGFloat heightWaiterMenu = 110;
-    if ([ShareManager shared].setting.abilityRequestForBill) {
+    if ([ShareManager shared].setting.abilityRequestForAssistance) {
         [self.waiterMenuView setHidden:NO];
     } else {
         [self.waiterMenuView setHidden:YES];
@@ -422,6 +422,8 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     categories = [NSMutableArray new];
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:MENU_CATEGORY_TABLE_NAME];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"display_order" ascending:YES];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
     NSArray *categoriesArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     int i = 0;

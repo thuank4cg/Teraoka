@@ -21,9 +21,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StartOrderController">
             <connections>
-                <outlet property="fixedBtn" destination="p7y-Nv-95i" id="Rek-EK-F7q"/>
-                <outlet property="preOrderBtn" destination="PY6-gZ-SZh" id="9eM-3h-IbF"/>
+                <outlet property="lbTitle" destination="2nw-cD-PTW" id="YuU-db-fAt"/>
+                <outlet property="submitBtn" destination="6ai-uh-G1D" id="dqd-4N-kmw"/>
                 <outlet property="tfTableNo" destination="tGq-q0-Gnw" id="QoB-Jh-5po"/>
+                <outlet property="topSpaceTfTableNo" destination="CKz-Rc-22o" id="etq-1n-GzG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -36,7 +37,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47y-eY-KKz" customClass="ContainerCommonView">
-                    <rect key="frame" x="358" y="272" width="650" height="500"/>
+                    <rect key="frame" x="358" y="339" width="650" height="366.5"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yjx-bX-xhT">
                             <rect key="frame" x="15" y="15" width="42.5" height="35"/>
@@ -50,57 +51,13 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have not selected a table number." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nw-cD-PTW">
-                            <rect key="frame" x="144" y="50" width="361" height="26.5"/>
+                            <rect key="frame" x="60" y="50" width="530" height="26.5"/>
                             <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select one below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDH-kW-7tK">
-                            <rect key="frame" x="211" y="96.5" width="228.5" height="26.5"/>
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="22"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDd-sE-XKK">
-                            <rect key="frame" x="125" y="163" width="400" height="60"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7y-Nv-95i" customClass="CommonButton">
-                                    <rect key="frame" x="0.0" y="0.0" width="185" height="60"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="185" id="ryu-92-eCj"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="20"/>
-                                    <state key="normal" title="Fixed"/>
-                                    <connections>
-                                        <action selector="selectModeAction:" destination="-1" eventType="touchUpInside" id="QAq-Nd-MRp"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PY6-gZ-SZh" customClass="CommonButton">
-                                    <rect key="frame" x="215" y="0.0" width="185" height="60"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="185" id="wL8-Mz-YCE"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="20"/>
-                                    <state key="normal" title="Pre-order"/>
-                                    <connections>
-                                        <action selector="selectModeAction:" destination="-1" eventType="touchUpInside" id="3oP-8e-XUX"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstItem="PY6-gZ-SZh" firstAttribute="top" secondItem="hDd-sE-XKK" secondAttribute="top" id="Kiv-2V-3fV"/>
-                                <constraint firstAttribute="bottom" secondItem="p7y-Nv-95i" secondAttribute="bottom" id="NqX-UT-3OB"/>
-                                <constraint firstItem="p7y-Nv-95i" firstAttribute="top" secondItem="hDd-sE-XKK" secondAttribute="top" id="PJY-3R-emb"/>
-                                <constraint firstAttribute="trailing" secondItem="PY6-gZ-SZh" secondAttribute="trailing" id="Tmh-xL-ecP"/>
-                                <constraint firstAttribute="height" constant="60" id="bHK-O4-enB"/>
-                                <constraint firstItem="p7y-Nv-95i" firstAttribute="leading" secondItem="hDd-sE-XKK" secondAttribute="leading" id="e0U-B0-okF"/>
-                                <constraint firstAttribute="bottom" secondItem="PY6-gZ-SZh" secondAttribute="bottom" id="f8V-ET-Eas"/>
-                                <constraint firstItem="PY6-gZ-SZh" firstAttribute="leading" secondItem="p7y-Nv-95i" secondAttribute="trailing" constant="30" id="sgu-a8-Iis"/>
-                            </constraints>
-                        </view>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tGq-q0-Gnw" customClass="CommonTextfield">
-                            <rect key="frame" x="175" y="253" width="300" height="70"/>
+                            <rect key="frame" x="175" y="126.5" width="300" height="70"/>
                             <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="300" id="fwb-CD-EZc"/>
@@ -111,13 +68,14 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ai-uh-G1D">
-                            <rect key="frame" x="178" y="373" width="294" height="70"/>
+                            <rect key="frame" x="178" y="246.5" width="294" height="70"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="6ai-uh-G1D" secondAttribute="height" multiplier="610:145" id="K5y-ik-N9r"/>
                                 <constraint firstAttribute="height" constant="70" id="Pzz-fv-mey"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
-                            <state key="normal" title="SUBMIT" backgroundImage="submit_btn">
+                            <inset key="titleEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="START ORDER" backgroundImage="submit_btn">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -127,18 +85,15 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="500" id="0nz-xs-xar"/>
                         <constraint firstItem="tGq-q0-Gnw" firstAttribute="centerX" secondItem="47y-eY-KKz" secondAttribute="centerX" id="5pi-Wx-dqY"/>
+                        <constraint firstAttribute="trailing" secondItem="2nw-cD-PTW" secondAttribute="trailing" constant="60" id="7RJ-7x-8rT"/>
                         <constraint firstItem="2nw-cD-PTW" firstAttribute="top" secondItem="47y-eY-KKz" secondAttribute="top" constant="50" id="7SE-wD-pbs"/>
-                        <constraint firstItem="RDH-kW-7tK" firstAttribute="top" secondItem="2nw-cD-PTW" secondAttribute="bottom" constant="20" id="D7L-Pq-hZz"/>
-                        <constraint firstItem="hDd-sE-XKK" firstAttribute="centerX" secondItem="47y-eY-KKz" secondAttribute="centerX" id="E9R-4O-vQT"/>
+                        <constraint firstItem="tGq-q0-Gnw" firstAttribute="top" secondItem="2nw-cD-PTW" secondAttribute="bottom" constant="50" id="CKz-Rc-22o"/>
                         <constraint firstItem="6ai-uh-G1D" firstAttribute="top" secondItem="tGq-q0-Gnw" secondAttribute="bottom" constant="50" id="IbU-t8-Qo9"/>
-                        <constraint firstItem="RDH-kW-7tK" firstAttribute="centerX" secondItem="2nw-cD-PTW" secondAttribute="centerX" id="U8c-6H-4R5"/>
-                        <constraint firstItem="hDd-sE-XKK" firstAttribute="top" secondItem="RDH-kW-7tK" secondAttribute="bottom" constant="40" id="XkF-t2-qXz"/>
+                        <constraint firstAttribute="bottom" secondItem="6ai-uh-G1D" secondAttribute="bottom" constant="50" id="R87-Zt-PbB"/>
+                        <constraint firstItem="2nw-cD-PTW" firstAttribute="leading" secondItem="47y-eY-KKz" secondAttribute="leading" constant="60" id="Uba-Sq-Mf4"/>
                         <constraint firstItem="Yjx-bX-xhT" firstAttribute="top" secondItem="47y-eY-KKz" secondAttribute="top" constant="15" id="awV-gi-yoK"/>
-                        <constraint firstItem="tGq-q0-Gnw" firstAttribute="top" secondItem="hDd-sE-XKK" secondAttribute="bottom" constant="30" id="jQA-gf-3dT"/>
                         <constraint firstItem="Yjx-bX-xhT" firstAttribute="leading" secondItem="47y-eY-KKz" secondAttribute="leading" constant="15" id="t3Z-P0-hI5"/>
-                        <constraint firstItem="2nw-cD-PTW" firstAttribute="centerX" secondItem="47y-eY-KKz" secondAttribute="centerX" id="uhU-vo-TrU"/>
                         <constraint firstItem="6ai-uh-G1D" firstAttribute="centerX" secondItem="47y-eY-KKz" secondAttribute="centerX" id="uml-oK-sgI"/>
                         <constraint firstAttribute="width" constant="650" id="vG7-XF-01d"/>
                     </constraints>

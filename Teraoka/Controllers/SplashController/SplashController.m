@@ -51,10 +51,6 @@
     if (!setting) setting = [[SettingModel alloc] init];
     
     [ShareManager shared].setting = setting;
-}
-    
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
     saveDataSuccess = NO;
     didClickStartButton = NO;
@@ -113,9 +109,7 @@
         return;
     }
     
-    StartOrderController *vc = [[StartOrderController alloc] initWithNibName:@"StartOrderController" bundle:nil];
-    vc.delegate = self;
-    [self presentViewController:vc animated:NO completion:nil];
+    [self showStartOrderPopup];
 }
 
 - (IBAction)settingAction:(id)sender {
@@ -147,9 +141,10 @@
 //    }
     
 //    [self saveDataToDb];
+    [self unzipFile];
     
-    [ProgressHUD show:nil Interaction:NO];
-    [self listDirectoryContents];
+//    [ProgressHUD show:nil Interaction:NO];
+//    [self listDirectoryContents];
 }
 
 - (void)listDirectoryContents {
@@ -193,7 +188,7 @@
 
 - (void)unzipFile {
     NSString *zipPath = [DOCUMENT_DIRECTORY_ROOT stringByAppendingPathComponent:fileName];
-//    zipPath = [[NSBundle mainBundle] pathForResource:@"HOTMasterDataFull_Test" ofType:@"zip"];
+    zipPath = [[NSBundle mainBundle] pathForResource:@"HOTMasterDataFull_02.12_181107_164412_01.07" ofType:@"zip"];
     NSString *unzipPath = DOCUMENT_DIRECTORY_ROOT;
     BOOL success =  [SSZipArchive unzipFileAtPath:zipPath toDestination:unzipPath];
     NSLog(@"unzipPath: %@", unzipPath);
@@ -335,9 +330,7 @@
         if ([ShareManager shared].setting.tableNo > 0) {
             [self showCategoriesScreen];
         } else {
-            StartOrderController *vc = [[StartOrderController alloc] initWithNibName:@"StartOrderController" bundle:nil];
-            vc.delegate = self;
-            [self presentViewController:vc animated:NO completion:nil];
+            [self showStartOrderPopup];
         }
     }
 }
@@ -363,6 +356,20 @@
     }@catch (NSException *exception) {
         NSLog(@"Exception:%@",exception);
     }
+}
+
+- (void)showStartOrderPopup {
+    StartOrderController *vc = [[StartOrderController alloc] initWithNibName:@"StartOrderController" bundle:nil];
+    vc.delegate = self;
+    
+    [self addChildViewController:vc];
+    [self.view addSubview:vc.view];
+    [vc didMoveToParentViewController:self];
+    
+    [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.equalTo(vc.view.superview);
+        make.width.height.equalTo(vc.view.superview);
+    }];
 }
 
 - (void)showCategoriesScreen {

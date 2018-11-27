@@ -17,12 +17,16 @@
 #import "ShareManager.h"
 #import "TableSelectionView.h"
 #import <View+MASAdditions.h>
+#import "SettingsController.h"
 
 @interface StartOrderController () <UITextFieldDelegate, TableSelectionViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfTableNo;
-@property (weak, nonatomic) IBOutlet CommonButton *fixedBtn;
-@property (weak, nonatomic) IBOutlet CommonButton *preOrderBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpaceTfTableNo;
+//@property (weak, nonatomic) IBOutlet CommonButton *fixedBtn;
+//@property (weak, nonatomic) IBOutlet CommonButton *preOrderBtn;
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 
 @end
 
@@ -69,61 +73,86 @@
 }
 
 - (IBAction)backAction:(id)sender {
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self.view removeFromSuperview];
 }
 
 - (IBAction)submitAction:(id)sender {
+    if ([ShareManager shared].setting.tableSelection == Fix_ed) {
+        SettingsController *vc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
+        [self.delegate presentViewController:vc animated:YES completion:^{
+            [self.view removeFromSuperview];
+        }];
+        return;
+        
+    }
+    
     if (self.tfTableNo.text.length == 0 || [self.tfTableNo.text isEqualToString:@"0"]) {
         [Util showAlert:@"Please select table first." vc:self];
         return;
     }
     
-    [self sendPOSRequest:SendSeated];
-//    [self.delegate showCategoriesScreen];
+//    [self sendPOSRequest:SendSeated];
+    [self.delegate showCategoriesScreen];
 }
 
-- (IBAction)selectModeAction:(id)sender {
-    UIButton *button = (UIButton *)sender;
-    
-    SettingModel *setting = [ShareManager shared].setting;
-    setting.tableSelection = button.tag;
-    
-    NSString *json = [setting toJSONString];
-    [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    switch (button.tag) {
-        case Fix_ed:
-            [self.fixedBtn selected];
-            [self.preOrderBtn unselected];
-            break;
-            
-        default:
-            [self.fixedBtn unselected];
-            [self.preOrderBtn selected];
-            break;
-    }
-}
+//- (IBAction)selectModeAction:(id)sender {
+//    UIButton *button = (UIButton *)sender;
+//    
+//    SettingModel *setting = [ShareManager shared].setting;
+//    setting.tableSelection = button.tag;
+//    
+//    NSString *json = [setting toJSONString];
+//    [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    
+//    switch (button.tag) {
+//        case Fix_ed:
+//            [self.fixedBtn selected];
+//            [self.preOrderBtn unselected];
+//            break;
+//            
+//        default:
+//            [self.fixedBtn unselected];
+//            [self.preOrderBtn selected];
+//            break;
+//    }
+//}
 
 - (void)loadLocalizable {
     [super loadLocalizable];
     
     self.tfTableNo.placeholder = @"SC12_061".localizedString;
     
-    [self.fixedBtn setTitle:@"SC12_059".localizedString forState:UIControlStateNormal];
-    [self.preOrderBtn setTitle:@"SC12_060".localizedString forState:UIControlStateNormal];
+//    [self.fixedBtn setTitle:@"SC12_059".localizedString forState:UIControlStateNormal];
+//    [self.preOrderBtn setTitle:@"SC12_060".localizedString forState:UIControlStateNormal];
 }
 
 - (void)setupView {
-    self.fixedBtn.tag = Fix_ed;
-    self.preOrderBtn.tag = Pre_order;
+//    self.fixedBtn.tag = Fix_ed;
+//    self.preOrderBtn.tag = Pre_order;
     
-    if ([ShareManager shared].setting.tableSelection == Fix_ed) {
-        [self.fixedBtn selected];
-        [self.preOrderBtn unselected];
+//    if ([ShareManager shared].setting.tableSelection == Fix_ed) {
+//        [self.fixedBtn selected];
+//        [self.preOrderBtn unselected];
+//    } else {
+//        [self.fixedBtn unselected];
+//        [self.preOrderBtn selected];
+//    }
+    
+    if ([ShareManager shared].setting.tableSelection == Pre_order) {
+        self.lbTitle.text = @"Please select table";
+        [self.submitBtn setTitle:@"START ORDER" forState:UIControlStateNormal];
     } else {
-        [self.fixedBtn unselected];
-        [self.preOrderBtn selected];
+        self.lbTitle.text = @"Please assign table number in SETTINGS before starting order";
+        [self.submitBtn setTitle:@"SETTINGS" forState:UIControlStateNormal];
+        [self.tfTableNo setHidden:YES];
+        self.topSpaceTfTableNo.constant = 0;
+        for (NSLayoutConstraint *constraint in self.tfTableNo.constraints) {
+            if (constraint.firstAttribute == NSLayoutAttributeHeight) {
+                constraint.constant = 0;
+                break;
+            }
+        }
     }
     
     self.tfTableNo.delegate = self;

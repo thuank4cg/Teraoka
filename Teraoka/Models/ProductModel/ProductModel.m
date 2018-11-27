@@ -70,39 +70,6 @@
         [optionGroupList addObject:optionGroup];
     }
     
-    //SERVING TIME
-    if (self.servingSource > 0) {
-        ServingSetModel *servingSet = [[DatabaseHelper shared] getServingSet:self.servingSourceNo];
-
-        if (servingSet.servingGroupNo1 > 0) {
-            OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:servingSet.servingGroupNo1];
-            [optionGroupList addObject:optionGroup];
-        }
-
-        if (servingSet.servingGroupNo2 > 0) {
-            OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:servingSet.servingGroupNo2];
-            [optionGroupList addObject:optionGroup];
-        }
-
-        if (servingSet.servingGroupNo3 > 0) {
-            OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:servingSet.servingGroupNo3];
-            [optionGroupList addObject:optionGroup];
-        }
-
-        if (servingSet.servingGroupNo4 > 0) {
-            OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:servingSet.servingGroupNo4];
-            [optionGroupList addObject:optionGroup];
-        }
-
-        if (servingSet.servingGroupNo5 > 0) {
-            OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:servingSet.servingGroupNo5];
-            [optionGroupList addObject:optionGroup];
-        }
-    } else if (self.servingSourceNo > 0) {
-        OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:self.servingSourceNo];
-        [optionGroupList addObject:optionGroup];
-    }
-    
     //COOKING INSTRUCTION
     if (self.commentSource > 0) {
         CommentSetModel *commentSet = [[DatabaseHelper shared] getCommentSet:self.commentSourceNo];
@@ -133,6 +100,39 @@
         }
     } else if (self.commentSourceNo > 0) {
         OptionGroupModel *optionGroup = [self getOptionGroupCookingInstruction:self.commentSourceNo];
+        [optionGroupList addObject:optionGroup];
+    }
+    
+    //SERVING TIME
+    if (self.servingSource > 0) {
+        ServingSetModel *servingSet = [[DatabaseHelper shared] getServingSet:self.servingSourceNo];
+        
+        if (servingSet.servingGroupNo1 > 0) {
+            OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:servingSet.servingGroupNo1];
+            [optionGroupList addObject:optionGroup];
+        }
+        
+        if (servingSet.servingGroupNo2 > 0) {
+            OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:servingSet.servingGroupNo2];
+            [optionGroupList addObject:optionGroup];
+        }
+        
+        if (servingSet.servingGroupNo3 > 0) {
+            OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:servingSet.servingGroupNo3];
+            [optionGroupList addObject:optionGroup];
+        }
+        
+        if (servingSet.servingGroupNo4 > 0) {
+            OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:servingSet.servingGroupNo4];
+            [optionGroupList addObject:optionGroup];
+        }
+        
+        if (servingSet.servingGroupNo5 > 0) {
+            OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:servingSet.servingGroupNo5];
+            [optionGroupList addObject:optionGroup];
+        }
+    } else if (self.servingSourceNo > 0) {
+        OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:self.servingSourceNo];
         [optionGroupList addObject:optionGroup];
     }
     
