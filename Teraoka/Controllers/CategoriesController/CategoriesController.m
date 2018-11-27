@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
 
 - (IBAction)homeAction:(id)sender {
     [self selectedMenuAt:Home];
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)orderCart:(id)sender {
@@ -382,6 +382,8 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
 }
 
 - (void)backDelegate {
+    [self selectedMenuAt:Home];
+    
     if (newOrderVC) {
         newOrderVC = nil;
     }

@@ -149,11 +149,7 @@
     [mCollectData appendData:[self requestHeaderData]];
     
     //Table No
-    NSString *tableNo = @"0";
-    if ([ShareManager shared].setting && [ShareManager shared].setting.tableNo > 0) {
-        tableNo = [NSString stringWithFormat:@"%d", [ShareManager shared].setting.tableNo];
-    }
-    [mCollectData appendData:[self convertStringToBytesArr:tableNo length:4]];
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", [ShareManager shared].setting.tableNo] length:4]];
     
     /**XBillIdData**/
     

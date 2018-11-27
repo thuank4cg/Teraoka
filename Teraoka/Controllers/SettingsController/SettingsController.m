@@ -110,6 +110,11 @@
             
             [self greyOutTableSelectionButton:YES];
             
+            [self.requestForAssistanceView setOn:NO];
+            [self.requestForBillView setOn:NO];
+            [self.requestForAssistanceView disableView:YES];
+            [self.requestForBillView disableView:YES];
+            
             break;
             
         default:
@@ -123,6 +128,9 @@
             }
             
             [self greyOutTableSelectionButton:NO];
+            
+            [self.requestForAssistanceView disableView:NO];
+            [self.requestForBillView disableView:NO];
             
             break;
     }
@@ -255,6 +263,9 @@
             [self greyOutTableSelectionButton:YES];
             [self hiddenTableNo:YES];
             
+            [self.requestForAssistanceView disableView:YES];
+            [self.requestForBillView disableView:YES];
+            
             break;
             
         default:
@@ -272,7 +283,7 @@
             [self.fixedBtn selected];
             [self.preOrderBtn unselected];
             
-            [self hiddenTableNo:YES];
+            [self hiddenTableNo:NO];
             
             break;
             
@@ -280,7 +291,7 @@
             [self.fixedBtn unselected];
             [self.preOrderBtn selected];
             
-            [self hiddenTableNo:NO];
+            [self hiddenTableNo:YES];
             
             break;
     }

@@ -7,6 +7,7 @@
 //
 
 #import "WaiterController.h"
+#import "ShareManager.h"
 
 @interface WaiterController ()
 

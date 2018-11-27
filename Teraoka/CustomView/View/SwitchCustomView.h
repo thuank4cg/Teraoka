@@ -13,4 +13,5 @@
 @property (nonatomic, strong) UIButton *disabledBtn;
 - (BOOL)isOn;
 - (void)setOn:(BOOL)isOn;
+- (void)disableView:(BOOL)isDisable;
 @end

@@ -101,4 +101,9 @@
     }
 }
 
+- (void)disableView:(BOOL)isDisable {
+    [self.enabledBtn setEnabled:!isDisable];
+    [self.enabledBtn setEnabled:!isDisable];
+}
+
 @end

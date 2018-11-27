@@ -21,7 +21,6 @@ typedef NS_ENUM(NSInteger, TABLE_SELECTION) {
 @interface SettingModel : JSONModel
 @property (nonatomic, strong) NSString<Optional> *serverIP;
 @property (nonatomic, assign) int tableNo;
-//@property (nonatomic, strong) NSArray<Optional> *languages;
 @property (nonatomic, strong) NSString<Optional> *language;
 @property (nonatomic, strong) NSString<Optional> *password;
 @property (nonatomic, assign) SELECT_MODE selectMode;

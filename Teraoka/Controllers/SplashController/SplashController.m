@@ -104,7 +104,8 @@
         return;
     }
     
-    if ([ShareManager shared].setting.tableNo > 0) {
+    SettingModel *setting = [ShareManager shared].setting;
+    if ((setting.tableNo > 0 && setting.tableSelection == Fix_ed) || setting.selectMode == Quick_Serve) {
         [self showCategoriesScreen];
         return;
     }
