@@ -59,7 +59,18 @@
     float price = [product.qty intValue] * [product.priceNumber floatValue];
     self.lbPrice.text = [NSString stringWithFormat:@"$%.2f", price];
     
-    self.lbStatus.text = @"SC10_034".localizedString;
+    switch (product.deliverStatus) {
+        case Pending:
+            self.lbStatus.text = @"SC10_035".localizedString;
+            break;
+        case Delivered:
+            self.lbStatus.text = @"SC10_034".localizedString;
+            break;
+            
+        default:
+            self.lbStatus.text = @"";
+            break;
+    }
 }
 
 @end
