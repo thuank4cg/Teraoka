@@ -13,6 +13,7 @@
 #import "CategoriesController.h"
 #import "ViewExistingOrderController.h"
 #import "NSString+KeyLanguage.h"
+#import <View+MASAdditions.h>
 
 @interface OrderConfirmController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -73,11 +74,14 @@
 //    [self presentViewController:alert animated:YES completion:nil];
     
     ViewExistingOrderController *vc = [[ViewExistingOrderController alloc] initWithNibName:@"ViewExistingOrderController" bundle:nil];
-    vc.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     [self addChildViewController:vc];
     [self.view addSubview:vc.view];
     [vc didMoveToParentViewController:self];
 
+    [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.equalTo(vc.view.superview);
+        make.width.height.equalTo(vc.view.superview);
+    }];
 }
 
 @end

@@ -140,6 +140,7 @@
 }
 
 - (IBAction)backAction:(id)sender {
+    [self.delegate selectedMenuAt:Home];
     [self.view removeFromSuperview];
 }
 
@@ -177,15 +178,15 @@
     }
 }
 
-- (void)onBack:(id)sender {
-    for (UIViewController *vc in self.navigationController.viewControllers) {
-        if ([vc isKindOfClass:[CategoriesController class]]) {
-            [self.navigationController popToViewController:vc animated:YES];
-            return;
-        }
-    }
-    [self.navigationController popViewControllerAnimated:YES];
-}
+//- (void)onBack:(id)sender {
+//    for (UIViewController *vc in self.navigationController.viewControllers) {
+//        if ([vc isKindOfClass:[CategoriesController class]]) {
+//            [self.navigationController popToViewController:vc animated:YES];
+//            return;
+//        }
+//    }
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
 
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
