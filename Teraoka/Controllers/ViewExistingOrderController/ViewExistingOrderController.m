@@ -12,6 +12,8 @@
 #import "BillCompleteController.h"
 #import "CategoriesController.h"
 #import "NSString+KeyLanguage.h"
+#import "APPConstants.h"
+#import "Util.h"
 
 @interface ViewExistingOrderController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -37,14 +39,91 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    products = [ShareManager shared].existingOrderArr;
+//    products = [ShareManager shared].existingOrderArr;
     
     [self setupView];
+    
+    [self sendPOSRequest:GetBillDetails];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.view removeFromSuperview];
+}
+
+- (void)handleDataGetBillDetails:(NSData *)data {
+    int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
+    
+    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
+    NSString *httpResponse = [Util hexadecimalString:replyStatus];
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
+        location += 12;//XBillIdData
+        location += 2;//Terminal No
+        location += 4;//Staff ID
+        
+        /**XBillDetailsData**/
+        
+        //Number of object
+        NSData *billDetailsData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+        NSData *numberOfObjectData = [billDetailsData subdataWithRange:NSMakeRange(0, 4)];
+        int numberOfObject = [Util hexStringToInt:[Util hexadecimalString:numberOfObjectData]];
+        location += 4;
+        
+        /**XBillDetailsDataStruct[n]**/
+        for (int i = 0;i<numberOfObject;i++) {
+            NSData *billItemDetailData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+            int itemDetailLength = 0;
+            itemDetailLength += 4;//Item Id
+            itemDetailLength += 4;//Order sequence
+            
+            NSData *pluNoData = [billItemDetailData subdataWithRange:NSMakeRange(itemDetailLength, 4)];//PLU No
+            itemDetailLength += 4;
+            
+            NSData *qtyData = [billItemDetailData subdataWithRange:NSMakeRange(itemDetailLength, 4)];//Qty
+            itemDetailLength += 2;
+            
+            itemDetailLength += 4;//Unit Price
+            itemDetailLength += 4;//Current Price
+            itemDetailLength += 4;//Item Flag
+            itemDetailLength += 4;//Ordered Date
+            itemDetailLength += 4;//Ordered Time
+            itemDetailLength += 4;//Prepared Date
+            itemDetailLength += 4;//Prepared Time
+            itemDetailLength += 4;//Delivered Date
+            itemDetailLength += 4;//Delivered Time
+            itemDetailLength += 2;//Item preparation status
+            
+            NSData *servedQtyData = [billItemDetailData subdataWithRange:NSMakeRange(itemDetailLength, 4)];//Served Qty
+            itemDetailLength += 2;
+            
+            itemDetailLength += 16;//XItemOptionData
+            
+            location += itemDetailLength;
+            
+            int pluNo = [Util hexStringToInt:[Util hexadecimalString:pluNoData]];
+            int qty = [Util hexStringToInt:[Util hexadecimalString:qtyData]];
+            int servedQty = [Util hexStringToInt:[Util hexadecimalString:servedQtyData]];
+            
+            for (ProductModel *product in [ShareManager shared].existingOrderArr) {
+                if ([product.productNo intValue] == pluNo) {
+                    if (qty > servedQty) {
+                        product.deliverStatus = Pending;
+                    } else {
+                        product.deliverStatus = Delivered;
+                    }
+                    break;
+                }
+            }
+        }
+        
+        products = [ShareManager shared].existingOrderArr;
+        [self.tblView reloadData];
+    } else {
+        NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
+        NSString *errorID = [Util hexadecimalString:errorData];
+        [Util showError:errorID vc:self];
+    }
 }
 
 - (void)loadLocalizable {

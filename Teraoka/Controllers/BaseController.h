@@ -17,5 +17,6 @@
 - (void)loadLocalizable;
 - (NSManagedObjectContext *)managedObjectContext;
 - (void)handleDataSendSeated:(NSData *)data;
+- (void)handleDataGetBillDetails:(NSData *)data;
 
 @end

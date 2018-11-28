@@ -33,13 +33,6 @@
 #import "WaiterController.h"
 #import "SplashController.h"
 
-typedef NS_ENUM(NSInteger, MENU_ITEMS) {
-    Home = 0,
-    Order,
-    Waiter,
-    Bill
-};
-
 #define KEY_PADDING_BOTTOM_CELL 65
 #define CELL_SPACE 15
 
@@ -84,6 +77,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     [self setupView];
     [self setupQtyBoxView];
     isBackDelegate = NO;
@@ -124,7 +118,7 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     [self selectedMenuAt:Waiter];
     
     WaiterController *vc = [[WaiterController alloc] initWithNibName:@"WaiterController" bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
+    vc.delegate = self;
     
     [self addChildViewController:vc];
     [self.view addSubview:vc.view];
@@ -158,10 +152,14 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     [self selectedMenuAt:Bill];
     
     ViewExistingOrderController *vc = [[ViewExistingOrderController alloc] initWithNibName:@"ViewExistingOrderController" bundle:nil];
-    vc.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     [self addChildViewController:vc];
     [self.view addSubview:vc.view];
     [vc didMoveToParentViewController:self];
+    
+    [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.equalTo(vc.view.superview);
+        make.width.height.equalTo(vc.view.superview);
+    }];
 }
 
 - (IBAction)restartOrderAction:(id)sender {
@@ -201,6 +199,8 @@ typedef NS_ENUM(NSInteger, MENU_ITEMS) {
     [menuIcons addObject:self.orderArrowIcon];
     [menuIcons addObject:self.waiterArrowIcon];
     [menuIcons addObject:self.billArrowIcon];
+    
+    [self selectedMenuAt:Home];
     
     // Shadow and Radius
     self.containerCategoryView.layer.shadowColor = [[UIColor blackColor] CGColor];

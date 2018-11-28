@@ -8,8 +8,16 @@
 
 #import "BaseController.h"
 
+typedef NS_ENUM(NSInteger, MENU_ITEMS) {
+    Home = 0,
+    Order,
+    Waiter,
+    Bill
+};
+
 @interface CategoriesController : BaseController
 - (void)showOrderCart;
 - (void)backDelegate;
 - (void)showOutOfStockScreen;
+- (void)selectedMenuAt:(int)index;
 @end

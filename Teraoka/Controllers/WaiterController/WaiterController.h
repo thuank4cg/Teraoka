@@ -7,7 +7,10 @@
 //
 
 #import "BaseController.h"
+#import "CategoriesController.h"
 
 @interface WaiterController : BaseController
+
+@property (nonatomic, weak) CategoriesController *delegate;
 
 @end

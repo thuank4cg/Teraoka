@@ -165,6 +165,9 @@
         case SendSeated:
             [asyncSocket writeData:[ParamsHelper.shared collectData:SendSeated] withTimeout:10 tag:0];
             break;
+        case GetBillDetails:
+            [asyncSocket writeData:[ParamsHelper.shared collectData:GetBillDetails] withTimeout:10 tag:0];
+            break;
             
         default:
             break;
@@ -198,6 +201,9 @@
             break;
         case SendSeated:
             [self handleDataSendSeated:data];
+            break;
+        case GetBillDetails:
+            [self handleDataGetBillDetails:data];
             break;
         default:
             break;
@@ -371,6 +377,10 @@
 }
 
 - (void)handleDataSendSeated:(NSData *)data {
+    
+}
+
+- (void)handleDataGetBillDetails:(NSData *)data {
     
 }
 

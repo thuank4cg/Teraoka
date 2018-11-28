@@ -15,7 +15,8 @@ typedef enum
     GetInventory,
     CallStaff,
     PrintBill,
-    SendSeated
+    SendSeated,
+    GetBillDetails
 } CommandName;
 
 @interface ParamsHelper : NSObject

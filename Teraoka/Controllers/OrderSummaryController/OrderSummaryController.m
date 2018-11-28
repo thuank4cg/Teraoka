@@ -93,11 +93,11 @@
 //        return;
 //    }
     
-    SettingModel *setting = [ShareManager shared].setting;
-    if (setting && setting.selectMode == Dine_in && setting.tableSelection == Fix_ed && setting.tableNo == 0) {
-        [Util showAlert:@"Please enter table no in settings" vc:self];
-        return;
-    }
+//    SettingModel *setting = [ShareManager shared].setting;
+//    if (setting && setting.selectMode == Dine_in && setting.tableSelection == Fix_ed && setting.tableNo == 0) {
+//        [Util showAlert:@"Please enter table no in settings" vc:self];
+//        return;
+//    }
     
     if (products.count == 0) return;
     for (ProductModel *product in products) {

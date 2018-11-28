@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <JSONModel/JSONModel.h>
 
+typedef NS_ENUM(NSInteger, DELIVER_STATUS) {
+    None = 0,
+    Pending,
+    Delivered
+};
+
 @protocol ProductModel
 
 @end
@@ -30,6 +36,7 @@
 @property (nonatomic, assign) int servingSourceNo;
 @property (nonatomic, assign) int commentSource;
 @property (nonatomic, assign) int commentSourceNo;
+@property (nonatomic, assign) DELIVER_STATUS deliverStatus;
 
 - (NSMutableArray *)getOptionGroupList;
 - (NSString *)getImageName:(NSArray *)directoryImageContents;
