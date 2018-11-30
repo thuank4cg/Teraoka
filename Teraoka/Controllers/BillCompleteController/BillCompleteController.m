@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [ShareManager shared].existingOrderArr = nil;
+//    [ShareManager shared].existingOrderArr = nil;
     
     self.containerView.clipsToBounds = YES;
     self.containerView.layer.cornerRadius = 5;

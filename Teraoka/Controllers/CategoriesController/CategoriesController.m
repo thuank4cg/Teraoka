@@ -152,6 +152,7 @@
     [self selectedMenuAt:Bill];
     
     ViewExistingOrderController *vc = [[ViewExistingOrderController alloc] initWithNibName:@"ViewExistingOrderController" bundle:nil];
+    vc.delegate = self;
     [self addChildViewController:vc];
     [self.view addSubview:vc.view];
     [vc didMoveToParentViewController:self];

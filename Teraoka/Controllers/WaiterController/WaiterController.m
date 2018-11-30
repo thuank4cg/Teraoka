@@ -19,7 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    [self sendPOSRequest:CallStaff];
+    [self sendPOSRequest:CallStaff];
 }
 
 - (IBAction)okAction:(id)sender {
