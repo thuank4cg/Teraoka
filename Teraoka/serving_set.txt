@@ -1,0 +1,4 @@
+serving_set_no,serving_set_name,serving_set_name1,serving_set_name2,serving_set_name3,serving_set_name4,serving_group_no1,serving_group_no2,serving_group_no3,serving_group_no4,serving_group_no5
+1,"SERVING SET 1","","","","",1,2,0,0,0
+2,"SERVING SET 2","","","","",1,3,0,0,0
+5,"SERVING SET 5","","","","",1,7,3,2,0

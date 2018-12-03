@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParamsHelper.h"
 
 @interface BaseController : UIViewController
-- (IBAction)onBack:(id)sender;
 
+- (IBAction)onBack:(id)sender;
+- (void)sendPOSRequest:(CommandName)_commandName;
+- (void)getExistingOrder;
+- (void)loadLocalizable;
+- (NSManagedObjectContext *)managedObjectContext;
+- (void)handleDataSendSeated:(NSData *)data;
+- (void)handleDataGetBillDetails:(NSData *)data;
 
 @end

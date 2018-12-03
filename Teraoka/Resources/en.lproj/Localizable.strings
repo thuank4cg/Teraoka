@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  Teraoka
+
+  Created by Thuan on 8/29/18.
+  Copyright © 2018 ss. All rights reserved.
+*/
+
+"SC04_001" =    "MENU";
+"SC04_002" =    "HOME";
+"SC04_003" =    "WAITER";
+"SC04_004" =    "ORDERS";
+"SC04_005" =    "BILL";
+"SC04_006" =    "RESTART ORDER";
+"SC05_001" =    "Option";
+"SC05_002" =    "BACK";
+"SC05_003" =    "SUBMIT ORDER";

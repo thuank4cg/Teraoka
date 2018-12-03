@@ -11,11 +11,15 @@
 #import "HomeController.h"
 #import "ShareManager.h"
 #import "CategoriesController.h"
+#import "ViewExistingOrderController.h"
+#import "NSString+KeyLanguage.h"
+#import <View+MASAdditions.h>
 
 @interface OrderConfirmController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
-@property (weak, nonatomic) IBOutlet UILabel *lbReceipt;
-@property (weak, nonatomic) IBOutlet UILabel *lbQueue;
+@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
+@property (weak, nonatomic) IBOutlet UIButton *okBtn;
+@property (weak, nonatomic) IBOutlet UIButton *viewBillBtn;
 
 @end
 
@@ -33,9 +37,14 @@
     self.containerView.layer.shadowOpacity = 0.5;
     self.containerView.layer.shadowRadius = 3.0;
     self.containerView.layer.masksToBounds = NO;
+}
+
+- (void)loadLocalizable {
+    [super loadLocalizable];
     
-    self.lbReceipt.text = [NSString stringWithFormat:@"Receipt: %d", self.receipt];
-    self.lbQueue.text = [NSString stringWithFormat:@"Order number: %d", self.queueNumber];
+    self.lbTitle.text = @"SC08_021".localizedString;
+    [self.okBtn setTitle:@"SC08_022".localizedString.uppercaseString forState:UIControlStateNormal];
+    [self.viewBillBtn setTitle:@"SC08_023".localizedString.uppercaseString forState:UIControlStateNormal];
 }
 
 - (IBAction)backTohome:(id)sender {
@@ -47,23 +56,32 @@
     }
 }
 
-- (IBAction)viewExistingOrder:(id)sender {
-    UIAlertController * alert = [UIAlertController
-                                 alertControllerWithTitle:nil
-                                 message:@"\"View Bill\" function is not applicable for Demo"
-                                 preferredStyle:UIAlertControllerStyleAlert];
+- (IBAction)viewBill:(id)sender {
+//    UIAlertController * alert = [UIAlertController
+//                                 alertControllerWithTitle:nil
+//                                 message:@"\"View Bill\" function is not applicable for Demo"
+//                                 preferredStyle:UIAlertControllerStyleAlert];
+//
+//    UIAlertAction* yesButton = [UIAlertAction
+//                                actionWithTitle:@"Ok"
+//                                style:UIAlertActionStyleDefault
+//                                handler:^(UIAlertAction * action) {
+//                                    //Handle your yes please button action here
+//
+//                                }];
+//
+//    [alert addAction:yesButton];
+//    [self presentViewController:alert animated:YES completion:nil];
     
-    UIAlertAction* yesButton = [UIAlertAction
-                                actionWithTitle:@"Ok"
-                                style:UIAlertActionStyleDefault
-                                handler:^(UIAlertAction * action) {
-                                    //Handle your yes please button action here
-                                    
-                                }];
-    
-    [alert addAction:yesButton];
-    [self presentViewController:alert animated:YES completion:nil];
+    ViewExistingOrderController *vc = [[ViewExistingOrderController alloc] initWithNibName:@"ViewExistingOrderController" bundle:nil];
+    [self addChildViewController:vc];
+    [self.view addSubview:vc.view];
+    [vc didMoveToParentViewController:self];
 
+    [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.equalTo(vc.view.superview);
+        make.width.height.equalTo(vc.view.superview);
+    }];
 }
 
 @end

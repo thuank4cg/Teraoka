@@ -9,5 +9,5 @@
 #import "BaseController.h"
 
 @interface SplashController : BaseController
-
+- (void)showCategoriesScreen;
 @end

@@ -1,0 +1,3 @@
+comment_set_no,comment_set_name,comment_set_name1,comment_set_name2,comment_set_name3,comment_set_name4,comment_group_no1,comment_group_no2,comment_group_no3,comment_group_no4,comment_group_no5
+1,"COOKING INSTRUCTION SET 1","","","","",1,2,0,0,0
+4,"COOKING SET 4","","","","",6,1,2,0,0

@@ -6,10 +6,14 @@ target 'Teraoka' do
   # use_frameworks!
   # Pods for Teraoka
   pod 'JSONModel',            '~> 1.0.2'
-  pod 'TPKeyboardAvoiding',   '1.2'
   pod 'CocoaAsyncSocket'
   pod 'SSZipArchive'
   pod 'SIAlertView', '~> 1.3'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'Masonry',              '~> 1.0'
+  pod 'ActionSheetPicker-3.0', '~> 2.3.0'
+  pod 'ProgressHUD'
+  pod 'AFNetworking',         '~> 2.0'
+  pod 'IQKeyboardManager'
 end

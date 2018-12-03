@@ -9,6 +9,7 @@
 #import "ParamsHelper.h"
 #import "ShareManager.h"
 #import "ProductModel.h"
+#import "APPConstants.h"
 
 #define MAX_VALUE 99999999
 #define REQUEST_ID @"request_id"
@@ -41,7 +42,7 @@
     return data;
 }
 
-- (NSData *)collectData {
+- (NSData *)collectData:(CommandName)commandName {
     NSMutableData *mCollectData = [NSMutableData new];
     //Header
     [mCollectData appendData:[self convertStringToBytesArr:@"68" length:1]];
@@ -50,28 +51,72 @@
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
     
     //Command size
-    int dataSize = (int)[self requestData].length;
+    NSString *commandId = @"0";
+    NSData *requestData;
+    
+    switch (commandName) {
+        case SendOrder:
+            commandId = @"10502";
+            requestData = [self requestSendOrderData];
+            break;
+            
+        case SendTransaction:
+            commandId = @"13200";
+            requestData = [self requestSendTransactionData];
+            break;
+            
+        case GetInventory:
+            commandId = @"13300";
+            requestData = [self requestGetInventoryData];
+            break;
+            
+        case CallStaff:
+            commandId = @"10106";
+            requestData = [self requestCallStaffData];
+            break;
+            
+        case PrintBill:
+            commandId = @"11101";
+            requestData = [self requestPrintBillData];
+            break;
+            
+        case SendSeated:
+            commandId = @"10501";
+            requestData = [self requestSendSeatedData];
+            break;
+            
+        case GetBillDetails:
+            commandId = @"10602";
+            requestData = [self requestGetBillDetailsData];
+            break;
+            
+        default:
+            break;
+    }
+    
+    int dataSize = (int)requestData.length;
     int commandSize = dataSize + 8;
 
     //Command size
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", commandSize] length:4]];
     
     //Command Id
-    [mCollectData appendData:[self convertStringToBytesArr:@"13200" length:4]];
+    [mCollectData appendData:[self convertStringToBytesArr:commandId length:4]];
 
     //Data size
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", dataSize] length:4]];
 
     //Data
-    [mCollectData appendData:[self requestData]];
+    [mCollectData appendData:requestData];
     
     return mCollectData;
 }
 
-- (NSMutableData *)requestData {
+- (NSData *)requestHeaderData {
     NSMutableData *mCollectData = [[NSMutableData alloc] init];
     
     /**XRequestHeaderData**/
+    
     //version
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
     [mCollectData appendData:[self convertStringToBytesArr:@"1" length:1]];
@@ -85,7 +130,7 @@
     [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]];
     
     //Staff ID
-    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:4]];
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
     
     //Sending Date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -98,96 +143,176 @@
     NSString *timeStr = [formatter stringFromDate:[NSDate date]];
     [mCollectData appendData:[self convertStringToBytesArr:timeStr length:4]];
     
+    return mCollectData;
+}
+
+- (NSMutableData *)requestSendOrderData {
+    NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
+    /**XRequestHeaderData**/
+    
+    [mCollectData appendData:[self requestHeaderData]];
+    
+    //Table No
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", [ShareManager shared].setting.tableNo] length:4]];
+    
+    /**XBillIdData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Bill No
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
+    
+    /**XGuestPaxData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //PAX
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
+    
+    /**XCouponData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"3" length:2]]; //Coupon status
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
+    
+    /**XBillOptionData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"3" length:2]]; //Cooking instruction status
+    
+    /**XCookingInstructionData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
+    
+    /**XFreeRemarkData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"2" length:2]]; //Free remark status
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Free remark data size
+    
+    /**XSendOrderData**/
+    
+    int numberOfObject = (int)[ShareManager shared].cartArr.count;
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObject] length:4]]; //Number of object
+    
+    /**XSendOrderDataStruct**/
+    
+    for (ProductModel *product in [ShareManager shared].cartArr) {
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]]; //PLU No
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]]; //Qty
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Current price
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Item Flag
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Item Flag
+        
+        /**XCondimentData**/
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+        
+        /**XCookingInstructionData**/
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+        
+        /**XServingTimeData**/
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+        
+        /**XFreeInstructionData**/
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+    }
+    
+    return mCollectData;
+}
+
+- (NSMutableData *)requestSendTransactionData {
+    NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
+    /**XRequestHeaderData**/
+    
+    [mCollectData appendData:[self requestHeaderData]];
+    
     /**XTransactionData**/
+    
     int totalPrice = 0;
     for (ProductModel *product in [ShareManager shared].cartArr) {
         totalPrice += [product.originalPrice intValue] * [product.qty intValue];
     }
-    
+
     /**XTransactionTotalData**/
     //Total price before item discount
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", totalPrice] length:4]];
-    
+
     //Total price before subtotal discount
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", totalPrice] length:4]];
-    
+
     //Discount amount
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     //Surcharge amount
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     //Total price after subtotal discount
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", totalPrice] length:4]];
-    
+
     //Taxable amount
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     //Tax amount
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     //Tax rate
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-    
+
     //Total price after tax
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", totalPrice] length:4]];
-    
+
     //Service chargable amount
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     //Service charge amount
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     //Service charge rate
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-    
+
     //Total price after service charge
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", totalPrice] length:4]];
-    
+
     //Extra chargable amount
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     //Extra charge amount
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     //Extra charge rate
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-    
+
     //Total price after extra charge
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", totalPrice] length:4]];
-    
+
     //Total price before rounding
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", totalPrice] length:4]];
-    
+
     //Total price after rounding
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", totalPrice] length:4]];
-    
+
     //Rounding amount
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     //Tender amount
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     //Change amount
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     //Virtual change amount
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     //pax
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-    
+
     //Total price paid
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-    
+
     int numberOfObj = (int)[ShareManager shared].cartArr.count;
     //Number of object
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
-    
+
     /**XTransactionPaymentData[]**/
     for (ProductModel *product in [ShareManager shared].cartArr) {
         //Id
-        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.ids] length:4]];
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]];
         //Quantity
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]];
         //Amount
@@ -200,11 +325,11 @@
     }
     //Number of object
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
-    
+
     /**XTransactionItemData[]**/
     for (ProductModel *product in [ShareManager shared].cartArr) {
         //PLU No
-        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.ids] length:4]];
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]];
         //Quantity
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]];
         //Weight
@@ -266,17 +391,141 @@
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
         //Set item addon price
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        
+
         /**XItemOptionData**/
-        /****XCondimentData**/
+        /****XCondimentData***/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        /****XCookingInstructionData**/
+        /****XCookingInstructionData***/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        /****XServingTimeData**/
+        /****XServingTimeData***/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        /****XFreeInstructionData**/
+        /****XFreeInstructionData***/
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
     }
+    
+    return mCollectData;
+}
+
+- (NSMutableData *)requestGetInventoryData {
+    NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
+    /**XRequestHeaderData**/
+    
+    [mCollectData appendData:[self requestHeaderData]];
+    
+    /**XInventoryPluData**/
+    
+    int numberOfObj = (int)[ShareManager shared].cartArr.count;
+    
+    //Number of object
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
+    
+    /**XInventoryPluDataStruct[n]**/
+    
+    for (ProductModel *product in [ShareManager shared].cartArr) {
+        //PLU No
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]];
+    }
+    
+    return mCollectData;
+}
+
+- (NSMutableData *)requestCallStaffData {
+    NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
+    /**XRequestHeaderData**/
+    
+    [mCollectData appendData:[self requestHeaderData]];
+    
+    /**XBillIdData**/
+    
+    NSString *billNo = @"";
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_BILL_NO]) {
+        billNo = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_BILL_NO];
+    }
+    [mCollectData appendData:[self convertStringToBytesArr:billNo length:4]]; //Bill No
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
+    
+    return mCollectData;
+}
+    
+- (NSMutableData *)requestPrintBillData {
+    NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
+    /**XRequestHeaderData**/
+    
+    [mCollectData appendData:[self requestHeaderData]];
+    
+    /**XBillIdData**/
+    
+    NSString *billNo = @"";
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_BILL_NO]) {
+        billNo = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_BILL_NO];
+    }
+    [mCollectData appendData:[self convertStringToBytesArr:billNo length:4]]; //Bill No
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
+    
+    /**Printer Group ID**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]];
+    
+    return mCollectData;
+}
+
+- (NSMutableData *)requestSendSeatedData {
+    NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
+    /**XRequestHeaderData**/
+    
+    [mCollectData appendData:[self requestHeaderData]];
+    
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", [ShareManager shared].setting.tableNo] length:4]]; //Table No
+    
+    /**XGuestPaxData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //PAX
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
+    
+    /**XCouponData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"3" length:2]]; //Coupon status
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
+    
+    /**XBillOptionData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"3" length:2]]; //Cooking instruction status
+    
+    /**XCookingInstructionData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Number of object
+    
+    /**XFreeRemarkData**/
+    
+    [mCollectData appendData:[self convertStringToBytesArr:@"2" length:2]]; //Free remark status
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Free remark data size
+    
+    return mCollectData;
+}
+
+- (NSMutableData *)requestGetBillDetailsData {
+    NSMutableData *mCollectData = [[NSMutableData alloc] init];
+    
+    /**XRequestHeaderData**/
+    
+    [mCollectData appendData:[self requestHeaderData]];
+    
+    /**XBillIdData**/
+    
+    NSString *billNo = @"";
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_BILL_NO]) {
+        billNo = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_BILL_NO];
+    }
+    [mCollectData appendData:[self convertStringToBytesArr:billNo length:4]]; //Bill No
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
+    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
+    
     return mCollectData;
 }
 

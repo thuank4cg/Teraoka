@@ -8,8 +8,9 @@
 
 #import "OrderSummaryCell.h"
 #import "TextfieldCustom.h"
-#import "ProductOptionValue.h"
-#import "ProductOption.h"
+#import "NSString+KeyLanguage.h"
+#import "OptionGroupModel.h"
+#import "OptionModel.h"
 
 @interface OrderSummaryCell ()
 @property (weak, nonatomic) IBOutlet TextfieldCustom *tfQty;
@@ -50,24 +51,36 @@
 - (void)setDataForCell:(int)row product:(ProductModel *)product {
     _row = row;
     _product = product;
+    
     self.lbProductName.text = product.name;
+    self.lbOptions.text = @"SC07_017".localizedString;
+    
 //    if (product.qty == 0) [self.lbNotice setHidden:NO];
 //    else [self.lbNotice setHidden:YES];
-    self.tfQty.text = product.qty;
-    if (product.image.length > 0) self.productImage.image = [UIImage imageNamed:product.image];
     
+    self.tfQty.text = product.qty;
+    NSData *imageData = [NSData dataWithContentsOfFile:product.image];
+    if (imageData) {
+        self.productImage.image = [UIImage imageWithData:imageData];
+    } else {
+        self.productImage.image = [UIImage imageNamed:@"no_product_image"];
+    }
+    
+    BOOL isSelectedOption = NO;
     NSString* optionStr = @"<p style='line-height:1.8;text-align:center'>";
-    for (ProductOption *option in product.options) {
-        for (ProductOptionValue *value in option.options) {
-            if (value.isCheck) {
-                optionStr = [optionStr stringByAppendingString:[NSString stringWithFormat:@"<span style='color:#000000;font-size:17px;font-family:SFUIDisplay-Bold'>%@:</span> <span style='color:#5A5A5A;font-size:17px;font-family:SFUIDisplay-Regular'>%@</span><br>", option.tittle, value.tittle]];
+    for (OptionGroupModel *optionGroup in product.options) {
+        for (OptionModel *option in optionGroup.optionList) {
+            if (option.isCheck) {
+                isSelectedOption = YES;
+                optionStr = [optionStr stringByAppendingString:[NSString stringWithFormat:@"<span style='color:#000000;font-size:17px;font-family:SFUIDisplay-Bold'>%@:</span> <span style='color:#5A5A5A;font-size:17px;font-family:SFUIDisplay-Regular'>%@</span><br>", optionGroup.name, option.name]];
             }
         }
     }
+    
     optionStr = [optionStr stringByAppendingString:@"</p>"];
     NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[optionStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     
-    self.lbOptions.attributedText = attrStr;
+    if (isSelectedOption) self.lbOptions.attributedText = attrStr;
 }
 - (IBAction)qtyDecrease:(id)sender {
     int qty = [self.tfQty.text intValue];

@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Display-Bold.otf">
+            <string>SFUIDisplay-Bold</string>
+        </array>
+        <array key="SF-UI-Display-Regular.otf">
+            <string>SFUIDisplay-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BillCompleteController">
             <connections>
+                <outlet property="backBtn" destination="r93-lI-PGC" id="WJo-6e-woT"/>
+                <outlet property="containerView" destination="JWN-E5-AFx" id="wx4-kd-2s0"/>
+                <outlet property="lbTitle1" destination="kAN-YG-Cpx" id="1ZO-IM-67t"/>
+                <outlet property="lbTitle2" destination="QZm-v3-Wh7" id="mDQ-CM-GS1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,48 +32,75 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We hope to see you again!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZm-v3-Wh7">
-                    <rect key="frame" x="365" y="369" width="294" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please hold on as we bring the bill to you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAN-YG-Cpx">
-                    <rect key="frame" x="286" y="289" width="452.5" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bill has been sent!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gT-Xd-kHb">
-                    <rect key="frame" x="411" y="259" width="202.5" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r93-lI-PGC" customClass="ButtonCustom">
-                    <rect key="frame" x="362" y="449" width="300" height="50"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_order_confirm" translatesAutoresizingMaskIntoConstraints="NO" id="XNW-3X-ylL">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWN-E5-AFx">
+                    <rect key="frame" x="212.5" y="184" width="600" height="400"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We hope to see you again!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZm-v3-Wh7">
+                            <rect key="frame" x="157.5" y="205" width="285" height="30"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="25"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please hold on as we bring the bill to you." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAN-YG-Cpx">
+                            <rect key="frame" x="78.5" y="155" width="444" height="30"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="25"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r93-lI-PGC">
+                            <rect key="frame" x="96.5" y="285" width="406" height="70"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="70" id="Xpw-Qg-USW"/>
+                                <constraint firstAttribute="width" secondItem="r93-lI-PGC" secondAttribute="height" multiplier="840:145" id="reF-nX-drL"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
+                            <state key="normal" title="BACK TO HOME" backgroundImage="back_to_home_btn">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="backToHome:" destination="-1" eventType="touchUpInside" id="MnP-ES-Qjd"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bill_icon" translatesAutoresizingMaskIntoConstraints="NO" id="57M-Zy-6Jz">
+                            <rect key="frame" x="260" y="40" width="80" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="3YO-La-3nQ"/>
+                                <constraint firstAttribute="height" constant="80" id="x0S-oE-FGr"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="Xpw-Qg-USW"/>
-                        <constraint firstAttribute="width" constant="300" id="eHi-is-fHX"/>
+                        <constraint firstItem="QZm-v3-Wh7" firstAttribute="centerX" secondItem="JWN-E5-AFx" secondAttribute="centerX" id="0TI-ie-rKT"/>
+                        <constraint firstItem="kAN-YG-Cpx" firstAttribute="centerX" secondItem="JWN-E5-AFx" secondAttribute="centerX" id="Ac6-MB-NKT"/>
+                        <constraint firstAttribute="height" constant="400" id="HMa-9o-SLq"/>
+                        <constraint firstItem="QZm-v3-Wh7" firstAttribute="centerY" secondItem="JWN-E5-AFx" secondAttribute="centerY" constant="20" id="IhP-qs-VOo"/>
+                        <constraint firstItem="r93-lI-PGC" firstAttribute="centerX" secondItem="JWN-E5-AFx" secondAttribute="centerX" id="IvO-km-RG7"/>
+                        <constraint firstItem="r93-lI-PGC" firstAttribute="top" secondItem="QZm-v3-Wh7" secondAttribute="bottom" constant="50" id="TWs-Nw-mrS"/>
+                        <constraint firstItem="57M-Zy-6Jz" firstAttribute="top" secondItem="JWN-E5-AFx" secondAttribute="top" constant="40" id="Zt5-bL-Rq9"/>
+                        <constraint firstItem="57M-Zy-6Jz" firstAttribute="centerX" secondItem="JWN-E5-AFx" secondAttribute="centerX" id="oh9-uA-3Or"/>
+                        <constraint firstAttribute="width" constant="600" id="qyw-eV-D2W"/>
+                        <constraint firstItem="QZm-v3-Wh7" firstAttribute="top" secondItem="kAN-YG-Cpx" secondAttribute="bottom" constant="20" id="rwv-qc-eal"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                    <state key="normal" title="Back to home"/>
-                    <connections>
-                        <action selector="backToHome:" destination="-1" eventType="touchUpInside" id="MnP-ES-Qjd"/>
-                    </connections>
-                </button>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="kAN-YG-Cpx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9i7-bs-czj"/>
-                <constraint firstItem="QZm-v3-Wh7" firstAttribute="top" secondItem="kAN-YG-Cpx" secondAttribute="bottom" constant="50" id="BBO-CU-7Uv"/>
-                <constraint firstItem="kAN-YG-Cpx" firstAttribute="top" secondItem="5gT-Xd-kHb" secondAttribute="bottom" id="V8f-0j-wDU"/>
-                <constraint firstItem="r93-lI-PGC" firstAttribute="top" secondItem="QZm-v3-Wh7" secondAttribute="bottom" constant="50" id="WXY-Ep-ADi"/>
-                <constraint firstItem="QZm-v3-Wh7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="a2i-Yt-yqb"/>
-                <constraint firstItem="r93-lI-PGC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gOA-b1-UZn"/>
-                <constraint firstItem="QZm-v3-Wh7" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="smx-Gb-QQg"/>
-                <constraint firstItem="5gT-Xd-kHb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="u5E-4n-FJx"/>
+                <constraint firstItem="JWN-E5-AFx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="65f-Bu-QOJ"/>
+                <constraint firstItem="JWN-E5-AFx" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Qiu-Ef-WX4"/>
+                <constraint firstAttribute="trailing" secondItem="XNW-3X-ylL" secondAttribute="trailing" id="dh1-PH-oR4"/>
+                <constraint firstItem="XNW-3X-ylL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="g81-Rm-MKj"/>
+                <constraint firstItem="XNW-3X-ylL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nsA-9l-1AY"/>
+                <constraint firstAttribute="bottom" secondItem="XNW-3X-ylL" secondAttribute="bottom" id="vm0-si-mh4"/>
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="back_to_home_btn" width="830" height="145"/>
+        <image name="bg_order_confirm" width="1024" height="768"/>
+        <image name="bill_icon" width="147" height="157"/>
+    </resources>
 </document>

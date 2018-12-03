@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Display-Bold.otf">
+            <string>SFUIDisplay-Bold</string>
+        </array>
+        <array key="SF-UI-Display-Regular.otf">
+            <string>SFUIDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OutOfStockCellID" id="gTV-IL-0wX" customClass="OutOfStockCell">
+            <rect key="frame" x="0.0" y="0.0" width="144" height="229"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="144" height="229"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g4D-Tp-CZu">
+                        <rect key="frame" x="0.0" y="0.0" width="144" height="229"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_product_image" translatesAutoresizingMaskIntoConstraints="NO" id="tO3-dl-Sak">
+                                <rect key="frame" x="0.0" y="0.0" width="144" height="144"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="tO3-dl-Sak" secondAttribute="height" multiplier="1:1" id="ppv-eI-sdw"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4k-T5-yyZ">
+                                <rect key="frame" x="5" y="152" width="134" height="21"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="17"/>
+                                <color key="textColor" red="0.25882352941176467" green="0.43137254901960786" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1z3-Ca-2AV">
+                                <rect key="frame" x="51.5" y="176" width="41" height="21"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
+                                <color key="textColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3k-on-y9V">
+                                <rect key="frame" x="39.5" y="197" width="64.5" height="21"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
+                                <color key="textColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="n3k-on-y9V" firstAttribute="top" secondItem="1z3-Ca-2AV" secondAttribute="bottom" id="5Fe-RJ-BSo"/>
+                            <constraint firstItem="F4k-T5-yyZ" firstAttribute="leading" secondItem="g4D-Tp-CZu" secondAttribute="leading" constant="5" id="9qJ-sI-HxX"/>
+                            <constraint firstItem="n3k-on-y9V" firstAttribute="centerX" secondItem="1z3-Ca-2AV" secondAttribute="centerX" id="MmS-L2-c4d"/>
+                            <constraint firstAttribute="trailing" secondItem="tO3-dl-Sak" secondAttribute="trailing" id="Q2O-EM-s7Y"/>
+                            <constraint firstAttribute="trailing" secondItem="F4k-T5-yyZ" secondAttribute="trailing" constant="5" id="Yaa-wg-AXC"/>
+                            <constraint firstItem="1z3-Ca-2AV" firstAttribute="centerX" secondItem="F4k-T5-yyZ" secondAttribute="centerX" id="eqa-Ay-OT1"/>
+                            <constraint firstItem="F4k-T5-yyZ" firstAttribute="top" secondItem="tO3-dl-Sak" secondAttribute="bottom" constant="8" id="mCF-He-edt"/>
+                            <constraint firstItem="tO3-dl-Sak" firstAttribute="leading" secondItem="g4D-Tp-CZu" secondAttribute="leading" id="mP2-SO-jTD"/>
+                            <constraint firstItem="tO3-dl-Sak" firstAttribute="top" secondItem="g4D-Tp-CZu" secondAttribute="top" id="vJd-UT-VUD"/>
+                            <constraint firstItem="1z3-Ca-2AV" firstAttribute="top" secondItem="F4k-T5-yyZ" secondAttribute="bottom" constant="3" id="zVN-n3-UDW"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="g4D-Tp-CZu" secondAttribute="bottom" id="1il-2v-UPQ"/>
+                <constraint firstItem="g4D-Tp-CZu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="2jW-gb-9bO"/>
+                <constraint firstAttribute="trailing" secondItem="g4D-Tp-CZu" secondAttribute="trailing" id="ZI4-BB-ciI"/>
+                <constraint firstItem="g4D-Tp-CZu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gCb-eM-Djs"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="144" height="229"/>
+            <connections>
+                <outlet property="containerView" destination="g4D-Tp-CZu" id="kbc-Qh-HsJ"/>
+                <outlet property="lbAmount" destination="1z3-Ca-2AV" id="N16-it-uRh"/>
+                <outlet property="lbAvailable" destination="n3k-on-y9V" id="Uzv-XI-WkZ"/>
+                <outlet property="lbProductName" destination="F4k-T5-yyZ" id="DV9-By-9WD"/>
+                <outlet property="productImage" destination="tO3-dl-Sak" id="Ote-Ay-kGt"/>
+            </connections>
+            <point key="canvasLocation" x="81" y="143.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="no_product_image" width="137" height="137"/>
+    </resources>
+</document>

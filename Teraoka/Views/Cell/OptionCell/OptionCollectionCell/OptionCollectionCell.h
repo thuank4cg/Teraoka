@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ProductOptionValue.h"
+#import "OptionModel.h"
 
 @interface OptionCollectionCell : UICollectionViewCell
-- (void)setDataForCell:(ProductOptionValue *)optionValue;
+- (void)setDataForCell:(OptionModel *)option;
 @end

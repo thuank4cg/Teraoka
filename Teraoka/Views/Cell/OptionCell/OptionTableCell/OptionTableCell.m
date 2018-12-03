@@ -8,7 +8,7 @@
 
 #import "OptionTableCell.h"
 #import "OptionCollectionCell.h"
-#import "ProductOptionValue.h"
+#import "OptionModel.h"
 
 @interface OptionTableCell () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -16,7 +16,7 @@
 
 @implementation OptionTableCell {
     NSIndexPath *_indexPath;
-    ProductOption *_productOption;
+    OptionGroupModel *_optionGroup;
     int selectedIndex;
 }
 
@@ -29,8 +29,8 @@
     [self.colView registerNib:[UINib nibWithNibName:@"OptionCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"OptionCollectionCellID"];
 }
 
-- (void)setDataForCell:(ProductOption *)productOption {
-    _productOption = productOption;
+- (void)setDataForCell:(OptionGroupModel *)optionGroup {
+    _optionGroup = optionGroup;
 }
 
 #pragma mark - UICollectionViewDataSource, UICollectionViewDelegate
@@ -38,11 +38,11 @@
     return 1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return _productOption.options.count;
+    return _optionGroup.optionList.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     OptionCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OptionCollectionCellID" forIndexPath:indexPath];
-    ProductOptionValue *value = _productOption.options[indexPath.row];
+    OptionModel *value = _optionGroup.optionList[indexPath.row];
     [cell setDataForCell:value];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
@@ -52,10 +52,10 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    for (int i=0;i<_productOption.options.count;i++) {
-        ProductOptionValue *optionValue = _productOption.options[i];
-        if (i == indexPath.row) optionValue.isCheck = YES;
-        else optionValue.isCheck = NO;
+    for (int i=0;i<_optionGroup.optionList.count;i++) {
+        OptionModel *option = _optionGroup.optionList[i];
+        if (i == indexPath.row) option.isCheck = YES;
+        else option.isCheck = NO;
     }
     [self.colView reloadData];
 }

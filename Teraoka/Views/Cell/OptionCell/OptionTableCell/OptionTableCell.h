@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ProductOption.h"
+#import "OptionGroupModel.h"
 
 @interface OptionTableCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UICollectionView *colView;
-- (void)setDataForCell:(ProductOption *)productOption;
+- (void)setDataForCell:(OptionGroupModel *)optionGroup;
 @end

@@ -21,13 +21,13 @@
     [super awakeFromNib];
     // Initialization code
 }
-- (void)setDataForCell:(ProductOptionValue *)optionValue {
-    if (optionValue.isCheck) {
+- (void)setDataForCell:(OptionModel *)option {
+    if (option.isCheck) {
         [self.radioBtn setBackgroundImage:[UIImage imageNamed:@"ic_radio_checked"] forState:UIControlStateNormal];
     }else {
         [self.radioBtn setBackgroundImage:[UIImage imageNamed:@"ic_radio"] forState:UIControlStateNormal];
     }
-    self.optionTitle.text = optionValue.tittle;
+    self.optionTitle.text = option.name;
 }
 
 @end

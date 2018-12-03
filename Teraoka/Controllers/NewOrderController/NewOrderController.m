@@ -10,16 +10,19 @@
 #import "OptionTableCell.h"
 #import "CategoryCell.h"
 #import "TextfieldCustom.h"
-#import "ProductOption.h"
 #import "ShareManager.h"
 #import "NewOrderAddedController.h"
 #import "IncompleteItemController.h"
 #import "ProductModel.h"
-#import "ProductOptionValue.h"
 #import "OrderSummaryController.h"
 #import "APPConstants.h"
 #import "UIColor+HexString.h"
 #import "ParamsHelper.h"
+#import "Util.h"
+#import "LocalizeHelper.h"
+#import "NSString+KeyLanguage.h"
+#import "OptionGroupModel.h"
+#import "OptionModel.h"
 
 @interface NewOrderController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
@@ -29,8 +32,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *productName;
 @property (weak, nonatomic) IBOutlet UIView *increaseBox;
 @property (weak, nonatomic) IBOutlet UIView *decreaseBox;
-@property (weak, nonatomic) IBOutlet UIView *containerFootView;
+@property (weak, nonatomic) IBOutlet UIView *containerHeaderView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UILabel *backBtnTitle;
+@property (weak, nonatomic) IBOutlet UILabel *submitBtnTitle;
 
 @end
 
@@ -50,6 +55,13 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.view removeFromSuperview];
+}
+
+- (void)loadLocalizable {
+    [super loadLocalizable];
+    
+    self.backBtnTitle.text = @"SC05_011".localizedString;
+    self.submitBtnTitle.text = @"SC05_012".localizedString;
 }
 
 - (void)setupView {
@@ -72,17 +84,38 @@
     self.decreaseBox.layer.cornerRadius = CGRectGetHeight(self.decreaseBox.frame)/2;
     
     // Shadow and Radius
-    self.containerFootView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.containerFootView.layer.shadowOffset = CGSizeMake(0.0f, 4.0f);
-    self.containerFootView.layer.shadowOpacity = 0.2;
-    self.containerFootView.layer.shadowRadius = 3.0;
-    self.containerFootView.layer.masksToBounds = NO;
+    self.containerHeaderView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.containerHeaderView.layer.shadowOffset = CGSizeMake(0.0f, 4.0f);
+    self.containerHeaderView.layer.shadowOpacity = 0.2;
+    self.containerHeaderView.layer.shadowRadius = 3.0;
+    self.containerHeaderView.layer.masksToBounds = NO;
     
     self.containerView.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.containerView.layer.shadowOffset = CGSizeMake(8.0f, 8.0f);
     self.containerView.layer.shadowOpacity = 0.2;
     self.containerView.layer.shadowRadius = 3.0;
     self.containerView.layer.masksToBounds = NO;
+    
+    CGFloat heightTblView = 420;
+    
+    int numberOfGroup = 0;
+    for (int i = 0;i<self.product.options.count;i++) {
+        OptionGroupModel *group = self.product.options[i];
+        if (group.optionList.count > 0) numberOfGroup++;
+    }
+    
+    if (numberOfGroup == 0) {
+        heightTblView = 100;
+    } else if (numberOfGroup < 3) {
+        heightTblView = numberOfGroup * 140;
+    }
+    
+    for (NSLayoutConstraint *constraint in self.tblView.constraints) {
+        if (constraint.firstAttribute == NSLayoutAttributeHeight) {
+            constraint.constant = heightTblView;
+            break;
+        }
+    }
 }
 
 - (IBAction)qtyDecrease:(id)sender {
@@ -91,40 +124,58 @@
     self.tfQty.text = [NSString stringWithFormat:@"%d", --qty];
     self.product.qty = self.tfQty.text;
 }
+
 - (IBAction)qtyIncrease:(id)sender {
     int qty = [self.tfQty.text intValue];
     self.tfQty.text = [NSString stringWithFormat:@"%d", ++qty];
     self.product.qty = self.tfQty.text;
 }
+
 - (IBAction)backAction:(id)sender {
 //    IncompleteItemController *vc = [[IncompleteItemController alloc] initWithNibName:@"IncompleteItemController" bundle:nil];
 //    [self.navigationController pushViewController:vc animated:NO];
     [self.delegate backDelegate];
     [self.view removeFromSuperview];
 }
+
 - (IBAction)sendAction:(id)sender {
+    BOOL isSelectedOption = NO;
+    for (OptionGroupModel *optionGroup in self.product.options) {
+        for (OptionModel *option in optionGroup.optionList) {
+            if (option.isCheck) {
+                isSelectedOption = YES;
+                break;
+            }
+        }
+    }
+    
+    if (!isSelectedOption && self.product.options.count > 0) {
+        [Util showAlert:@"Please select at least one option" vc:self];
+        return;
+    }
+    
     if (![ShareManager shared].cartArr) [ShareManager shared].cartArr = [NSMutableArray new];
     
     if ([ShareManager shared].cartArr.count > 0) {
         BOOL isAdd = YES;
         for (ProductModel *product in [ShareManager shared].cartArr) {
-            if ([product.ids isEqualToString:self.product.ids]) {
+            if ([product.productNo isEqualToString:self.product.productNo]) {
                 isAdd = NO;
                 NSString *optionStr1 = @"";
-                for (ProductOption *option in product.options) {
-                    for (ProductOptionValue *value in option.options) {
-                        if (value.isCheck) {
-                            optionStr1 = [optionStr1 stringByAppendingString:value.tittle];
+                for (OptionGroupModel *optionGroup in product.options) {
+                    for (OptionModel *option in optionGroup.optionList) {
+                        if (option.isCheck) {
+                            optionStr1 = [optionStr1 stringByAppendingString:option.name];
                             optionStr1 = [optionStr1 stringByAppendingString:@"\n"];
                         }
                     }
                 }
                 
                 NSString *optionStr2 = @"";
-                for (ProductOption *option in self.product.options) {
-                    for (ProductOptionValue *value in option.options) {
-                        if (value.isCheck) {
-                            optionStr2 = [optionStr2 stringByAppendingString:value.tittle];
+                for (OptionGroupModel *optionGroup in self.product.options) {
+                    for (OptionModel *option in optionGroup.optionList) {
+                        if (option.isCheck) {
+                            optionStr2 = [optionStr2 stringByAppendingString:option.name];
                             optionStr2 = [optionStr2 stringByAppendingString:@"\n"];
                         }
                     }
@@ -145,8 +196,6 @@
         [[ShareManager shared].cartArr addObject:self.product];
     }
     
-    
-    
 //    OrderSummaryController *vc = [[OrderSummaryController alloc] initWithNibName:@"OrderSummaryController" bundle:nil];
 //    [self.navigationController pushViewController:vc animated:YES];
     [self.delegate backDelegate];
@@ -156,39 +205,46 @@
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return self.product.options.count;
-    return 0;
+    return self.product.options.count;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     OptionTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionTableCellID" forIndexPath:indexPath];
-    ProductOption *option = self.product.options[indexPath.section];
-    [cell setDataForCell:option];
+    OptionGroupModel *optionGroup = self.product.options[indexPath.section];
+    [cell setDataForCell:optionGroup];
 //    cell.backgroundColor = [UIColor yellowColor];
     return cell;
-
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return (CGRectGetHeight(self.tblView.frame)/3)/2;
+    OptionGroupModel *optionGroup = self.product.options[indexPath.section];
+    if (optionGroup.optionList.count == 0) return 0;
+    return 70;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tblView.frame), (CGRectGetHeight(self.tblView.frame)/3)/2)];
-//    header.backgroundColor = [UIColor redColor];
-    ProductOption *option = self.product.options[section];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tblView.frame), 70)];
+    header.backgroundColor = [UIColor whiteColor];
+    OptionGroupModel *optionGroup = self.product.options[section];
     UILabel *lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(25, 10, CGRectGetWidth(header.frame), CGRectGetHeight(header.frame) - 10)];
-    lbTitle.text = option.tittle;
+    lbTitle.text = optionGroup.name;
     [lbTitle setTextColor:[UIColor colorWithHexString:@"272727"]];
     lbTitle.font = [UIFont fontWithName:KEY_FONT_BOLD size:17];
     [header addSubview:lbTitle];
     
     return header;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return (CGRectGetHeight(self.tblView.frame)/3)/2;
+    OptionGroupModel *optionGroup = self.product.options[section];
+    if (optionGroup.optionList.count == 0) return 0;
+    return 70;
 }
+
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tblView.frame), 1)];
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(footer.frame), 1)];
@@ -198,6 +254,7 @@
     [footer addSubview:line];
     return  footer;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 1;
 }

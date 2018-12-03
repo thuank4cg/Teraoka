@@ -1,0 +1,6 @@
+comment_no,comment_name,comment_name1,comment_name2,comment_name3,comment_name4,short_name,short_name1,short_name2,short_name3,short_name4
+1,"Less Sugar","","","","","","","","",""
+2,"More Pepper","","","","","","","","",""
+3,"No Onion","","","","","","","","",""
+4,"MEDIUM","","","","","","","","",""
+5,"WELL DONE","","","","","","","","",""

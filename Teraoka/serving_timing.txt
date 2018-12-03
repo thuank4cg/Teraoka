@@ -1,0 +1,6 @@
+serving_timing_no,desc_name,desc_name1,desc_name2,desc_name3,desc_name4,short_name,short_name1,short_name2,short_name3,short_name4
+1,"Before Meal","","","","","","","","",""
+2,"After Meal","","","","","","","","",""
+3,"Right Now","","","","","","","","",""
+4,"TAKE AWAY","","","","","","","","",""
+5,"EAT IN","","","","","","","","",""

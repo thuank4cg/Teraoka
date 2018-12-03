@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad12_9" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Display-Bold.otf">
+            <string>SFUIDisplay-Bold</string>
+        </array>
+        <array key="SF-UI-Display-Regular.otf">
+            <string>SFUIDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StartOrderController">
+            <connections>
+                <outlet property="lbTitle" destination="2nw-cD-PTW" id="YuU-db-fAt"/>
+                <outlet property="submitBtn" destination="6ai-uh-G1D" id="dqd-4N-kmw"/>
+                <outlet property="tfTableNo" destination="tGq-q0-Gnw" id="QoB-Jh-5po"/>
+                <outlet property="topSpaceTfTableNo" destination="CKz-Rc-22o" id="etq-1n-GzG"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_home" translatesAutoresizingMaskIntoConstraints="NO" id="1dp-nH-szs">
+                    <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47y-eY-KKz" customClass="ContainerCommonView">
+                    <rect key="frame" x="358" y="339" width="650" height="366.5"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yjx-bX-xhT">
+                            <rect key="frame" x="15" y="15" width="42.5" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Yjx-bX-xhT" secondAttribute="height" multiplier="70:58" id="LRl-Q9-NM7"/>
+                                <constraint firstAttribute="height" constant="35" id="pXE-W8-lz4"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="ic_back"/>
+                            <connections>
+                                <action selector="backAction:" destination="-1" eventType="touchUpInside" id="Shb-Up-hbd"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have not selected a table number." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nw-cD-PTW">
+                            <rect key="frame" x="60" y="50" width="530" height="26.5"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="22"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tGq-q0-Gnw" customClass="CommonTextfield">
+                            <rect key="frame" x="175" y="126.5" width="300" height="70"/>
+                            <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="300" id="fwb-CD-EZc"/>
+                                <constraint firstAttribute="height" constant="70" id="mSo-Vd-mfh"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="25"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ai-uh-G1D">
+                            <rect key="frame" x="178" y="246.5" width="294" height="70"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="6ai-uh-G1D" secondAttribute="height" multiplier="610:145" id="K5y-ik-N9r"/>
+                                <constraint firstAttribute="height" constant="70" id="Pzz-fv-mey"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
+                            <inset key="titleEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="START ORDER" backgroundImage="submit_btn">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="submitAction:" destination="-1" eventType="touchUpInside" id="ggP-uc-l6f"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="tGq-q0-Gnw" firstAttribute="centerX" secondItem="47y-eY-KKz" secondAttribute="centerX" id="5pi-Wx-dqY"/>
+                        <constraint firstAttribute="trailing" secondItem="2nw-cD-PTW" secondAttribute="trailing" constant="60" id="7RJ-7x-8rT"/>
+                        <constraint firstItem="2nw-cD-PTW" firstAttribute="top" secondItem="47y-eY-KKz" secondAttribute="top" constant="50" id="7SE-wD-pbs"/>
+                        <constraint firstItem="tGq-q0-Gnw" firstAttribute="top" secondItem="2nw-cD-PTW" secondAttribute="bottom" constant="50" id="CKz-Rc-22o"/>
+                        <constraint firstItem="6ai-uh-G1D" firstAttribute="top" secondItem="tGq-q0-Gnw" secondAttribute="bottom" constant="50" id="IbU-t8-Qo9"/>
+                        <constraint firstAttribute="bottom" secondItem="6ai-uh-G1D" secondAttribute="bottom" constant="50" id="R87-Zt-PbB"/>
+                        <constraint firstItem="2nw-cD-PTW" firstAttribute="leading" secondItem="47y-eY-KKz" secondAttribute="leading" constant="60" id="Uba-Sq-Mf4"/>
+                        <constraint firstItem="Yjx-bX-xhT" firstAttribute="top" secondItem="47y-eY-KKz" secondAttribute="top" constant="15" id="awV-gi-yoK"/>
+                        <constraint firstItem="Yjx-bX-xhT" firstAttribute="leading" secondItem="47y-eY-KKz" secondAttribute="leading" constant="15" id="t3Z-P0-hI5"/>
+                        <constraint firstItem="6ai-uh-G1D" firstAttribute="centerX" secondItem="47y-eY-KKz" secondAttribute="centerX" id="uml-oK-sgI"/>
+                        <constraint firstAttribute="width" constant="650" id="vG7-XF-01d"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="1dp-nH-szs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0Sm-lE-ayY"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="1dp-nH-szs" secondAttribute="trailing" id="iSa-U1-od6"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="1dp-nH-szs" secondAttribute="bottom" id="jvk-sZ-qSy"/>
+                <constraint firstItem="47y-eY-KKz" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="m2p-l1-BF4"/>
+                <constraint firstItem="47y-eY-KKz" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="mve-WJ-3vP"/>
+                <constraint firstItem="1dp-nH-szs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="oVR-5p-TVQ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg_home" width="1024" height="768"/>
+        <image name="ic_back" width="70" height="58"/>
+        <image name="submit_btn" width="610" height="145"/>
+    </resources>
+</document>

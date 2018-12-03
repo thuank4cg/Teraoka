@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+
 typedef void (^ChooseCategory)(int index);
+
 @interface CategoryView : UIView
+
 @property (nonatomic, assign) int categoryIndex;
 @property (nonatomic, copy) ChooseCategory chooseCategory;
 - (void)setupData:(NSMutableArray *)cateArr;
+
 @end

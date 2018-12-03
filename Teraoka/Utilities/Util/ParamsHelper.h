@@ -8,7 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum
+{
+    SendOrder = 1,
+    SendTransaction,
+    GetInventory,
+    CallStaff,
+    PrintBill,
+    SendSeated,
+    GetBillDetails
+} CommandName;
+
 @interface ParamsHelper : NSObject
 + (ParamsHelper *)shared;
-- (NSMutableData *)collectData;
+- (NSMutableData *)collectData:(CommandName)commandName;
 @end

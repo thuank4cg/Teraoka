@@ -9,26 +9,19 @@
 #import "OrderSummaryController.h"
 #import "OrderSummaryCell.h"
 #import "OrderConfirmController.h"
-#import "ProductOption.h"
 #import "ShareManager.h"
 #import "CategoriesController.h"
 #import "OrderConfirmController.h"
 #import "ProductModel.h"
-#import "ProductOptionValue.h"
-#import "ProductOption.h"
 #import "APPConstants.h"
-#import "ParamsHelper.h"
-#import "GCDAsyncSocket.h"
+#import "NSString+KeyLanguage.h"
 #import "Util.h"
 #import "Reachability.h"
 
-#define STATUS_REPLY_OK @"00000000"
-#define MSG_ERROR @"submission failed due to connection error"
+@interface OrderSummaryController () <UITableViewDelegate, UITableViewDataSource>
 
-@interface OrderSummaryController () <UITableViewDelegate, UITableViewDataSource, GCDAsyncSocketDelegate, NSStreamDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet UIButton *btnBack;
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
 
@@ -36,29 +29,37 @@
 
 @implementation OrderSummaryController {
     NSMutableArray *products;
-    GCDAsyncSocket* asyncSocket;
-    
-    NSOutputStream *outputStream;
-    NSInputStream *inputStream;
-    CFReadStreamRef readStream;
-    CFReadStreamRef writeStream;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     products = [ShareManager shared].cartArr;
+    
     [self setupView];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.view removeFromSuperview];
+- (void)loadLocalizable {
+    [super loadLocalizable];
+    
+    [self.btnBack setTitle:@"SC07_019".localizedString forState:UIControlStateNormal];
+    [self.btnSend setTitle:@"SC07_020".localizedString forState:UIControlStateNormal];
 }
 
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOutOfStock:) name:KEY_NOTIFY_OUT_OF_STOCK object:nil];
+//}
+
+//- (void)viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
+
 - (void)setupView {
-    [_indicatorView setHidden:YES];
-    
     self.tblView.delegate = self;
     self.tblView.dataSource = self;
     [self.tblView registerNib:[UINib nibWithNibName:@"OrderSummaryCell" bundle:nil] forCellReuseIdentifier:@"OrderSummaryCellID"];
@@ -85,53 +86,41 @@
 }
 
 - (IBAction)sendOrder:(id)sender {
+//    Reachability *reach = [Reachability reachabilityForInternetConnection];
+//    
+//    if (![reach isReachable]) {
+//        [Util showAlert:@"Unable to proceed, you do not have any network." vc:self];
+//        return;
+//    }
+    
+//    SettingModel *setting = [ShareManager shared].setting;
+//    if (setting && setting.selectMode == Dine_in && setting.tableSelection == Fix_ed && setting.tableNo == 0) {
+//        [Util showAlert:@"Please enter table no in settings" vc:self];
+//        return;
+//    }
+    
     if (products.count == 0) return;
     for (ProductModel *product in products) {
         if ([product.qty intValue] == 0) [products removeObject:product];
     }
-//    if ([ShareManager shared].existingOrderArr.count == 0) {
-//        [ShareManager shared].existingOrderArr = products;
-//    }else {
-//        for (ProductModel *product in products) {
-//            BOOL isAdd = YES;
-//            for (ProductModel *existingProduct in [ShareManager shared].existingOrderArr) {
-//                if ([product.ids isEqualToString:existingProduct.ids]) {
-//                    isAdd = NO;
-//                    NSString *optionStr1 = @"";
-//                    for (ProductOption *option in product.options) {
-//                        for (ProductOptionValue *value in option.options) {
-//                            if (value.isCheck) {
-//                                optionStr1 = [optionStr1 stringByAppendingString:value.tittle];
-//                                optionStr1 = [optionStr1 stringByAppendingString:@"\n"];
-//                            }
-//                        }
-//                    }
-//
-//                    NSString *optionStr2 = @"";
-//                    for (ProductOption *option in existingProduct.options) {
-//                        for (ProductOptionValue *value in option.options) {
-//                            if (value.isCheck) {
-//                                optionStr2 = [optionStr2 stringByAppendingString:value.tittle];
-//                                optionStr2 = [optionStr2 stringByAppendingString:@"\n"];
-//                            }
-//                        }
-//                    }
-//
-//                    if ([optionStr1 isEqualToString:optionStr2]) {
-//                        int qty = [product.qty intValue];
-//                        qty += [existingProduct.qty intValue];
-//                        existingProduct.qty = [NSString stringWithFormat:@"%d", qty];
-//                    }else {
-//                        [[ShareManager shared].existingOrderArr addObject:product];
-//                    }
-//                    break;
-//                }
-//            }
-//            if (isAdd) [[ShareManager shared].existingOrderArr addObject:product];
-//        }
-//    }
-    [self sendTransaction];
+    
+    [ShareManager shared].cartArr = products;
+    
+    if ([ShareManager shared].setting.selectMode == Quick_Serve) {
+        [self sendPOSRequest:GetInventory];
+    } else {
+        [self sendPOSRequest:SendOrder];
+    }
+    
+    [self.view removeFromSuperview];
 }
+
+//MARK: Custom method
+
+//- (void)showOutOfStock:(NSNotification *)notification {
+//    [self.delegate showOutOfStockScreen];
+//    [self.view removeFromSuperview];
+//}
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -189,6 +178,16 @@
     header.layer.shadowOpacity = 0.5;
     header.layer.shadowRadius = 3.0;
     header.layer.masksToBounds = NO;
+    
+    UILabel *lbl = (UILabel *)[header viewWithTag:1];
+    lbl.text = @"SC07_014".localizedString;
+    
+    lbl = (UILabel *)[header viewWithTag:2];
+    lbl.text = @"SC07_015".localizedString;
+    
+    lbl = (UILabel *)[header viewWithTag:3];
+    lbl.text = @"SC07_016".localizedString;
+    
     return header;
 }
 
@@ -210,99 +209,6 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 1;
-}
-
-#pragma mark - Custom method
-
-- (void)stopProcessView {
-    [_indicatorView setHidden:YES];
-    [_indicatorView stopAnimating];
-    [_btnBack setUserInteractionEnabled:YES];
-    [_btnSend setUserInteractionEnabled:YES];
-}
-
-- (void)sendTransaction {
-//    if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable)
-//    {
-//        [Util showAlert:MSG_ERROR vc:self];
-//        return;
-//    }
-    
-    [_indicatorView setHidden:NO];
-    [_indicatorView startAnimating];
-    [_btnBack setUserInteractionEnabled:NO];
-    [_btnSend setUserInteractionEnabled:NO];
-    
-    NSString *host = [ShareManager shared].hostName;
-    uint16_t port = PORT;
-
-    NSError *error = nil;
-
-    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-
-    asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
-
-    if (![asyncSocket connectToHost:host onPort:port withTimeout:10 error:&error])
-    {
-        NSLog(@"error");
-        [self stopProcessView];
-    }
-}
-
-- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
-    NSLog(@"didConnectToHost");
-    [asyncSocket writeData:ParamsHelper.shared.collectData withTimeout:10 tag:0];
-}
-
-- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
-    NSLog(@"didWriteDataWithTag");
-    [asyncSocket readDataWithTimeout:10 tag:0];
-}
-
-- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-    NSLog(@"didReadData");
-    
-    int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
-    
-    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
-    NSString *httpResponse = [Util hexadecimalString:replyStatus];
-    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
-        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
-        NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-//        httpResponse = [[NSString alloc] initWithData:replyData encoding:NSUTF8StringEncoding];
-        NSData *dataReceipt = [replyData subdataWithRange:NSMakeRange(0, 4)];
-        NSData *transactionNumber = [replyData subdataWithRange:NSMakeRange(4, 4)];
-        
-        int receiptResponse = [Util hexStringToInt:[Util hexadecimalString:dataReceipt]];
-        int transactionNumberResponse = [Util hexStringToInt:[Util hexadecimalString:transactionNumber]];
-        NSLog(@"%d %d", receiptResponse, transactionNumberResponse);
-        
-        [ShareManager shared].cartArr = nil;
-        OrderConfirmController *vc = [[OrderConfirmController alloc] initWithNibName:@"OrderConfirmController" bundle:nil];
-        vc.receipt = receiptResponse;
-        vc.queueNumber = transactionNumberResponse;
-        [self.navigationController pushViewController:vc animated:NO];
-    }else {
-        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
-        NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
-        httpResponse = [[NSString alloc] initWithData:replyData encoding:NSUTF8StringEncoding];
-        if (httpResponse.length == 0) {
-            httpResponse = MSG_ERROR;
-        }
-        [Util showAlert:httpResponse vc:self];
-        
-        [self stopProcessView];
-    }
-}
-
-- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    if (err.domain == NSPOSIXErrorDomain) {
-        [Util showAlert:MSG_ERROR vc:self];
-    }
-    NSLog(@"socketDidDisconnect");
-    if (!_btnSend.isUserInteractionEnabled) {
-        [self stopProcessView];
-    }
 }
 
 @end
