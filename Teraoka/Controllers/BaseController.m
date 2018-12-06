@@ -168,6 +168,9 @@
         case GetBillDetails:
             [asyncSocket writeData:[ParamsHelper.shared collectData:GetBillDetails] withTimeout:10 tag:0];
             break;
+        case GetBillHeader:
+            [asyncSocket writeData:[ParamsHelper.shared collectData:GetBillHeader] withTimeout:10 tag:0];
+            break;
             
         default:
             break;
@@ -205,6 +208,9 @@
         case GetBillDetails:
             [self handleDataGetBillDetails:data];
             break;
+        case GetBillHeader:
+            [self handleDataGetBillHeader:data];
+            break;
         default:
             break;
     }
@@ -226,7 +232,7 @@
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
     if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
-        [self showOrderConfirmScreen];
+        [self sendPOSRequest:GetBillHeader];
     } else {
         NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
         NSData *dataErrorID = [replyData subdataWithRange:NSMakeRange(0, 2)];
@@ -382,6 +388,30 @@
 
 - (void)handleDataGetBillDetails:(NSData *)data {
     
+}
+
+- (void)handleDataGetBillHeader:(NSData *)data {
+    int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
+    
+    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
+    NSString *httpResponse = [Util hexadecimalString:replyStatus];
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
+        
+        /**XBillIdData**/
+        NSData *billIdData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+        NSData *billNoData = [billIdData subdataWithRange:NSMakeRange(0, 4)];
+        int billNo = [Util hexStringToInt:[Util hexadecimalString:billNoData]];
+        NSLog(@"%d", billNo);
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d", billNo] forKey:KEY_SAVED_BILL_NO];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self showOrderConfirmScreen];
+    } else {
+        NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
+        NSString *errorID = [Util hexadecimalString:errorData];
+        [Util showError:errorID vc:self];
+    }
 }
 
 @end

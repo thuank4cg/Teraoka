@@ -283,7 +283,9 @@
             [self.fixedBtn selected];
             [self.preOrderBtn unselected];
             
-            [self hiddenTableNo:NO];
+            if (selectModeValue == Dine_in) {
+                [self hiddenTableNo:NO];
+            }
             
             break;
             

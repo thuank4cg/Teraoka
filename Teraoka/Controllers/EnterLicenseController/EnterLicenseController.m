@@ -47,7 +47,7 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:[NSNumber numberWithInt:1] forKey:@"licensetype"];
     [params setObject:self.tfLicenseKey.text forKey:@"license"];
-    [params setObject:[NSNumber numberWithInt:1] forKey:@"appid"];
+    [params setObject:[NSNumber numberWithInt:3] forKey:@"appid"];
 //    [params setObject:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"uid"];
     
     [[APIManager shared] postRequestSuccess:params success:^(id response) {
