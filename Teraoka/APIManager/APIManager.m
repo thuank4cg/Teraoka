@@ -9,6 +9,10 @@
 #import "APIManager.h"
 #import <AFNetworking.h>
 #import "ErrorModel.h"
+#import "APPConstants.h"
+#import "SettingModel.h"
+#import "ShareManager.h"
+#import "SettingLanguageModel.h"
 
 @implementation APIManager
 
@@ -21,8 +25,8 @@
     return _shared;
 }
 
-- (void)postRequestSuccess:(NSDictionary *)params success:(void(^)(id response))success failure:(void(^)(id failure))failure {
-    NSString *url = @"http://dmc.teraoka.com.sg:8081/v1/token/verify";
+- (void)tokenVerify:(NSDictionary *)params success:(void(^)(id response))success failure:(void(^)(id failure))failure {
+    NSString *url = [NSString stringWithFormat:@"%@v1/token/verify", ROOT_API_URL];
     AFHTTPRequestOperationManager *manager    = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     
@@ -31,6 +35,45 @@
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         ErrorModel *errModel = [[ErrorModel alloc] initWithString:operation.responseString error:nil];
         failure(errModel.detail);
+    }];
+}
+
+- (void)getLanguageList:(NSDictionary *)params success:(void(^)(id response))success failure:(void(^)(id failure))failure {
+    NSString *url = [NSString stringWithFormat:@"%@v1/lang/index", ROOT_API_URL];
+    AFHTTPRequestOperationManager *manager    = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [manager POST:url parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSData *data = [operation.responseString dataUsingEncoding:NSUTF8StringEncoding];
+        id response = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSArray *languageList = [response objectForKey:@"languagelist"];
+        
+        SettingModel *setting = [ShareManager shared].setting;
+        setting.languageList = [NSMutableArray new];
+        
+        for (NSDictionary *dict in languageList) {
+            SettingLanguageModel *language = [[SettingLanguageModel alloc] initWithDictionary:dict error:nil];
+            [setting.languageList addObject:language];
+        }
+        [ShareManager shared].setting = setting;
+        NSString *json = [setting toJSONString];
+        [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        success(nil);
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        ErrorModel *errModel = [[ErrorModel alloc] initWithString:operation.responseString error:nil];
+        failure(errModel.detail);
+    }];
+}
+
+- (void)getCSVLanguage:(void (^)(NSString *response))success failure:(void (^)(id failure))failure {
+    NSString *url = @"https://dmc.teraoka.com.sg/mobile_translation/selforder-english.csv";
+    AFHTTPRequestOperationManager *manager    = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        success(operation.responseString);
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        failure(nil);
     }];
 }
 

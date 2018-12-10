@@ -2,12 +2,12 @@
 //  SplashController.h
 //  Teraoka
 //
-//  Created by Thuan on 12/14/17.
-//  Copyright © 2017 ss. All rights reserved.
+//  Created by Thuan on 12/7/18.
+//  Copyright © 2018 ss. All rights reserved.
 //
 
 #import "BaseController.h"
 
 @interface SplashController : BaseController
-- (void)showCategoriesScreen;
+
 @end

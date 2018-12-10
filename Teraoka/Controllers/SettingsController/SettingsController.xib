@@ -134,12 +134,15 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="185" height="50"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="20"/>
                                                     <state key="normal" title="Fetch Languages"/>
+                                                    <connections>
+                                                        <action selector="fetchLanguageAction:" destination="-1" eventType="touchUpInside" id="xWY-ub-jxN"/>
+                                                    </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3I-Fh-Gtc">
                                                     <rect key="frame" x="195" y="0.0" width="185" height="50"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3oB-ZF-GWn">
-                                                            <rect key="frame" x="20" y="13.5" width="91.5" height="24"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3oB-ZF-GWn">
+                                                            <rect key="frame" x="20" y="13.5" width="125" height="24"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="20"/>
                                                             <color key="textColor" red="0.76470588235294112" green="0.76470588235294112" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -162,6 +165,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="oC0-jR-iix" secondAttribute="trailing" id="26E-Ug-aLe"/>
                                                         <constraint firstAttribute="trailing" secondItem="A7b-hC-dxF" secondAttribute="trailing" constant="20" id="EUg-Rn-L1x"/>
+                                                        <constraint firstItem="A7b-hC-dxF" firstAttribute="leading" secondItem="3oB-ZF-GWn" secondAttribute="trailing" constant="5" id="KS8-KF-ul5"/>
                                                         <constraint firstItem="A7b-hC-dxF" firstAttribute="centerY" secondItem="A3I-Fh-Gtc" secondAttribute="centerY" id="fTR-fn-pnj"/>
                                                         <constraint firstItem="oC0-jR-iix" firstAttribute="leading" secondItem="A3I-Fh-Gtc" secondAttribute="leading" id="hHX-Xr-UtP"/>
                                                         <constraint firstItem="oC0-jR-iix" firstAttribute="top" secondItem="A3I-Fh-Gtc" secondAttribute="top" id="j3w-df-QAa"/>

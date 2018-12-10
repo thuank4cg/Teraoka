@@ -1,103 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad12_9" orientation="landscape">
-        <adaptation id="fullscreen"/>
-    </device>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="SF-UI-Display-Bold.otf">
-            <string>SFUIDisplay-Bold</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashController">
             <connections>
-                <outlet property="lbTitle" destination="2jA-m8-6sg" id="rgf-AZ-ruA"/>
-                <outlet property="settingBtn" destination="jg4-uo-yzv" id="fvo-0g-7c6"/>
-                <outlet property="startOrderBtn" destination="PF0-OK-UUy" id="Byz-HP-wOO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_home" translatesAutoresizingMaskIntoConstraints="NO" id="JTs-1L-oAt">
-                    <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
-                </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajK-YP-84g">
-                    <rect key="frame" x="507.5" y="398" width="352" height="248.5"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DELIOUS SELF ORDER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jA-m8-6sg">
-                            <rect key="frame" x="12.5" y="0.0" width="327" height="38.5"/>
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="32"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PF0-OK-UUy">
-                            <rect key="frame" x="0.0" y="88.5" width="352" height="70"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="70" id="F9c-fb-gWR"/>
-                                <constraint firstAttribute="width" secondItem="PF0-OK-UUy" secondAttribute="height" multiplier="988:196" id="bqt-V7-ecu"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
-                            <inset key="titleEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="START ORDER" backgroundImage="start_order_btn">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="startOrderAction:" destination="-1" eventType="touchUpInside" id="F9s-K4-nDA"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jg4-uo-yzv">
-                            <rect key="frame" x="0.0" y="178.5" width="352" height="70"/>
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
-                            <inset key="titleEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="SETTINGS" backgroundImage="goto_setting_btn">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="settingAction:" destination="-1" eventType="touchUpInside" id="RUp-bD-3bO"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="jg4-uo-yzv" firstAttribute="leading" secondItem="PF0-OK-UUy" secondAttribute="leading" id="8wL-vP-hin"/>
-                        <constraint firstItem="jg4-uo-yzv" firstAttribute="top" secondItem="PF0-OK-UUy" secondAttribute="bottom" constant="20" id="Ke9-Rm-LrZ"/>
-                        <constraint firstItem="2jA-m8-6sg" firstAttribute="top" secondItem="ajK-YP-84g" secondAttribute="top" id="NUp-FG-rw4"/>
-                        <constraint firstItem="jg4-uo-yzv" firstAttribute="width" secondItem="PF0-OK-UUy" secondAttribute="width" id="No0-TK-eOb"/>
-                        <constraint firstAttribute="bottom" secondItem="jg4-uo-yzv" secondAttribute="bottom" id="Q19-Sc-dc9"/>
-                        <constraint firstItem="PF0-OK-UUy" firstAttribute="leading" secondItem="ajK-YP-84g" secondAttribute="leading" id="ZLA-tZ-daO"/>
-                        <constraint firstAttribute="trailing" secondItem="PF0-OK-UUy" secondAttribute="trailing" id="gyr-1c-Rdl"/>
-                        <constraint firstItem="jg4-uo-yzv" firstAttribute="height" secondItem="PF0-OK-UUy" secondAttribute="height" id="mEP-00-bKB"/>
-                        <constraint firstItem="PF0-OK-UUy" firstAttribute="top" secondItem="2jA-m8-6sg" secondAttribute="bottom" constant="50" id="qbt-SS-Ihx"/>
-                        <constraint firstItem="2jA-m8-6sg" firstAttribute="centerX" secondItem="ajK-YP-84g" secondAttribute="centerX" id="vo2-mM-azd"/>
-                    </constraints>
-                </view>
-            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstItem="JTs-1L-oAt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8jv-tU-Vhe"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="JTs-1L-oAt" secondAttribute="trailing" id="J1l-5X-euM"/>
-                <constraint firstItem="ajK-YP-84g" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="Q1g-ed-STr"/>
-                <constraint firstItem="ajK-YP-84g" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="RFf-Bu-9SB"/>
-                <constraint firstAttribute="bottom" secondItem="JTs-1L-oAt" secondAttribute="bottom" id="a68-7J-4zo"/>
-                <constraint firstItem="JTs-1L-oAt" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="gHf-2b-wOe"/>
-            </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>
     </objects>
-    <resources>
-        <image name="bg_home" width="1024" height="768"/>
-        <image name="goto_setting_btn" width="988" height="196"/>
-        <image name="start_order_btn" width="988" height="196"/>
-    </resources>
 </document>

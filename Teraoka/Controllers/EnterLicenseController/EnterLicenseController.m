@@ -7,7 +7,7 @@
 //
 
 #import "EnterLicenseController.h"
-#import "SplashController.h"
+#import "DeliousSelfOrderController.h"
 #import "APIManager.h"
 #import "Util.h"
 #import <ProgressHUD.h>
@@ -37,8 +37,7 @@
 
 - (IBAction)submitAction:(id)sender {
     if (self.tfLicenseKey.text.length == 0) {
-//        [Util showAlert:@"Please enter license key." vc:self];
-        [self showSplashScreen];
+        [Util showAlert:@"Please enter license key." vc:self];
         return;
     }
     
@@ -50,7 +49,7 @@
     [params setObject:[NSNumber numberWithInt:3] forKey:@"appid"];
 //    [params setObject:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"uid"];
     
-    [[APIManager shared] postRequestSuccess:params success:^(id response) {
+    [[APIManager shared] tokenVerify:params success:^(id response) {
         [ProgressHUD dismiss];
         
         [[NSUserDefaults standardUserDefaults] setObject:self.tfLicenseKey.text forKey:KEY_LICENSE_VALID];
@@ -64,7 +63,7 @@
 }
 
 - (void)showSplashScreen {
-    SplashController *vc = [[SplashController alloc] initWithNibName:@"SplashController" bundle:nil];
+    DeliousSelfOrderController *vc = [[DeliousSelfOrderController alloc] initWithNibName:@"DeliousSelfOrderController" bundle:nil];
     [self presentViewController:vc animated:YES completion:nil];
 }
 

@@ -231,7 +231,7 @@
     
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
-    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]) {
         [self sendPOSRequest:GetBillHeader];
     } else {
         NSData *replyData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
@@ -281,7 +281,7 @@
     
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
-    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]) {
         [self showOrderConfirmScreen];
     } else {
         NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
@@ -295,7 +295,7 @@
     
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
-    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]) {
         location = location + REPLY_STATUS + REPLY_DATA_SIZE;
         
         /**XInventoryData**/
@@ -359,7 +359,7 @@
     
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
-    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]) {
         NSLog(@"Ok");
     } else {
         NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
@@ -373,7 +373,7 @@
     
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
-    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]) {
         NSLog(@"Ok");
     } else {
         NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
@@ -395,7 +395,7 @@
     
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
-    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]) {
         location = location + REPLY_STATUS + REPLY_DATA_SIZE;
         
         /**XBillIdData**/

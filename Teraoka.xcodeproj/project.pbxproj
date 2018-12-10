@@ -45,6 +45,10 @@
 		73203825215C7A0A00747F37 /* serving_group_header.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73203823215C7A0A00747F37 /* serving_group_header.txt */; };
 		73203826215C7A0A00747F37 /* serving_timing.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73203824215C7A0A00747F37 /* serving_timing.txt */; };
 		73203828215C7A1A00747F37 /* option_set.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73203827215C7A1A00747F37 /* option_set.txt */; };
+		732BE9B621BA696400872990 /* SplashController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732BE9B421BA696400872990 /* SplashController.m */; };
+		732BE9B721BA696400872990 /* SplashController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 732BE9B521BA696400872990 /* SplashController.xib */; };
+		732BE9BD21BA6C5A00872990 /* DeliousSelfOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732BE9B921BA6C5900872990 /* DeliousSelfOrderController.m */; };
+		732BE9BE21BA6C5A00872990 /* DeliousSelfOrderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 732BE9BC21BA6C5900872990 /* DeliousSelfOrderController.xib */; };
 		7331E2982191531D007A69AF /* table_no.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7331E2972191531D007A69AF /* table_no.txt */; };
 		733675481FE25F2200F0AFF8 /* 4001.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675281FE25F2200F0AFF8 /* 4001.png */; };
 		733675491FE25F2200F0AFF8 /* 3008.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675291FE25F2200F0AFF8 /* 3008.png */; };
@@ -149,8 +153,7 @@
 		739853531FBC38B30024E87C /* CategoryCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 739853511FBC38B30024E87C /* CategoryCollectionCell.xib */; };
 		739853571FBC3AF50024E87C /* CategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 739853561FBC3AF50024E87C /* CategoryView.m */; };
 		739853591FBC3AFE0024E87C /* CategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 739853581FBC3AFE0024E87C /* CategoryView.xib */; };
-		73A660711FE264B000FB80B8 /* SplashController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A6606F1FE264B000FB80B8 /* SplashController.m */; };
-		73A660721FE264B000FB80B8 /* SplashController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A660701FE264B000FB80B8 /* SplashController.xib */; };
+		739D1A5921BA51F700DA5CF5 /* SettingLanguageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 739D1A5821BA51F700DA5CF5 /* SettingLanguageModel.m */; };
 		73C1E02B1FBC25F5005D6DE1 /* SF-UI-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C1E0291FBC25F5005D6DE1 /* SF-UI-Display-Bold.otf */; };
 		73C1E02C1FBC25F5005D6DE1 /* SF-UI-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C1E02A1FBC25F5005D6DE1 /* SF-UI-Display-Regular.otf */; };
 		73CE5CC6215CCE2600CDCD15 /* OptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CE5CC5215CCE2600CDCD15 /* OptionModel.m */; };
@@ -217,6 +220,12 @@
 		73203824215C7A0A00747F37 /* serving_timing.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = serving_timing.txt; sourceTree = "<group>"; };
 		73203827215C7A1A00747F37 /* option_set.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = option_set.txt; sourceTree = "<group>"; };
 		732679A51FB2E3D80071405F /* APPConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APPConstants.h; sourceTree = "<group>"; };
+		732BE9B321BA696400872990 /* SplashController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplashController.h; sourceTree = "<group>"; };
+		732BE9B421BA696400872990 /* SplashController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplashController.m; sourceTree = "<group>"; };
+		732BE9B521BA696400872990 /* SplashController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashController.xib; sourceTree = "<group>"; };
+		732BE9B921BA6C5900872990 /* DeliousSelfOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliousSelfOrderController.m; sourceTree = "<group>"; };
+		732BE9BB21BA6C5900872990 /* DeliousSelfOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliousSelfOrderController.h; sourceTree = "<group>"; };
+		732BE9BC21BA6C5900872990 /* DeliousSelfOrderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliousSelfOrderController.xib; sourceTree = "<group>"; };
 		7331E2972191531D007A69AF /* table_no.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = table_no.txt; sourceTree = "<group>"; };
 		733675281FE25F2200F0AFF8 /* 4001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4001.png; sourceTree = "<group>"; };
 		733675291FE25F2200F0AFF8 /* 3008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3008.png; sourceTree = "<group>"; };
@@ -367,9 +376,8 @@
 		739853551FBC3AF50024E87C /* CategoryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryView.h; sourceTree = "<group>"; };
 		739853561FBC3AF50024E87C /* CategoryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryView.m; sourceTree = "<group>"; };
 		739853581FBC3AFE0024E87C /* CategoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryView.xib; sourceTree = "<group>"; };
-		73A6606E1FE264B000FB80B8 /* SplashController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplashController.h; sourceTree = "<group>"; };
-		73A6606F1FE264B000FB80B8 /* SplashController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplashController.m; sourceTree = "<group>"; };
-		73A660701FE264B000FB80B8 /* SplashController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashController.xib; sourceTree = "<group>"; };
+		739D1A5721BA51F700DA5CF5 /* SettingLanguageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingLanguageModel.h; sourceTree = "<group>"; };
+		739D1A5821BA51F700DA5CF5 /* SettingLanguageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingLanguageModel.m; sourceTree = "<group>"; };
 		73C1E0291FBC25F5005D6DE1 /* SF-UI-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Bold.otf"; sourceTree = "<group>"; };
 		73C1E02A1FBC25F5005D6DE1 /* SF-UI-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Regular.otf"; sourceTree = "<group>"; };
 		73CE5CC4215CCE2600CDCD15 /* OptionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionModel.h; sourceTree = "<group>"; };
@@ -493,13 +501,14 @@
 		730FE0CF1F95A2120045A234 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				732BE9B221BA695900872990 /* SplashController */,
+				732BE9B821BA6C5900872990 /* DeliousSelfOrderController */,
 				7369AD6B2158E87700210EC9 /* EnterLicenseController */,
 				7369AD652158C5CD00210EC9 /* StartOrderController */,
 				7336D848214F5249004908E0 /* WaiterController */,
 				7386F1D6212E4EED001DAC8D /* OutOfStockController */,
 				73840E96212C0A3800904454 /* EnterPassAccessSetting */,
 				737B4895212AA00300B02B3D /* SettingsController */,
-				73A6606D1FE2649F00FB80B8 /* SplashController */,
 				7357EEB31F975A60001EB56B /* BillCompleteController */,
 				7357EE9B1F974BDC001EB56B /* ViewExistingOrderController */,
 				7357EE951F974AFD001EB56B /* OrderConfirmController */,
@@ -728,6 +737,27 @@
 				7316B559216F2F780061DE24 /* ErrorModel.m */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		732BE9B221BA695900872990 /* SplashController */ = {
+			isa = PBXGroup;
+			children = (
+				732BE9B321BA696400872990 /* SplashController.h */,
+				732BE9B421BA696400872990 /* SplashController.m */,
+				732BE9B521BA696400872990 /* SplashController.xib */,
+			);
+			path = SplashController;
+			sourceTree = "<group>";
+		};
+		732BE9B821BA6C5900872990 /* DeliousSelfOrderController */ = {
+			isa = PBXGroup;
+			children = (
+				732BE9BB21BA6C5900872990 /* DeliousSelfOrderController.h */,
+				732BE9B921BA6C5900872990 /* DeliousSelfOrderController.m */,
+				732BE9BC21BA6C5900872990 /* DeliousSelfOrderController.xib */,
+			);
+			name = DeliousSelfOrderController;
+			path = ../../../../DeliousSelfOrderController;
 			sourceTree = "<group>";
 		};
 		733675271FE25F2200F0AFF8 /* ImagesForProduct */ = {
@@ -960,6 +990,8 @@
 			children = (
 				736095F321462CD0001EBAB7 /* LanguageModel.h */,
 				736095F421462CD0001EBAB7 /* LanguageModel.m */,
+				739D1A5721BA51F700DA5CF5 /* SettingLanguageModel.h */,
+				739D1A5821BA51F700DA5CF5 /* SettingLanguageModel.m */,
 			);
 			path = Language;
 			sourceTree = "<group>";
@@ -1107,16 +1139,6 @@
 			path = CategoryView;
 			sourceTree = "<group>";
 		};
-		73A6606D1FE2649F00FB80B8 /* SplashController */ = {
-			isa = PBXGroup;
-			children = (
-				73A6606E1FE264B000FB80B8 /* SplashController.h */,
-				73A6606F1FE264B000FB80B8 /* SplashController.m */,
-				73A660701FE264B000FB80B8 /* SplashController.xib */,
-			);
-			path = SplashController;
-			sourceTree = "<group>";
-		};
 		73CE5CC3215CCDF700CDCD15 /* Option */ = {
 			isa = PBXGroup;
 			children = (
@@ -1220,7 +1242,6 @@
 				7357EE6E1F96F9F3001EB56B /* OptionTableCell.xib in Resources */,
 				730FE10E1F95EBAF0045A234 /* CategoryCell.xib in Resources */,
 				733675501FE25F2200F0AFF8 /* 4005.png in Resources */,
-				73A660721FE264B000FB80B8 /* SplashController.xib in Resources */,
 				7301E3B121ABDA3E00389733 /* plu.txt in Resources */,
 				733675571FE25F2200F0AFF8 /* 2007.png in Resources */,
 				7336755D1FE25F2200F0AFF8 /* 3002.png in Resources */,
@@ -1269,11 +1290,13 @@
 				739853591FBC3AFE0024E87C /* CategoryView.xib in Resources */,
 				7336755A1FE25F2200F0AFF8 /* 4008.png in Resources */,
 				7357EE911F973EE1001EB56B /* OrderSummaryFooter.xib in Resources */,
+				732BE9B721BA696400872990 /* SplashController.xib in Resources */,
 				733675521FE25F2200F0AFF8 /* 2002.png in Resources */,
 				730FE0FF1F95B18B0045A234 /* HomeController.xib in Resources */,
 				7386F1DB212E4F36001DAC8D /* OutOfStockController.xib in Resources */,
 				736095F12146286F001EBAB7 /* english.csv in Resources */,
 				7336755F1FE25F2200F0AFF8 /* 1006.png in Resources */,
+				732BE9BE21BA6C5A00872990 /* DeliousSelfOrderController.xib in Resources */,
 				733675621FE25F2200F0AFF8 /* 1002.png in Resources */,
 				7320381C215C797A00747F37 /* comment_group_header.txt in Resources */,
 				730FE0F41F95AB950045A234 /* EnterTableController.xib in Resources */,
@@ -1357,8 +1380,8 @@
 				7386F1DA212E4F36001DAC8D /* OutOfStockController.m in Sources */,
 				730FE11A1F96032F0045A234 /* NewOrderController.m in Sources */,
 				7336D84C214F527A004908E0 /* WaiterController.m in Sources */,
-				73A660711FE264B000FB80B8 /* SplashController.m in Sources */,
 				730FE0E51F95A6B40045A234 /* UIColor+HexString.m in Sources */,
+				732BE9B621BA696400872990 /* SplashController.m in Sources */,
 				73387D89215E1D9600BE023B /* CommentSetModel.m in Sources */,
 				7309BBE11FB4077800790808 /* Util.m in Sources */,
 				730FE0E61F95A6B40045A234 /* UIView+Nib.m in Sources */,
@@ -1394,6 +1417,7 @@
 				73840E9F212C18AF00904454 /* SettingModel.m in Sources */,
 				73387D76215DC52400BE023B /* OptionSetModel.m in Sources */,
 				730FE10D1F95EBAF0045A234 /* CategoryCell.m in Sources */,
+				739D1A5921BA51F700DA5CF5 /* SettingLanguageModel.m in Sources */,
 				73387D83215E157500BE023B /* ServingGroupHeaderModel.m in Sources */,
 				7316B55A216F2F780061DE24 /* ErrorModel.m in Sources */,
 				730FE1041F95E8960045A234 /* CategoriesController.m in Sources */,
@@ -1410,6 +1434,7 @@
 				73504DC521410C8C003C7ADE /* OutOfStockModel.m in Sources */,
 				730FE0EA1F95A7A80045A234 /* ButtonCustom.m in Sources */,
 				73E4DD061FFF151F00BBD349 /* Reachability.m in Sources */,
+				732BE9BD21BA6C5A00872990 /* DeliousSelfOrderController.m in Sources */,
 				7357EE8A1F9737C2001EB56B /* OrderSummaryCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

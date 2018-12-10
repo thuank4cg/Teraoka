@@ -31,7 +31,7 @@
 #import "LocalizeHelper.h"
 #import "NSString+KeyLanguage.h"
 #import "WaiterController.h"
-#import "SplashController.h"
+#import "DeliousSelfOrderController.h"
 
 #define KEY_PADDING_BOTTOM_CELL 65
 #define CELL_SPACE 15
@@ -497,7 +497,7 @@
     enterPassSettingVC = nil;
 //    SettingsController *vc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
 //    [self presentViewController:vc animated:YES completion:nil];
-    SplashController *rootVC = [[SplashController alloc] initWithNibName:@"SplashController" bundle:nil];
+    DeliousSelfOrderController *rootVC = [[DeliousSelfOrderController alloc] initWithNibName:@"DeliousSelfOrderController" bundle:nil];
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:rootVC];
     [navc setNavigationBarHidden:YES];
     appDelegate.window.rootViewController = navc;

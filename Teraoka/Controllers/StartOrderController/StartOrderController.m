@@ -46,7 +46,7 @@
     
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
-    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]) {
         location = location + REPLY_STATUS + REPLY_DATA_SIZE;
         
         /**XBillIdData**/
@@ -58,7 +58,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         SettingModel *setting = [ShareManager shared].setting;
-        setting.tableNo = [self.tfTableNo.text intValue];
+        setting.tableNo = [setting getTableNo:self.tfTableNo.text];
         
         [ShareManager shared].setting = setting;
         
@@ -88,13 +88,13 @@
         
     }
     
-    if (self.tfTableNo.text.length == 0 || [self.tfTableNo.text isEqualToString:@"0"]) {
+    if (self.tfTableNo.text.length == 0) {
         [Util showAlert:@"Please select table first." vc:self];
         return;
     }
     
-//    [self sendPOSRequest:SendSeated];
-    [self.delegate showCategoriesScreen];
+    [self sendPOSRequest:SendSeated];
+//    [self.delegate showCategoriesScreen];
 }
 
 //- (IBAction)selectModeAction:(id)sender {
@@ -177,7 +177,7 @@
     NSMutableArray *items = [NSMutableArray new];
 
     for (NSManagedObject *table in tableArr) {
-        [items addObject:[table valueForKey:@"table_no"]];
+        [items addObject:[NSString stringWithFormat:@"%@ - %@", [table valueForKey:@"table_no"], [table valueForKey:@"table_name"]]];
     }
     
     UIViewController *controller = [[UIViewController alloc] init];

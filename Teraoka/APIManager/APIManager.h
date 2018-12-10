@@ -11,6 +11,8 @@
 @interface APIManager : NSObject
 
 + (APIManager*)shared;
-- (void)postRequestSuccess:(NSDictionary *)params success:(void(^)(id response))success failure:(void(^)(id failure))failure;
+- (void)tokenVerify:(NSDictionary *)params success:(void(^)(id response))success failure:(void(^)(id failure))failure;
+- (void)getLanguageList:(NSDictionary *)params success:(void(^)(id response))success failure:(void(^)(id failure))failure;
+- (void)getCSVLanguage:(void (^)(NSString *response))success failure:(void (^)(id failure))failure;
 
 @end

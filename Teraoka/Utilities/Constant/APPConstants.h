@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #define appDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
+#define ROOT_API_URL @"http://dmc.teraoka.com.sg:8081/"
+
 //#define HOST_NAME @"192.168.1.100"
 #define PORT 9088
 #define USERNAME @"root"
@@ -24,7 +26,7 @@
 
 #define KEY_SAVED_DATA @"IS_SAVED_DATA"
 #define KEY_SAVED_SETTING @"IS_SAVED_SETTING"
-#define KEY_CURRENT_LANGUAGE @"KEY_CURRENT_LANGUAGE"
+#define KEY_CURRENT_CONTENT_LANGUAGE @"KEY_CURRENT_CONTENT_LANGUAGE"
 #define KEY_LICENSE_VALID @"KEY_LICENSE_VALID"
 #define KEY_SAVED_BILL_NO @"KEY_SAVED_BILL_NO"
 
@@ -123,11 +125,5 @@
 
 //Unknown
 #define ERROR_ID_NO_UNKNOW_ERROR @"6363"
-
-//language
-#define KEY_LANG_EN @"English"
-#define KEY_LANG_CH @"Chinese"
-
-#define KEY_LANGUAGE_ARR @[@"English", @"Chinese"]
 
 #endif /* APPConstants_h */

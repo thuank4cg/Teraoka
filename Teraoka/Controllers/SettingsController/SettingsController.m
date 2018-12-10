@@ -21,6 +21,9 @@
 #import "UIColor+HexString.h"
 #import "TableSelectionView.h"
 #import <View+MASAdditions.h>
+#import <ProgressHUD.h>
+#import "APIManager.h"
+#import "SettingLanguageModel.h"
 
 @interface SettingsController () <UITextFieldDelegate, TableSelectionViewDelegate>
 @property (weak, nonatomic) IBOutlet CommonTextfield *tfIPAddress;
@@ -77,7 +80,6 @@
     self.lbRequestForBill.text = @"SC12_051".localizedString;
     
     [self.fetchLanguageBtn setTitle:@"SC12_053".localizedString forState:UIControlStateNormal];
-    self.languageValueLb.text = @"SC12_054".localizedString;
     self.tfNewPassword.placeholder = @"SC12_055".localizedString;
     self.tfConfirmPassword.placeholder = @"SC12_056".localizedString;
     [self.quickServeBtn setTitle:@"SC12_057".localizedString forState:UIControlStateNormal];
@@ -95,6 +97,10 @@
 
 - (IBAction)backAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)fetchLanguageAction:(id)sender {
+    [self getLanguageList];
 }
 
 - (IBAction)selectModeAction:(id)sender {
@@ -160,18 +166,29 @@
 }
 
 - (IBAction)selectLanguageAction:(id)sender {
-    NSArray *items = KEY_LANGUAGE_ARR;
+    NSMutableArray *items = [NSMutableArray new];
+    for (SettingLanguageModel *language in [ShareManager shared].setting.languageList) {
+        [items addObject:language.name];
+    }
     
+    __weak __typeof(self)weakSelf = self;
     [ActionSheetStringPicker showPickerWithTitle:@"Select Language"
                                             rows:items
                                 initialSelection:0
                                      doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                                         [[NSUserDefaults standardUserDefaults] setObject:items[selectedIndex] forKey:KEY_CURRENT_LANGUAGE];
+                                         if (items.count == 0) return;
+                                         
+                                         SettingModel *setting = [ShareManager shared].setting;
+                                         setting.language = [setting.languageList objectAtIndex:selectedIndex];
+                                         [ShareManager shared].setting = setting;
+                                         
+                                         NSString *json = [setting toJSONString];
+                                         [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
                                          [[NSUserDefaults standardUserDefaults] synchronize];
                                          
-                                         [Util setLanguage:items[0]];
+                                         weakSelf.languageValueLb.text = items[selectedIndex];
                                          
-                                         self.languageValueLb.text = items[0];
+                                         [weakSelf getCSVContent];
                                      }
                                      cancelBlock:^(ActionSheetStringPicker *picker) {
                                          
@@ -198,7 +215,7 @@
 //            return;
 //        }
         
-        if (self.tfTableNo.text.length == 0 || [self.tfTableNo.text isEqualToString:@"0"]) {
+        if (self.tfTableNo.text.length == 0) {
             [Util showAlert:@"Please select table" vc:self];
             return;
         }
@@ -209,7 +226,8 @@
     setting.password = self.tfNewPassword.text;
     setting.selectMode = selectModeValue;
     setting.tableSelection = tableSelectionValue;
-    setting.tableNo = [self.tfTableNo.text intValue];
+    setting.tableNo = [setting getTableNo:self.tfTableNo.text];
+    setting.tableName = [setting getTableName:self.tfTableNo.text];
     setting.abilityRequestForAssistance = self.requestForAssistanceView.isOn;
     setting.abilityRequestForBill = self.requestForBillView.isOn;
     
@@ -298,9 +316,16 @@
             break;
     }
     
-    if (setting.tableNo > 0) self.tfTableNo.text = [NSString stringWithFormat:@"%d", setting.tableNo];
+    if (setting.tableNo > 0) {
+        self.tfTableNo.text = [NSString stringWithFormat:@"%d - %@", setting.tableNo, setting.tableName];
+    }
     [self.requestForAssistanceView setOn:setting.abilityRequestForAssistance];
     [self.requestForBillView setOn:setting.abilityRequestForBill];
+    
+    self.languageValueLb.text = @"SC12_054".localizedString;
+    if (setting.language) {
+        self.languageValueLb.text = setting.language.name;
+    }
 }
 
 - (void)hiddenTableNo:(BOOL)isHidden {
@@ -324,16 +349,16 @@
 }
 
 - (void)getCurrentLanguage {
-    NSArray *items = KEY_LANGUAGE_ARR;
-    
-    NSString *lang = KEY_LANG_EN;
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_CURRENT_LANGUAGE]) {
-        lang = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_CURRENT_LANGUAGE];
-    }
-    
-    int index = (int)[items indexOfObject:lang];
-    
-    self.languageValueLb.text = items[index];
+//    NSArray *items = KEY_LANGUAGE_ARR;
+//
+//    NSString *lang = KEY_LANG_EN;
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_CURRENT_LANGUAGE]) {
+//        lang = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_CURRENT_LANGUAGE];
+//    }
+//
+//    int index = (int)[items indexOfObject:lang];
+//
+//    self.languageValueLb.text = items[index];
 }
 
 - (void)showTableNoList {
@@ -344,7 +369,7 @@
     NSMutableArray *items = [NSMutableArray new];
     
     for (NSManagedObject *table in tableArr) {
-        [items addObject:[table valueForKey:@"table_no"]];
+        [items addObject:[NSString stringWithFormat:@"%@ - %@", [table valueForKey:@"table_no"], [table valueForKey:@"table_name"]]];
     }
     
     UIViewController *controller = [[UIViewController alloc] init];
@@ -375,6 +400,39 @@
     popPresenter.sourceRect = self.tfTableNo.bounds;
     
     [self presentViewController:alertController animated:YES completion:^{}];
+}
+
+- (void)getLanguageList {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:@"languagelist" forKey:@"action"];
+    [params setObject:[NSNumber numberWithInt:3] forKey:@"appid"];
+    
+    NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
+    NSString *version = infoDictionary[@"CFBundleShortVersionString"];
+    NSString *build = infoDictionary[(NSString*)kCFBundleVersionKey];
+    [params setObject:[NSString stringWithFormat:@"%@(%@)", version, build] forKey:@"versionno"];
+    
+    [ProgressHUD show:nil Interaction:NO];
+    [[APIManager shared] getLanguageList:params success:^(id response) {
+        [ProgressHUD dismiss];
+    } failure:^(id failure) {
+        [Util showAlert:failure vc:self];
+        [ProgressHUD dismiss];
+    }];
+}
+
+- (void)getCSVContent {
+    __weak __typeof(self)weakSelf = self;
+    [ProgressHUD show:nil Interaction:NO];
+    [[APIManager shared] getCSVLanguage:^(NSString *content) {
+        [ProgressHUD dismiss];
+        [Util setLanguage:content];
+        [weakSelf loadLocalizable];
+        [[NSUserDefaults standardUserDefaults] setObject:content forKey:KEY_CURRENT_CONTENT_LANGUAGE];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } failure:^(id response) {
+        [ProgressHUD dismiss];
+    }];
 }
 
 //MARK: TableSelectionViewDelegate

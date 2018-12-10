@@ -88,6 +88,7 @@
         case GetBillDetails:
             commandId = @"10602";
             requestData = [self requestGetBillDetailsData];
+            break;
             
         case GetBillHeader:
             commandId = @"10600";
@@ -162,7 +163,11 @@
     
     /**XBillIdData**/
     
-    [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Bill No
+    NSString *billNo = @"0";
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_BILL_NO]) {
+        billNo = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_SAVED_BILL_NO];
+    }
+    [mCollectData appendData:[self convertStringToBytesArr:billNo length:4]]; //Bill No
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Primary Server Version
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Backup Server Version
     

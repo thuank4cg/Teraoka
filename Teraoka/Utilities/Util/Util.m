@@ -64,9 +64,9 @@
     return iValue;
 }
 
-+ (void)setLanguage:(NSString *)fileName {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName.lowercaseString ofType:@"csv"];
-    NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
++ (void)setLanguage:(NSString *)content {
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName.lowercaseString ofType:@"csv"];
+//    NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     NSArray *rows = [content componentsSeparatedByString:@"\n"];
     
     NSMutableArray *languages = [NSMutableArray new];

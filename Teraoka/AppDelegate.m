@@ -8,15 +8,14 @@
 
 #import "AppDelegate.h"
 #import "CategoriesController.h"
-#import "SplashController.h"
 #import "APPConstants.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "LocalizeHelper.h"
 #import "ShareManager.h"
 #import "Util.h"
-#import "EnterLicenseController.h"
 #import <IQKeyboardManager.h>
+#import "SplashController.h"
 
 @interface AppDelegate ()
 
@@ -30,27 +29,11 @@
     
     [Fabric with:@[[Crashlytics class]]];
     
-    NSString *lang = KEY_LANG_EN;
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_CURRENT_LANGUAGE]) {
-        lang = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_CURRENT_LANGUAGE];
-    }
-    
-    [Util setLanguage:lang];
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    UIViewController *rootVC;
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_LICENSE_VALID]) {
-        rootVC = [[SplashController alloc] initWithNibName:@"SplashController" bundle:nil];
-    } else {
-        rootVC = [[EnterLicenseController alloc] initWithNibName:@"EnterLicenseController" bundle:nil];
-    }
-    
-    if (rootVC) {
-        self.window.rootViewController = rootVC;
-        [self.window makeKeyAndVisible];
-    }
+    SplashController *rootVC = [[SplashController alloc] initWithNibName:@"SplashController" bundle:nil];
+    self.window.rootViewController = rootVC;
+    [self.window makeKeyAndVisible];
     
     [IQKeyboardManager sharedManager].enable = YES;
     

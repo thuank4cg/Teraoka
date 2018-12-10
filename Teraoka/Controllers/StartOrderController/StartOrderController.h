@@ -7,8 +7,8 @@
 //
 
 #import "BaseController.h"
-#import "SplashController.h"
+#import "DeliousSelfOrderController.h"
 
 @interface StartOrderController : BaseController
-@property (nonatomic, weak) SplashController *delegate;
+@property (nonatomic, weak) DeliousSelfOrderController *delegate;
 @end

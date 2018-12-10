@@ -56,7 +56,7 @@
     
     NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
     NSString *httpResponse = [Util hexadecimalString:replyStatus];
-    if ([httpResponse isEqualToString:STATUS_REPLY_OK]){
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]) {
         location = location + REPLY_STATUS + REPLY_DATA_SIZE;
         location += 12;//XBillIdData
         location += 2;//Terminal No
@@ -80,7 +80,7 @@
             NSData *pluNoData = [billItemDetailData subdataWithRange:NSMakeRange(itemDetailLength, 4)];//PLU No
             itemDetailLength += 4;
             
-            NSData *qtyData = [billItemDetailData subdataWithRange:NSMakeRange(itemDetailLength, 4)];//Qty
+            NSData *qtyData = [billItemDetailData subdataWithRange:NSMakeRange(itemDetailLength, 2)];//Qty
             itemDetailLength += 2;
             
             itemDetailLength += 4;//Unit Price
@@ -94,7 +94,7 @@
             itemDetailLength += 4;//Delivered Time
             itemDetailLength += 2;//Item preparation status
             
-            NSData *servedQtyData = [billItemDetailData subdataWithRange:NSMakeRange(itemDetailLength, 4)];//Served Qty
+            NSData *servedQtyData = [billItemDetailData subdataWithRange:NSMakeRange(itemDetailLength, 2)];//Served Qty
             itemDetailLength += 2;
             
             itemDetailLength += 16;//XItemOptionData
