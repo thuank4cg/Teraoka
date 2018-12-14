@@ -1,5 +1,5 @@
 //
-//  SplashController.h
+//  DeliousSelfOrderController.h
 //  Teraoka
 //
 //  Created by Thuan on 12/14/17.

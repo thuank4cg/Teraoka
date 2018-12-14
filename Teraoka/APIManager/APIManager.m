@@ -67,7 +67,10 @@
 }
 
 - (void)getCSVLanguage:(void (^)(NSString *response))success failure:(void (^)(id failure))failure {
-    NSString *url = @"https://dmc.teraoka.com.sg/mobile_translation/selforder-english.csv";
+    NSString *url = [ShareManager shared].setting.language.url;
+    if ([url rangeOfString:@"http"].location == NSNotFound) {
+        url = [NSString stringWithFormat:@"https://%@", url];
+    }
     AFHTTPRequestOperationManager *manager    = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {

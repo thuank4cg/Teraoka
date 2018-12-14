@@ -55,14 +55,14 @@
         [[NSUserDefaults standardUserDefaults] setObject:self.tfLicenseKey.text forKey:KEY_LICENSE_VALID];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        [self showSplashScreen];
+        [self deliousSelfOrder];
     } failure:^(id failure) {
         [Util showAlert:failure vc:self];
         [ProgressHUD dismiss];
     }];
 }
 
-- (void)showSplashScreen {
+- (void)deliousSelfOrder {
     DeliousSelfOrderController *vc = [[DeliousSelfOrderController alloc] initWithNibName:@"DeliousSelfOrderController" bundle:nil];
     [self presentViewController:vc animated:YES completion:nil];
 }

@@ -47,8 +47,6 @@
 		73203828215C7A1A00747F37 /* option_set.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73203827215C7A1A00747F37 /* option_set.txt */; };
 		732BE9B621BA696400872990 /* SplashController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732BE9B421BA696400872990 /* SplashController.m */; };
 		732BE9B721BA696400872990 /* SplashController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 732BE9B521BA696400872990 /* SplashController.xib */; };
-		732BE9BD21BA6C5A00872990 /* DeliousSelfOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732BE9B921BA6C5900872990 /* DeliousSelfOrderController.m */; };
-		732BE9BE21BA6C5A00872990 /* DeliousSelfOrderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 732BE9BC21BA6C5900872990 /* DeliousSelfOrderController.xib */; };
 		7331E2982191531D007A69AF /* table_no.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7331E2972191531D007A69AF /* table_no.txt */; };
 		733675481FE25F2200F0AFF8 /* 4001.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675281FE25F2200F0AFF8 /* 4001.png */; };
 		733675491FE25F2200F0AFF8 /* 3008.png in Resources */ = {isa = PBXBuildFile; fileRef = 733675291FE25F2200F0AFF8 /* 3008.png */; };
@@ -160,6 +158,8 @@
 		73CE5CC9215CCF3A00CDCD15 /* OptionGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CE5CC8215CCF3A00CDCD15 /* OptionGroupModel.m */; };
 		73DC91BB1FE2BC6500AD86E6 /* ParamsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC91BA1FE2BC6500AD86E6 /* ParamsHelper.m */; };
 		73E4DD061FFF151F00BBD349 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E4DD051FFF151F00BBD349 /* Reachability.m */; };
+		796378A221C342630078815B /* DeliousSelfOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7963789F21C342620078815B /* DeliousSelfOrderController.m */; };
+		796378A321C342630078815B /* DeliousSelfOrderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796378A121C342620078815B /* DeliousSelfOrderController.xib */; };
 		F534B53E83D60C16002E3C90 /* libPods-Teraoka.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8826900F53921C0151A18A11 /* libPods-Teraoka.a */; };
 /* End PBXBuildFile section */
 
@@ -223,9 +223,6 @@
 		732BE9B321BA696400872990 /* SplashController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplashController.h; sourceTree = "<group>"; };
 		732BE9B421BA696400872990 /* SplashController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplashController.m; sourceTree = "<group>"; };
 		732BE9B521BA696400872990 /* SplashController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashController.xib; sourceTree = "<group>"; };
-		732BE9B921BA6C5900872990 /* DeliousSelfOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliousSelfOrderController.m; sourceTree = "<group>"; };
-		732BE9BB21BA6C5900872990 /* DeliousSelfOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliousSelfOrderController.h; sourceTree = "<group>"; };
-		732BE9BC21BA6C5900872990 /* DeliousSelfOrderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliousSelfOrderController.xib; sourceTree = "<group>"; };
 		7331E2972191531D007A69AF /* table_no.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = table_no.txt; sourceTree = "<group>"; };
 		733675281FE25F2200F0AFF8 /* 4001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4001.png; sourceTree = "<group>"; };
 		733675291FE25F2200F0AFF8 /* 3008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3008.png; sourceTree = "<group>"; };
@@ -388,6 +385,9 @@
 		73DC91BA1FE2BC6500AD86E6 /* ParamsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParamsHelper.m; sourceTree = "<group>"; };
 		73E4DD041FFF151E00BBD349 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		73E4DD051FFF151F00BBD349 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		7963789F21C342620078815B /* DeliousSelfOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliousSelfOrderController.m; sourceTree = "<group>"; };
+		796378A021C342620078815B /* DeliousSelfOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliousSelfOrderController.h; sourceTree = "<group>"; };
+		796378A121C342620078815B /* DeliousSelfOrderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliousSelfOrderController.xib; sourceTree = "<group>"; };
 		8826900F53921C0151A18A11 /* libPods-Teraoka.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Teraoka.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B4E1C4D574C9122D1A3D981 /* Pods-Teraoka.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teraoka.release.xcconfig"; path = "Pods/Target Support Files/Pods-Teraoka/Pods-Teraoka.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -501,8 +501,8 @@
 		730FE0CF1F95A2120045A234 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7963789E21C342620078815B /* DeliousSelfOrderController */,
 				732BE9B221BA695900872990 /* SplashController */,
-				732BE9B821BA6C5900872990 /* DeliousSelfOrderController */,
 				7369AD6B2158E87700210EC9 /* EnterLicenseController */,
 				7369AD652158C5CD00210EC9 /* StartOrderController */,
 				7336D848214F5249004908E0 /* WaiterController */,
@@ -747,17 +747,6 @@
 				732BE9B521BA696400872990 /* SplashController.xib */,
 			);
 			path = SplashController;
-			sourceTree = "<group>";
-		};
-		732BE9B821BA6C5900872990 /* DeliousSelfOrderController */ = {
-			isa = PBXGroup;
-			children = (
-				732BE9BB21BA6C5900872990 /* DeliousSelfOrderController.h */,
-				732BE9B921BA6C5900872990 /* DeliousSelfOrderController.m */,
-				732BE9BC21BA6C5900872990 /* DeliousSelfOrderController.xib */,
-			);
-			name = DeliousSelfOrderController;
-			path = ../../../../DeliousSelfOrderController;
 			sourceTree = "<group>";
 		};
 		733675271FE25F2200F0AFF8 /* ImagesForProduct */ = {
@@ -1154,6 +1143,16 @@
 			path = Option;
 			sourceTree = "<group>";
 		};
+		7963789E21C342620078815B /* DeliousSelfOrderController */ = {
+			isa = PBXGroup;
+			children = (
+				796378A021C342620078815B /* DeliousSelfOrderController.h */,
+				7963789F21C342620078815B /* DeliousSelfOrderController.m */,
+				796378A121C342620078815B /* DeliousSelfOrderController.xib */,
+			);
+			path = DeliousSelfOrderController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1296,7 +1295,7 @@
 				7386F1DB212E4F36001DAC8D /* OutOfStockController.xib in Resources */,
 				736095F12146286F001EBAB7 /* english.csv in Resources */,
 				7336755F1FE25F2200F0AFF8 /* 1006.png in Resources */,
-				732BE9BE21BA6C5A00872990 /* DeliousSelfOrderController.xib in Resources */,
+				796378A321C342630078815B /* DeliousSelfOrderController.xib in Resources */,
 				733675621FE25F2200F0AFF8 /* 1002.png in Resources */,
 				7320381C215C797A00747F37 /* comment_group_header.txt in Resources */,
 				730FE0F41F95AB950045A234 /* EnterTableController.xib in Resources */,
@@ -1434,7 +1433,7 @@
 				73504DC521410C8C003C7ADE /* OutOfStockModel.m in Sources */,
 				730FE0EA1F95A7A80045A234 /* ButtonCustom.m in Sources */,
 				73E4DD061FFF151F00BBD349 /* Reachability.m in Sources */,
-				732BE9BD21BA6C5A00872990 /* DeliousSelfOrderController.m in Sources */,
+				796378A221C342630078815B /* DeliousSelfOrderController.m in Sources */,
 				7357EE8A1F9737C2001EB56B /* OrderSummaryCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
