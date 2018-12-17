@@ -258,6 +258,15 @@
     }
     if (targetDict) {
         fileName = [targetDict objectForKey:(id)kCFFTPResourceName];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:fileName forKey:KEY_LATEST_FILE_NAME];
+
+        NSDateFormatter *dat = [[NSDateFormatter alloc] init];
+        dat.dateFormat = @"dd-MM-yyyy HH:mm";
+
+        [[NSUserDefaults standardUserDefaults] setObject:[dat stringFromDate:[NSDate date]] forKey:KEY_LAST_SYNCED_TIME];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         isDownloadFile = YES;
         [self downloadZipFile];
         
@@ -328,7 +337,8 @@
     saveDataSuccess = YES;
     
     if (didClickStartButton) {
-        if ([ShareManager shared].setting.tableNo > 0) {
+        SettingModel *setting = [ShareManager shared].setting;
+        if ((setting.tableNo > 0 && setting.tableSelection == Fix_ed) || setting.selectMode == Quick_Serve) {
             [self showCategoriesScreen];
         } else {
             [self showStartOrderPopup];

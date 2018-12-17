@@ -51,6 +51,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbRequestForBill;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 @property (weak, nonatomic) IBOutlet UILabel *lbTableSelectionNotice;
+@property (weak, nonatomic) IBOutlet UILabel *lbSyncInfo;
 
 @end
 
@@ -263,6 +264,13 @@
     self.tfTableNo.delegate = self;
     
     [self getCurrentLanguage];
+    
+    self.lbSyncInfo.text = @"";
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_LAST_SYNCED_TIME]) {
+        NSString *lastSynced = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_LAST_SYNCED_TIME];
+        NSString *fileName = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_LATEST_FILE_NAME];
+        self.lbSyncInfo.text = [NSString stringWithFormat:@"Last synced: %@ - Package name: %@", lastSynced, fileName];
+    }
     
     [self setupData];
 }
