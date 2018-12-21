@@ -119,6 +119,7 @@
         
         products = [ShareManager shared].existingOrderArr;
         [self.tblView reloadData];
+        [self calculateTotal];
     } else {
         NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
         NSString *errorID = [Util hexadecimalString:errorData];
@@ -167,15 +168,17 @@
     self.tblView.dataSource = self;
     [self.tblView registerNib:[UINib nibWithNibName:@"ExistingOrderCell" bundle:nil] forCellReuseIdentifier:@"ExistingOrderCellID"];
     
+    if (![ShareManager shared].setting.abilityRequestForBill) {
+        [self.callForBillBtn setHidden:YES];
+    }
+}
+
+- (void)calculateTotal {
     float total = 0;
     for (ProductModel *product in products) {
         total += [product.qty intValue] * [product.priceNumber floatValue];
     }
     self.lbTotalBill.text = [NSString stringWithFormat:@"$%.2f", total];
-    
-    if (![ShareManager shared].setting.abilityRequestForBill) {
-        [self.callForBillBtn setHidden:YES];
-    }
 }
 
 //- (void)onBack:(id)sender {

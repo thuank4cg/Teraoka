@@ -17,4 +17,6 @@
 + (int)hexStringToInt:(NSString *)hex;
 + (void)setLanguage:(NSString *)content;
 + (void)showError:(NSString *)errorId vc:(UIViewController *)vc;
++ (BOOL)isConnectionInternet;
++ (BOOL)checkLicenseKeyValid;
 @end

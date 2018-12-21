@@ -31,6 +31,7 @@
 
 - (void)setDataForCell:(OptionGroupModel *)optionGroup {
     _optionGroup = optionGroup;
+    [self.colView reloadData];
 }
 
 #pragma mark - UICollectionViewDataSource, UICollectionViewDelegate

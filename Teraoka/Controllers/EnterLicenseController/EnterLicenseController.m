@@ -52,7 +52,14 @@
     [[APIManager shared] tokenVerify:params success:^(id response) {
         [ProgressHUD dismiss];
         
+        NSData *data = [response dataUsingEncoding:NSUTF8StringEncoding];
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
         [[NSUserDefaults standardUserDefaults] setObject:self.tfLicenseKey.text forKey:KEY_LICENSE_VALID];
+        if ([json objectForKey:@"expirydate"]) {
+            NSString *expiryDate = [[json objectForKey:@"expirydate"] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            [[NSUserDefaults standardUserDefaults] setObject:expiryDate forKey:KEY_LICENSE_EXPIRY_DATE];
+        }
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [self deliousSelfOrder];

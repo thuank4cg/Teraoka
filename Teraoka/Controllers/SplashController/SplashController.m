@@ -34,7 +34,8 @@
     
     UIViewController *rootVC;
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_LICENSE_VALID]) {
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_LICENSE_VALID]) {
+    if ([Util checkLicenseKeyValid]) {
         rootVC = [[DeliousSelfOrderController alloc] initWithNibName:@"DeliousSelfOrderController" bundle:nil];
     } else {
         rootVC = [[EnterLicenseController alloc] initWithNibName:@"EnterLicenseController" bundle:nil];

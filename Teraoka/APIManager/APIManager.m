@@ -31,7 +31,7 @@
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        success(nil);
+        success(operation.responseString);
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         ErrorModel *errModel = [[ErrorModel alloc] initWithString:operation.responseString error:nil];
         failure(errModel.detail);

@@ -243,9 +243,7 @@
         }
     }
     
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gotoSettingAction:)];
-    [longPress setMinimumPressDuration:2];
-    [self.settingBtn addGestureRecognizer:longPress];
+    [self.settingBtn addTarget:self action:@selector(gotoSettingAction:) forControlEvents:UIControlEventTouchUpInside];
 }
     
 - (void)showOutOfStock:(NSNotification *)notification {

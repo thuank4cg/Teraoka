@@ -11,6 +11,7 @@
 #import "LanguageModel.h"
 #import "ShareManager.h"
 #import "APPConstants.h"
+#import "Reachability.h"
 
 @implementation Util
 
@@ -151,6 +152,41 @@
     }];
     [alert addAction:okAction];
     [vc presentViewController:alert animated:YES completion:nil];
+}
+
++ (BOOL)isConnectionInternet {
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        return NO;
+    }
+    else {
+        return YES;
+    }
+}
+
++ (BOOL)checkLicenseKeyValid {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_LICENSE_EXPIRY_DATE]) {
+        NSString *expiryDateStr = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_LICENSE_EXPIRY_DATE];
+        
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        df.dateFormat = @"yyyyMMddHHmmss";
+        
+        NSDate *expiryDate = [df dateFromString:expiryDateStr];
+        
+        if ([expiryDate compare:[NSDate date]] == NSOrderedAscending) {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_LICENSE_VALID];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_LICENSE_EXPIRY_DATE];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            return NO;
+        }
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_LICENSE_VALID]) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

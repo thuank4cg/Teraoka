@@ -13,6 +13,8 @@
 #import "OptionModel.h"
 
 @interface ExistingOrderCell()
+
+@property (weak, nonatomic) IBOutlet UILabel *lbName;
 @property (weak, nonatomic) IBOutlet UIImageView *productImage;
 @property (weak, nonatomic) IBOutlet UILabel *lbOptions;
 @property (weak, nonatomic) IBOutlet UILabel *lbPrice;
@@ -32,6 +34,7 @@
     self.tfQuantity.layer.borderColor = [UIColor colorWithHexString:@"cccccc"].CGColor;
 }
 - (void)setDataForCell:(ProductModel *)product {
+    self.lbName.text = product.name;
     self.tfQuantity.text = product.qty;
     NSData *imageData = [NSData dataWithContentsOfFile:product.image];
     if (imageData) {

@@ -411,6 +411,11 @@
 }
 
 - (void)getLanguageList {
+    if (![Util isConnectionInternet]) {
+        [Util showAlert:@"No network connection" vc:self];
+        return;
+    }
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:@"languagelist" forKey:@"action"];
     [params setObject:[NSNumber numberWithInt:3] forKey:@"appid"];
@@ -430,6 +435,11 @@
 }
 
 - (void)getCSVContent {
+    if (![Util isConnectionInternet]) {
+        [Util showAlert:@"No network connection" vc:self];
+        return;
+    }
+    
     __weak __typeof(self)weakSelf = self;
     [ProgressHUD show:nil Interaction:NO];
     [[APIManager shared] getCSVLanguage:^(NSString *content) {
