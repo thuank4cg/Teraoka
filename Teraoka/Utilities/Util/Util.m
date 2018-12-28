@@ -170,7 +170,7 @@
         NSString *expiryDateStr = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_LICENSE_EXPIRY_DATE];
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        df.dateFormat = @"yyyyMMddHHmmss";
+        df.dateFormat = @"yyyy-MM-dd HH:mm:ss";
         
         NSDate *expiryDate = [df dateFromString:expiryDateStr];
         

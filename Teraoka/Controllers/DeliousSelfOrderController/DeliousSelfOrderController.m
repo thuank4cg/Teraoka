@@ -73,7 +73,7 @@
     [self removeDataForEntity:OPTION_SET_TABLE_NAME];
     [self removeDataForEntity:TABLE_NO_TABLE_NAME];
     
-    [self doGetContents];
+//    [self doGetContents];
 }
 
 - (void)loadLocalizable {
@@ -97,6 +97,7 @@
 //        return;
 //    }
     
+    saveDataSuccess = NO;
     didClickStartButton = YES;
     
     if (!saveDataSuccess) {

@@ -467,13 +467,78 @@
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
 
         /**XItemOptionData**/
-        /****XCondimentData***/
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        /****XCookingInstructionData***/
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        /****XServingTimeData***/
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        /****XFreeInstructionData***/
+        
+        /**XCondimentData**/
+        
+        NSMutableArray *condiments = [NSMutableArray new];
+        
+        for (OptionGroupModel *optionGroup in product.options) {
+            for (OptionModel *option in optionGroup.optionList) {
+                if (option.isCheck && option.type == TYPE_CONDIMENT) {
+                    [condiments addObject:option];
+                }
+            }
+        }
+        
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", (int)condiments.count] length:4]]; //Number of object
+        
+        /**XCondimentDataStruct[n]**/
+        
+        for (OptionModel *option in condiments) {
+            [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", option.optionId] length:4]]; //Condiment No (PLU No)
+            [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Condiment Qty
+        }
+        
+        //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+        
+        /**XCookingInstructionData**/
+        
+        NSMutableArray *instructions = [NSMutableArray new];
+        
+        for (OptionGroupModel *optionGroup in product.options) {
+            for (OptionModel *option in optionGroup.optionList) {
+                if (option.isCheck && option.type == TYPE_COOKING_INSTRUCTION) {
+                    [instructions addObject:option];
+                }
+            }
+        }
+        
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", (int)instructions.count] length:4]]; //Number of object
+        
+        /**XCookingInstructionDataStruct[n]**/
+        
+        for (OptionModel *option in instructions) {
+            [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", option.optionId] length:2]]; //Cooking Instruction No
+            [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Cooking Instruction Qty
+        }
+        
+        //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+        
+        /**XServingTimeData**/
+        
+        NSMutableArray *servings = [NSMutableArray new];
+        
+        for (OptionGroupModel *optionGroup in product.options) {
+            for (OptionModel *option in optionGroup.optionList) {
+                if (option.isCheck && option.type == TYPE_SERVING_TIME) {
+                    [servings addObject:option];
+                }
+            }
+        }
+        
+        [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", (int)servings.count] length:4]]; //Number of object
+        
+        /**XServingTimeDataStruct[n]**/
+        
+        for (OptionModel *option in servings) {
+            [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", option.optionId] length:2]]; //Serving Time No
+            [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Serving Time Qty
+        }
+        
+        //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
+        
+        /**XFreeInstructionData**/
+        
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
     }
     

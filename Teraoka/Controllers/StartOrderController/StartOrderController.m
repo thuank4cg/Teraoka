@@ -58,9 +58,6 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         SettingModel *setting = [ShareManager shared].setting;
-        setting.tableNo = [setting getTableNo:self.tfTableNo.text];
-        
-        [ShareManager shared].setting = setting;
         
         NSString *json = [setting toJSONString];
         [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
@@ -93,8 +90,12 @@
         return;
     }
     
+    SettingModel *setting = [ShareManager shared].setting;
+    setting.tableNo = [setting getTableNo:self.tfTableNo.text];
+    
+    [ShareManager shared].setting = setting;
+    
     [self sendPOSRequest:SendSeated];
-//    [self.delegate showCategoriesScreen];
 }
 
 //- (IBAction)selectModeAction:(id)sender {

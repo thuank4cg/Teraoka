@@ -57,7 +57,7 @@
         
         [[NSUserDefaults standardUserDefaults] setObject:self.tfLicenseKey.text forKey:KEY_LICENSE_VALID];
         if ([json objectForKey:@"expirydate"]) {
-            NSString *expiryDate = [[json objectForKey:@"expirydate"] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString *expiryDate = [json objectForKey:@"expirydate"];
             [[NSUserDefaults standardUserDefaults] setObject:expiryDate forKey:KEY_LICENSE_EXPIRY_DATE];
         }
         [[NSUserDefaults standardUserDefaults] synchronize];

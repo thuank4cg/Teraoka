@@ -32,6 +32,7 @@
 #import "NSString+KeyLanguage.h"
 #import "WaiterController.h"
 #import "DeliousSelfOrderController.h"
+#import "EnterLicenseController.h"
 
 #define KEY_PADDING_BOTTOM_CELL 65
 #define CELL_SPACE 15
@@ -83,7 +84,9 @@
     isBackDelegate = NO;
     [self setData];
     
+    [self checkLicenseKey];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOutOfStock:) name:KEY_NOTIFY_OUT_OF_STOCK object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doWhenEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
     
 - (void)viewWillDisappear:(BOOL)animated {
@@ -248,6 +251,10 @@
     
 - (void)showOutOfStock:(NSNotification *)notification {
     [self showOutOfStockScreen];
+}
+
+- (void)doWhenEnterForeground:(NSNotification *)notification {
+    [self checkLicenseKey];
 }
 
 - (void)setupQtyBoxView {
@@ -486,6 +493,18 @@
         if (i == categoriesArr.count) {
             [self setupCategoryView];
         }
+    }
+}
+
+- (void)checkLicenseKey {
+    if (![Util checkLicenseKeyValid]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"License has expired" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action){
+            EnterLicenseController *enterLicenseVC = [[EnterLicenseController alloc] initWithNibName:@"EnterLicenseController" bundle:nil];
+            appDelegate.window.rootViewController = enterLicenseVC;
+        }];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
