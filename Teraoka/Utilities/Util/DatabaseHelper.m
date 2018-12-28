@@ -75,6 +75,8 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:OPTION_GROUP_TABLE_NAME];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"option_group_no == %d", option_group_no]];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"sorting_no" ascending:YES];
+    [fetchRequest setSortDescriptors:@[sort]];
     NSArray *optionGroupArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     NSMutableArray *pluNos = [NSMutableArray new];
@@ -89,17 +91,32 @@
     fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PLU_TABLE_NAME];
     NSArray *pluArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    for (NSManagedObject *plu in pluArr) {
-        NSString *pluNo = [plu valueForKey:@"plu_no"];
-        if ([pluNos containsObject:pluNo]) {
-            OptionModel *option = [[OptionModel alloc] init];
-            option.optionId = [pluNo intValue];
-            option.name = [plu valueForKey:@"item_name"];
-            option.type = TYPE_CONDIMENT;
-            option.price = [[plu valueForKey:@"price"] intValue];
-            [optionList addObject:option];
+    for (NSString *no in pluNos) {
+        for (NSManagedObject *plu in pluArr) {
+            NSString *pluNo = [plu valueForKey:@"plu_no"];
+            if ([no isEqualToString:pluNo]) {
+                OptionModel *option = [[OptionModel alloc] init];
+                option.optionId = [pluNo intValue];
+                option.name = [plu valueForKey:@"item_name"];
+                option.type = TYPE_CONDIMENT;
+                option.price = [[plu valueForKey:@"price"] intValue];
+                [optionList addObject:option];
+                break;
+            }
         }
     }
+    
+//    for (NSManagedObject *plu in pluArr) {
+//        NSString *pluNo = [plu valueForKey:@"plu_no"];
+//        if ([pluNos containsObject:pluNo]) {
+//            OptionModel *option = [[OptionModel alloc] init];
+//            option.optionId = [pluNo intValue];
+//            option.name = [plu valueForKey:@"item_name"];
+//            option.type = TYPE_CONDIMENT;
+//            option.price = [[plu valueForKey:@"price"] intValue];
+//            [optionList addObject:option];
+//        }
+//    }
     
     return optionList;
 }
@@ -146,6 +163,8 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:SERVING_GROUP_TABLE_NAME];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"serving_group_no == %d", serving_group_no]];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"sorting_no" ascending:YES];
+    [fetchRequest setSortDescriptors:@[sort]];
     NSArray *servingGroupArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     NSMutableArray *servingTimingNos = [NSMutableArray new];
@@ -216,6 +235,8 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:COMMENT_GROUP_TABLE_NAME];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"comment_group_no == %d", comment_group_no]];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"sorting_no" ascending:YES];
+    [fetchRequest setSortDescriptors:@[sort]];
     NSArray *commentGroupArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     NSMutableArray *commentNos = [NSMutableArray new];

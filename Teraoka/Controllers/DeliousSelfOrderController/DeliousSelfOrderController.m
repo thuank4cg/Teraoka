@@ -98,6 +98,7 @@
 //    }
     
     saveDataSuccess = NO;
+    isDownloadFile = NO;
     didClickStartButton = YES;
     
     if (!saveDataSuccess) {
