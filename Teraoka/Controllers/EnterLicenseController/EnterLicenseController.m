@@ -37,8 +37,7 @@
 
 - (IBAction)submitAction:(id)sender {
     if (self.tfLicenseKey.text.length == 0) {
-//        [Util showAlert:@"Please enter license key." vc:self];
-        [self deliousSelfOrder];
+        [Util showAlert:@"Please enter license key." vc:self];
         return;
     }
     

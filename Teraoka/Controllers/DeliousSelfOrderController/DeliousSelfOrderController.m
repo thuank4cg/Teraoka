@@ -100,6 +100,7 @@
     saveDataSuccess = NO;
     isDownloadFile = NO;
     didClickStartButton = YES;
+    [ShareManager shared].existingOrderArr = nil;
     
     if (!saveDataSuccess) {
         [self doGetContents];

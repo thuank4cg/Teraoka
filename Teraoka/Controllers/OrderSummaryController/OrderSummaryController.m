@@ -63,6 +63,8 @@
     self.tblView.delegate = self;
     self.tblView.dataSource = self;
     [self.tblView registerNib:[UINib nibWithNibName:@"OrderSummaryCell" bundle:nil] forCellReuseIdentifier:@"OrderSummaryCellID"];
+    self.tblView.estimatedRowHeight = 150;
+    self.tblView.rowHeight = UITableViewAutomaticDimension;
     
     self.containerView.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.containerView.layer.shadowOffset = CGSizeMake(8.0f, 8.0f);
@@ -166,9 +168,9 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 150;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 150;
+//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (products.count == 0) return [[UIView alloc] init];

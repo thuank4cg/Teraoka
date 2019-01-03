@@ -106,18 +106,6 @@
         }
     }
     
-//    for (NSManagedObject *plu in pluArr) {
-//        NSString *pluNo = [plu valueForKey:@"plu_no"];
-//        if ([pluNos containsObject:pluNo]) {
-//            OptionModel *option = [[OptionModel alloc] init];
-//            option.optionId = [pluNo intValue];
-//            option.name = [plu valueForKey:@"item_name"];
-//            option.type = TYPE_CONDIMENT;
-//            option.price = [[plu valueForKey:@"price"] intValue];
-//            [optionList addObject:option];
-//        }
-//    }
-    
     return optionList;
 }
 
@@ -179,14 +167,17 @@
     fetchRequest = [[NSFetchRequest alloc] initWithEntityName:SERVING_TIMING_TABLE_NAME];
     NSArray *servingTimingArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    for (NSManagedObject *serving in servingTimingArr) {
-        NSString *servingTimingNo = [serving valueForKey:@"serving_timing_no"];
-        if ([servingTimingNos containsObject:servingTimingNo]) {
-            OptionModel *option = [[OptionModel alloc] init];
-            option.optionId = [servingTimingNo intValue];
-            option.name = [serving valueForKey:@"desc_name"];
-            option.type = TYPE_SERVING_TIME;
-            [optionList addObject:option];
+    for (NSString *no in servingTimingNos) {
+        for (NSManagedObject *serving in servingTimingArr) {
+            NSString *servingTimingNo = [serving valueForKey:@"serving_timing_no"];
+            if ([no isEqualToString:servingTimingNo]) {
+                OptionModel *option = [[OptionModel alloc] init];
+                option.optionId = [servingTimingNo intValue];
+                option.name = [serving valueForKey:@"desc_name"];
+                option.type = TYPE_SERVING_TIME;
+                [optionList addObject:option];
+                break;
+            }
         }
     }
     
@@ -251,14 +242,17 @@
     fetchRequest = [[NSFetchRequest alloc] initWithEntityName:COMMENT_TABLE_NAME];
     NSArray *commentArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    for (NSManagedObject *comment in commentArr) {
-        NSString *commentNo = [comment valueForKey:@"comment_no"];
-        if ([commentNos containsObject:commentNo]) {
-            OptionModel *option = [[OptionModel alloc] init];
-            option.optionId = [commentNo intValue];
-            option.name = [comment valueForKey:@"comment_name"];
-            option.type = TYPE_COOKING_INSTRUCTION;
-            [optionList addObject:option];
+    for (NSString *no in commentNos) {
+        for (NSManagedObject *comment in commentArr) {
+            NSString *commentNo = [comment valueForKey:@"comment_no"];
+            if ([no isEqualToString:commentNo]) {
+                OptionModel *option = [[OptionModel alloc] init];
+                option.optionId = [commentNo intValue];
+                option.name = [comment valueForKey:@"comment_name"];
+                option.type = TYPE_COOKING_INSTRUCTION;
+                [optionList addObject:option];
+                break;
+            }
         }
     }
     

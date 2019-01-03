@@ -14,6 +14,8 @@
 #import "NSString+KeyLanguage.h"
 #import "APPConstants.h"
 #import "Util.h"
+#import "OptionGroupModel.h"
+#import "OptionModel.h"
 
 @interface ViewExistingOrderController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -167,6 +169,8 @@
     self.tblView.delegate = self;
     self.tblView.dataSource = self;
     [self.tblView registerNib:[UINib nibWithNibName:@"ExistingOrderCell" bundle:nil] forCellReuseIdentifier:@"ExistingOrderCellID"];
+    self.tblView.estimatedRowHeight = 150;
+    self.tblView.rowHeight = UITableViewAutomaticDimension;
     
     if (![ShareManager shared].setting.abilityRequestForBill) {
         [self.callForBillBtn setHidden:YES];
@@ -177,6 +181,13 @@
     float total = 0;
     for (ProductModel *product in products) {
         total += [product.qty intValue] * [product.priceNumber floatValue];
+        for (OptionGroupModel *optionGroup in product.options) {
+            for (OptionModel *option in optionGroup.optionList) {
+                if (option.isCheck && option.type == TYPE_CONDIMENT) {
+                    total += option.price;
+                }
+            }
+        }
     }
     self.lbTotalBill.text = [NSString stringWithFormat:@"$%.2f", total];
 }
@@ -208,9 +219,9 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 150;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 150;
+//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     return [[UIView alloc] init];

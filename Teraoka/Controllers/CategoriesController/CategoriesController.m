@@ -67,7 +67,6 @@
     NSMutableArray *categories;
     int categoryIndex;
     NewOrderController *newOrderVC;
-    EnterPassAccessSettingController *enterPassSettingVC;
     BOOL isBackDelegate;
 }
 
@@ -298,9 +297,7 @@
 }
 
 - (void)gotoSettingAction:(id)sender {
-    if (enterPassSettingVC) return;
-    
-    enterPassSettingVC = [[EnterPassAccessSettingController alloc] initWithNibName:@"EnterPassAccessSettingController" bundle:nil];
+    EnterPassAccessSettingController *enterPassSettingVC = [[EnterPassAccessSettingController alloc] initWithNibName:@"EnterPassAccessSettingController" bundle:nil];
     enterPassSettingVC.delegate = self;
     [self addChildViewController:enterPassSettingVC];
     [self.view addSubview:enterPassSettingVC.view];
@@ -511,9 +508,6 @@
 //MARK: EnterPassAccessDelegate
 
 - (void)didEnterPassSuccess {
-    enterPassSettingVC = nil;
-//    SettingsController *vc = [[SettingsController alloc] initWithNibName:@"SettingsController" bundle:nil];
-//    [self presentViewController:vc animated:YES completion:nil];
     DeliousSelfOrderController *rootVC = [[DeliousSelfOrderController alloc] initWithNibName:@"DeliousSelfOrderController" bundle:nil];
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:rootVC];
     [navc setNavigationBarHidden:YES];

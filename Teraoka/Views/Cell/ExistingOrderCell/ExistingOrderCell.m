@@ -60,6 +60,14 @@
     if (isSelectedOption) self.lbOptions.attributedText = attrStr;
     
     float price = [product.qty intValue] * [product.priceNumber floatValue];
+    for (OptionGroupModel *optionGroup in product.options) {
+        for (OptionModel *option in optionGroup.optionList) {
+            if (option.isCheck && option.type == TYPE_CONDIMENT) {
+                price += option.price;
+            }
+        }
+    }
+    
     self.lbPrice.text = [NSString stringWithFormat:@"$%.2f", price];
     
     switch (product.deliverStatus) {
