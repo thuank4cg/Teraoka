@@ -13,7 +13,7 @@
 @property (nonatomic, assign) int type;
 @property (nonatomic, assign) int optionId;
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, assign) int price;
+@property (nonatomic, assign) float price;
 @property (nonatomic, assign) BOOL isCheck;
 
 @end

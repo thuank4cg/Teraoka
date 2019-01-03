@@ -99,9 +99,9 @@
             NSData *servedQtyData = [billItemDetailData subdataWithRange:NSMakeRange(itemDetailLength, 2)];//Served Qty
             itemDetailLength += 2;
             
-            itemDetailLength += 16;//XItemOptionData
+//            itemDetailLength += 16;//XItemOptionData
             
-            location += itemDetailLength;
+//            location += itemDetailLength;
             
             int pluNo = [Util hexStringToInt:[Util hexadecimalString:pluNoData]];
             int qty = [Util hexStringToInt:[Util hexadecimalString:qtyData]];
@@ -109,6 +109,9 @@
             
             for (ProductModel *product in [ShareManager shared].existingOrderArr) {
                 if ([product.productNo intValue] == pluNo) {
+                    itemDetailLength += [self getProductOptionLength:product];//XItemOptionData
+                    location += itemDetailLength;
+                    
                     if (qty > servedQty) {
                         product.deliverStatus = Pending;
                     } else {
@@ -201,6 +204,75 @@
 //    }
 //    [self.navigationController popViewControllerAnimated:YES];
 //}
+
+- (int)getProductOptionLength:(ProductModel *)product {
+    int optionLength = 0;
+    
+    /**XItemOptionData**/
+    
+    /**XCondimentData**/
+    
+    NSMutableArray *condiments = [NSMutableArray new];
+    
+    for (OptionGroupModel *optionGroup in product.options) {
+        for (OptionModel *option in optionGroup.optionList) {
+            if (option.isCheck && option.type == TYPE_CONDIMENT) {
+                [condiments addObject:option];
+            }
+        }
+    }
+    
+    optionLength += 4; //Number of object
+    
+    /**XCondimentDataStruct[n]**/
+    
+    optionLength += 4*condiments.count; //Condiment No (PLU No)
+    optionLength += 2*condiments.count; //Condiment Qty
+    
+    /**XCookingInstructionData**/
+    
+    NSMutableArray *instructions = [NSMutableArray new];
+    
+    for (OptionGroupModel *optionGroup in product.options) {
+        for (OptionModel *option in optionGroup.optionList) {
+            if (option.isCheck && option.type == TYPE_COOKING_INSTRUCTION) {
+                [instructions addObject:option];
+            }
+        }
+    }
+    
+    optionLength += 4; //Number of object
+    
+    /**XCookingInstructionDataStruct[n]**/
+    
+    optionLength += 2*instructions.count; //Cooking Instruction No
+    optionLength += 2*instructions.count; //Cooking Instruction Qty
+    
+    /**XServingTimeData**/
+    
+    NSMutableArray *servings = [NSMutableArray new];
+    
+    for (OptionGroupModel *optionGroup in product.options) {
+        for (OptionModel *option in optionGroup.optionList) {
+            if (option.isCheck && option.type == TYPE_SERVING_TIME) {
+                [servings addObject:option];
+            }
+        }
+    }
+    
+    optionLength += 4; //Number of object
+    
+    /**XServingTimeDataStruct[n]**/
+    
+    optionLength += 2*servings.count; //Serving Time No
+    optionLength += 2*servings.count; //Serving Time Qty
+    
+    /**XFreeInstructionData**/
+    
+    optionLength += 4;
+    
+    return optionLength;
+}
 
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
