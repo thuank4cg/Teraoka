@@ -417,9 +417,13 @@
     UIImageView *icon = (UIImageView *)[menuIcons objectAtIndex:index];
     [icon setHidden:NO];
 }
-
-// dummy data
 - (void)setData {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setDataFromBackground];
+    });
+}
+
+- (void)setDataFromBackground {
     if (!isBackDelegate) categoryIndex = 0;
     
     NSArray *directoryImageContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString stringWithFormat:@"%@%@", DOCUMENT_DIRECTORY_ROOT, PLU_IMAGE_DIRECTORY_PATH] error:nil];

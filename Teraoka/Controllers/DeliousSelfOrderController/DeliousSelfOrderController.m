@@ -51,22 +51,6 @@
     if (!setting) setting = [[SettingModel alloc] init];
     
     [ShareManager shared].setting = setting;
-    
-    [self removeDataForEntity:MENU_CATEGORY_TABLE_NAME];
-    [self removeDataForEntity:MENU_CONTENTS_TABLE_NAME];
-    [self removeDataForEntity:PLU_TABLE_NAME];
-    [self removeDataForEntity:OPTION_GROUP_HEADER_TABLE_NAME];
-    [self removeDataForEntity:OPTION_GROUP_TABLE_NAME];
-    [self removeDataForEntity:COMMENT_GROUP_HEADER_TABLE_NAME];
-    [self removeDataForEntity:COMMENT_GROUP_TABLE_NAME];
-    [self removeDataForEntity:COMMENT_TABLE_NAME];
-    [self removeDataForEntity:COMMENT_SET_TABLE_NAME];
-    [self removeDataForEntity:SERVING_SET_TABLE_NAME];
-    [self removeDataForEntity:SERVING_GROUP_HEADER_TABLE_NAME];
-    [self removeDataForEntity:SERVING_GROUP_TABLE_NAME];
-    [self removeDataForEntity:SERVING_TIMING_TABLE_NAME];
-    [self removeDataForEntity:OPTION_SET_TABLE_NAME];
-    [self removeDataForEntity:TABLE_NO_TABLE_NAME];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,6 +61,7 @@
     
     isDownloadFile = NO;
     
+    [self removeOldData];
     [self doGetContents];
 }
 
@@ -89,6 +74,8 @@
 }
 
 - (IBAction)startOrderAction:(id)sender {
+    [self removeOldData];
+    
     if ([ShareManager shared].setting.serverIP.length == 0) {
         [Util showAlert:@"Please enter IP to proceed" vc:self];
         return;
@@ -136,6 +123,24 @@
 }
 
 #pragma mark - Custom method
+
+- (void)removeOldData {
+    [self removeDataForEntity:MENU_CATEGORY_TABLE_NAME];
+    [self removeDataForEntity:MENU_CONTENTS_TABLE_NAME];
+    [self removeDataForEntity:PLU_TABLE_NAME];
+    [self removeDataForEntity:OPTION_GROUP_HEADER_TABLE_NAME];
+    [self removeDataForEntity:OPTION_GROUP_TABLE_NAME];
+    [self removeDataForEntity:COMMENT_GROUP_HEADER_TABLE_NAME];
+    [self removeDataForEntity:COMMENT_GROUP_TABLE_NAME];
+    [self removeDataForEntity:COMMENT_TABLE_NAME];
+    [self removeDataForEntity:COMMENT_SET_TABLE_NAME];
+    [self removeDataForEntity:SERVING_SET_TABLE_NAME];
+    [self removeDataForEntity:SERVING_GROUP_HEADER_TABLE_NAME];
+    [self removeDataForEntity:SERVING_GROUP_TABLE_NAME];
+    [self removeDataForEntity:SERVING_TIMING_TABLE_NAME];
+    [self removeDataForEntity:OPTION_SET_TABLE_NAME];
+    [self removeDataForEntity:TABLE_NO_TABLE_NAME];
+}
 
 - (void)doGetContents {
     if ([ShareManager shared].setting.serverIP.length == 0) return;
