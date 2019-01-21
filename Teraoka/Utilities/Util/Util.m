@@ -169,12 +169,37 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:KEY_LICENSE_EXPIRY_DATE]) {
         NSString *expiryDateStr = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_LICENSE_EXPIRY_DATE];
         
+//        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+//        df.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+//
+//        NSDate *expiryDate = [df dateFromString:expiryDateStr];
+        
+//        if ([expiryDate compare:[NSDate date]] == NSOrderedAscending) {
+//            [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_LICENSE_VALID];
+//            [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_LICENSE_EXPIRY_DATE];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            return NO;
+//        }
+        
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         df.dateFormat = @"yyyy-MM-dd HH:mm:ss";
         
         NSDate *expiryDate = [df dateFromString:expiryDateStr];
+        NSDate *currentDate = [NSDate date];
         
-        if ([expiryDate compare:[NSDate date]] == NSOrderedAscending) {
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSInteger comps = (NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear);
+        
+        NSDateComponents *date1Components = [calendar components:comps
+                                                        fromDate:expiryDate];
+        NSDateComponents *date2Components = [calendar components:comps
+                                                        fromDate:currentDate];
+        
+        expiryDate = [calendar dateFromComponents:date1Components];
+        currentDate = [calendar dateFromComponents:date2Components];
+        
+        NSComparisonResult result = [expiryDate compare:currentDate];
+        if (result == NSOrderedAscending) {
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_LICENSE_VALID];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_LICENSE_EXPIRY_DATE];
             [[NSUserDefaults standardUserDefaults] synchronize];

@@ -52,11 +52,6 @@
     
     [ShareManager shared].setting = setting;
     
-    saveDataSuccess = NO;
-    didClickStartButton = NO;
-    
-    isDownloadFile = NO;
-    
     [self removeDataForEntity:MENU_CATEGORY_TABLE_NAME];
     [self removeDataForEntity:MENU_CONTENTS_TABLE_NAME];
     [self removeDataForEntity:PLU_TABLE_NAME];
@@ -72,8 +67,17 @@
     [self removeDataForEntity:SERVING_TIMING_TABLE_NAME];
     [self removeDataForEntity:OPTION_SET_TABLE_NAME];
     [self removeDataForEntity:TABLE_NO_TABLE_NAME];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-//    [self doGetContents];
+    saveDataSuccess = NO;
+    didClickStartButton = NO;
+    
+    isDownloadFile = NO;
+    
+    [self doGetContents];
 }
 
 - (void)loadLocalizable {
@@ -89,13 +93,11 @@
         [Util showAlert:@"Please enter IP to proceed" vc:self];
         return;
     }
-    
-//    Reachability *reach = [Reachability reachabilityForInternetConnection];
-//
-//    if (![reach isReachable]) {
-//        [Util showAlert:@"Unable to proceed, you do not have any network." vc:self];
-//        return;
-//    }
+
+    if (![Util isConnectionInternet]) {
+        [Util showAlert:@"Unable to proceed, you do not have any network." vc:self];
+        return;
+    }
     
     saveDataSuccess = NO;
     isDownloadFile = NO;

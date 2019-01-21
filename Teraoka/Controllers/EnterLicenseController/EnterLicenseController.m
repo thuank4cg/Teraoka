@@ -36,6 +36,11 @@
 }
 
 - (IBAction)submitAction:(id)sender {
+    if (![Util isConnectionInternet]) {
+        [Util showAlert:@"No network connection" vc:self];
+        return;
+    }
+    
     if (self.tfLicenseKey.text.length == 0) {
         [Util showAlert:@"Please enter license key." vc:self];
         return;

@@ -88,12 +88,10 @@
 }
 
 - (IBAction)sendOrder:(id)sender {
-//    Reachability *reach = [Reachability reachabilityForInternetConnection];
-//    
-//    if (![reach isReachable]) {
-//        [Util showAlert:@"Unable to proceed, you do not have any network." vc:self];
-//        return;
-//    }
+    if (![Util isConnectionInternet]) {
+        [Util showAlert:@"Unable to proceed, you do not have any network." vc:self];
+        return;
+    }
     
 //    SettingModel *setting = [ShareManager shared].setting;
 //    if (setting && setting.selectMode == Dine_in && setting.tableSelection == Fix_ed && setting.tableNo == 0) {

@@ -19,7 +19,7 @@
 #import "OptionGroupModel.h"
 #import "OptionModel.h"
 
-#define MSG_ERROR @"Submission failed due to connection error"
+#define MSG_ERROR @"Unable to connect to POS terminal"
 
 @interface BaseController () <GCDAsyncSocketDelegate, NSStreamDelegate>
 
@@ -64,11 +64,11 @@
 - (void)sendPOSRequest:(CommandName)_commandName {
     commandName = _commandName;
     
-    //    if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable)
-    //    {
-    //        [Util showAlert:MSG_ERROR vc:self];
-    //        return;
-    //    }
+//    if (![Util isConnectionInternet])
+//    {
+//        [Util showAlert:MSG_ERROR vc:self];
+//        return;
+//    }
     
     [ProgressHUD show:nil Interaction:NO];
     
@@ -84,6 +84,7 @@
     if (![asyncSocket connectToHost:host onPort:port withTimeout:10 error:&error])
     {
         NSLog(@"error");
+        [Util showAlert:MSG_ERROR vc:self];
         [ProgressHUD dismiss];
     }
 }
@@ -219,7 +220,7 @@
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     [ProgressHUD dismiss];
     
-    if (err.domain == NSPOSIXErrorDomain) {
+    if (err) {
         [Util showAlert:MSG_ERROR vc:self];
     }
     
