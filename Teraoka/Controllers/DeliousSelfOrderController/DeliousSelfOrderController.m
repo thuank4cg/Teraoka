@@ -61,7 +61,6 @@
     
     isDownloadFile = NO;
     
-    [self removeOldData];
     [self doGetContents];
 }
 
@@ -74,8 +73,6 @@
 }
 
 - (IBAction)startOrderAction:(id)sender {
-    [self removeOldData];
-    
     if ([ShareManager shared].setting.serverIP.length == 0) {
         [Util showAlert:@"Please enter IP to proceed" vc:self];
         return;
@@ -91,18 +88,7 @@
     didClickStartButton = YES;
     [ShareManager shared].existingOrderArr = nil;
     
-    if (!saveDataSuccess) {
-        [self doGetContents];
-        return;
-    }
-    
-    SettingModel *setting = [ShareManager shared].setting;
-    if ((setting.tableNo > 0 && setting.tableSelection == Fix_ed) || setting.selectMode == Quick_Serve) {
-        [self showCategoriesScreen];
-        return;
-    }
-    
-    [self showStartOrderPopup];
+    [self doGetContents];
 }
 
 - (IBAction)settingAction:(id)sender {
@@ -144,6 +130,8 @@
 
 - (void)doGetContents {
     if ([ShareManager shared].setting.serverIP.length == 0) return;
+    
+    [self removeOldData];
     
 //    Reachability *reach = [Reachability reachabilityForInternetConnection];
 //    
