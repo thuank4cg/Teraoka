@@ -413,12 +413,6 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d", billNo] forKey:KEY_SAVED_BILL_NO];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        SettingModel *setting = [ShareManager shared].setting;
-        
-        NSString *json = [setting toJSONString];
-        [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
         [self showCategoriesScreen];
     } else {
         NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
