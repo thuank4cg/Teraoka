@@ -236,9 +236,9 @@
     [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [Util showAlert:@"Save changes successfully" vc:self];
-    
     [ShareManager shared].setting = setting;
+    
+    [Util showAlert:@"Save changes successfully" vc:self];
 }
 
 - (void)setupView {
@@ -276,7 +276,8 @@
 }
 
 - (void)setupData {
-    SettingModel *setting = [ShareManager shared].setting;
+    NSString *json = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_SAVED_SETTING];
+    SettingModel *setting = [[SettingModel alloc] initWithString:json error:nil];
     
     self.tfIPAddress.text = setting.serverIP;
     
