@@ -158,8 +158,11 @@
 		73CE5CC9215CCF3A00CDCD15 /* OptionGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CE5CC8215CCF3A00CDCD15 /* OptionGroupModel.m */; };
 		73DC91BB1FE2BC6500AD86E6 /* ParamsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC91BA1FE2BC6500AD86E6 /* ParamsHelper.m */; };
 		73E4DD061FFF151F00BBD349 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E4DD051FFF151F00BBD349 /* Reachability.m */; };
+		7930DBD22215614A003AD4D2 /* SelectionHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930DBD12215614A003AD4D2 /* SelectionHeaderModel.m */; };
 		796378A221C342630078815B /* DeliousSelfOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7963789F21C342620078815B /* DeliousSelfOrderController.m */; };
 		796378A321C342630078815B /* DeliousSelfOrderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796378A121C342620078815B /* DeliousSelfOrderController.xib */; };
+		798723F12213C7CF0076794D /* OptionSelectedTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 798723EF2213C7CF0076794D /* OptionSelectedTableCell.m */; };
+		798723F22213C7CF0076794D /* OptionSelectedTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 798723F02213C7CF0076794D /* OptionSelectedTableCell.xib */; };
 		F534B53E83D60C16002E3C90 /* libPods-Teraoka.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8826900F53921C0151A18A11 /* libPods-Teraoka.a */; };
 /* End PBXBuildFile section */
 
@@ -385,9 +388,14 @@
 		73DC91BA1FE2BC6500AD86E6 /* ParamsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParamsHelper.m; sourceTree = "<group>"; };
 		73E4DD041FFF151E00BBD349 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		73E4DD051FFF151F00BBD349 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		7930DBD02215614A003AD4D2 /* SelectionHeaderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectionHeaderModel.h; sourceTree = "<group>"; };
+		7930DBD12215614A003AD4D2 /* SelectionHeaderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectionHeaderModel.m; sourceTree = "<group>"; };
 		7963789F21C342620078815B /* DeliousSelfOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliousSelfOrderController.m; sourceTree = "<group>"; };
 		796378A021C342620078815B /* DeliousSelfOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliousSelfOrderController.h; sourceTree = "<group>"; };
 		796378A121C342620078815B /* DeliousSelfOrderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliousSelfOrderController.xib; sourceTree = "<group>"; };
+		798723EE2213C7CF0076794D /* OptionSelectedTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionSelectedTableCell.h; sourceTree = "<group>"; };
+		798723EF2213C7CF0076794D /* OptionSelectedTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OptionSelectedTableCell.m; sourceTree = "<group>"; };
+		798723F02213C7CF0076794D /* OptionSelectedTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionSelectedTableCell.xib; sourceTree = "<group>"; };
 		8826900F53921C0151A18A11 /* libPods-Teraoka.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Teraoka.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B4E1C4D574C9122D1A3D981 /* Pods-Teraoka.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teraoka.release.xcconfig"; path = "Pods/Target Support Files/Pods-Teraoka/Pods-Teraoka.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -486,6 +494,7 @@
 		730FE0CE1F95A1FE0045A234 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7930DBCF22156131003AD4D2 /* Selection */,
 				7316B557216F2F650061DE24 /* Error */,
 				73387D86215E1D7E00BE023B /* Comment */,
 				73387D7D215E11CE00BE023B /* Serving */,
@@ -844,6 +853,7 @@
 		7357EE671F96F84D001EB56B /* OptionCell */ = {
 			isa = PBXGroup;
 			children = (
+				798723ED2213C7B80076794D /* OptionSelectedTableCell */,
 				7357EE681F96F9DE001EB56B /* OptionTableCell */,
 				7357EE691F96F9DE001EB56B /* OptionCollectionCell */,
 			);
@@ -1143,6 +1153,15 @@
 			path = Option;
 			sourceTree = "<group>";
 		};
+		7930DBCF22156131003AD4D2 /* Selection */ = {
+			isa = PBXGroup;
+			children = (
+				7930DBD02215614A003AD4D2 /* SelectionHeaderModel.h */,
+				7930DBD12215614A003AD4D2 /* SelectionHeaderModel.m */,
+			);
+			path = Selection;
+			sourceTree = "<group>";
+		};
 		7963789E21C342620078815B /* DeliousSelfOrderController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1151,6 +1170,16 @@
 				796378A121C342620078815B /* DeliousSelfOrderController.xib */,
 			);
 			path = DeliousSelfOrderController;
+			sourceTree = "<group>";
+		};
+		798723ED2213C7B80076794D /* OptionSelectedTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				798723EE2213C7CF0076794D /* OptionSelectedTableCell.h */,
+				798723EF2213C7CF0076794D /* OptionSelectedTableCell.m */,
+				798723F02213C7CF0076794D /* OptionSelectedTableCell.xib */,
+			);
+			path = OptionSelectedTableCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1270,6 +1299,7 @@
 				7301E3B221ABDA3E00389733 /* menu_category.txt in Resources */,
 				7336D84D214F527A004908E0 /* WaiterController.xib in Resources */,
 				733675661FE25F2200F0AFF8 /* 1001.png in Resources */,
+				798723F22213C7CF0076794D /* OptionSelectedTableCell.xib in Resources */,
 				733675601FE25F2200F0AFF8 /* 3003.png in Resources */,
 				7357EEAC1F9753DA001EB56B /* ExistingOrderHeader.xib in Resources */,
 				7336754B1FE25F2200F0AFF8 /* 4003.png in Resources */,
@@ -1390,6 +1420,7 @@
 				7357EE9F1F974BE6001EB56B /* ViewExistingOrderController.m in Sources */,
 				730FE0DB1F95A5230045A234 /* TextfieldCustom.m in Sources */,
 				73387D73215DC4B000BE023B /* DatabaseHelper.m in Sources */,
+				7930DBD22215614A003AD4D2 /* SelectionHeaderModel.m in Sources */,
 				736095F821463163001EBAB7 /* NSString+KeyLanguage.m in Sources */,
 				7382C8601FDE2B0300952250 /* WhiteRaccoon.m in Sources */,
 				73CE5CC9215CCF3A00CDCD15 /* OptionGroupModel.m in Sources */,
@@ -1433,6 +1464,7 @@
 				73504DC521410C8C003C7ADE /* OutOfStockModel.m in Sources */,
 				730FE0EA1F95A7A80045A234 /* ButtonCustom.m in Sources */,
 				73E4DD061FFF151F00BBD349 /* Reachability.m in Sources */,
+				798723F12213C7CF0076794D /* OptionSelectedTableCell.m in Sources */,
 				796378A221C342630078815B /* DeliousSelfOrderController.m in Sources */,
 				7357EE8A1F9737C2001EB56B /* OrderSummaryCell.m in Sources */,
 			);

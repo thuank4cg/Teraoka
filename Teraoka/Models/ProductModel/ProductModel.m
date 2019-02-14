@@ -136,6 +136,11 @@
         [optionGroupList addObject:optionGroup];
     }
     
+    if ([[DatabaseHelper shared] isMealSet:[self.productNo intValue]]) {
+        OptionGroupModel *optionGroup = [self getSelectionGroup:[self.productNo intValue]];
+        [optionGroupList addObject:optionGroup];
+    }
+    
     return optionGroupList;
 }
 
@@ -171,6 +176,17 @@
     optionGroup.groupId = commentHeader.commentGroupNo;
     optionGroup.type = TYPE_COOKING_INSTRUCTION;
     optionGroup.optionList = [[DatabaseHelper shared] getAllCommentByCommentgGroup:comment_group_no];
+    
+    return optionGroup;
+}
+
+- (OptionGroupModel *)getSelectionGroup:(int)plu_no {
+    SelectionHeaderModel *selectionHeader = [[DatabaseHelper shared] getSelectionHeader:plu_no];
+    
+    OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
+    optionGroup.name = selectionHeader.selectionName;
+    optionGroup.groupId = selectionHeader.selectionNo;
+    optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlus:plu_no];
     
     return optionGroup;
 }

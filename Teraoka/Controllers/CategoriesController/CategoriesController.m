@@ -356,7 +356,7 @@
         CategoryModel *cate = categories[categoryIndex];
         if (indexPath.row < cate.products.count) {
             ProductModel *product = cate.products[indexPath.row];
-//            product.options = [product getOptionGroupList];
+            product.options = [product getOptionGroupList];
             newOrderVC.product = product;
         }
     }
@@ -482,7 +482,7 @@
                     product.servingSourceNo = [[productObj valueForKey:@"serving_source_no"] intValue];
                     product.commentSource = [[productObj valueForKey:@"comment_source"] intValue];
                     product.commentSourceNo = [[productObj valueForKey:@"comment_source_no"] intValue];
-                    product.options = [product getOptionGroupList];
+//                    product.options = [product getOptionGroupList];
                     
                     [cateModel.products addObject:product];
                 }

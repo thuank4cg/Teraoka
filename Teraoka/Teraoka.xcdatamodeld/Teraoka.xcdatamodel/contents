@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="17G4015" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Comment" representedClassName="Comment" syncable="YES" codeGenerationType="class">
         <attribute name="comment_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comment_name1" optional="YES" attributeType="String" syncable="YES"/>
@@ -47,6 +47,13 @@
         <attribute name="comment_set_name3" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comment_set_name4" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comment_set_no" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MealSet" representedClassName="MealSet" syncable="YES" codeGenerationType="class">
+        <attribute name="main_dish_flag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parent_plu_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sorting_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MenuCategory" representedClassName="MenuCategory" syncable="YES" codeGenerationType="class">
         <attribute name="category_name" optional="YES" attributeType="String" syncable="YES"/>
@@ -134,6 +141,24 @@
         <attribute name="suspended_plu_flag" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tax_no" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="SelectionGroup" representedClassName="SelectionGroup" syncable="YES" codeGenerationType="class">
+        <attribute name="child_plu_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="default_flag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="extra_price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="less_price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selection_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sorting_no" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="SelectionHeader" representedClassName="SelectionHeader" syncable="YES" codeGenerationType="class">
+        <attribute name="qty_check" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selection_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selection_name1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selection_name2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selection_name3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selection_name4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selection_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thot_dsp_col" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="ServingGroup" representedClassName="ServingGroup" syncable="YES" codeGenerationType="class">
         <attribute name="default_flag" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="serving_group_no" optional="YES" attributeType="String" syncable="YES"/>
@@ -208,5 +233,8 @@
         <element name="ServingSet" positionX="18" positionY="180" width="128" height="210"/>
         <element name="ServingTiming" positionX="36" positionY="189" width="128" height="210"/>
         <element name="TableNo" positionX="-9" positionY="135" width="128" height="180"/>
+        <element name="MealSet" positionX="-9" positionY="135" width="128" height="120"/>
+        <element name="SelectionGroup" positionX="0" positionY="144" width="128" height="135"/>
+        <element name="SelectionHeader" positionX="9" positionY="153" width="128" height="165"/>
     </elements>
 </model>

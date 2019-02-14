@@ -13,6 +13,7 @@
 #import "ServingGroupHeaderModel.h"
 #import "CommentSetModel.h"
 #import "CommentGroupHeaderModel.h"
+#import "SelectionHeaderModel.h"
 
 @interface DatabaseHelper : NSObject
 + (DatabaseHelper *)shared;
@@ -25,4 +26,7 @@
 - (CommentSetModel *)getCommentSet:(int)comment_set_no;
 - (CommentGroupHeaderModel *)getCommentGroupHeader:(int)comment_group_no;
 - (NSMutableArray *)getAllCommentByCommentgGroup:(int)comment_group_no;
+- (SelectionHeaderModel *)getSelectionHeader:(int)plu_no;
+- (NSMutableArray *)getAllChildPlus:(int)plu_no;
+- (BOOL)isMealSet:(int)plu_no;
 @end

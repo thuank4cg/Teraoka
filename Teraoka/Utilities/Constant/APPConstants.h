@@ -54,6 +54,9 @@
 #define KEY_SERVING_TIMING_TABLE_FILE_NAME @"serving_timing"
 #define KEY_OPTION_SET_TABLE_FILE_NAME @"option_set"
 #define KEY_TABLE_NO_TABLE_FILE_NAME @"table_no"
+#define KEY_MEAL_SET_TABLE_FILE_NAME @"meal_set"
+#define KEY_SELECTION_GROUP_TABLE_FILE_NAME @"selection_group"
+#define KEY_SELECTION_HEADER_TABLE_FILE_NAME @"selection_header"
 
 #define PLU_TABLE_NAME @"Plu"
 #define MENU_CATEGORY_TABLE_NAME @"MenuCategory"
@@ -70,6 +73,9 @@
 #define SERVING_TIMING_TABLE_NAME @"ServingTiming"
 #define OPTION_SET_TABLE_NAME @"OptionSet"
 #define TABLE_NO_TABLE_NAME @"TableNo"
+#define MEAL_SET_TABLE_NAME @"MealSet"
+#define SELECTION_GROUP_TABLE_NAME @"SelectionGroup"
+#define SELECTION_HEADER_TABLE_NAME @"SelectionHeader"
 
 //byte size
 #define REPLY_HEADER 4

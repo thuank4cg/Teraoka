@@ -23,6 +23,7 @@
 #import "NSString+KeyLanguage.h"
 #import "OptionGroupModel.h"
 #import "OptionModel.h"
+#import "OptionSelectedTableCell.h"
 
 @interface NewOrderController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
@@ -69,6 +70,7 @@
     self.tblView.dataSource = self;
     [self.tblView setSeparatorColor:[UIColor clearColor]];
     [self.tblView registerNib:[UINib nibWithNibName:@"OptionTableCell" bundle:nil] forCellReuseIdentifier:@"OptionTableCellID"];
+    [self.tblView registerNib:[UINib nibWithNibName:@"OptionSelectedTableCell" bundle:nil] forCellReuseIdentifier:@"OptionSelectedTableCellID"];
     
     self.tfQty.layer.borderColor = [UIColor grayColor].CGColor;
     self.tfQty.backgroundColor = [UIColor whiteColor];
@@ -216,14 +218,14 @@
     OptionTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionTableCellID" forIndexPath:indexPath];
     OptionGroupModel *optionGroup = self.product.options[indexPath.section];
     [cell setDataForCell:optionGroup];
-//    cell.backgroundColor = [UIColor yellowColor];
+//    OptionSelectedTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionSelectedTableCellID" forIndexPath:indexPath];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     OptionGroupModel *optionGroup = self.product.options[indexPath.section];
     if (optionGroup.optionList.count == 0) return 0;
-    return 70;
+    return 70;//150;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
