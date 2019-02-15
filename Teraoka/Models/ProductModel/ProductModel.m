@@ -201,15 +201,15 @@
     return optionGroup;
 }
 
-- (OptionGroupModel *)getSelectionGroup:(int)plu_no {
-    SelectionHeaderModel *selectionHeader = [[DatabaseHelper shared] getSelectionHeader:plu_no];
+- (OptionGroupModel *)getSelectionGroup:(int)selection_no {
+    SelectionHeaderModel *selectionHeader = [[DatabaseHelper shared] getSelectionHeader:selection_no];
     
     if (!selectionHeader.selectionName) return nil;
     
     OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
     optionGroup.name = selectionHeader.selectionName;
     optionGroup.groupId = selectionHeader.selectionNo;
-    optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlus:plu_no];
+    optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlus:selection_no];
     
     return optionGroup;
 }

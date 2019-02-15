@@ -295,10 +295,10 @@
     return selectionNos;
 }
 
-- (SelectionHeaderModel *)getSelectionHeader:(int)plu_no {
+- (SelectionHeaderModel *)getSelectionHeader:(int)selection_no {
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:SELECTION_HEADER_TABLE_NAME];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"selection_no == %d", plu_no]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"selection_no == %d", selection_no]];
     NSArray *groupArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     SelectionHeaderModel *model = [[SelectionHeaderModel alloc] init];
