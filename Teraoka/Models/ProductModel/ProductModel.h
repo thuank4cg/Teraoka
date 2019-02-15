@@ -30,7 +30,6 @@ typedef NS_ENUM(NSInteger, DELIVER_STATUS) {
 @property (nonatomic, strong) NSString *qty;
 @property (nonatomic, strong) NSString *qtyAvailable;
 @property (nonatomic, strong) NSMutableArray *options;
-//@property (nonatomic, strong) NSMutableArray *selectionGroups;
 @property (nonatomic, assign) int optionSource;
 @property (nonatomic, assign) int optionSourceNo;
 @property (nonatomic, assign) int servingSource;

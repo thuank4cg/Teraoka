@@ -215,17 +215,55 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    OptionTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionTableCellID" forIndexPath:indexPath];
     OptionGroupModel *optionGroup = self.product.options[indexPath.section];
+    __weak typeof(self) wSelf = self;
+    
+    BOOL isShowChild = NO;
+    
+    for (OptionModel *option in optionGroup.optionList) {
+        if (option.isCheck && option.product) {
+            isShowChild = YES;
+            break;
+        }
+    }
+    
+    if (isShowChild) {
+        OptionSelectedTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionSelectedTableCellID" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setDataForCell:optionGroup];
+        
+        cell.optionSelectedTableCellCallback = ^{
+            [wSelf.tblView reloadData];
+        };
+        
+        return cell;
+    }
+    
+    OptionTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionTableCellID" forIndexPath:indexPath];
     [cell setDataForCell:optionGroup];
-//    OptionSelectedTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionSelectedTableCellID" forIndexPath:indexPath];
+    
+    cell.optionTableCellCallback = ^{
+        [wSelf.tblView reloadData];
+    };
+
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     OptionGroupModel *optionGroup = self.product.options[indexPath.section];
+    
     if (optionGroup.optionList.count == 0) return 0;
-    return 70;//150;
+    
+    BOOL isShowChild = NO;
+    
+    for (OptionModel *option in optionGroup.optionList) {
+        if (option.isCheck && option.product) {
+            isShowChild = YES;
+            break;
+        }
+    }
+    if (isShowChild) return 150;
+    return 70;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

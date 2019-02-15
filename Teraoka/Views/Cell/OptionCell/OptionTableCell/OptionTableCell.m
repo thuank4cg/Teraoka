@@ -56,10 +56,14 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     for (int i=0;i<_optionGroup.optionList.count;i++) {
         OptionModel *option = _optionGroup.optionList[i];
-        if (i == indexPath.row) option.isCheck = YES;
-        else option.isCheck = NO;
+        if (i == indexPath.row) {
+            option.isCheck = YES;
+        } else {
+            option.isCheck = NO;
+        }
     }
-    [self.colView reloadData];
+//    [self.colView reloadData];
+    self.optionTableCellCallback();
 }
 
 @end

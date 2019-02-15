@@ -315,6 +315,31 @@
                 option.name = [plu valueForKey:@"item_name"];
                 option.type = TYPE_CONDIMENT;
                 option.price = [[plu valueForKey:@"price"] floatValue]/100;
+//                option.isChild = YES;
+                
+                ProductModel *product = [[ProductModel alloc] init];
+                product.productNo = [plu valueForKey:@"plu_no"];
+                
+                NSArray *directoryImageContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString stringWithFormat:@"%@%@", DOCUMENT_DIRECTORY_ROOT, PLU_IMAGE_DIRECTORY_PATH] error:nil];
+                product.image = [product getImageName:directoryImageContents];
+                product.name = [NSString stringWithFormat:@"%@", [plu valueForKey:@"item_name"]];
+                
+                float price = [[plu valueForKey:@"price"] floatValue]/100;
+                
+                product.price = [NSString stringWithFormat:@"SGD %.2f", price];
+                product.priceNumber = [NSString stringWithFormat:@"%.2f", price];
+                product.originalPrice = [NSString stringWithFormat:@"%@", [plu valueForKey:@"price"]];
+                product.qty = @"1";
+                product.optionSource = [[plu valueForKey:@"option_source"] intValue];
+                product.optionSourceNo = [[plu valueForKey:@"option_source_no"] intValue];
+                product.servingSource = [[plu valueForKey:@"serving_source"] intValue];
+                product.servingSourceNo = [[plu valueForKey:@"serving_source_no"] intValue];
+                product.commentSource = [[plu valueForKey:@"comment_source"] intValue];
+                product.commentSourceNo = [[plu valueForKey:@"comment_source_no"] intValue];
+                product.options = [product getOptionGroupList];
+                
+                option.product = product;
+                
                 [optionList addObject:option];
                 break;
             }

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ProductModel.h"
 
 @interface OptionModel : NSObject
 
@@ -15,5 +16,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) float price;
 @property (nonatomic, assign) BOOL isCheck;
+//@property (nonatomic, assign) BOOL isChild;
+@property (nonatomic, strong) ProductModel *product;
 
 @end

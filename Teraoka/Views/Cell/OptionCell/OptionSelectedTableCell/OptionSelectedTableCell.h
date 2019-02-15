@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OptionGroupModel.h"
+
+typedef void (^OptionSelectedTableCellCallback)(void);
 
 @interface OptionSelectedTableCell : UITableViewCell
+
+@property (nonatomic, copy) OptionSelectedTableCellCallback optionSelectedTableCellCallback;
+
+- (void)setDataForCell:(OptionGroupModel *)optionGroup;
 
 @end
