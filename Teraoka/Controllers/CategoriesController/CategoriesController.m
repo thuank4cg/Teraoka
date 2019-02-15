@@ -356,7 +356,7 @@
         CategoryModel *cate = categories[categoryIndex];
         if (indexPath.row < cate.products.count) {
             ProductModel *product = cate.products[indexPath.row];
-            product.options = [product getOptionGroupList];
+            product.options = [[product getOptionGroupList] arrayByAddingObjectsFromArray:[product getSelectionGroupList]];
             newOrderVC.product = product;
         }
     }

@@ -151,10 +151,10 @@
         }
     }
     
-    if (!isSelectedOption && self.product.options.count > 0) {
-        [Util showAlert:@"Please select at least one option" vc:self];
-        return;
-    }
+//    if (!isSelectedOption && self.product.options.count > 0) {
+//        [Util showAlert:@"Please select at least one option" vc:self];
+//        return;
+//    }
     
     if (![ShareManager shared].cartArr) [ShareManager shared].cartArr = [NSMutableArray new];
     

@@ -268,7 +268,10 @@
     NSArray *dataArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     for (NSManagedObject *data in dataArr) {
-        [childs addObject:[data valueForKey:@"no"]];
+        NSString *no = [data valueForKey:@"no"];
+        if (![childs containsObject:no]) {
+            [childs addObject:[data valueForKey:@"no"]];
+        }
     }
     
     return childs;
@@ -283,7 +286,10 @@
     NSArray *dataArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     for (NSManagedObject *data in dataArr) {
-        [selectionNos addObject:[data valueForKey:@"selection_no"]];
+        NSString *no = [data valueForKey:@"selection_no"];
+        if (![selectionNos containsObject:no]) {
+            [selectionNos addObject:[data valueForKey:@"selection_no"]];
+        }
     }
     
     return selectionNos;

@@ -34,33 +34,59 @@
     return [NSString stringWithFormat:@"%@%@/%@", DOCUMENT_DIRECTORY_ROOT, PLU_IMAGE_DIRECTORY_PATH, fullImageName];
 }
 
+- (NSMutableArray *)getSelectionGroupList {
+    NSMutableArray *optionGroupList = [NSMutableArray new];
+    NSMutableArray *selectionArr = [NSMutableArray new];
+    
+    NSArray *childPlus = [[DatabaseHelper shared] getChildPluFromMealSet:[self.productNo intValue]];
+    if (childPlus.count > 0) {
+        
+        for (NSString *child_plu_no in childPlus) {
+            NSArray *selectionNos = [[DatabaseHelper shared] getSelectionNoFromSelectionGroup:[child_plu_no intValue]];
+            
+            for (NSString *selectionNo in selectionNos) {
+                if (![selectionArr containsObject:selectionNo]) {
+                    [selectionArr addObject:selectionNo];
+                }
+            }
+        }
+    }
+    
+    for (NSString *selectionNo in selectionArr) {
+        OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue]];
+        if (optionGroup) [optionGroupList addObject:optionGroup];
+    }
+    
+    return optionGroupList;
+}
+
 - (NSMutableArray *)getOptionGroupList {
     NSMutableArray *optionGroupList = [NSMutableArray new];
     
     //CONDIMENTS
     if (self.optionSource > 0) {
         OptionSetModel *optionSet = [[DatabaseHelper shared] getOptionSet:self.optionSourceNo];
-
+        
         if (optionSet.optionGroupNo1 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupCondiments:optionSet.optionGroupNo1];
             [optionGroupList addObject:optionGroup];
         }
-
+        
         if (optionSet.optionGroupNo2 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupCondiments:optionSet.optionGroupNo2];
             [optionGroupList addObject:optionGroup];
         }
-
+        
         if (optionSet.optionGroupNo3 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupCondiments:optionSet.optionGroupNo3];
             [optionGroupList addObject:optionGroup];
         }
-
+        
         if (optionSet.optionGroupNo4 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupCondiments:optionSet.optionGroupNo4];
             [optionGroupList addObject:optionGroup];
         }
-
+        
         if (optionSet.optionGroupNo5 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupCondiments:optionSet.optionGroupNo5];
             [optionGroupList addObject:optionGroup];
@@ -73,27 +99,27 @@
     //COOKING INSTRUCTION
     if (self.commentSource > 0) {
         CommentSetModel *commentSet = [[DatabaseHelper shared] getCommentSet:self.commentSourceNo];
-
+        
         if (commentSet.commentGroupNo1 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupCookingInstruction:commentSet.commentGroupNo1];
             [optionGroupList addObject:optionGroup];
         }
-
+        
         if (commentSet.commentGroupNo2 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupCookingInstruction:commentSet.commentGroupNo2];
             [optionGroupList addObject:optionGroup];
         }
-
+        
         if (commentSet.commentGroupNo3 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupCookingInstruction:commentSet.commentGroupNo3];
             [optionGroupList addObject:optionGroup];
         }
-
+        
         if (commentSet.commentGroupNo4 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupCookingInstruction:commentSet.commentGroupNo4];
             [optionGroupList addObject:optionGroup];
         }
-
+        
         if (commentSet.commentGroupNo5 > 0) {
             OptionGroupModel *optionGroup = [self getOptionGroupCookingInstruction:commentSet.commentGroupNo5];
             [optionGroupList addObject:optionGroup];
@@ -134,20 +160,6 @@
     } else if (self.servingSourceNo > 0) {
         OptionGroupModel *optionGroup = [self getOptionGroupServingTiming:self.servingSourceNo];
         [optionGroupList addObject:optionGroup];
-    }
-    
-    NSArray *childPlus = [[DatabaseHelper shared] getChildPluFromMealSet:[self.productNo intValue]];
-    if (childPlus.count > 0) {
-        
-        for (NSString *child_plu_no in childPlus) {
-            NSArray *selectionNos = [[DatabaseHelper shared] getSelectionNoFromSelectionGroup:[child_plu_no intValue]];
-            
-            for (NSString *selectionNo in selectionNos) {
-                OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue]];
-                [optionGroupList addObject:optionGroup];
-            }
-        }
-
     }
     
     return optionGroupList;
@@ -191,6 +203,8 @@
 
 - (OptionGroupModel *)getSelectionGroup:(int)plu_no {
     SelectionHeaderModel *selectionHeader = [[DatabaseHelper shared] getSelectionHeader:plu_no];
+    
+    if (!selectionHeader.selectionName) return nil;
     
     OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
     optionGroup.name = selectionHeader.selectionName;

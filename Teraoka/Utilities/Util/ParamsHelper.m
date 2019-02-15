@@ -203,7 +203,22 @@
     
     /**XSendOrderDataStruct**/
     
-    for (ProductModel *product in [ShareManager shared].cartArr) {
+    NSMutableArray *cartArr = [[ShareManager shared].cartArr mutableCopy];
+    
+    for (ProductModel *product in cartArr) {
+        for (OptionGroupModel *group in product.options) {
+            for (OptionModel *option in group.optionList) {
+                if (option.product && option.isCheck) {
+                    option.product.qty = @"1";
+                } else {
+                    option.product.qty = @"0";
+                }
+                [cartArr addObject:option.product];
+            }
+        }
+    }
+    
+    for (ProductModel *product in cartArr) {
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]]; //PLU No
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]]; //Qty
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Current price
@@ -218,7 +233,7 @@
         
         for (OptionGroupModel *optionGroup in product.options) {
             for (OptionModel *option in optionGroup.optionList) {
-                if (option.isCheck && option.type == TYPE_CONDIMENT) {
+                if (option.isCheck && option.type == TYPE_CONDIMENT && !option.product) {
                     [condiments addObject:option];
                 }
             }
@@ -241,7 +256,7 @@
         
         for (OptionGroupModel *optionGroup in product.options) {
             for (OptionModel *option in optionGroup.optionList) {
-                if (option.isCheck && option.type == TYPE_COOKING_INSTRUCTION) {
+                if (option.isCheck && option.type == TYPE_COOKING_INSTRUCTION && !option.product) {
                     [instructions addObject:option];
                 }
             }
@@ -264,7 +279,7 @@
         
         for (OptionGroupModel *optionGroup in product.options) {
             for (OptionModel *option in optionGroup.optionList) {
-                if (option.isCheck && option.type == TYPE_SERVING_TIME) {
+                if (option.isCheck && option.type == TYPE_SERVING_TIME && !option.product) {
                     [servings addObject:option];
                 }
             }

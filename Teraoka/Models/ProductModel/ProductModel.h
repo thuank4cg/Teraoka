@@ -39,6 +39,7 @@ typedef NS_ENUM(NSInteger, DELIVER_STATUS) {
 @property (nonatomic, assign) DELIVER_STATUS deliverStatus;
 
 - (NSMutableArray *)getOptionGroupList;
+- (NSMutableArray *)getSelectionGroupList;
 - (NSString *)getImageName:(NSArray *)directoryImageContents;
 
 @end
