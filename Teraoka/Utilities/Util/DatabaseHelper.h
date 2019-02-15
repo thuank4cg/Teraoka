@@ -28,5 +28,6 @@
 - (NSMutableArray *)getAllCommentByCommentgGroup:(int)comment_group_no;
 - (SelectionHeaderModel *)getSelectionHeader:(int)plu_no;
 - (NSMutableArray *)getAllChildPlus:(int)plu_no;
-- (BOOL)isMealSet:(int)plu_no;
+- (NSMutableArray *)getChildPluFromMealSet:(int)plu_no;
+- (NSMutableArray *)getSelectionNoFromSelectionGroup:(int)child_plu_no;
 @end

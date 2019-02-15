@@ -259,15 +259,34 @@
     return optionList;
 }
 
-- (BOOL)isMealSet:(int)plu_no {
+- (NSMutableArray *)getChildPluFromMealSet:(int)plu_no {
+    NSMutableArray *childs = [NSMutableArray new];
+    
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:MEAL_SET_TABLE_NAME];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"parent_plu_no == %d", plu_no]];
     NSArray *dataArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    if (dataArr.count > 0) return YES;
+    for (NSManagedObject *data in dataArr) {
+        [childs addObject:[data valueForKey:@"no"]];
+    }
     
-    return NO;
+    return childs;
+}
+
+- (NSMutableArray *)getSelectionNoFromSelectionGroup:(int)child_plu_no {
+    NSMutableArray *selectionNos = [NSMutableArray new];
+    
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:SELECTION_GROUP_TABLE_NAME];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"child_plu_no == %d", child_plu_no]];
+    NSArray *dataArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    for (NSManagedObject *data in dataArr) {
+        [selectionNos addObject:[data valueForKey:@"selection_no"]];
+    }
+    
+    return selectionNos;
 }
 
 - (SelectionHeaderModel *)getSelectionHeader:(int)plu_no {

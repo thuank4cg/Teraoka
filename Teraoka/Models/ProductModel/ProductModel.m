@@ -136,9 +136,18 @@
         [optionGroupList addObject:optionGroup];
     }
     
-    if ([[DatabaseHelper shared] isMealSet:[self.productNo intValue]]) {
-        OptionGroupModel *optionGroup = [self getSelectionGroup:[self.productNo intValue]];
-        [optionGroupList addObject:optionGroup];
+    NSArray *childPlus = [[DatabaseHelper shared] getChildPluFromMealSet:[self.productNo intValue]];
+    if (childPlus.count > 0) {
+        
+        for (NSString *child_plu_no in childPlus) {
+            NSArray *selectionNos = [[DatabaseHelper shared] getSelectionNoFromSelectionGroup:[child_plu_no intValue]];
+            
+            for (NSString *selectionNo in selectionNos) {
+                OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue]];
+                [optionGroupList addObject:optionGroup];
+            }
+        }
+
     }
     
     return optionGroupList;
