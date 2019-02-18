@@ -311,27 +311,29 @@
     return model;
 }
 
-- (NSMutableArray *)getAllChildPlus:(int)plu_no {
+- (NSMutableArray *)getAllChildPlus:(int)plu_no childs:(NSArray *)childPlus {
     NSMutableArray *optionList = [NSMutableArray new];
     
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:SELECTION_GROUP_TABLE_NAME];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"selection_no == %d", plu_no]];
-    NSArray *selectionGroupArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+//    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:SELECTION_GROUP_TABLE_NAME];
+//    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"selection_no == %d", plu_no]];
+//    NSArray *selectionGroupArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+//
+//    NSMutableArray *pluNos = [NSMutableArray new];
+//    for (NSManagedObject *group in selectionGroupArr) {
+//        [pluNos addObject:[group valueForKey:@"child_plu_no"]];
+//    }
     
-    NSMutableArray *pluNos = [NSMutableArray new];
-    for (NSManagedObject *group in selectionGroupArr) {
-        [pluNos addObject:[group valueForKey:@"child_plu_no"]];
-    }
-    
-    if (pluNos.count == 0) {
+    if (childPlus.count == 0) {
         return optionList;
     }
     
-    fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PLU_TABLE_NAME];
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PLU_TABLE_NAME];
     NSArray *pluArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    for (NSString *no in pluNos) {
+    for (NSString *no in childPlus) {
         for (NSManagedObject *plu in pluArr) {
             NSString *pluNo = [plu valueForKey:@"plu_no"];
             if ([no isEqualToString:pluNo]) {

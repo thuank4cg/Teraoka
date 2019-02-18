@@ -53,7 +53,7 @@
     }
     
     for (NSString *selectionNo in selectionArr) {
-        OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue]];
+        OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue] childs:childPlus];
         if (optionGroup) [optionGroupList addObject:optionGroup];
     }
     
@@ -201,7 +201,7 @@
     return optionGroup;
 }
 
-- (OptionGroupModel *)getSelectionGroup:(int)selection_no {
+- (OptionGroupModel *)getSelectionGroup:(int)selection_no childs:(NSArray *)childPlus {
     SelectionHeaderModel *selectionHeader = [[DatabaseHelper shared] getSelectionHeader:selection_no];
     
     if (!selectionHeader.selectionName) return nil;
@@ -210,7 +210,7 @@
     optionGroup.name = selectionHeader.selectionName;
     optionGroup.groupId = selectionHeader.selectionNo;
     optionGroup.type = TYPE_SELECTION;
-    optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlus:selection_no];
+    optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlus:selection_no childs:childPlus];
     
     return optionGroup;
 }

@@ -198,11 +198,6 @@
     
     /**XSendOrderData**/
     
-    int numberOfObject = (int)[ShareManager shared].cartArr.count;
-    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObject] length:4]]; //Number of object
-    
-    /**XSendOrderDataStruct**/
-    
     NSMutableArray *cartArr = [[ShareManager shared].cartArr mutableCopy];
     
     for (ProductModel *product in cartArr) {
@@ -219,14 +214,17 @@
         }
     }
     
+    int numberOfObject = (int)cartArr.count;
+    [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObject] length:4]]; //Number of object
+    
+    /**XSendOrderDataStruct**/
+    
     for (ProductModel *product in cartArr) {
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]]; //PLU No
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]]; //Qty
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Current price
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Item Flag
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Item Flag
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Current price
-        [mCollectData appendData:[self convertStringToBytesArr:(product.isChild) ? @"3" : @"0" length:2]]; //Item Flag
+        [mCollectData appendData:[self convertStringToBytesArr:(product.isChild) ? @"3" : @"0" length:1]]; //Item Flag
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]]; //Item Flag
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Item Flag
         
         /**XItemOptionData**/
