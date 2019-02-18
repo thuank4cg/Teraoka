@@ -198,7 +198,7 @@
     
     /**XSendOrderData**/
     
-    NSMutableArray *cartArr = [[ShareManager shared].cartArr mutableCopy];
+    NSMutableArray *cartArr = [self filterCart];
     
     for (ProductModel *product in cartArr) {
         for (OptionGroupModel *group in product.options) {
@@ -315,8 +315,10 @@
     
     /**XTransactionData**/
     
+    NSArray *cartArr = [self filterCart];
+    
     int totalPrice = 0;
-    for (ProductModel *product in [ShareManager shared].cartArr) {
+    for (ProductModel *product in cartArr) {
         totalPrice += [product.originalPrice intValue] * [product.qty intValue];
     }
 
@@ -396,12 +398,12 @@
     //Total price paid
     [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
 
-    int numberOfObj = (int)[ShareManager shared].cartArr.count;
+    int numberOfObj = (int)cartArr.count;
     //Number of object
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
 
     /**XTransactionPaymentData[]**/
-    for (ProductModel *product in [ShareManager shared].cartArr) {
+    for (ProductModel *product in cartArr) {
         //Id
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]];
         //Quantity
@@ -418,7 +420,7 @@
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
 
     /**XTransactionItemData[]**/
-    for (ProductModel *product in [ShareManager shared].cartArr) {
+    for (ProductModel *product in cartArr) {
         //PLU No
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]];
         //Quantity
@@ -565,14 +567,16 @@
     
     /**XInventoryPluData**/
     
-    int numberOfObj = (int)[ShareManager shared].cartArr.count;
+    NSArray *cartArr = [self filterCart];
+    
+    int numberOfObj = (int)cartArr.count;
     
     //Number of object
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObj] length:4]];
     
     /**XInventoryPluDataStruct[n]**/
     
-    for (ProductModel *product in [ShareManager shared].cartArr) {
+    for (ProductModel *product in cartArr) {
         //PLU No
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]];
     }
@@ -712,6 +716,32 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     return  requestId;
+}
+
+- (NSArray *)filterCart {
+    NSMutableArray *cartArr = [[ShareManager shared].cartArr mutableCopy];
+    
+    for (ProductModel *product in cartArr) {
+        for (OptionGroupModel *group in product.options) {
+            for (OptionModel *option in group.optionList) {
+                if (option.isFilter) {
+                    if (option.product) {
+                        option.product.qty = (option.isCheck) ? @"1" : @"0";
+                        option.product.isChild = YES;
+                        [cartArr addObject:option.product];
+                    }
+                } else {
+                    if (option.product && option.isCheck) {
+                        option.product.qty = @"1";
+                        option.product.isChild = YES;
+                        [cartArr addObject:option.product];
+                    }
+                }
+            }
+        }
+    }
+    
+    return cartArr;
 }
 
 @end

@@ -151,10 +151,10 @@
         }
     }
     
-//    if (!isSelectedOption && self.product.options.count > 0) {
-//        [Util showAlert:@"Please select at least one option" vc:self];
-//        return;
-//    }
+    if (!isSelectedOption && self.product.options.count > 0) {
+        [Util showAlert:@"Please select at least one option" vc:self];
+        return;
+    }
     
     if (![ShareManager shared].cartArr) [ShareManager shared].cartArr = [NSMutableArray new];
     
@@ -244,6 +244,11 @@
     OptionGroupModel *optionGroup = self.product.options[indexPath.section];
     
     if (optionGroup.optionList.count == 0) return 0;
+    for (OptionModel *option in optionGroup.optionList) {
+        if (option.isCheck && option.product.options.count == 0) {
+            return 70;
+        }
+    }
     if (optionGroup.isShowChild && optionGroup.type == TYPE_SELECTION) return 150;
     return 70;
 }

@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *colView;
 @property (weak, nonatomic) IBOutlet UILabel *lbSelected;
+@property (weak, nonatomic) IBOutlet UIView *preferenceContentView;
 
 @end
 
@@ -59,6 +60,8 @@
             [options addObject:option];
         }
     }
+    
+    [self.preferenceContentView setHidden:(options.count == 0)];
 
     self.lbSelected.text = [NSString stringWithFormat:@"You selected: %@", childName];
     

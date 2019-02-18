@@ -116,6 +116,7 @@
             <connections>
                 <outlet property="colView" destination="xID-am-QkR" id="vwU-LX-qN1"/>
                 <outlet property="lbSelected" destination="Bc8-CB-IdK" id="jsi-JX-Sxu"/>
+                <outlet property="preferenceContentView" destination="ESy-J6-ER3" id="MOz-gs-aZs"/>
             </connections>
             <point key="canvasLocation" x="5.5999999999999996" y="98.050974512743636"/>
         </tableViewCell>
