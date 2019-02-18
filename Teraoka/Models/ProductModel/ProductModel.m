@@ -52,10 +52,26 @@
         }
     }
     
-    for (NSString *selectionNo in selectionArr) {
-        OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue] childs:childPlus];
-        if (optionGroup) [optionGroupList addObject:optionGroup];
+    [selectionArr addObject:@"4"];
+    
+    if (selectionArr.count == 0 && childPlus.count > 0) {
+        OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
+        optionGroup.name = @"";
+        optionGroup.groupId = 0;
+        optionGroup.type = TYPE_SELECTION;
+        optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlus:0 childs:childPlus];
+        [optionGroupList addObject:optionGroup];
+    } else {
+        for (NSString *selectionNo in selectionArr) {
+            OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue] childs:childPlus];
+            if (optionGroup) [optionGroupList addObject:optionGroup];
+        }
     }
+    
+//    for (NSString *selectionNo in selectionArr) {
+//        OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue] childs:childPlus];
+//        if (optionGroup) [optionGroupList addObject:optionGroup];
+//    }
     
     return optionGroupList;
 }
@@ -204,7 +220,7 @@
 - (OptionGroupModel *)getSelectionGroup:(int)selection_no childs:(NSArray *)childPlus {
     SelectionHeaderModel *selectionHeader = [[DatabaseHelper shared] getSelectionHeader:selection_no];
     
-    if (!selectionHeader.selectionName) return nil;
+//    if (!selectionHeader.selectionName) return nil;
     
     OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
     optionGroup.name = selectionHeader.selectionName;

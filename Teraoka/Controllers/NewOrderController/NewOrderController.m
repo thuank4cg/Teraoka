@@ -263,7 +263,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     OptionGroupModel *optionGroup = self.product.options[section];
-    if (optionGroup.optionList.count == 0) return 0;
+    if (optionGroup.optionList.count == 0 || optionGroup.name.length == 0) return 0;
     return 70;
 }
 

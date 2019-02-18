@@ -269,7 +269,8 @@
     
     for (NSManagedObject *data in dataArr) {
         NSString *no = [data valueForKey:@"no"];
-        if (![childs containsObject:no]) {
+        int type = [[data valueForKey:@"type"] intValue];
+        if (![childs containsObject:no] && type == 0) {
             [childs addObject:[data valueForKey:@"no"]];
         }
     }
@@ -314,26 +315,26 @@
 - (NSMutableArray *)getAllChildPlus:(int)plu_no childs:(NSArray *)childPlus {
     NSMutableArray *optionList = [NSMutableArray new];
     
-//    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:SELECTION_GROUP_TABLE_NAME];
-//    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"selection_no == %d", plu_no]];
-//    NSArray *selectionGroupArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-//
-//    NSMutableArray *pluNos = [NSMutableArray new];
-//    for (NSManagedObject *group in selectionGroupArr) {
-//        [pluNos addObject:[group valueForKey:@"child_plu_no"]];
-//    }
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:SELECTION_GROUP_TABLE_NAME];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"selection_no == %d", plu_no]];
+    NSArray *selectionGroupArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+
+    NSMutableArray *pluNos = [NSMutableArray new];
+    for (NSManagedObject *group in selectionGroupArr) {
+        [pluNos addObject:[group valueForKey:@"child_plu_no"]];
+    }
     
-    if (childPlus.count == 0) {
+    if (pluNos.count == 0) {
         return optionList;
     }
     
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    if (plu_no != 4) pluNos = childPlus;
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PLU_TABLE_NAME];
+    fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PLU_TABLE_NAME];
     NSArray *pluArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    for (NSString *no in childPlus) {
+    for (NSString *no in pluNos) {
         for (NSManagedObject *plu in pluArr) {
             NSString *pluNo = [plu valueForKey:@"plu_no"];
             if ([no isEqualToString:pluNo]) {
@@ -342,7 +343,6 @@
                 option.name = [plu valueForKey:@"item_name"];
                 option.type = TYPE_SELECTION;
                 option.price = [[plu valueForKey:@"price"] floatValue]/100;
-//                option.isChild = YES;
                 
                 ProductModel *product = [[ProductModel alloc] init];
                 product.productNo = [plu valueForKey:@"plu_no"];
