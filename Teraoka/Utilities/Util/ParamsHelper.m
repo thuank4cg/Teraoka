@@ -213,6 +213,7 @@
                 } else {
                     option.product.qty = @"0";
                 }
+                option.product.isChild = YES;
                 [cartArr addObject:option.product];
             }
         }
@@ -221,9 +222,12 @@
     for (ProductModel *product in cartArr) {
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]]; //PLU No
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]]; //Qty
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Current price
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Current price
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Item Flag
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Item Flag
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Current price
+        [mCollectData appendData:[self convertStringToBytesArr:(product.isChild) ? @"3" : @"0" length:2]]; //Item Flag
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Item Flag
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Item Flag
         
         /**XItemOptionData**/
         
@@ -233,7 +237,7 @@
         
         for (OptionGroupModel *optionGroup in product.options) {
             for (OptionModel *option in optionGroup.optionList) {
-                if (option.isCheck && option.type == TYPE_CONDIMENT && !option.product) {
+                if (option.isCheck && option.type == TYPE_CONDIMENT) {
                     [condiments addObject:option];
                 }
             }
@@ -248,15 +252,13 @@
             [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Condiment Qty
         }
         
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        
         /**XCookingInstructionData**/
         
         NSMutableArray *instructions = [NSMutableArray new];
         
         for (OptionGroupModel *optionGroup in product.options) {
             for (OptionModel *option in optionGroup.optionList) {
-                if (option.isCheck && option.type == TYPE_COOKING_INSTRUCTION && !option.product) {
+                if (option.isCheck && option.type == TYPE_COOKING_INSTRUCTION) {
                     [instructions addObject:option];
                 }
             }
@@ -271,15 +273,13 @@
             [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Cooking Instruction Qty
         }
         
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        
         /**XServingTimeData**/
         
         NSMutableArray *servings = [NSMutableArray new];
         
         for (OptionGroupModel *optionGroup in product.options) {
             for (OptionModel *option in optionGroup.optionList) {
-                if (option.isCheck && option.type == TYPE_SERVING_TIME && !option.product) {
+                if (option.isCheck && option.type == TYPE_SERVING_TIME) {
                     [servings addObject:option];
                 }
             }
@@ -293,8 +293,6 @@
             [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", option.optionId] length:2]]; //Serving Time No
             [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Serving Time Qty
         }
-        
-//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         
         /**XFreeInstructionData**/
         
@@ -504,8 +502,6 @@
             [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Condiment Qty
         }
         
-        //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        
         /**XCookingInstructionData**/
         
         NSMutableArray *instructions = [NSMutableArray new];
@@ -527,8 +523,6 @@
             [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Cooking Instruction Qty
         }
         
-        //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
-        
         /**XServingTimeData**/
         
         NSMutableArray *servings = [NSMutableArray new];
@@ -549,8 +543,6 @@
             [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", option.optionId] length:2]]; //Serving Time No
             [mCollectData appendData:[self convertStringToBytesArr:@"1" length:2]]; //Serving Time Qty
         }
-        
-        //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         
         /**XFreeInstructionData**/
         

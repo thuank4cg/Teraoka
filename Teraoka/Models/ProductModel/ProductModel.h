@@ -37,6 +37,7 @@ typedef NS_ENUM(NSInteger, DELIVER_STATUS) {
 @property (nonatomic, assign) int commentSource;
 @property (nonatomic, assign) int commentSourceNo;
 @property (nonatomic, assign) DELIVER_STATUS deliverStatus;
+@property (nonatomic, assign) BOOL isChild;
 
 - (NSMutableArray *)getOptionGroupList;
 - (NSMutableArray *)getSelectionGroupList;

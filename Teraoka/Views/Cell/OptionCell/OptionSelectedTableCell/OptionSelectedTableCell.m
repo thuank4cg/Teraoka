@@ -36,6 +36,7 @@
     for (OptionModel *option in _optionGroup.optionList) {
         if (option.product) option.isCheck = NO;
     }
+    _optionGroup.isShowChild = NO;
     self.optionSelectedTableCellCallback();
 }
 
@@ -92,15 +93,6 @@
             option.isCheck = YES;
         } else {
             option.isCheck = NO;
-        }
-    }
-    
-    for (OptionModel *option in _optionGroup.optionList) {
-        for (OptionModel *opt in options) {
-            if (option.optionId == opt.optionId) {
-                option.isCheck = opt.isCheck;
-                break;
-            }
         }
     }
     

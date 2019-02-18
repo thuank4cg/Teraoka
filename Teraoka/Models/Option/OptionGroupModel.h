@@ -11,7 +11,8 @@
 typedef NS_ENUM(NSInteger, OPTION_TYPE) {
     TYPE_CONDIMENT = 100,
     TYPE_SERVING_TIME,
-    TYPE_COOKING_INSTRUCTION
+    TYPE_COOKING_INSTRUCTION,
+    TYPE_SELECTION
 };
 
 @interface OptionGroupModel : NSObject
@@ -20,5 +21,6 @@ typedef NS_ENUM(NSInteger, OPTION_TYPE) {
 @property (nonatomic, assign) int groupId;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSMutableArray *optionList;
+@property (nonatomic, assign) BOOL isShowChild;
 
 @end

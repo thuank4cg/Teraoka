@@ -338,7 +338,7 @@
                 OptionModel *option = [[OptionModel alloc] init];
                 option.optionId = [pluNo intValue];
                 option.name = [plu valueForKey:@"item_name"];
-                option.type = TYPE_CONDIMENT;
+                option.type = TYPE_SELECTION;
                 option.price = [[plu valueForKey:@"price"] floatValue]/100;
 //                option.isChild = YES;
                 

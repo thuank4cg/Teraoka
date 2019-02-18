@@ -218,16 +218,7 @@
     OptionGroupModel *optionGroup = self.product.options[indexPath.section];
     __weak typeof(self) wSelf = self;
     
-    BOOL isShowChild = NO;
-    
-    for (OptionModel *option in optionGroup.optionList) {
-        if (option.isCheck && option.product) {
-            isShowChild = YES;
-            break;
-        }
-    }
-    
-    if (isShowChild) {
+    if (optionGroup.isShowChild && optionGroup.type == TYPE_SELECTION) {
         OptionSelectedTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionSelectedTableCellID" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setDataForCell:optionGroup];
@@ -253,16 +244,7 @@
     OptionGroupModel *optionGroup = self.product.options[indexPath.section];
     
     if (optionGroup.optionList.count == 0) return 0;
-    
-    BOOL isShowChild = NO;
-    
-    for (OptionModel *option in optionGroup.optionList) {
-        if (option.isCheck && option.product) {
-            isShowChild = YES;
-            break;
-        }
-    }
-    if (isShowChild) return 150;
+    if (optionGroup.isShowChild && optionGroup.type == TYPE_SELECTION) return 150;
     return 70;
 }
 

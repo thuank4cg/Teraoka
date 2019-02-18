@@ -62,6 +62,9 @@
             option.isCheck = NO;
         }
     }
+    
+    if (_optionGroup.type == TYPE_SELECTION) _optionGroup.isShowChild = YES;
+    
 //    [self.colView reloadData];
     self.optionTableCellCallback();
 }

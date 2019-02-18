@@ -209,6 +209,7 @@
     OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
     optionGroup.name = selectionHeader.selectionName;
     optionGroup.groupId = selectionHeader.selectionNo;
+    optionGroup.type = TYPE_SELECTION;
     optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlus:selection_no];
     
     return optionGroup;
