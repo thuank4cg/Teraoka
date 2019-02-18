@@ -162,6 +162,8 @@
 		796378A221C342630078815B /* DeliousSelfOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7963789F21C342620078815B /* DeliousSelfOrderController.m */; };
 		796378A321C342630078815B /* DeliousSelfOrderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796378A121C342620078815B /* DeliousSelfOrderController.xib */; };
 		796D67BA221A488C00DFF098 /* HOTMasterDataFull_02.12_190215_120007_01.48.zip in Resources */ = {isa = PBXBuildFile; fileRef = 796D67B9221A488C00DFF098 /* HOTMasterDataFull_02.12_190215_120007_01.48.zip */; };
+		796D67BE221AAEE800DFF098 /* MealSetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 796D67BD221AAEE800DFF098 /* MealSetModel.m */; };
+		796D67C0221AB15A00DFF098 /* HOTMasterDataFull_02.12_190218_151207_01.55.zip in Resources */ = {isa = PBXBuildFile; fileRef = 796D67BF221AB15900DFF098 /* HOTMasterDataFull_02.12_190218_151207_01.55.zip */; };
 		798723F12213C7CF0076794D /* OptionSelectedTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 798723EF2213C7CF0076794D /* OptionSelectedTableCell.m */; };
 		798723F22213C7CF0076794D /* OptionSelectedTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 798723F02213C7CF0076794D /* OptionSelectedTableCell.xib */; };
 		F534B53E83D60C16002E3C90 /* libPods-Teraoka.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8826900F53921C0151A18A11 /* libPods-Teraoka.a */; };
@@ -395,6 +397,9 @@
 		796378A021C342620078815B /* DeliousSelfOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliousSelfOrderController.h; sourceTree = "<group>"; };
 		796378A121C342620078815B /* DeliousSelfOrderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliousSelfOrderController.xib; sourceTree = "<group>"; };
 		796D67B9221A488C00DFF098 /* HOTMasterDataFull_02.12_190215_120007_01.48.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = HOTMasterDataFull_02.12_190215_120007_01.48.zip; sourceTree = "<group>"; };
+		796D67BC221AAEE800DFF098 /* MealSetModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MealSetModel.h; sourceTree = "<group>"; };
+		796D67BD221AAEE800DFF098 /* MealSetModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MealSetModel.m; sourceTree = "<group>"; };
+		796D67BF221AB15900DFF098 /* HOTMasterDataFull_02.12_190218_151207_01.55.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = HOTMasterDataFull_02.12_190218_151207_01.55.zip; sourceTree = "<group>"; };
 		798723EE2213C7CF0076794D /* OptionSelectedTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionSelectedTableCell.h; sourceTree = "<group>"; };
 		798723EF2213C7CF0076794D /* OptionSelectedTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OptionSelectedTableCell.m; sourceTree = "<group>"; };
 		798723F02213C7CF0076794D /* OptionSelectedTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionSelectedTableCell.xib; sourceTree = "<group>"; };
@@ -470,6 +475,7 @@
 		730FE0B41F95A1690045A234 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				796D67BF221AB15900DFF098 /* HOTMasterDataFull_02.12_190218_151207_01.55.zip */,
 				796D67B9221A488C00DFF098 /* HOTMasterDataFull_02.12_190215_120007_01.48.zip */,
 				7301E3B321ABDBB900389733 /* HOTMasterDataFull_02.12_181107_164412_01.07.zip */,
 				736095F02146286E001EBAB7 /* english.csv */,
@@ -497,6 +503,7 @@
 		730FE0CE1F95A1FE0045A234 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				796D67BB221AAED500DFF098 /* MealSet */,
 				7930DBCF22156131003AD4D2 /* Selection */,
 				7316B557216F2F650061DE24 /* Error */,
 				73387D86215E1D7E00BE023B /* Comment */,
@@ -1175,6 +1182,15 @@
 			path = DeliousSelfOrderController;
 			sourceTree = "<group>";
 		};
+		796D67BB221AAED500DFF098 /* MealSet */ = {
+			isa = PBXGroup;
+			children = (
+				796D67BC221AAEE800DFF098 /* MealSetModel.h */,
+				796D67BD221AAEE800DFF098 /* MealSetModel.m */,
+			);
+			path = MealSet;
+			sourceTree = "<group>";
+		};
 		798723ED2213C7B80076794D /* OptionSelectedTableCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1285,6 +1301,7 @@
 				7357EEB81F975A6D001EB56B /* BillCompleteController.xib in Resources */,
 				730FE11B1F96032F0045A234 /* NewOrderController.xib in Resources */,
 				7336755E1FE25F2200F0AFF8 /* 1007.png in Resources */,
+				796D67C0221AB15A00DFF098 /* HOTMasterDataFull_02.12_190218_151207_01.55.zip in Resources */,
 				733675631FE25F2200F0AFF8 /* 1003.png in Resources */,
 				73203826215C7A0A00747F37 /* serving_timing.txt in Resources */,
 				737B489A212AA02400B02B3D /* SettingsController.xib in Resources */,
@@ -1465,6 +1482,7 @@
 				7357EE781F9711FB001EB56B /* IncompleteItemController.m in Sources */,
 				730FE0C21F95A1690045A234 /* Teraoka.xcdatamodeld in Sources */,
 				730FE0FE1F95B18B0045A234 /* HomeController.m in Sources */,
+				796D67BE221AAEE800DFF098 /* MealSetModel.m in Sources */,
 				73504DC521410C8C003C7ADE /* OutOfStockModel.m in Sources */,
 				730FE0EA1F95A7A80045A234 /* ButtonCustom.m in Sources */,
 				73E4DD061FFF151F00BBD349 /* Reachability.m in Sources */,

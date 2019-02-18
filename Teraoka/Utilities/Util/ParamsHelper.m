@@ -203,10 +203,18 @@
     for (ProductModel *product in cartArr) {
         for (OptionGroupModel *group in product.options) {
             for (OptionModel *option in group.optionList) {
-                if (option.product) {
-                    option.product.qty = (option.isCheck) ? @"1" : @"0";
-                    option.product.isChild = YES;
-                    [cartArr addObject:option.product];
+                if (option.isFilter) {
+                    if (option.product) {
+                        option.product.qty = (option.isCheck) ? @"1" : @"0";
+                        option.product.isChild = YES;
+                        [cartArr addObject:option.product];
+                    }
+                } else {
+                    if (option.product && option.isCheck) {
+                        option.product.qty = @"1";
+                        option.product.isChild = YES;
+                        [cartArr addObject:option.product];
+                    }
                 }
             }
         }

@@ -12,6 +12,7 @@
 #import "APPConstants.h"
 #import "OptionModel.h"
 #import "OptionGroupModel.h"
+#import "MealSetModel.h"
 
 @implementation DatabaseHelper
 
@@ -259,8 +260,8 @@
     return optionList;
 }
 
-- (NSMutableArray *)getChildPluFromMealSet:(int)plu_no {
-    NSMutableArray *childs = [NSMutableArray new];
+- (NSMutableArray *)getMealSetList:(int)plu_no {
+    NSMutableArray *mealSetList = [NSMutableArray new];
     
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:MEAL_SET_TABLE_NAME];
@@ -268,14 +269,16 @@
     NSArray *dataArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     for (NSManagedObject *data in dataArr) {
-        NSString *no = [data valueForKey:@"no"];
+        int no = [[data valueForKey:@"no"] intValue];
         int type = [[data valueForKey:@"type"] intValue];
-        if (![childs containsObject:no] && type == 0) {
-            [childs addObject:[data valueForKey:@"no"]];
-        }
+        
+        MealSetModel *model = [[MealSetModel alloc] init];
+        model.type = type;
+        model.no = no;
+        [mealSetList addObject:model];
     }
     
-    return childs;
+    return mealSetList;
 }
 
 - (NSMutableArray *)getSelectionNoFromSelectionGroup:(int)child_plu_no {
@@ -312,7 +315,7 @@
     return model;
 }
 
-- (NSMutableArray *)getAllChildPlus:(int)plu_no childs:(NSArray *)childPlus {
+- (NSMutableArray *)getAllChildPlus:(int)plu_no childs:(NSArray *)childPlus mealSet:(NSArray *)mealSetList {
     NSMutableArray *optionList = [NSMutableArray new];
     
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
@@ -325,14 +328,24 @@
         [pluNos addObject:[group valueForKey:@"child_plu_no"]];
     }
     
+    BOOL isFilter = YES;
+    
+    for (MealSetModel *model in mealSetList) {
+        if (model.no == plu_no) {
+            isFilter = NO;
+            break;
+        }
+    }
+    
+    if (isFilter) pluNos = (NSMutableArray *)childPlus;
+    
     if (pluNos.count == 0) {
         return optionList;
     }
     
-    if (plu_no != 4) pluNos = childPlus;
     
-    fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PLU_TABLE_NAME];
-    NSArray *pluArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    NSFetchRequest *fetchRequest1 = [[NSFetchRequest alloc] initWithEntityName:PLU_TABLE_NAME];
+    NSArray *pluArr = [[managedObjectContext executeFetchRequest:fetchRequest1 error:nil] mutableCopy];
     
     for (NSString *no in pluNos) {
         for (NSManagedObject *plu in pluArr) {
@@ -343,6 +356,7 @@
                 option.name = [plu valueForKey:@"item_name"];
                 option.type = TYPE_SELECTION;
                 option.price = [[plu valueForKey:@"price"] floatValue]/100;
+                option.isFilter = isFilter;
                 
                 ProductModel *product = [[ProductModel alloc] init];
                 product.productNo = [plu valueForKey:@"plu_no"];

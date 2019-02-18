@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) float price;
 @property (nonatomic, assign) BOOL isCheck;
+@property (nonatomic, assign) BOOL isFilter;
 @property (nonatomic, strong) ProductModel *product;
 
 @end
