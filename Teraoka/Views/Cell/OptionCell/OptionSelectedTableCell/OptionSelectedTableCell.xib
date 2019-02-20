@@ -92,7 +92,7 @@
                             <constraint firstAttribute="width" constant="30" id="iT5-dG-ztW"/>
                             <constraint firstAttribute="height" constant="30" id="jRo-5z-TTv"/>
                         </constraints>
-                        <state key="normal" backgroundImage="ic_radio"/>
+                        <state key="normal" backgroundImage="ic_radio_checked"/>
                     </button>
                 </subviews>
                 <constraints>
@@ -122,6 +122,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_radio" width="16" height="16"/>
+        <image name="ic_radio_checked" width="16" height="16"/>
     </resources>
 </document>

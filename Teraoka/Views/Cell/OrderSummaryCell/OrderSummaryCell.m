@@ -67,7 +67,7 @@
     }
     
     BOOL isSelectedOption = NO;
-    NSString* optionStr = @"<p style='line-height:1.8;text-align:center'>";
+    NSString* optionStr = @"<p style='line-height:1.8'>";
     for (OptionGroupModel *optionGroup in product.options) {
         for (OptionModel *option in optionGroup.optionList) {
             if (option.isCheck) {
