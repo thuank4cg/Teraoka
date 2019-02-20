@@ -198,27 +198,7 @@
     
     /**XSendOrderData**/
     
-    NSMutableArray *cartArr = [self filterCart];
-    
-    for (ProductModel *product in cartArr) {
-        for (OptionGroupModel *group in product.options) {
-            for (OptionModel *option in group.optionList) {
-                if (option.isFilter) {
-                    if (option.product) {
-                        option.product.qty = (option.isCheck) ? @"1" : @"0";
-                        option.product.isChild = YES;
-                        [cartArr addObject:option.product];
-                    }
-                } else {
-                    if (option.product && option.isCheck) {
-                        option.product.qty = @"1";
-                        option.product.isChild = YES;
-                        [cartArr addObject:option.product];
-                    }
-                }
-            }
-        }
-    }
+    NSArray *cartArr = [self filterCart];
     
     int numberOfObject = (int)cartArr.count;
     [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%d", numberOfObject] length:4]]; //Number of object
@@ -725,14 +705,14 @@
         for (OptionGroupModel *group in product.options) {
             for (OptionModel *option in group.optionList) {
                 if (option.isFilter) {
-                    if (option.product) {
-                        option.product.qty = (option.isCheck) ? @"1" : @"0";
+                    if (option.product && option.isCheck) {
+                        option.product.qty = @"1";
                         option.product.isChild = YES;
                         [cartArr addObject:option.product];
                     }
                 } else {
-                    if (option.product && option.isCheck) {
-                        option.product.qty = @"1";
+                    if (option.product) {
+                        option.product.qty = (option.isCheck) ? @"1" : @"0";
                         option.product.isChild = YES;
                         [cartArr addObject:option.product];
                     }

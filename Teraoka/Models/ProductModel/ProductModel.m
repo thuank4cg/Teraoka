@@ -38,20 +38,20 @@
 - (NSMutableArray *)getSelectionGroupList {
     NSMutableArray *optionGroupList = [NSMutableArray new];
     NSMutableArray *selectionArr = [NSMutableArray new];
-    NSMutableArray *childPlus = [NSMutableArray new];
+    NSMutableArray *childPluList = [NSMutableArray new];
     
-    NSArray *mealSetList = [[DatabaseHelper shared] getMealSetList:[self.productNo intValue]];
+    NSArray *mealSetList = [[DatabaseHelper shared]  getMealSetList:[self.productNo intValue]];
     
     for (MealSetModel *model in mealSetList) {
-        if (model.type == 0) [childPlus addObject:[NSString stringWithFormat:@"%d", model.no]];
+        if (model.type == 0) [childPluList addObject:[NSString stringWithFormat:@"%d", model.no]];
     }
     
-    if (childPlus.count > 0) {
+    if (childPluList.count > 0) {
         
-        for (NSString *child_plu_no in childPlus) {
-            NSArray *selectionNos = [[DatabaseHelper shared] getSelectionNoFromSelectionGroup:[child_plu_no intValue]];
+        for (NSString *child_plu_no in childPluList) {
+            NSArray *selectionNoList = [[DatabaseHelper shared] getSelectionNoFromSelectionGroup:[child_plu_no intValue]];
             
-            for (NSString *selectionNo in selectionNos) {
+            for (NSString *selectionNo in selectionNoList) {
                 if (![selectionArr containsObject:selectionNo]) {
                     [selectionArr addObject:selectionNo];
                 }
@@ -59,22 +59,39 @@
         }
     }
     
-    for (MealSetModel *model in mealSetList) {
-        if (model.type == 1) [selectionArr addObject:[NSString stringWithFormat:@"%d", model.no]];
-    }
-    
-    if (selectionArr.count == 0 && childPlus.count > 0) {
+    if (selectionArr.count == 0 && childPluList.count > 0) {
         OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
         optionGroup.name = @"";
         optionGroup.groupId = 0;
         optionGroup.type = TYPE_SELECTION;
-        optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlus:0 childs:childPlus mealSet:mealSetList];
+        optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlu:0 childs:childPluList];
         [optionGroupList addObject:optionGroup];
     } else {
         for (NSString *selectionNo in selectionArr) {
-            OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue] childs:childPlus mealSet:mealSetList];
+            OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue] childs:childPluList];
             if (optionGroup) [optionGroupList addObject:optionGroup];
         }
+        
+        NSArray *childPluNoGroup = [[DatabaseHelper shared] getChildPluNoGroup:selectionArr childs:childPluList];
+        
+        if (childPluNoGroup.count > 0) {
+            OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
+            optionGroup.name = @"";
+            optionGroup.groupId = 0;
+            optionGroup.type = TYPE_SELECTION;
+            optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlu:0 childs:childPluNoGroup];
+            [optionGroupList addObject:optionGroup];
+        }
+    }
+    
+    [selectionArr removeAllObjects];
+    for (MealSetModel *model in mealSetList) {
+        if (model.type == 1) [selectionArr addObject:[NSString stringWithFormat:@"%d", model.no]];
+    }
+
+    for (NSString *selectionNo in selectionArr) {
+        OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue] childs:nil];
+        if (optionGroup) [optionGroupList addObject:optionGroup];
     }
     
     return optionGroupList;
@@ -221,7 +238,7 @@
     return optionGroup;
 }
 
-- (OptionGroupModel *)getSelectionGroup:(int)selection_no childs:(NSArray *)childPlus mealSet:(NSArray *)mealSetList {
+- (OptionGroupModel *)getSelectionGroup:(int)selection_no childs:(NSArray *)childPluList {
     SelectionHeaderModel *selectionHeader = [[DatabaseHelper shared] getSelectionHeader:selection_no];
     
 //    if (!selectionHeader.selectionName) return nil;
@@ -230,7 +247,7 @@
     optionGroup.name = selectionHeader.selectionName;
     optionGroup.groupId = selectionHeader.selectionNo;
     optionGroup.type = TYPE_SELECTION;
-    optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlus:selection_no childs:childPlus mealSet:mealSetList];
+    optionGroup.optionList = (childPluList) ? [[DatabaseHelper shared] getAllChildPlu:selection_no childs:childPluList] : [[DatabaseHelper shared] getAllChildPlu:selection_no];
     
     return optionGroup;
 }
