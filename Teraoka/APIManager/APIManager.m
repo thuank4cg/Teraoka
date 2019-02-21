@@ -33,7 +33,7 @@
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         success(operation.responseString);
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        ErrorModel *errModel = [[ErrorModel alloc] initWithString:operation.responseString error:nil];
+        ErrorModel *errModel = [self handleError:operation.responseString];;
         failure(errModel.detail);
     }];
 }
@@ -61,7 +61,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         success(nil);
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        ErrorModel *errModel = [[ErrorModel alloc] initWithString:operation.responseString error:nil];
+        ErrorModel *errModel = [self handleError:operation.responseString];
         failure(errModel.detail);
     }];
 }
@@ -78,6 +78,16 @@
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         failure(nil);
     }];
+}
+
+- (ErrorModel *)handleError:(NSString *)responseString {
+    ErrorModel *errModel = [[ErrorModel alloc] initWithString:responseString error:nil];
+    if (!errModel) {
+        errModel = [[ErrorModel alloc] init];
+        errModel.detail = @"No network connection";
+    }
+    
+    return errModel;
 }
 
 @end
