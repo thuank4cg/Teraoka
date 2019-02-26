@@ -57,6 +57,7 @@
 #define KEY_MEAL_SET_TABLE_FILE_NAME @"meal_set"
 #define KEY_SELECTION_GROUP_TABLE_FILE_NAME @"selection_group"
 #define KEY_SELECTION_HEADER_TABLE_FILE_NAME @"selection_header"
+#define KEY_TAX_TABLE_FILE_NAME @"tax"
 
 #define PLU_TABLE_NAME @"Plu"
 #define MENU_CATEGORY_TABLE_NAME @"MenuCategory"
@@ -76,6 +77,7 @@
 #define MEAL_SET_TABLE_NAME @"MealSet"
 #define SELECTION_GROUP_TABLE_NAME @"SelectionGroup"
 #define SELECTION_HEADER_TABLE_NAME @"SelectionHeader"
+#define TAX_TABLE_NAME @"Tax"
 
 //byte size
 #define REPLY_HEADER 4

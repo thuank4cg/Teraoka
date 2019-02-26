@@ -35,6 +35,12 @@
     return [NSString stringWithFormat:@"%@%@/%@", DOCUMENT_DIRECTORY_ROOT, PLU_IMAGE_DIRECTORY_PATH, fullImageName];
 }
 
+- (float)getTaxPrice {
+    int qty = [self.qty intValue];
+    float price = [self.priceNumber floatValue];
+    return price*qty*(1 + self.rate/100);
+}
+
 - (NSMutableArray *)getSelectionGroupList {
     NSMutableArray *optionGroupList = [NSMutableArray new];
     NSMutableArray *selectionArr = [NSMutableArray new];

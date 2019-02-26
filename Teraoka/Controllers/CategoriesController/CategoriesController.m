@@ -435,6 +435,9 @@
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     NSArray *categoriesArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
+    fetchRequest = [[NSFetchRequest alloc] initWithEntityName:TAX_TABLE_NAME];
+    NSArray *taxArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
     int i = 0;
     for (NSManagedObject *category in categoriesArr) {
         CategoryModel *cateModel = [[CategoryModel alloc] init];
@@ -483,6 +486,15 @@
                     product.commentSource = [[productObj valueForKey:@"comment_source"] intValue];
                     product.commentSourceNo = [[productObj valueForKey:@"comment_source_no"] intValue];
 //                    product.options = [product getOptionGroupList];
+                    
+                    int tax_no = [[productObj valueForKey:@"tax_no"] intValue];
+                    for (NSManagedObject *tax in taxArr) {
+                        int no = [[tax valueForKey:@"tax_no"] intValue];
+                        if (tax_no == no) {
+                            product.rate = [[tax valueForKey:@"rate"] floatValue];
+                            break;
+                        }
+                    }
                     
                     [cateModel.products addObject:product];
                 }

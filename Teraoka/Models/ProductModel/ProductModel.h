@@ -38,7 +38,9 @@ typedef NS_ENUM(NSInteger, DELIVER_STATUS) {
 @property (nonatomic, assign) int commentSourceNo;
 @property (nonatomic, assign) DELIVER_STATUS deliverStatus;
 @property (nonatomic, assign) BOOL isChild;
+@property (nonatomic, assign) float rate;
 
+- (float)getTaxPrice;
 - (NSMutableArray *)getOptionGroupList;
 - (NSMutableArray *)getSelectionGroupList;
 - (NSString *)getImageName:(NSArray *)directoryImageContents;

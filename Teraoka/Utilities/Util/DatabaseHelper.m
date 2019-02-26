@@ -425,6 +425,9 @@
     NSFetchRequest *fetchRequest1 = [[NSFetchRequest alloc] initWithEntityName:PLU_TABLE_NAME];
     NSArray *pluArr = [[managedObjectContext executeFetchRequest:fetchRequest1 error:nil] mutableCopy];
     
+    fetchRequest1 = [[NSFetchRequest alloc] initWithEntityName:TAX_TABLE_NAME];
+    NSArray *taxArr = [[managedObjectContext executeFetchRequest:fetchRequest1 error:nil] mutableCopy];
+    
     for (NSString *no in pluNoList) {
         for (NSManagedObject *plu in pluArr) {
             NSString *pluNo = [plu valueForKey:@"plu_no"];
@@ -455,6 +458,15 @@
                 product.commentSource = [[plu valueForKey:@"comment_source"] intValue];
                 product.commentSourceNo = [[plu valueForKey:@"comment_source_no"] intValue];
                 product.options = [product getOptionGroupList];
+                
+                int tax_no = [[plu valueForKey:@"tax_no"] intValue];
+                for (NSManagedObject *tax in taxArr) {
+                    int no = [[tax valueForKey:@"tax_no"] intValue];
+                    if (tax_no == no) {
+                        product.rate = [[tax valueForKey:@"rate"] floatValue];
+                        break;
+                    }
+                }
                 
                 option.product = product;
                 

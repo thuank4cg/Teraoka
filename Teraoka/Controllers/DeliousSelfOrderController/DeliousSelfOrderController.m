@@ -129,6 +129,7 @@
     [self removeDataForEntity:MEAL_SET_TABLE_NAME];
     [self removeDataForEntity:SELECTION_GROUP_TABLE_NAME];
     [self removeDataForEntity:SELECTION_HEADER_TABLE_NAME];
+    [self removeDataForEntity:TAX_TABLE_NAME];
 }
 
 - (void)doGetContents {
@@ -336,6 +337,7 @@
     [self saveDataToDbFrom:KEY_MEAL_SET_TABLE_FILE_NAME toTable:MEAL_SET_TABLE_NAME];
     [self saveDataToDbFrom:KEY_SELECTION_GROUP_TABLE_FILE_NAME toTable:SELECTION_GROUP_TABLE_NAME];
     [self saveDataToDbFrom:KEY_SELECTION_HEADER_TABLE_FILE_NAME toTable:SELECTION_HEADER_TABLE_NAME];
+    [self saveDataToDbFrom:KEY_TAX_TABLE_FILE_NAME toTable:TAX_TABLE_NAME];
     [ProgressHUD dismiss];
     
     saveDataSuccess = YES;

@@ -183,7 +183,7 @@
 - (void)calculateTotal {
     float total = 0;
     for (ProductModel *product in products) {
-        total += [product.qty intValue] * [product.priceNumber floatValue];
+        total += [product getTaxPrice];
         for (OptionGroupModel *optionGroup in product.options) {
             for (OptionModel *option in optionGroup.optionList) {
                 if (option.isCheck && option.type == TYPE_CONDIMENT) {
