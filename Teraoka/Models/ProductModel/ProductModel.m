@@ -250,7 +250,7 @@
 //    if (!selectionHeader.selectionName) return nil;
     
     OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
-    optionGroup.name = selectionHeader.selectionName;
+    optionGroup.name = (childPluList) ? selectionHeader.selectionName : @"";
     optionGroup.groupId = selectionHeader.selectionNo;
     optionGroup.type = TYPE_SELECTION;
     optionGroup.optionList = (childPluList) ? [[DatabaseHelper shared] getAllChildPlu:selection_no childs:childPluList] : [[DatabaseHelper shared] getAllChildPlu:selection_no];

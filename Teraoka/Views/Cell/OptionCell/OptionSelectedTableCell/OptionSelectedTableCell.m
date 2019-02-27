@@ -37,6 +37,13 @@
     for (OptionModel *option in _optionGroup.optionList) {
         if (option.product) option.isCheck = NO;
     }
+    
+    for (OptionGroupModel *optionGroup in optionSelected.product.options) {
+        for (OptionModel *option in optionGroup.optionList) {
+            option.isCheck = NO;
+        }
+    }
+    
     _optionGroup.isShowChild = NO;
     self.optionSelectedTableCellCallback();
 }

@@ -23,6 +23,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
     self.colView.delegate = self;
     self.colView.dataSource = self;
     self.colView.backgroundColor = [UIColor clearColor];
