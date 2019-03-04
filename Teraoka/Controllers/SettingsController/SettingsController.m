@@ -181,11 +181,9 @@
                                          
                                          SettingModel *setting = [ShareManager shared].setting;
                                          setting.language = [setting.languageList objectAtIndex:selectedIndex];
-                                         [ShareManager shared].setting = setting;
                                          
-                                         NSString *json = [setting toJSONString];
-                                         [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
-                                         [[NSUserDefaults standardUserDefaults] synchronize];
+                                         [Util saveSetting:setting];
+                                         [ShareManager shared].setting = [Util getSetting];
                                          
                                          weakSelf.languageValueLb.text = items[selectedIndex];
                                          
@@ -232,11 +230,8 @@
     setting.abilityRequestForAssistance = self.requestForAssistanceView.isOn;
     setting.abilityRequestForBill = self.requestForBillView.isOn;
     
-    NSString *json = [setting toJSONString];
-    [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [ShareManager shared].setting = setting;
+    [Util saveSetting:setting];
+    [ShareManager shared].setting = [Util getSetting];
     
     [Util showAlert:@"Save changes successfully" vc:self];
 }
@@ -276,8 +271,7 @@
 }
 
 - (void)setupData {
-    NSString *json = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_SAVED_SETTING];
-    SettingModel *setting = [[SettingModel alloc] initWithString:json error:nil];
+    SettingModel *setting = [Util getSetting];
     
     self.tfIPAddress.text = setting.serverIP;
     

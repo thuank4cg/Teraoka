@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "ProductModel.h"
 #import <CoreData/CoreData.h>
+#import "SettingModel.h"
 
 @interface Util : NSObject
 
@@ -23,5 +24,7 @@
 + (BOOL)isConnectionInternet;
 + (BOOL)checkLicenseKeyValid;
 + (ProductModel *)getPlu:(NSManagedObject *)plu tax:(NSArray *)taxList;
++ (SettingModel *)getSetting;
++ (void)saveSetting:(SettingModel *)setting;
 
 @end

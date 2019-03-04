@@ -45,12 +45,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    NSString *json = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_SAVED_SETTING];
-    SettingModel *setting = [[SettingModel alloc] initWithString:json error:nil];
-    
-    if (!setting) setting = [[SettingModel alloc] init];
-    
-    [ShareManager shared].setting = setting;
+    [ShareManager shared].setting = [Util getSetting];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

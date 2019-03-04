@@ -58,10 +58,11 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         SettingModel *setting = [ShareManager shared].setting;
+        setting.tableNo = [setting getTableNo:self.tfTableNo.text];
+        setting.tableName = [setting getTableName:self.tfTableNo.text];
         
-        NSString *json = [setting toJSONString];
-        [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [Util saveSetting:setting];
+        [ShareManager shared].setting = [Util getSetting];
         
         [self.delegate showCategoriesScreen];
     } else {
@@ -90,10 +91,12 @@
         return;
     }
     
-    SettingModel *setting = [ShareManager shared].setting;
-    setting.tableNo = [setting getTableNo:self.tfTableNo.text];
-    
-    [ShareManager shared].setting = setting;
+//    SettingModel *setting = [ShareManager shared].setting;
+//    setting.tableNo = [setting getTableNo:self.tfTableNo.text];
+//    setting.tableName = [setting getTableName:self.tfTableNo.text];
+//
+//    [Util saveSetting:setting];
+//    [ShareManager shared].setting = [Util getSetting];
     
     [self sendPOSRequest:SendSeated];
 }

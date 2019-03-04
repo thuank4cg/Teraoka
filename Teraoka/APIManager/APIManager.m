@@ -13,6 +13,7 @@
 #import "SettingModel.h"
 #import "ShareManager.h"
 #import "SettingLanguageModel.h"
+#import "Util.h"
 
 @implementation APIManager
 
@@ -55,10 +56,10 @@
             SettingLanguageModel *language = [[SettingLanguageModel alloc] initWithDictionary:dict error:nil];
             [setting.languageList addObject:language];
         }
-        [ShareManager shared].setting = setting;
-        NSString *json = [setting toJSONString];
-        [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [Util saveSetting:setting];
+        [ShareManager shared].setting = [Util getSetting];
+        
         success(nil);
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         ErrorModel *errModel = [self handleError:operation.responseString];

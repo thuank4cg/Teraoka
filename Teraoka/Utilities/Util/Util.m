@@ -243,4 +243,19 @@
     return product;
 }
 
++ (SettingModel *)getSetting {
+    NSString *json = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_SAVED_SETTING];
+    SettingModel *setting = [[SettingModel alloc] initWithString:json error:nil];
+    
+    if (!setting) setting = [[SettingModel alloc] init];
+    
+    return setting;
+}
+
++ (void)saveSetting:(SettingModel *)setting {
+    NSString *json = [setting toJSONString];
+    [[NSUserDefaults standardUserDefaults] setObject:json forKey:KEY_SAVED_SETTING];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end
