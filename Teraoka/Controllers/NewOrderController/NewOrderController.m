@@ -231,6 +231,7 @@
     }
     
     OptionTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionTableCellID" forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell setDataForCell:optionGroup];
     
     cell.optionTableCellCallback = ^{

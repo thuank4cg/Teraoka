@@ -203,7 +203,7 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_LICENSE_VALID];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_LICENSE_EXPIRY_DATE];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            return NO;
+            return YES;
         }
     }
     
@@ -211,7 +211,36 @@
         return YES;
     }
     
-    return NO;
+    return YES;
+}
+
++ (ProductModel *)getPlu:(NSManagedObject *)plu tax:(NSArray *)taxList {
+    NSArray *directoryImageContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString stringWithFormat:@"%@%@", DOCUMENT_DIRECTORY_ROOT, PLU_IMAGE_DIRECTORY_PATH] error:nil];
+    
+    ProductModel *product = [[ProductModel alloc] init];
+    product.productNo = [plu valueForKey:@"plu_no"];
+    
+    product.image = [product getImageName:directoryImageContents];
+    product.name = [NSString stringWithFormat:@"%@", [plu valueForKey:@"item_name"]];
+    
+    float price = [[plu valueForKey:@"price"] floatValue]/100;
+    
+    product.price = [NSString stringWithFormat:@"SGD %.2f", price];
+    product.priceNumber = [NSString stringWithFormat:@"%.2f", price];
+    
+    product.originalPrice = [NSString stringWithFormat:@"%@", [plu valueForKey:@"price"]];
+    product.qty = @"1";
+    product.optionSource = [[plu valueForKey:@"option_source"] intValue];
+    product.optionSourceNo = [[plu valueForKey:@"option_source_no"] intValue];
+    product.servingSource = [[plu valueForKey:@"serving_source"] intValue];
+    product.servingSourceNo = [[plu valueForKey:@"serving_source_no"] intValue];
+    product.commentSource = [[plu valueForKey:@"comment_source"] intValue];
+    product.commentSourceNo = [[plu valueForKey:@"comment_source_no"] intValue];
+    product.options = [product getOptionGroupList];
+    product.tax_no = [[plu valueForKey:@"tax_no"] intValue];
+    product.rate = [product getRate:taxList];
+    
+    return product;
 }
 
 @end

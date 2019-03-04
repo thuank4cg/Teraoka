@@ -39,10 +39,12 @@ typedef NS_ENUM(NSInteger, DELIVER_STATUS) {
 @property (nonatomic, assign) DELIVER_STATUS deliverStatus;
 @property (nonatomic, assign) BOOL isChild;
 @property (nonatomic, assign) float rate;
+@property (nonatomic, assign) int tax_no;
 
 - (float)getTaxPrice;
 - (NSMutableArray *)getOptionGroupList;
 - (NSMutableArray *)getSelectionGroupList;
 - (NSString *)getImageName:(NSArray *)directoryImageContents;
+- (float)getRate:(NSArray *)taxList;
 
 @end

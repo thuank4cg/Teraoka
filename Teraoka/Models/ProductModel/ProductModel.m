@@ -14,6 +14,7 @@
 #import "CommentSetModel.h"
 #import "APPConstants.h"
 #import "MealSetModel.h"
+#import <CoreData/CoreData.h>
 
 @implementation ProductModel
 
@@ -39,6 +40,18 @@
     int qty = [self.qty intValue];
     float price = [self.priceNumber floatValue];
     return price*qty*(1 + self.rate/100);
+}
+
+- (float)getRate:(NSArray *)taxList {
+    for (NSManagedObject *tax in taxList) {
+        int no = [[tax valueForKey:@"tax_no"] intValue];
+        if (self.tax_no == no) {
+            float rate = [[tax valueForKey:@"rate"] floatValue];
+            return rate;
+        }
+    }
+    
+    return 0;
 }
 
 - (NSMutableArray *)getSelectionGroupList {

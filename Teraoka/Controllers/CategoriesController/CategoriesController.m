@@ -356,7 +356,7 @@
         CategoryModel *cate = categories[categoryIndex];
         if (indexPath.row < cate.products.count) {
             ProductModel *product = cate.products[indexPath.row];
-            product.options = [[product getOptionGroupList] arrayByAddingObjectsFromArray:[product getSelectionGroupList]];
+            product.options = (NSMutableArray *)[[[product getOptionGroupList] arrayByAddingObjectsFromArray:[product getSelectionGroupList]] mutableCopy];
             newOrderVC.product = product;
         }
     }
@@ -426,8 +426,6 @@
 - (void)setDataFromBackground {
     if (!isBackDelegate) categoryIndex = 0;
     
-    NSArray *directoryImageContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString stringWithFormat:@"%@%@", DOCUMENT_DIRECTORY_ROOT, PLU_IMAGE_DIRECTORY_PATH] error:nil];
-    
     categories = [NSMutableArray new];
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:MENU_CATEGORY_TABLE_NAME];
@@ -467,35 +465,7 @@
             for (NSManagedObject *productObj in products) {
                 NSString *productIdStr = [productObj valueForKey:@"plu_no"];
                 if ([productIdStr isEqualToString:productId]) {
-                    ProductModel *product = [[ProductModel alloc] init];
-                    product.productNo = [productObj valueForKey:@"plu_no"];
-                    
-                    product.image = [product getImageName:directoryImageContents];
-                    product.name = [NSString stringWithFormat:@"%@", [productObj valueForKey:@"item_name"]];
-                    
-                    float price = [[productObj valueForKey:@"price"] floatValue]/100;
-                    
-                    product.price = [NSString stringWithFormat:@"SGD %.2f", price];
-                    product.priceNumber = [NSString stringWithFormat:@"%.2f", price];
-                    product.originalPrice = [NSString stringWithFormat:@"%@", [productObj valueForKey:@"price"]];
-                    product.qty = @"1";
-                    product.optionSource = [[productObj valueForKey:@"option_source"] intValue];
-                    product.optionSourceNo = [[productObj valueForKey:@"option_source_no"] intValue];
-                    product.servingSource = [[productObj valueForKey:@"serving_source"] intValue];
-                    product.servingSourceNo = [[productObj valueForKey:@"serving_source_no"] intValue];
-                    product.commentSource = [[productObj valueForKey:@"comment_source"] intValue];
-                    product.commentSourceNo = [[productObj valueForKey:@"comment_source_no"] intValue];
-//                    product.options = [product getOptionGroupList];
-                    
-                    int tax_no = [[productObj valueForKey:@"tax_no"] intValue];
-                    for (NSManagedObject *tax in taxArr) {
-                        int no = [[tax valueForKey:@"tax_no"] intValue];
-                        if (tax_no == no) {
-                            product.rate = [[tax valueForKey:@"rate"] floatValue];
-                            break;
-                        }
-                    }
-                    
+                    ProductModel *product = [Util getPlu:productObj tax:taxArr];
                     [cateModel.products addObject:product];
                 }
             }

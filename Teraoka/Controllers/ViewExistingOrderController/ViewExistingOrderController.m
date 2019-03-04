@@ -99,10 +99,6 @@
             NSData *servedQtyData = [billItemDetailData subdataWithRange:NSMakeRange(itemDetailLength, 2)];//Served Qty
             itemDetailLength += 2;
             
-//            itemDetailLength += 16;//XItemOptionData
-            
-//            location += itemDetailLength;
-            
             int pluNo = [Util hexStringToInt:[Util hexadecimalString:pluNoData]];
             int qty = [Util hexStringToInt:[Util hexadecimalString:qtyData]];
             int servedQty = [Util hexStringToInt:[Util hexadecimalString:servedQtyData]];

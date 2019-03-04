@@ -8,12 +8,13 @@
 
 #import "OptionSelectedTableCell.h"
 #import "OptionCollectionCell.h"
+#import <Masonry.h>
 
 @interface OptionSelectedTableCell () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property (weak, nonatomic) IBOutlet UICollectionView *colView;
 @property (weak, nonatomic) IBOutlet UILabel *lbSelected;
 @property (weak, nonatomic) IBOutlet UIView *preferenceContentView;
+@property (weak, nonatomic) IBOutlet UIView *optionContainerView;
 
 @end
 
@@ -21,16 +22,12 @@
     OptionGroupModel *_optionGroup;
     OptionModel *optionSelected;
     NSMutableArray *options;
+    UICollectionView *optionCollectionView;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
-    self.colView.delegate = self;
-    self.colView.dataSource = self;
-    self.colView.backgroundColor = [UIColor clearColor];
-    [self.colView registerNib:[UINib nibWithNibName:@"OptionCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"OptionCollectionCellID"];
 }
 
 - (IBAction)changeAction:(id)sender {
@@ -72,7 +69,27 @@
 
     self.lbSelected.text = [NSString stringWithFormat:@"You selected: %@", childName];
     
-    [self.colView reloadData];
+    if (optionCollectionView) [optionCollectionView removeFromSuperview];
+    
+    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    optionCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+    
+    [self.optionContainerView addSubview:optionCollectionView];
+    
+    [optionCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.equalTo(optionCollectionView.superview);
+        make.leading.equalTo(optionCollectionView.superview);
+        make.top.equalTo(optionCollectionView.superview);
+    }];
+    
+    optionCollectionView.backgroundColor = [UIColor redColor];
+    optionCollectionView.delegate = self;
+    optionCollectionView.dataSource = self;
+    optionCollectionView.backgroundColor = [UIColor clearColor];
+    [optionCollectionView registerNib:[UINib nibWithNibName:@"OptionCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"OptionCollectionCellID"];
+    
+    [optionCollectionView reloadData];
 }
 
 #pragma mark - UICollectionViewDataSource, UICollectionViewDelegate
@@ -93,7 +110,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(CGRectGetWidth(self.colView.frame)/3, 40);
+    return CGSizeMake(CGRectGetWidth(self.optionContainerView.frame)/3, 40);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -106,7 +123,6 @@
         }
     }
     
-    //    [self.colView reloadData];
     self.optionSelectedTableCellCallback();
 }
 

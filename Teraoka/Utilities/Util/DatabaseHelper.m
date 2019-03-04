@@ -13,6 +13,7 @@
 #import "OptionModel.h"
 #import "OptionGroupModel.h"
 #import "MealSetModel.h"
+#import "Util.h"
 
 @implementation DatabaseHelper
 
@@ -439,34 +440,8 @@
                 option.price = [[plu valueForKey:@"price"] floatValue]/100;
                 option.isFilter = YES;
                 
-                ProductModel *product = [[ProductModel alloc] init];
+                ProductModel *product = [Util getPlu:plu tax:taxArr];
                 product.productNo = [plu valueForKey:@"plu_no"];
-                
-                NSArray *directoryImageContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString stringWithFormat:@"%@%@", DOCUMENT_DIRECTORY_ROOT, PLU_IMAGE_DIRECTORY_PATH] error:nil];
-                product.image = [product getImageName:directoryImageContents];
-                product.name = [NSString stringWithFormat:@"%@", [plu valueForKey:@"item_name"]];
-                
-                float price = [[plu valueForKey:@"price"] floatValue]/100;
-                
-                product.price = [NSString stringWithFormat:@"SGD %.2f", price];
-                product.priceNumber = [NSString stringWithFormat:@"%.2f", price];
-                product.originalPrice = [NSString stringWithFormat:@"%@", [plu valueForKey:@"price"]];
-                product.optionSource = [[plu valueForKey:@"option_source"] intValue];
-                product.optionSourceNo = [[plu valueForKey:@"option_source_no"] intValue];
-                product.servingSource = [[plu valueForKey:@"serving_source"] intValue];
-                product.servingSourceNo = [[plu valueForKey:@"serving_source_no"] intValue];
-                product.commentSource = [[plu valueForKey:@"comment_source"] intValue];
-                product.commentSourceNo = [[plu valueForKey:@"comment_source_no"] intValue];
-                product.options = [product getOptionGroupList];
-                
-                int tax_no = [[plu valueForKey:@"tax_no"] intValue];
-                for (NSManagedObject *tax in taxArr) {
-                    int no = [[tax valueForKey:@"tax_no"] intValue];
-                    if (tax_no == no) {
-                        product.rate = [[tax valueForKey:@"rate"] floatValue];
-                        break;
-                    }
-                }
                 
                 option.product = product;
                 
