@@ -408,8 +408,11 @@
         //Weight
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]];
         //Item Flag
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+//        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
+        [mCollectData appendData:[self convertStringToBytesArr:(product.isChild) ? @"3" : @"0" length:1]]; //Item Flag
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]]; //Item Flag
+        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Item Flag
         //Item status
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]];
