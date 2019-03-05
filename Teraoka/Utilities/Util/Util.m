@@ -203,7 +203,7 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_LICENSE_VALID];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_LICENSE_EXPIRY_DATE];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            return YES;
+            return NO;
         }
     }
     
@@ -211,7 +211,7 @@
         return YES;
     }
     
-    return YES;
+    return NO;
 }
 
 + (ProductModel *)getPlu:(NSManagedObject *)plu tax:(NSArray *)taxList {
