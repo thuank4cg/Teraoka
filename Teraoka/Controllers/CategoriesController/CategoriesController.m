@@ -50,6 +50,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *waiterArrowIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *billArrowIcon;
 @property (weak, nonatomic) IBOutlet UIView *waiterMenuView;
+@property (weak, nonatomic) IBOutlet UIView *billMenuView;
 @property (weak, nonatomic) IBOutlet UIImageView *billMenuIcon;
 @property (weak, nonatomic) IBOutlet UIButton *settingBtn;
 @property (weak, nonatomic) IBOutlet UILabel *headerMenuTitleLb;
@@ -229,18 +230,21 @@
     self.restartOrderView.layer.shadowOpacity = 0.2;
     self.restartOrderView.layer.shadowRadius = 3.0;
     self.restartOrderView.layer.masksToBounds = NO;
+
+    SettingModel *setting = [ShareManager shared].setting;
     
-    CGFloat heightWaiterMenu = 110;
-    if ([ShareManager shared].setting.abilityRequestForAssistance) {
-        [self.waiterMenuView setHidden:NO];
-    } else {
-        [self.waiterMenuView setHidden:YES];
-        heightWaiterMenu = 0;
-    }
-    
+    [self.waiterMenuView setHidden:(setting.abilityRequestForAssistance) ? NO : YES];
     for (NSLayoutConstraint *constraint in self.waiterMenuView.constraints) {
         if (constraint.firstAttribute == NSLayoutAttributeHeight) {
-            constraint.constant = heightWaiterMenu;
+            constraint.constant = (setting.abilityRequestForAssistance) ? 110 : 0;
+            break;
+        }
+    }
+    
+    [self.billMenuView setHidden:(setting.selectMode == Quick_Serve) ? YES : NO];
+    for (NSLayoutConstraint *constraint in self.billMenuView.constraints) {
+        if (constraint.firstAttribute == NSLayoutAttributeHeight) {
+            constraint.constant = (setting.selectMode == Quick_Serve) ? 0 : 110;
             break;
         }
     }

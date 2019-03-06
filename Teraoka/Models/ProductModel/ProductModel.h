@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger, DELIVER_STATUS) {
 @property (nonatomic, assign) BOOL isChild;
 @property (nonatomic, assign) float rate;
 @property (nonatomic, assign) int tax_no;
+@property (nonatomic, assign) BOOL isFixedSet;
 
 - (float)getTaxPrice;
 - (NSMutableArray *)getOptionGroupList;

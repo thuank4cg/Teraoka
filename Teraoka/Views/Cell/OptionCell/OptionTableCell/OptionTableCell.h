@@ -17,4 +17,5 @@ typedef void (^OptionTableCellCallback)(void);
 @property (nonatomic, copy) OptionTableCellCallback optionTableCellCallback;
 
 - (void)setDataForCell:(OptionGroupModel *)optionGroup;
+
 @end

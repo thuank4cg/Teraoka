@@ -37,6 +37,10 @@
     self.containerView.layer.shadowOpacity = 0.5;
     self.containerView.layer.shadowRadius = 3.0;
     self.containerView.layer.masksToBounds = NO;
+    
+    if ([ShareManager shared].setting.selectMode == Quick_Serve) {
+        [self.viewBillBtn setHidden:YES];
+    }
 }
 
 - (void)loadLocalizable {

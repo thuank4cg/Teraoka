@@ -166,6 +166,8 @@
 		796D67C0221AB15A00DFF098 /* HOTMasterDataFull_02.12_190218_151207_01.55.zip in Resources */ = {isa = PBXBuildFile; fileRef = 796D67BF221AB15900DFF098 /* HOTMasterDataFull_02.12_190218_151207_01.55.zip */; };
 		798723F12213C7CF0076794D /* OptionSelectedTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 798723EF2213C7CF0076794D /* OptionSelectedTableCell.m */; };
 		798723F22213C7CF0076794D /* OptionSelectedTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 798723F02213C7CF0076794D /* OptionSelectedTableCell.xib */; };
+		79E1604D222FA5C900377EC8 /* FixedSetOptionTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E1604B222FA5C900377EC8 /* FixedSetOptionTableCell.m */; };
+		79E1604E222FA5C900377EC8 /* FixedSetOptionTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79E1604C222FA5C900377EC8 /* FixedSetOptionTableCell.xib */; };
 		F534B53E83D60C16002E3C90 /* libPods-Teraoka.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8826900F53921C0151A18A11 /* libPods-Teraoka.a */; };
 /* End PBXBuildFile section */
 
@@ -403,6 +405,9 @@
 		798723EE2213C7CF0076794D /* OptionSelectedTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionSelectedTableCell.h; sourceTree = "<group>"; };
 		798723EF2213C7CF0076794D /* OptionSelectedTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OptionSelectedTableCell.m; sourceTree = "<group>"; };
 		798723F02213C7CF0076794D /* OptionSelectedTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionSelectedTableCell.xib; sourceTree = "<group>"; };
+		79E1604A222FA5C900377EC8 /* FixedSetOptionTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FixedSetOptionTableCell.h; sourceTree = "<group>"; };
+		79E1604B222FA5C900377EC8 /* FixedSetOptionTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FixedSetOptionTableCell.m; sourceTree = "<group>"; };
+		79E1604C222FA5C900377EC8 /* FixedSetOptionTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FixedSetOptionTableCell.xib; sourceTree = "<group>"; };
 		8826900F53921C0151A18A11 /* libPods-Teraoka.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Teraoka.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B4E1C4D574C9122D1A3D981 /* Pods-Teraoka.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teraoka.release.xcconfig"; path = "Pods/Target Support Files/Pods-Teraoka/Pods-Teraoka.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -708,6 +713,7 @@
 		730FE1071F95EB670045A234 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				79E16049222FA5A200377EC8 /* FixedSetOptionCell */,
 				7386F1DD212E5286001DAC8D /* OutOfStockCell */,
 				7357EEA11F974EB8001EB56B /* ExistingOrderCell */,
 				7357EE861F973773001EB56B /* OrderSummaryCell */,
@@ -1201,6 +1207,16 @@
 			path = OptionSelectedTableCell;
 			sourceTree = "<group>";
 		};
+		79E16049222FA5A200377EC8 /* FixedSetOptionCell */ = {
+			isa = PBXGroup;
+			children = (
+				79E1604A222FA5C900377EC8 /* FixedSetOptionTableCell.h */,
+				79E1604B222FA5C900377EC8 /* FixedSetOptionTableCell.m */,
+				79E1604C222FA5C900377EC8 /* FixedSetOptionTableCell.xib */,
+			);
+			path = FixedSetOptionCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1294,6 +1310,7 @@
 				7336755D1FE25F2200F0AFF8 /* 3002.png in Resources */,
 				73C1E02C1FBC25F5005D6DE1 /* SF-UI-Display-Regular.otf in Resources */,
 				73C1E02B1FBC25F5005D6DE1 /* SF-UI-Display-Bold.otf in Resources */,
+				79E1604E222FA5C900377EC8 /* FixedSetOptionTableCell.xib in Resources */,
 				733675481FE25F2200F0AFF8 /* 4001.png in Resources */,
 				7336755C1FE25F2200F0AFF8 /* 1005.png in Resources */,
 				7320381A215C795000747F37 /* option_group.txt in Resources */,
@@ -1464,6 +1481,7 @@
 				730FE0B91F95A1690045A234 /* AppDelegate.m in Sources */,
 				7357EEA81F974EEB001EB56B /* ExistingOrderCell.m in Sources */,
 				730FE0B61F95A1690045A234 /* main.m in Sources */,
+				79E1604D222FA5C900377EC8 /* FixedSetOptionTableCell.m in Sources */,
 				7357EE841F9714D1001EB56B /* OrderSummaryController.m in Sources */,
 				73840E9F212C18AF00904454 /* SettingModel.m in Sources */,
 				73387D76215DC52400BE023B /* OptionSetModel.m in Sources */,

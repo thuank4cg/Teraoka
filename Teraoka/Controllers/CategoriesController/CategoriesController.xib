@@ -19,6 +19,7 @@
                 <outlet property="billArrowIcon" destination="rci-l3-lub" id="43D-8R-6It"/>
                 <outlet property="billMenuIcon" destination="qm7-CV-QWQ" id="gYR-Aj-nCe"/>
                 <outlet property="billMenuTitleLb" destination="zM5-9L-E5G" id="8Gh-95-Zez"/>
+                <outlet property="billMenuView" destination="tUf-3O-9P0" id="yeT-xi-gnz"/>
                 <outlet property="containerCategoryView" destination="aG9-MJ-0Ip" id="9Bi-FZ-h8c"/>
                 <outlet property="headerMenuTitleLb" destination="14d-J6-UBH" id="rCQ-LW-jYK"/>
                 <outlet property="homeArrowIcon" destination="B7u-00-Nms" id="hNJ-bB-HXP"/>

@@ -24,6 +24,7 @@
 #import "OptionGroupModel.h"
 #import "OptionModel.h"
 #import "OptionSelectedTableCell.h"
+#import "FixedSetOptionTableCell.h"
 
 @interface NewOrderController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
@@ -71,6 +72,7 @@
     [self.tblView setSeparatorColor:[UIColor clearColor]];
     [self.tblView registerNib:[UINib nibWithNibName:@"OptionTableCell" bundle:nil] forCellReuseIdentifier:@"OptionTableCellID"];
     [self.tblView registerNib:[UINib nibWithNibName:@"OptionSelectedTableCell" bundle:nil] forCellReuseIdentifier:@"OptionSelectedTableCellID"];
+    [self.tblView registerNib:[UINib nibWithNibName:@"FixedSetOptionTableCell" bundle:nil] forCellReuseIdentifier:@"FixedSetOptionTableCellID"];
     
     self.tfQty.layer.borderColor = [UIColor grayColor].CGColor;
     self.tfQty.backgroundColor = [UIColor whiteColor];
@@ -101,9 +103,17 @@
     CGFloat heightTblView = 420;
     
     int numberOfGroup = 0;
-    for (int i = 0;i<self.product.options.count;i++) {
-        OptionGroupModel *group = self.product.options[i];
-        if (group.optionList.count > 0) numberOfGroup++;
+    if (self.product.isFixedSet) {
+        OptionGroupModel *group = [self.product.options objectAtIndex:0];
+        for (OptionModel *option in group.optionList) {
+            option.isCheck = YES;
+            numberOfGroup += option.product.options.count;
+        }
+    } else {
+        for (int i = 0;i<self.product.options.count;i++) {
+            OptionGroupModel *group = self.product.options[i];
+            if (group.optionList.count > 0) numberOfGroup++;
+        }
     }
     
     if (numberOfGroup == 0) {
@@ -207,14 +217,40 @@
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (self.product.isFixedSet) {
+        OptionGroupModel *group = [self.product.options objectAtIndex:0];
+        return group.optionList.count;
+    }
     return self.product.options.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.product.isFixedSet) {
+        OptionGroupModel *group = [self.product.options objectAtIndex:0];
+        OptionModel *option = [group.optionList objectAtIndex:section];
+        return option.product.options.count;
+    }
     return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.product.isFixedSet) {
+        OptionGroupModel *group = [self.product.options objectAtIndex:0];
+        OptionModel *option = [group.optionList objectAtIndex:indexPath.section];
+        group = [option.product.options objectAtIndex:indexPath.row];
+        
+        FixedSetOptionTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FixedSetOptionTableCellID" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setDataForCell:group];
+        
+        __weak typeof(self) wSelf = self;
+        cell.fixedSetOptionTableCellCallback = ^{
+            [wSelf.tblView reloadData];
+        };
+        
+        return cell;
+    }
+    
     OptionGroupModel *optionGroup = self.product.options[indexPath.section];
     __weak typeof(self) wSelf = self;
     
@@ -242,6 +278,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.product.isFixedSet) return 100;
+    
     OptionGroupModel *optionGroup = self.product.options[indexPath.section];
     
     if (optionGroup.optionList.count == 0) return 0;
@@ -255,25 +293,38 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tblView.frame), 70)];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tblView.frame), (self.product.isFixedSet) ? 40 : 70)];
     header.backgroundColor = [UIColor whiteColor];
-    OptionGroupModel *optionGroup = self.product.options[section];
-    UILabel *lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(25, 10, CGRectGetWidth(header.frame), CGRectGetHeight(header.frame) - 10)];
-    lbTitle.text = optionGroup.name;
+    
+    CGFloat originY = (self.product.isFixedSet) ? 2 : 10;
+    UILabel *lbTitle = [[UILabel alloc] initWithFrame:CGRectMake((self.product.isFixedSet) ? 10 : 25, originY, CGRectGetWidth(header.frame), CGRectGetHeight(header.frame) - originY)];
     [lbTitle setTextColor:[UIColor colorWithHexString:@"272727"]];
     lbTitle.font = [UIFont fontWithName:KEY_FONT_BOLD size:17];
     [header addSubview:lbTitle];
+    
+    if (self.product.isFixedSet) {
+        OptionGroupModel *group = [self.product.options objectAtIndex:0];
+        OptionModel *option = [group.optionList objectAtIndex:section];
+        lbTitle.text = option.name;
+    } else {
+        OptionGroupModel *optionGroup = self.product.options[section];
+        lbTitle.text = optionGroup.name;
+    }
     
     return header;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (self.product.isFixedSet) return 40;
+    
     OptionGroupModel *optionGroup = self.product.options[section];
     if (optionGroup.optionList.count == 0 || optionGroup.name.length == 0) return 0;
     return 70;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (self.product.isFixedSet) return [[UIView alloc] init];
+    
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tblView.frame), 1)];
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(footer.frame), 1)];
     if (section == self.product.options.count - 1) {

@@ -79,6 +79,8 @@
     }
     
     if (selectionArr.count == 0 && childPluList.count > 0) {
+        self.isFixedSet = YES;
+        
         OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
         optionGroup.name = @"";
         optionGroup.groupId = 0;

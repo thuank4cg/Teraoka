@@ -72,7 +72,7 @@
         for (OptionModel *option in optionGroup.optionList) {
             if (option.isCheck) {
                 isSelectedOption = YES;
-                optionStr = [optionStr stringByAppendingString:[NSString stringWithFormat:@"<span style='color:#000000;font-size:17px;font-family:SFUIDisplay-Bold'>%@:</span> <span style='color:#5A5A5A;font-size:17px;font-family:SFUIDisplay-Regular'>%@</span><br>", optionGroup.name, option.name]];
+                optionStr = [optionStr stringByAppendingString:[NSString stringWithFormat:@"<span style='color:#000000;font-size:17px;font-family:SFUIDisplay-Bold'>%@:</span> <span style='color:#5A5A5A;font-size:17px;font-family:SFUIDisplay-Regular'>%@</span><br>", (optionGroup.name.length > 0) ? optionGroup.name : @"Plu", option.name]];
             }
         }
     }
