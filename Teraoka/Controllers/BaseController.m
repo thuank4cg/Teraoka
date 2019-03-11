@@ -407,6 +407,23 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d", billNo] forKey:KEY_SAVED_BILL_NO];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
+        location += 12;//XBillIdData
+        location += 4;//Bill Status
+        location += 4;//Table No
+        location += 4;//Seated Date
+        location += 4;//Seated Time
+        location += 8;//FirstOrderedTime&Date
+        location += 4;//Last Ordered Date
+        location += 4;//Last Ordered Time
+        location += 2;//Total Item
+        location += 2;//Total Qty
+        
+        NSData *headerData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+        NSData *totalData = [headerData subdataWithRange:NSMakeRange(0, 4)];
+        int total = [Util hexStringToInt:[Util hexadecimalString:headerData]];
+        
+        location += 4;//Total Amount
+        
         [self showOrderConfirmScreen];
     } else {
         NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
