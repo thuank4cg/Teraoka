@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbTitle;
 @property (weak, nonatomic) IBOutlet UIButton *okBtn;
 @property (weak, nonatomic) IBOutlet UIButton *viewBillBtn;
+@property (weak, nonatomic) IBOutlet UIView *containerViewBill;
 
 @end
 
@@ -39,7 +40,7 @@
     self.containerView.layer.masksToBounds = NO;
     
     if ([ShareManager shared].setting.selectMode == Quick_Serve) {
-        [self.viewBillBtn setHidden:YES];
+        [self.containerViewBill setHidden:YES];
     }
 }
 

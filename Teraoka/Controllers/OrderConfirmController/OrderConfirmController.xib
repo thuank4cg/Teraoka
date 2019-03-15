@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -21,6 +20,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderConfirmController">
             <connections>
                 <outlet property="containerView" destination="KMZ-f5-OQh" id="t7V-ML-Gab"/>
+                <outlet property="containerViewBill" destination="CT8-EP-C6C" id="DC3-kX-Rrb"/>
                 <outlet property="lbTitle" destination="OXN-Dz-Uv2" id="tYf-Zs-ojc"/>
                 <outlet property="okBtn" destination="mbg-UT-fNg" id="tGY-C1-tai"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -39,7 +39,7 @@
                     <rect key="frame" x="177" y="184" width="670" height="400"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your order has been sent!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXN-Dz-Uv2">
-                            <rect key="frame" x="198" y="175" width="275.5" height="30"/>
+                            <rect key="frame" x="197.5" y="175" width="275.5" height="30"/>
                             <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="25"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -51,47 +51,74 @@
                                 <constraint firstAttribute="width" constant="100" id="QhO-Ad-ZrQ"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbg-UT-fNg">
-                            <rect key="frame" x="30" y="280" width="294.5" height="70"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="G3G-3N-fvZ">
+                            <rect key="frame" x="30" y="280" width="610" height="70"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9I1-oe-ldc">
+                                    <rect key="frame" x="0.0" y="0.0" width="295" height="70"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbg-UT-fNg">
+                                            <rect key="frame" x="0.5" y="0.0" width="294" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="mbg-UT-fNg" secondAttribute="height" multiplier="610:145" id="aY8-tf-E4X"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
+                                            <state key="normal" title="OKAY" backgroundImage="home_gray_btn">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="backTohome:" destination="-1" eventType="touchUpInside" id="N2t-ya-AQp"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="mbg-UT-fNg" firstAttribute="top" secondItem="9I1-oe-ldc" secondAttribute="top" id="4sK-IM-fO1"/>
+                                        <constraint firstAttribute="bottom" secondItem="mbg-UT-fNg" secondAttribute="bottom" id="Gsq-mw-S2c"/>
+                                        <constraint firstItem="mbg-UT-fNg" firstAttribute="centerX" secondItem="9I1-oe-ldc" secondAttribute="centerX" id="S2r-hZ-L7Y"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CT8-EP-C6C">
+                                    <rect key="frame" x="315" y="0.0" width="295" height="70"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sc6-wz-xG1">
+                                            <rect key="frame" x="0.5" y="0.0" width="294" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="Sc6-wz-xG1" secondAttribute="height" multiplier="610:145" id="e8m-AR-lHf"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
+                                            <state key="normal" title="VIEW BILL" backgroundImage="view_bill_btn">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="viewBill:" destination="-1" eventType="touchUpInside" id="jTz-UA-wif"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="Sc6-wz-xG1" firstAttribute="centerX" secondItem="CT8-EP-C6C" secondAttribute="centerX" id="hEi-sq-jEa"/>
+                                        <constraint firstItem="Sc6-wz-xG1" firstAttribute="top" secondItem="CT8-EP-C6C" secondAttribute="top" id="tM1-rG-CFe"/>
+                                        <constraint firstAttribute="bottom" secondItem="Sc6-wz-xG1" secondAttribute="bottom" id="xUs-Ha-YaL"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
                             <constraints>
-                                <constraint firstAttribute="height" constant="70" id="L3U-EN-Xlb"/>
-                                <constraint firstAttribute="width" secondItem="mbg-UT-fNg" secondAttribute="height" multiplier="610:145" id="u5i-AS-maX"/>
+                                <constraint firstAttribute="height" constant="70" id="F4i-cj-u8y"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
-                            <state key="normal" title="OKAY" backgroundImage="home_gray_btn">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="backTohome:" destination="-1" eventType="touchUpInside" id="N2t-ya-AQp"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sc6-wz-xG1">
-                            <rect key="frame" x="345.5" y="280" width="294.5" height="70"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="Sc6-wz-xG1" secondAttribute="height" multiplier="610:145" id="CZJ-eu-ET3"/>
-                                <constraint firstAttribute="height" constant="70" id="nSY-g9-gg1"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="22"/>
-                            <state key="normal" title="VIEW BILL" backgroundImage="view_bill_btn">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="viewBill:" destination="-1" eventType="touchUpInside" id="jTz-UA-wif"/>
-                            </connections>
-                        </button>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="Sc6-wz-xG1" secondAttribute="trailing" constant="30" id="KN2-eA-J4R"/>
+                        <constraint firstItem="G3G-3N-fvZ" firstAttribute="top" secondItem="OXN-Dz-Uv2" secondAttribute="bottom" constant="75" id="81d-NZ-3PG"/>
+                        <constraint firstAttribute="trailing" secondItem="G3G-3N-fvZ" secondAttribute="trailing" constant="30" id="BRl-Nl-oaU"/>
                         <constraint firstItem="AM9-fG-BSB" firstAttribute="centerX" secondItem="KMZ-f5-OQh" secondAttribute="centerX" id="Nuw-s7-ch5"/>
                         <constraint firstAttribute="width" constant="670" id="UnW-Kb-6e2"/>
                         <constraint firstItem="AM9-fG-BSB" firstAttribute="top" secondItem="KMZ-f5-OQh" secondAttribute="top" constant="60" id="WaR-Gl-XlF"/>
                         <constraint firstItem="OXN-Dz-Uv2" firstAttribute="centerY" secondItem="KMZ-f5-OQh" secondAttribute="centerY" constant="-10" id="WeU-qm-f1Z"/>
                         <constraint firstAttribute="height" constant="400" id="aFx-oP-Cx1"/>
-                        <constraint firstItem="mbg-UT-fNg" firstAttribute="top" secondItem="OXN-Dz-Uv2" secondAttribute="bottom" constant="75" id="uGc-KN-WCP"/>
-                        <constraint firstItem="mbg-UT-fNg" firstAttribute="leading" secondItem="KMZ-f5-OQh" secondAttribute="leading" constant="30" id="yTe-8q-pQE"/>
                         <constraint firstItem="OXN-Dz-Uv2" firstAttribute="centerX" secondItem="KMZ-f5-OQh" secondAttribute="centerX" id="ypC-f5-Bcc"/>
-                        <constraint firstItem="Sc6-wz-xG1" firstAttribute="top" secondItem="mbg-UT-fNg" secondAttribute="top" id="z60-NH-tRU"/>
+                        <constraint firstItem="G3G-3N-fvZ" firstAttribute="leading" secondItem="KMZ-f5-OQh" secondAttribute="leading" constant="30" id="zUY-RI-VuQ"/>
                     </constraints>
                 </view>
             </subviews>

@@ -195,7 +195,7 @@
 }
 
 - (IBAction)saveAction:(id)sender {
-    if (self.tfNewPassword.text.length > 0 || self.tfConfirmPassword.text.length) {
+    if (self.tfNewPassword.text.length > 0 || self.tfConfirmPassword.text.length > 0) {
         if (![self.tfNewPassword.text isEqualToString:self.tfConfirmPassword.text]) {
             [Util showAlert:@"Password does not match" vc:self];
             return;
@@ -220,9 +220,9 @@
         }
     }
     
-    SettingModel *setting = [[SettingModel alloc] init];
+    SettingModel *setting = [Util getSetting];
     setting.serverIP = self.tfIPAddress.text;
-    setting.password = self.tfNewPassword.text;
+    if (self.tfNewPassword.text.length > 0) setting.password = self.tfNewPassword.text;
     setting.selectMode = selectModeValue;
     setting.tableSelection = tableSelectionValue;
     setting.tableNo = [setting getTableNo:self.tfTableNo.text];
