@@ -18,5 +18,6 @@
 - (NSManagedObjectContext *)managedObjectContext;
 - (void)handleDataSendSeated:(NSData *)data;
 - (void)handleDataGetBillDetails:(NSData *)data;
+- (void)handleDataGetBillHeader:(NSData *)data;
 
 @end

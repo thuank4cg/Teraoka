@@ -45,12 +45,47 @@
     
     [self setupView];
     
-    [self sendPOSRequest:GetBillDetails];
+    [self sendPOSRequest:GetBillHeader];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.view removeFromSuperview];
+}
+
+- (void)handleDataGetBillHeader:(NSData *)data {
+    int location = REPLY_HEADER + REPLY_COMMAND_SIZE + REPLY_COMMAND_ID + REPLY_REQUEST_ID + REPLY_STORE_STATUS + REPLY_LAST_EVENT_ID;
+    
+    NSData *replyStatus = [data subdataWithRange:NSMakeRange(location, 4)];
+    NSString *httpResponse = [Util hexadecimalString:replyStatus];
+    if ([httpResponse isEqualToString:STATUS_REPLY_OK]) {
+        location = location + REPLY_STATUS + REPLY_DATA_SIZE;
+        
+        location += 12;//XBillIdData
+        location += 4;//Bill Status
+        location += 4;//Table No
+        location += 4;//Seated Date
+        location += 4;//Seated Time
+        location += 8;//FirstOrderedTime&Date
+        location += 4;//Last Ordered Date
+        location += 4;//Last Ordered Time
+        location += 2;//Total Item
+        location += 2;//Total Qty
+        
+        NSData *headerData = [data subdataWithRange:NSMakeRange(location, data.length - location)];
+        NSData *totalData = [headerData subdataWithRange:NSMakeRange(0, 4)];
+        int total = [Util hexStringToInt:[Util hexadecimalString:totalData]];
+        
+        location += 4;//Total Amount
+        
+        float fTotal = (float)total/100;
+        self.lbTotalBill.text = [NSString stringWithFormat:@"$%.2f", floor(fTotal*20)/20];
+        [self sendPOSRequest:GetBillDetails];
+    } else {
+        NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
+        NSString *errorID = [Util hexadecimalString:errorData];
+        [Util showError:errorID vc:self];
+    }
 }
 
 - (void)handleDataGetBillDetails:(NSData *)data {
@@ -120,7 +155,7 @@
         
         products = [ShareManager shared].existingOrderArr;
         [self.tblView reloadData];
-        [self calculateTotal];
+//        [self calculateTotal];
     } else {
         NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
         NSString *errorID = [Util hexadecimalString:errorData];
@@ -177,18 +212,18 @@
 }
 
 - (void)calculateTotal {
-    float total = 0;
-    for (ProductModel *product in products) {
-        total += [product getTaxPrice];
-        for (OptionGroupModel *optionGroup in product.options) {
-            for (OptionModel *option in optionGroup.optionList) {
-                if (option.isCheck && option.type == TYPE_CONDIMENT) {
-                    total += option.price;
-                }
-            }
-        }
-    }
-    self.lbTotalBill.text = [NSString stringWithFormat:@"$%.2f", total];
+//    float total = 0;
+//    for (ProductModel *product in products) {
+//        total += [product getTaxPrice];
+//        for (OptionGroupModel *optionGroup in product.options) {
+//            for (OptionModel *option in optionGroup.optionList) {
+//                if (option.isCheck && option.type == TYPE_CONDIMENT) {
+//                    total += option.price;
+//                }
+//            }
+//        }
+//    }
+//    self.lbTotalBill.text = [NSString stringWithFormat:@"$%.2f", total];
 }
 
 //- (void)onBack:(id)sender {
