@@ -341,7 +341,7 @@
         SettingModel *setting = [ShareManager shared].setting;
         if (setting.selectMode == Quick_Serve) {
             [self showCategoriesScreen];
-        } else if ((setting.tableNo > 0 && setting.tableSelection == Fix_ed) || setting.selectMode == Quick_Serve) {
+        } else if (setting.tableNo > 0 && setting.tableSelection == Fix_ed) {
             [self sendPOSRequest:SendSeated];
         } else {
             [self showStartOrderPopup];

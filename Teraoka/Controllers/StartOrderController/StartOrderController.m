@@ -91,12 +91,8 @@
         return;
     }
     
-//    SettingModel *setting = [ShareManager shared].setting;
-//    setting.tableNo = [setting getTableNo:self.tfTableNo.text];
-//    setting.tableName = [setting getTableName:self.tfTableNo.text];
-//
-//    [Util saveSetting:setting];
-//    [ShareManager shared].setting = [Util getSetting];
+    SettingModel *setting = [ShareManager shared].setting;
+    setting.tableNo = [setting getTableNo:self.tfTableNo.text];
     
     [self sendPOSRequest:SendSeated];
 }
