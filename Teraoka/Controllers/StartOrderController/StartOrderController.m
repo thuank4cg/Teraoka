@@ -92,7 +92,9 @@
     }
     
     SettingModel *setting = [ShareManager shared].setting;
-    setting.tableNo = [setting getTableNo:self.tfTableNo.text];
+    int tableNo = [setting getTableNo:self.tfTableNo.text];
+    
+    [ShareManager shared].setting.tableNo = tableNo;
     
     [self sendPOSRequest:SendSeated];
 }

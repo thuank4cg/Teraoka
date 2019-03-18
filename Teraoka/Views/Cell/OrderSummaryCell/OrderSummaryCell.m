@@ -48,6 +48,7 @@
     self.decreaseBox.layer.borderWidth = 1;
     self.decreaseBox.layer.cornerRadius = CGRectGetHeight(self.decreaseBox.frame)/2;
 }
+
 - (void)setDataForCell:(int)row product:(ProductModel *)product {
     _row = row;
     _product = product;
@@ -72,7 +73,7 @@
         for (OptionModel *option in optionGroup.optionList) {
             if (option.isCheck) {
                 isSelectedOption = YES;
-                optionStr = [optionStr stringByAppendingString:[NSString stringWithFormat:@"<span style='color:#000000;font-size:17px;font-family:SFUIDisplay-Bold'>%@</span> <span style='color:#5A5A5A;font-size:17px;font-family:SFUIDisplay-Regular'>%@</span><br>", (optionGroup.name.length > 0) ? [NSString stringWithFormat:@"%@:", optionGroup.name] : @"", option.name]];
+                optionStr = [optionStr stringByAppendingString:[NSString stringWithFormat:@"<span style='color:#000000;font-size:17px;font-family:SFUIDisplay-Bold'>%@</span> <span style='color:#5A5A5A;font-size:17px;font-family:SFUIDisplay-Regular'>%@</span>%@<br>", (optionGroup.name.length > 0) ? [NSString stringWithFormat:@"%@:", optionGroup.name] : @"", option.name, (option.product) ? [self getOptionForPluFixedSet:option] : @""]];
             }
         }
     }
@@ -82,6 +83,21 @@
     
     if (isSelectedOption) self.lbOptions.attributedText = attrStr;
 }
+
+- (NSString *)getOptionForPluFixedSet:(OptionModel *)option {
+    NSString* optionStr = @"";
+    
+    for (OptionGroupModel *optionGroup in option.product.options) {
+        for (OptionModel *option in optionGroup.optionList) {
+            if (option.isCheck) {
+                optionStr = [optionStr stringByAppendingString:[NSString stringWithFormat:@"<br><span style='color:#ffffff'>N/A</span><span style='color:#000000;font-size:17px;font-family:SFUIDisplay-Bold'>%@:</span> <span style='color:#5A5A5A;font-size:17px;font-family:SFUIDisplay-Regular'>%@</span>", optionGroup.name, option.name]];
+            }
+        }
+    }
+    
+    return optionStr;
+}
+
 - (IBAction)qtyDecrease:(id)sender {
     int qty = [self.tfQty.text intValue];
     if (qty == 0) return;
@@ -92,9 +108,11 @@
         self.removeItem(_row);
     }
 }
+
 - (IBAction)qtyIncrease:(id)sender {
     int qty = [self.tfQty.text intValue];
     self.tfQty.text = [NSString stringWithFormat:@"%d", ++qty];
     _product.qty = self.tfQty.text;
 }
+
 @end

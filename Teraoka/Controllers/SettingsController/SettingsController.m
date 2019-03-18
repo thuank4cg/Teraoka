@@ -375,6 +375,11 @@
         [items addObject:[NSString stringWithFormat:@"%@ - %@", [table valueForKey:@"table_no"], [table valueForKey:@"table_name"]]];
     }
     
+    if (items.count == 0) {
+        [Util showAlert:@"Table list is empty. Please synchonize data again." vc:self];
+        return;
+    }
+    
     UIViewController *controller = [[UIViewController alloc] init];
     CGRect rect = CGRectMake(0, 0, 270, 250);
     [controller setPreferredContentSize:rect.size];
