@@ -36,12 +36,6 @@
     return [NSString stringWithFormat:@"%@%@/%@", DOCUMENT_DIRECTORY_ROOT, PLU_IMAGE_DIRECTORY_PATH, fullImageName];
 }
 
-- (float)getTaxPrice {
-    int qty = [self.qty intValue];
-    float price = [self.priceNumber floatValue];
-    return price*qty*(1 + self.rate/100);
-}
-
 - (float)getRate:(NSArray *)taxList {
     for (NSManagedObject *tax in taxList) {
         int no = [[tax valueForKey:@"tax_no"] intValue];
@@ -66,7 +60,6 @@
     }
     
     if (childPluList.count > 0) {
-        
         for (NSString *child_plu_no in childPluList) {
             NSArray *selectionNoList = [[DatabaseHelper shared] getSelectionNoFromSelectionGroup:[child_plu_no intValue]];
             
@@ -78,7 +71,7 @@
         }
     }
     
-    if (selectionArr.count == 0 && childPluList.count > 0) {
+    if (selectionArr.count == 0) {
         self.isFixedSet = YES;
         
         OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
@@ -262,10 +255,8 @@
 - (OptionGroupModel *)getSelectionGroup:(int)selection_no childs:(NSArray *)childPluList {
     SelectionHeaderModel *selectionHeader = [[DatabaseHelper shared] getSelectionHeader:selection_no];
     
-//    if (!selectionHeader.selectionName) return nil;
-    
     OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
-    optionGroup.name = (childPluList) ? selectionHeader.selectionName : @"";
+    optionGroup.name = selectionHeader.selectionName;//(childPluList) ? selectionHeader.selectionName : @"";
     optionGroup.groupId = selectionHeader.selectionNo;
     optionGroup.type = TYPE_SELECTION;
     optionGroup.optionList = (childPluList) ? [[DatabaseHelper shared] getAllChildPlu:selection_no childs:childPluList] : [[DatabaseHelper shared] getAllChildPlu:selection_no];

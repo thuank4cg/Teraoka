@@ -58,7 +58,7 @@
     for (int i=0;i<_optionGroup.optionList.count;i++) {
         OptionModel *option = _optionGroup.optionList[i];
         if (i == indexPath.row) {
-            option.isCheck = YES;
+            option.isCheck = !option.isCheck;
         } else {
             option.isCheck = NO;
         }

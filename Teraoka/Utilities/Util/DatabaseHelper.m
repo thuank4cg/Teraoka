@@ -350,25 +350,8 @@
                 option.type = TYPE_SELECTION;
                 option.price = [[plu valueForKey:@"price"] floatValue]/100;
                 
-                ProductModel *product = [[ProductModel alloc] init];
+                ProductModel *product = [Util getPlu:plu tax:nil];
                 product.productNo = [plu valueForKey:@"plu_no"];
-                
-                NSArray *directoryImageContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString stringWithFormat:@"%@%@", DOCUMENT_DIRECTORY_ROOT, PLU_IMAGE_DIRECTORY_PATH] error:nil];
-                product.image = [product getImageName:directoryImageContents];
-                product.name = [NSString stringWithFormat:@"%@", [plu valueForKey:@"item_name"]];
-                
-                float price = [[plu valueForKey:@"price"] floatValue]/100;
-                
-                product.price = [NSString stringWithFormat:@"SGD %.2f", price];
-                product.priceNumber = [NSString stringWithFormat:@"%.2f", price];
-                product.originalPrice = [NSString stringWithFormat:@"%@", [plu valueForKey:@"price"]];
-                product.optionSource = [[plu valueForKey:@"option_source"] intValue];
-                product.optionSourceNo = [[plu valueForKey:@"option_source_no"] intValue];
-                product.servingSource = [[plu valueForKey:@"serving_source"] intValue];
-                product.servingSourceNo = [[plu valueForKey:@"serving_source_no"] intValue];
-                product.commentSource = [[plu valueForKey:@"comment_source"] intValue];
-                product.commentSourceNo = [[plu valueForKey:@"comment_source_no"] intValue];
-                product.options = [product getOptionGroupList];
                 
                 option.product = product;
                 
@@ -379,31 +362,6 @@
     }
     
     return optionList;
-}
-
-- (NSMutableArray *)getChildPluNoGroup:(NSArray *)selectionArr childs:(NSArray *)childPluList {
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:SELECTION_GROUP_TABLE_NAME];
-    NSArray *groupArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    
-    NSMutableArray *pluList = [NSMutableArray new];
-    NSMutableArray *childPlu = [NSMutableArray new];
-    
-    for (NSManagedObject *group in groupArr) {
-        NSString *selectionNo = [group valueForKey:@"selection_no"];
-        NSString *childPluNo = [group valueForKey:@"child_plu_no"];
-        if ([selectionArr containsObject:selectionNo]) {
-            if (![pluList containsObject:childPluNo]) [pluList addObject:childPluNo];
-        }
-    }
-    
-    for (NSString *pluNo in childPluList) {
-        if (![pluList containsObject:pluNo]) {
-            [childPlu addObject:pluNo];
-        }
-    }
-    
-    return childPlu;
 }
 
 - (NSMutableArray *)getAllChildPlu:(int)selection_no {
@@ -452,6 +410,31 @@
     }
     
     return optionList;
+}
+
+- (NSMutableArray *)getChildPluNoGroup:(NSArray *)selectionArr childs:(NSArray *)childPluList {
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:SELECTION_GROUP_TABLE_NAME];
+    NSArray *groupArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    NSMutableArray *pluList = [NSMutableArray new];
+    NSMutableArray *childPlu = [NSMutableArray new];
+    
+    for (NSManagedObject *group in groupArr) {
+        NSString *selectionNo = [group valueForKey:@"selection_no"];
+        NSString *childPluNo = [group valueForKey:@"child_plu_no"];
+        if ([selectionArr containsObject:selectionNo]) {
+            if (![pluList containsObject:childPluNo]) [pluList addObject:childPluNo];
+        }
+    }
+    
+    for (NSString *pluNo in childPluList) {
+        if (![pluList containsObject:pluNo]) {
+            [childPlu addObject:pluNo];
+        }
+    }
+    
+    return childPlu;
 }
 
 @end

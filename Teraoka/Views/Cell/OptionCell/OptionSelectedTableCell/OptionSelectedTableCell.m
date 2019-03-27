@@ -117,7 +117,7 @@
     for (int i=0;i<options.count;i++) {
         OptionModel *option = options[i];
         if (i == indexPath.row) {
-            option.isCheck = YES;
+            option.isCheck = !option.isCheck;
         } else {
             option.isCheck = NO;
         }

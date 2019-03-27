@@ -155,7 +155,6 @@
         
         products = [ShareManager shared].existingOrderArr;
         [self.tblView reloadData];
-//        [self calculateTotal];
     } else {
         NSData *errorData = [replyStatus subdataWithRange:NSMakeRange(0, 2)];
         NSString *errorID = [Util hexadecimalString:errorData];
@@ -210,31 +209,6 @@
         [self.callForBillBtn setHidden:YES];
     }
 }
-
-- (void)calculateTotal {
-//    float total = 0;
-//    for (ProductModel *product in products) {
-//        total += [product getTaxPrice];
-//        for (OptionGroupModel *optionGroup in product.options) {
-//            for (OptionModel *option in optionGroup.optionList) {
-//                if (option.isCheck && option.type == TYPE_CONDIMENT) {
-//                    total += option.price;
-//                }
-//            }
-//        }
-//    }
-//    self.lbTotalBill.text = [NSString stringWithFormat:@"$%.2f", total];
-}
-
-//- (void)onBack:(id)sender {
-//    for (UIViewController *vc in self.navigationController.viewControllers) {
-//        if ([vc isKindOfClass:[CategoriesController class]]) {
-//            [self.navigationController popToViewController:vc animated:YES];
-//            return;
-//        }
-//    }
-//    [self.navigationController popViewControllerAnimated:YES];
-//}
 
 - (int)getProductOptionLength:(ProductModel *)product {
     int optionLength = 0;
