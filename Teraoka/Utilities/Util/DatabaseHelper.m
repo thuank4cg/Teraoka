@@ -340,6 +340,9 @@
     NSFetchRequest *fetchRequest1 = [[NSFetchRequest alloc] initWithEntityName:PLU_TABLE_NAME];
     NSArray *pluArr = [[managedObjectContext executeFetchRequest:fetchRequest1 error:nil] mutableCopy];
     
+    fetchRequest1 = [[NSFetchRequest alloc] initWithEntityName:TAX_TABLE_NAME];
+    NSArray *taxArr = [[managedObjectContext executeFetchRequest:fetchRequest1 error:nil] mutableCopy];
+    
     for (NSString *no in pluNoList) {
         for (NSManagedObject *plu in pluArr) {
             NSString *pluNo = [plu valueForKey:@"plu_no"];
@@ -350,7 +353,7 @@
                 option.type = TYPE_SELECTION;
                 option.price = [[plu valueForKey:@"price"] floatValue]/100;
                 
-                ProductModel *product = [Util getPlu:plu tax:nil];
+                ProductModel *product = [Util getPlu:plu tax:taxArr];
                 product.productNo = [plu valueForKey:@"plu_no"];
                 
                 option.product = product;
