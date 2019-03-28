@@ -360,7 +360,11 @@
         CategoryModel *cate = categories[categoryIndex];
         if (indexPath.row < cate.products.count) {
             ProductModel *product = cate.products[indexPath.row];
-            product.options = (NSMutableArray *)[[[product getOptionGroupList] arrayByAddingObjectsFromArray:[product getSelectionGroupList]] mutableCopy];
+            if (product.mealSetFlag == 0) {
+                product.options = [[product getOptionGroupList] mutableCopy];
+            } else {
+                product.options = [[product getSelectionGroupList] mutableCopy];
+            }
             newOrderVC.product = product;
         }
     }

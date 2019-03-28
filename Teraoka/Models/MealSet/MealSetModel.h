@@ -12,5 +12,6 @@
 
 @property (nonatomic, assign) int type;
 @property (nonatomic, assign) int no;
+@property (nonatomic, assign) int sortingNo;
 
 @end

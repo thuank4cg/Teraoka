@@ -203,7 +203,7 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_LICENSE_VALID];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:KEY_LICENSE_EXPIRY_DATE];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            return YES;
+            return NO;
         }
     }
     
@@ -211,7 +211,7 @@
         return YES;
     }
     
-    return YES;
+    return NO;
 }
 
 + (ProductModel *)getPlu:(NSManagedObject *)plu tax:(NSArray *)taxList {
@@ -230,6 +230,7 @@
     
     product.originalPrice = [NSString stringWithFormat:@"%@", [plu valueForKey:@"price"]];
     product.qty = @"1";
+    product.mealSetFlag = [[plu valueForKey:@"meal_set_flag"] intValue];
     product.optionSource = [[plu valueForKey:@"option_source"] intValue];
     product.optionSourceNo = [[plu valueForKey:@"option_source_no"] intValue];
     product.servingSource = [[plu valueForKey:@"serving_source"] intValue];

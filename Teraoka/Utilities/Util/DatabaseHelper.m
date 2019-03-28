@@ -272,10 +272,12 @@
     for (NSManagedObject *data in dataArr) {
         int no = [[data valueForKey:@"no"] intValue];
         int type = [[data valueForKey:@"type"] intValue];
+        int sortingNo = [[data valueForKey:@"sorting_no"] intValue];
         
         MealSetModel *model = [[MealSetModel alloc] init];
         model.type = type;
         model.no = no;
+        model.sortingNo = sortingNo;
         [mealSetList addObject:model];
     }
     
