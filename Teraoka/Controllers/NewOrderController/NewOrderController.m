@@ -179,6 +179,17 @@
                         if (option.isCheck) {
                             optionStr1 = [optionStr1 stringByAppendingString:option.name];
                             optionStr1 = [optionStr1 stringByAppendingString:@"\n"];
+                            
+                            if (option.product) {
+                                for (OptionGroupModel *optionGroup in option.product.options) {
+                                    for (OptionModel *option in optionGroup.optionList) {
+                                        if (option.isCheck) {
+                                            optionStr1 = [optionStr1 stringByAppendingString:option.name];
+                                            optionStr1 = [optionStr1 stringByAppendingString:@"\n"];
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -189,6 +200,17 @@
                         if (option.isCheck) {
                             optionStr2 = [optionStr2 stringByAppendingString:option.name];
                             optionStr2 = [optionStr2 stringByAppendingString:@"\n"];
+                            
+                            if (option.product) {
+                                for (OptionGroupModel *optionGroup in option.product.options) {
+                                    for (OptionModel *option in optionGroup.optionList) {
+                                        if (option.isCheck) {
+                                            optionStr2 = [optionStr2 stringByAppendingString:option.name];
+                                            optionStr2 = [optionStr2 stringByAppendingString:@"\n"];
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
