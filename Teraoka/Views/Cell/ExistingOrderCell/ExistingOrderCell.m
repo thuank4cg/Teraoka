@@ -45,15 +45,16 @@
     self.lbOptions.text = @"Not applicable";
     
     BOOL isSelectedOption = NO;
-    NSString* optionStr = @"<p style='line-height:1.8'>";
+    NSString* optionStr = @"<p>";
     for (OptionGroupModel *optionGroup in product.options) {
         for (OptionModel *option in optionGroup.optionList) {
             if (option.isCheck) {
                 isSelectedOption = YES;
-                optionStr = [optionStr stringByAppendingString:[NSString stringWithFormat:@"<span style='color:#000000;font-size:17px;font-family:SFUIDisplay-Bold'>%@</span> <span style='color:#5A5A5A;font-size:17px;font-family:SFUIDisplay-Regular'>%@</span><br>", (optionGroup.name.length > 0) ? [NSString stringWithFormat:@"%@:", optionGroup.name] : @"", option.name]];
+                optionStr = [optionStr stringByAppendingString:[NSString stringWithFormat:@"<span style='color:#000000;font-size:17px;font-family:SFUIDisplay-Bold'>%@</span> <span style='color:#5A5A5A;font-size:17px;font-family:SFUIDisplay-Regular'>%@</span>%@<br>", (optionGroup.name.length > 0) ? [NSString stringWithFormat:@"%@:", optionGroup.name] : @"", option.name, (option.product) ? [self getOptionForPluFixedSet:option] : @""]];
             }
         }
     }
+    
     optionStr = [optionStr stringByAppendingString:@"</p>"];
     NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[optionStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     
@@ -82,6 +83,20 @@
             self.lbStatus.text = @"";
             break;
     }
+}
+
+- (NSString *)getOptionForPluFixedSet:(OptionModel *)option {
+    NSString* optionStr = @"";
+    
+    for (OptionGroupModel *optionGroup in option.product.options) {
+        for (OptionModel *option in optionGroup.optionList) {
+            if (option.isCheck) {
+                optionStr = [optionStr stringByAppendingString:[NSString stringWithFormat:@"<br><span style='color:#ffffff'>N/A</span><span style='color:#000000;font-size:17px;font-family:SFUIDisplay-Bold'>%@:</span> <span style='color:#5A5A5A;font-size:17px;font-family:SFUIDisplay-Regular'>%@</span>", optionGroup.name, option.name]];
+            }
+        }
+    }
+    
+    return optionStr;
 }
 
 @end

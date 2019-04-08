@@ -704,7 +704,7 @@
 - (NSArray *)filterCart {
     NSMutableArray *cartArr = [[ShareManager shared].cartArr mutableCopy];
     
-    for (ProductModel *product in cartArr) {
+    for (ProductModel *product in [ShareManager shared].cartArr) {
         for (OptionGroupModel *group in product.options) {
             for (OptionModel *option in group.optionList) {
                 if (option.isFilter) {
