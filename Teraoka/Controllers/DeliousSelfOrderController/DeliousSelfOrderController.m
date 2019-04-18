@@ -130,7 +130,7 @@
 - (void)doGetContents {
     if ([ShareManager shared].setting.serverIP.length == 0) return;
     
-    [self removeOldData];
+//    [self removeOldData];
     
 //    Reachability *reach = [Reachability reachabilityForInternetConnection];
 //    
@@ -223,6 +223,7 @@
 #pragma mark - WRRequestDelegate
 
 - (void)requestCompleted:(WRRequest *)request {
+    [self removeOldData];
     //called after 'request' is completed successfully
 //    NSLog(@"%@ completed!", request);
     
