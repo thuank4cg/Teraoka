@@ -105,6 +105,7 @@
     }
     
     [ShareManager shared].cartArr = products;
+//    [[ParamsHelper shared] requestSendOrderData];
     
     if ([ShareManager shared].setting.selectMode == Quick_Serve) {
         [self sendPOSRequest:GetInventory];

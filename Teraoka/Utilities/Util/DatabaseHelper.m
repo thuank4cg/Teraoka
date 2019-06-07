@@ -442,4 +442,37 @@
     return childPlu;
 }
 
+- (NSMutableArray *)getPluFrom:(int)pluNo {
+    NSMutableArray *optionList = [NSMutableArray new];
+    
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PLU_TABLE_NAME];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"plu_no == %d", pluNo]];
+    NSArray *pluArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    fetchRequest = [[NSFetchRequest alloc] initWithEntityName:TAX_TABLE_NAME];
+    NSArray *taxArr = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    for (NSManagedObject *plu in pluArr) {
+        int no = [[plu valueForKey:@"plu_no"] intValue];
+        if (no == pluNo) {
+            OptionModel *option = [[OptionModel alloc] init];
+            option.optionId = no;
+            option.name = [plu valueForKey:@"item_name"];
+            option.type = TYPE_SELECTION;
+            option.price = [[plu valueForKey:@"price"] floatValue]/100;
+            
+            ProductModel *product = [Util getPlu:plu tax:taxArr];
+            product.productNo = [plu valueForKey:@"plu_no"];
+            
+            option.product = product;
+            
+            [optionList addObject:option];
+            break;
+        }
+    }
+    
+    return optionList;
+}
+
 @end

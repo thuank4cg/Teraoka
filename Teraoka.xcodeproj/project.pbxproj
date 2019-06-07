@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7300C22A22A8C44B0004C511 /* HOTMasterDataFull_02.12_190304_155407_01.62.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7300C22922A8C44A0004C511 /* HOTMasterDataFull_02.12_190304_155407_01.62.zip */; };
 		7301E3B021ABDA3E00389733 /* menu_contents.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7301E3AD21ABDA3C00389733 /* menu_contents.txt */; };
 		7301E3B121ABDA3E00389733 /* plu.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7301E3AE21ABDA3D00389733 /* plu.txt */; };
 		7301E3B221ABDA3E00389733 /* menu_category.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7301E3AF21ABDA3D00389733 /* menu_category.txt */; };
@@ -174,6 +175,7 @@
 
 /* Begin PBXFileReference section */
 		24F02FA8BDE10E327C3A1FF9 /* Pods-Teraoka.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teraoka.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Teraoka/Pods-Teraoka.debug.xcconfig"; sourceTree = "<group>"; };
+		7300C22922A8C44A0004C511 /* HOTMasterDataFull_02.12_190304_155407_01.62.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = HOTMasterDataFull_02.12_190304_155407_01.62.zip; sourceTree = "<group>"; };
 		7301E3AD21ABDA3C00389733 /* menu_contents.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_contents.txt; sourceTree = "<group>"; };
 		7301E3AE21ABDA3D00389733 /* plu.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plu.txt; sourceTree = "<group>"; };
 		7301E3AF21ABDA3D00389733 /* menu_category.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_category.txt; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 				796D67BF221AB15900DFF098 /* HOTMasterDataFull_02.12_190218_151207_01.55.zip */,
 				796D67B9221A488C00DFF098 /* HOTMasterDataFull_02.12_190215_120007_01.48.zip */,
 				7301E3B321ABDBB900389733 /* HOTMasterDataFull_02.12_181107_164412_01.07.zip */,
+				7300C22922A8C44A0004C511 /* HOTMasterDataFull_02.12_190304_155407_01.62.zip */,
 				736095F02146286E001EBAB7 /* english.csv */,
 				7301E3AF21ABDA3D00389733 /* menu_category.txt */,
 				7301E3AD21ABDA3C00389733 /* menu_contents.txt */,
@@ -1264,6 +1267,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -1312,6 +1316,7 @@
 				733675571FE25F2200F0AFF8 /* 2007.png in Resources */,
 				7336755D1FE25F2200F0AFF8 /* 3002.png in Resources */,
 				73C1E02C1FBC25F5005D6DE1 /* SF-UI-Display-Regular.otf in Resources */,
+				7300C22A22A8C44B0004C511 /* HOTMasterDataFull_02.12_190304_155407_01.62.zip in Resources */,
 				73C1E02B1FBC25F5005D6DE1 /* SF-UI-Display-Bold.otf in Resources */,
 				79E1604E222FA5C900377EC8 /* FixedSetOptionTableCell.xib in Resources */,
 				733675481FE25F2200F0AFF8 /* 4001.png in Resources */,

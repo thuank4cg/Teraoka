@@ -62,7 +62,7 @@
     if (childPluList.count > 0) {
         for (NSString *child_plu_no in childPluList) {
             NSArray *selectionNoList = [[DatabaseHelper shared] getSelectionNoFromSelectionGroup:[child_plu_no intValue]];
-            
+
             for (NSString *selectionNo in selectionNoList) {
                 if (![selectionArr containsObject:selectionNo]) {
                     [selectionArr addObject:selectionNo];
@@ -70,10 +70,10 @@
             }
         }
     }
-    
+
     if (selectionArr.count == 0) {
         self.isFixedSet = YES;
-        
+
         OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
         optionGroup.name = @"";
         optionGroup.groupId = 0;
@@ -81,23 +81,25 @@
         optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlu:0 childs:childPluList];
         [optionGroupList addObject:optionGroup];
     } else {
-        for (NSString *selectionNo in selectionArr) {
-            OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue] childs:childPluList];
-            if (optionGroup) [optionGroupList addObject:optionGroup];
-        }
-        
-        NSArray *childPluNoGroup = [[DatabaseHelper shared] getChildPluNoGroup:selectionArr childs:childPluList];
-        
-        if (childPluNoGroup.count > 0) {
+//        for (NSString *selectionNo in selectionArr) {
+//            OptionGroupModel *optionGroup = [self getSelectionGroup:[selectionNo intValue] childs:childPluList];
+//            if (optionGroup) [optionGroupList addObject:optionGroup];
+//        }
+//
+//        NSArray *childPluNoGroup = [[DatabaseHelper shared] getChildPluNoGroup:selectionArr childs:childPluList];
+//
+//        if (childPluNoGroup.count > 0) {
+        for (NSString *pluNo in childPluList) {
             OptionGroupModel *optionGroup = [[OptionGroupModel alloc] init];
             optionGroup.name = @"";
             optionGroup.groupId = 0;
             optionGroup.type = TYPE_SELECTION;
-            optionGroup.optionList = [[DatabaseHelper shared] getAllChildPlu:0 childs:childPluNoGroup];
+            optionGroup.optionList = [[DatabaseHelper shared] getPluFrom:[pluNo intValue]];
             [optionGroupList addObject:optionGroup];
         }
+//        }
     }
-    
+
     [selectionArr removeAllObjects];
     for (MealSetModel *model in mealSetList) {
         if (model.type == 1) [selectionArr addObject:[NSString stringWithFormat:@"%d", model.no]];

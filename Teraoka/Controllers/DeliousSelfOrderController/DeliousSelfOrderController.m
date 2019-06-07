@@ -186,7 +186,7 @@
 
 - (void)unzipFile {
     NSString *zipPath = [DOCUMENT_DIRECTORY_ROOT stringByAppendingPathComponent:fileName];
-//    zipPath = [[NSBundle mainBundle] pathForResource:@"HOTMasterDataFull_02.12_181107_164412_01.07" ofType:@"zip"];
+//    zipPath = [[NSBundle mainBundle] pathForResource:@"HOTMasterDataFull_02.12_190304_155407_01.62" ofType:@"zip"];
     NSString *unzipPath = DOCUMENT_DIRECTORY_ROOT;
     BOOL success =  [SSZipArchive unzipFileAtPath:zipPath toDestination:unzipPath];
     NSLog(@"unzipPath: %@", unzipPath);

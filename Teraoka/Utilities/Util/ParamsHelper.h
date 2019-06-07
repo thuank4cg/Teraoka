@@ -23,4 +23,5 @@ typedef enum
 @interface ParamsHelper : NSObject
 + (ParamsHelper *)shared;
 - (NSMutableData *)collectData:(CommandName)commandName;
+- (NSMutableData *)requestSendOrderData;
 @end

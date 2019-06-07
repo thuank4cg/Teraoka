@@ -16,6 +16,7 @@
 #import "SelectionHeaderModel.h"
 
 @interface DatabaseHelper : NSObject
+
 + (DatabaseHelper *)shared;
 - (OptionSetModel *)getOptionSet:(int)option_set_no;
 - (OptionGroupHeaderModel *)getOptionGroupHeader:(int)option_group_no;
@@ -32,4 +33,6 @@
 - (NSMutableArray *)getMealSetList:(int)plu_no;
 - (NSMutableArray *)getSelectionNoFromSelectionGroup:(int)child_plu_no;
 - (NSMutableArray *)getChildPluNoGroup:(NSArray *)selectionArr childs:(NSArray *)childPluList;
+- (NSMutableArray *)getPluFrom:(int)pluNo;
+
 @end

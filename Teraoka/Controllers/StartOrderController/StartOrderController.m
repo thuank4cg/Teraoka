@@ -96,6 +96,7 @@
     
     [ShareManager shared].setting.tableNo = tableNo;
     
+//    [self.delegate showCategoriesScreen];
     [self sendPOSRequest:SendSeated];
 }
 
