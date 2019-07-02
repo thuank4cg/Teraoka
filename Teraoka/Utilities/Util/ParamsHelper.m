@@ -209,7 +209,11 @@
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.productNo] length:4]]; //PLU No
         [mCollectData appendData:[self convertStringToBytesArr:[NSString stringWithFormat:@"%@", product.qty] length:2]]; //Qty
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:4]]; //Current price
-        [mCollectData appendData:[self convertStringToBytesArr:(product.isChild) ? @"3" : @"0" length:1]]; //Item Flag
+        if (product.isFixedSet) {
+            [mCollectData appendData:[self convertStringToBytesArr:@"4" length:1]]; //Item Flag
+        } else {
+            [mCollectData appendData:[self convertStringToBytesArr:(product.isChild) ? @"3" : @"0" length:1]]; //Item Flag
+        }
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]]; //Item Flag
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Item Flag
         
@@ -410,7 +414,11 @@
         //Item Flag
 //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
 //        [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]];
-        [mCollectData appendData:[self convertStringToBytesArr:(product.isChild) ? @"3" : @"0" length:1]]; //Item Flag
+        if (product.isFixedSet) {
+            [mCollectData appendData:[self convertStringToBytesArr:@"4" length:1]]; //Item Flag
+        } else {
+            [mCollectData appendData:[self convertStringToBytesArr:(product.isChild) ? @"3" : @"0" length:1]]; //Item Flag
+        }
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:1]]; //Item Flag
         [mCollectData appendData:[self convertStringToBytesArr:@"0" length:2]]; //Item Flag
         //Item status
